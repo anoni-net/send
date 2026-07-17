@@ -19,7 +19,7 @@ module.exports = function(app, devServer) {
   assets.setMiddleware(devServer.middleware);
   app.use(morgan('dev', { stream: process.stderr }));
   function android(req, res) {
-    const index = devServer.middleware.fileSystem
+    const index = devServer.middleware.context.outputFileSystem
       .readFileSync(devServer.middleware.getFilenameFromUrl('/android.html'))
       .toString()
       .replace(
