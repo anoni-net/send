@@ -28,10 +28,64 @@ const config = {
   redis_host: 'localhost'
 };
 
+// In-memory stand-in for the node-redis v4+ client (promise API) so these
+// storage unit tests stay hermetic and need no running redis. Implements only
+// the commands server/storage/index.js uses.
+function createFakeRedis() {
+  const hashes = new Map();
+  const ttls = new Map();
+  const hash = k => {
+    if (!hashes.has(k)) hashes.set(k, new Map());
+    return hashes.get(k);
+  };
+  return {
+    on() {},
+    async connect() {},
+    async hSet(key, fieldOrObj, value) {
+      const m = hash(key);
+      if (typeof fieldOrObj === 'object') {
+        for (const [f, v] of Object.entries(fieldOrObj)) m.set(f, String(v));
+      } else {
+        m.set(fieldOrObj, String(value));
+      }
+    },
+    async hGet(key, field) {
+      const m = hashes.get(key);
+      return m && m.has(field) ? m.get(field) : null;
+    },
+    async hGetAll(key) {
+      const m = hashes.get(key);
+      return m ? Object.fromEntries(m) : {};
+    },
+    async hIncrBy(key, field, n) {
+      const m = hash(key);
+      const next = Number(m.get(field) || 0) + n;
+      m.set(field, String(next));
+      return next;
+    },
+    async expire(key, seconds) {
+      ttls.set(key, seconds);
+      return true;
+    },
+    async ttl(key) {
+      return ttls.has(key) ? ttls.get(key) : -1;
+    },
+    async del(key) {
+      hashes.delete(key);
+      ttls.delete(key);
+      return 1;
+    },
+    async ping() {
+      return 'PONG';
+    }
+  };
+}
+
 const storage = proxyquire('../../server/storage', {
   '../config': config,
   '../log': () => {},
-  './s3': MockStorage
+  './s3': MockStorage,
+  './redis': () => createFakeRedis()
 });
 
 describe('Storage', function() {
@@ -63,7 +117,7 @@ describe('Storage', function() {
     it('sets expiration to expire time', async function() {
       const seconds = 100;
       await storage.set('x', null, { foo: 'bar' }, seconds);
-      const s = await storage.redis.ttlAsync('x');
+      const s = await storage.redis.ttl('x');
       await storage.del('x');
       assert.equal(Math.ceil(s), seconds);
     });
@@ -88,7 +142,7 @@ describe('Storage', function() {
     it('sets metadata', async function() {
       const m = { foo: 'bar' };
       await storage.set('x', null, m);
-      const meta = await storage.redis.hgetallAsync('x');
+      const meta = await storage.redis.hGetAll('x');
       delete meta.prefix;
       await storage.del('x');
       assert.deepEqual(meta, m);
@@ -99,7 +153,7 @@ describe('Storage', function() {
     it('works', async function() {
       await storage.set('x', null);
       storage.setField('x', 'y', 'z');
-      const z = await storage.redis.hgetAsync('x', 'y');
+      const z = await storage.redis.hGet('x', 'y');
       assert.equal(z, 'z');
       await storage.del('x');
     });
