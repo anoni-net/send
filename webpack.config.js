@@ -1,17 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
-const ManifestPlugin = require('webpack-manifest-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const VersionPlugin = require('./build/version_plugin');
 const AndroidIndexPlugin = require('./build/android_index_plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
-// Fix for node 18+
-// See: <https://stackoverflow.com/a/78005686/1000145>
-const crypto = require('crypto');
-const crypto_orig_createHash = crypto.createHash;
-crypto.createHash = algorithm =>
-  crypto_orig_createHash(algorithm == 'md4' ? 'sha256' : algorithm);
 
 const webJsOptions = {
   babelrc: false,
@@ -32,6 +25,27 @@ const webJsOptions = {
   ]
 };
 
+// webpack 5 no longer polyfills node core modules automatically. The frontend
+// needs `buffer` (the ECE encryption transformer in app/ece.js uses the bare
+// `Buffer` global) and `path` (content-disposition, imported by the service
+// worker to parse download filenames, calls path.basename). Both app/ece.js and
+// the service worker bundle these. ProvidePlugin restores the bare `Buffer`
+// global that webpack 4 injected implicitly.
+const nodeResolve = {
+  fallback: {
+    buffer: require.resolve('buffer/'),
+    path: require.resolve('path-browserify')
+  }
+};
+const provideBuffer = new webpack.ProvidePlugin({
+  Buffer: ['buffer', 'Buffer']
+});
+
+// webpack 5 defaults output.hashFunction to md4, which OpenSSL 3 (Node 17+)
+// rejects. xxhash64 is webpack's built-in WASM hash and needs no OpenSSL, so
+// this is what lets us drop --openssl-legacy-provider from the Dockerfile.
+const hashFunction = 'xxhash64';
+
 const serviceWorker = {
   target: 'webworker',
   entry: {
@@ -40,8 +54,10 @@ const serviceWorker = {
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/'
+    publicPath: '/',
+    hashFunction
   },
+  resolve: nodeResolve,
   devtool: 'source-map',
   module: {
     rules: [
@@ -91,7 +107,10 @@ const serviceWorker = {
       }
     ]
   },
-  plugins: [new webpack.IgnorePlugin(/\.\.\/dist/)]
+  plugins: [
+    provideBuffer,
+    new webpack.IgnorePlugin({ resourceRegExp: /\.\.\/dist/ })
+  ]
 };
 
 const web = {
@@ -104,8 +123,10 @@ const web = {
   output: {
     chunkFilename: '[name].[contenthash:8].js',
     filename: '[name].[contenthash:8].js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    hashFunction
   },
+  resolve: nodeResolve,
   module: {
     rules: [
       {
@@ -187,18 +208,17 @@ const web = {
       {
         // creates style.css with all styles
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                importLoaders: 1,
-                esModule: false
-              }
-            },
-            'postcss-loader'
-          ]
-        })
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              esModule: false
+            }
+          },
+          'postcss-loader'
+        ]
       },
       {
         test: /\.ftl$/,
@@ -226,13 +246,14 @@ const web = {
       ]
     }),
     new webpack.EnvironmentPlugin(['NODE_ENV']),
-    new webpack.IgnorePlugin(/\.\.\/dist/), // used in common/*.js
-    new ExtractTextPlugin({
-      filename: '[name].[md5:contenthash:8].css'
+    provideBuffer,
+    new webpack.IgnorePlugin({ resourceRegExp: /\.\.\/dist/ }), // used in common/*.js
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash:8].css'
     }),
     new VersionPlugin(), // used for the /__version__ route
     new AndroidIndexPlugin(),
-    new ManifestPlugin() // used by server side to resolve hashed assets
+    new WebpackManifestPlugin() // used by server side to resolve hashed assets
   ],
   devtool: 'source-map',
   devServer: {

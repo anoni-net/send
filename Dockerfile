@@ -31,10 +31,7 @@ WORKDIR /app
 RUN set -x \
     # Build
     && PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm ci \
-    # webpack 4 uses md4 for module hashing, which OpenSSL 3 (Node 17+) rejects.
-    # --openssl-legacy-provider re-enables it for the BUILD only; runtime crypto
-    # is unaffected. This flag goes away once we migrate to webpack 5 (Tier 3d).
-    && NODE_OPTIONS=--openssl-legacy-provider npm run build
+    && npm run build
 
 # Main image
 FROM node:22-alpine3.22
