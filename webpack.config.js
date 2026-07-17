@@ -120,6 +120,10 @@ const web = {
     chunkFilename: '[name].[contenthash:8].js',
     filename: '[name].[contenthash:8].js',
     path: path.resolve(__dirname, 'dist'),
+    // webpack 5 defaults publicPath to 'auto', which prefixes asset URLs with
+    // 'auto/' here and breaks them (assets are served from the root by the
+    // server's express.static('dist')). Pin it back to '/' like webpack 4.
+    publicPath: '/',
     hashFunction
   },
   resolve: nodeResolve,

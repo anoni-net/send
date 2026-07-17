@@ -46,15 +46,23 @@ if echo "$html" | grep -qE '\[object Object\]|/undefined'; then
   echo "  broken asset map (found [object Object] or /undefined in rendered HTML)"
   exit 1
 fi
-asset=$(echo "$html" | grep -oE '/[A-Za-z0-9_.-]+\.[a-f0-9]{8}\.(js|css)' | head -1)
+# Pull the exact src/href of a hashed JS/CSS asset as the page references it and
+# confirm THAT url resolves. Testing a stripped filename would miss a bad
+# publicPath (e.g. webpack 5's default 'auto/' prefix that 404s the bundle).
+asset=$(echo "$html" | grep -oE '(src|href)="[^"]*\.[a-f0-9]{8}\.(js|css)"' | head -1 | sed -E 's/.*="([^"]*)".*/\1/')
 [ -n "$asset" ] || {
   echo "  no hashed asset reference in rendered page"
   echo "$html" | head -30
   exit 1
 }
-acode=$(curl -s -o /dev/null -w '%{http_code}' "http://localhost:${PORT}${asset}")
+case "$asset" in
+  http*) url="$asset" ;;
+  /*)    url="http://localhost:${PORT}${asset}" ;;
+  *)     url="http://localhost:${PORT}/${asset}" ;;
+esac
+acode=$(curl -s -o /dev/null -w '%{http_code}' "$url")
 echo "  asset ${asset} -> ${acode}"
-[ "$acode" = "200" ] || { echo "  hashed asset did not resolve"; exit 1; }
+[ "$acode" = "200" ] || { echo "  page-referenced asset did not resolve (bad publicPath?)"; exit 1; }
 echo "  page render + asset resolution OK"
 
 echo "E2EE upload/download round-trip via ffsend ${FFSEND_VERSION} ..."
