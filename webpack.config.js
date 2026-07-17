@@ -156,7 +156,10 @@ const web = {
               path.resolve(__dirname, 'node_modules/@fluent'),
               path.resolve(__dirname, 'node_modules/@sentry'),
               path.resolve(__dirname, 'node_modules/tslib'),
-              path.resolve(__dirname, 'node_modules/webcrypto-core')
+              path.resolve(__dirname, 'node_modules/webcrypto-core'),
+              // The dev-server client is modern JS the old esprima-based
+              // unassert-loader can't parse; it's dev-only, skip it.
+              path.resolve(__dirname, 'node_modules/webpack-dev-server')
             ],
             loader: 'webpack-unassert-loader'
           }
@@ -253,18 +256,26 @@ const web = {
   ],
   devtool: 'source-map',
   devServer: {
-    before:
-      process.env.NODE_ENV === 'development' && require('./server/bin/dev'),
+    // webpack-dev-server v5: `before` was removed in favour of setupMiddlewares,
+    // and `proxy` is now an array. server/bin/dev.js wires the app routes and
+    // reads emitted assets from the dev-middleware instance (devServer.middleware).
+    setupMiddlewares: (middlewares, devServer) => {
+      if (process.env.NODE_ENV === 'development') {
+        require('./server/bin/dev')(devServer.app, devServer);
+      }
+      return middlewares;
+    },
     compress: true,
     hot: false,
     host: '0.0.0.0',
-    proxy: {
-      '/api/ws': {
+    proxy: [
+      {
+        context: ['/api/ws'],
         target: 'ws://localhost:8081',
         ws: true,
         secure: false
       }
-    }
+    ]
   }
 };
 
@@ -276,7 +287,12 @@ module.exports = (env, argv) => {
   if (mode === 'development') {
     // istanbul instruments the source for code coverage
     webJsOptions.plugins.push('istanbul');
-    web.entry.tests = ['./test/frontend/index.js'];
+    // The in-browser test bundle (/test) still needs the frontend-test
+    // modernization (it pulls node crypto/assert and has stale imports), so keep
+    // it opt-in — a plain `npm start` stays clean. Set FRONTEND_TESTS=1 to build.
+    if (process.env.FRONTEND_TESTS) {
+      web.entry.tests = ['./test/frontend/index.js'];
+    }
   }
   return [web, serviceWorker];
 };

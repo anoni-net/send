@@ -32,7 +32,7 @@ const instance = {
   setMiddleware: function(middleware) {
     function getManifest() {
       return JSON.parse(
-        middleware.fileSystem.readFileSync(
+        middleware.context.outputFileSystem.readFileSync(
           middleware.getFilenameFromUrl('/manifest.json')
         )
       );
