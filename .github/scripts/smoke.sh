@@ -87,5 +87,16 @@ echo "  sha_out=${sha_out}"
 [ "$sha_in" = "$sha_out" ] || { echo "  ROUND-TRIP CHECKSUM MISMATCH"; docker logs send; exit 1; }
 
 echo "Smoke test + E2EE round-trip passed."
+
+# Headless browser render check (real chromium): catches client-side regressions
+# curl can't see (blank page from a bad publicPath, undefined asset URLs). Runs
+# only when playwright is installed (a CI step provides it); local runs skip it.
+if [ -f .github/scripts/browser-check.mjs ] && node -e "require.resolve('playwright')" 2>/dev/null; then
+  echo "Headless browser render check ..."
+  node .github/scripts/browser-check.mjs "http://localhost:${PORT}/"
+else
+  echo "(playwright not installed; skipping headless browser render check)"
+fi
+
 docker rm -f send redis >/dev/null 2>&1 || true
 docker network rm sendci >/dev/null 2>&1 || true

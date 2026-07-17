@@ -46,7 +46,12 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Smoke test (health + E2EE upload round-trip)
+      - name: Set up Playwright (chromium)
+        run: |
+          npm i --no-save playwright@1.48.2
+          npx playwright install --with-deps chromium
+
+      - name: Smoke test (health + E2EE round-trip + browser render)
         run: bash .github/scripts/smoke.sh
 
       # Report-only vulnerability scan so every PR/branch build shows the
