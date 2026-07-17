@@ -75,6 +75,27 @@ jobs:
           echo
           echo "Smoke test passed."
 
+      # Report-only vulnerability scan so every PR/branch build shows the
+      # HIGH/CRITICAL count. This is how we measure the delta as the stack is
+      # modernized (Tier 3). Non-gating here; the hard gate lives in publish.yml.
+      - name: Trivy vulnerability scan (report-only)
+        run: |
+          set -euo pipefail
+          docker run --rm \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            aquasec/trivy:latest image \
+              --scanners vuln --ignore-unfixed --no-progress \
+              --severity HIGH,CRITICAL \
+              send:ci | tee trivy-report.txt
+
+      - name: Upload Trivy report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-report
+          path: trivy-report.txt
+          if-no-files-found: warn
+
       - name: Dump container logs on failure
         if: failure()
         run: |
