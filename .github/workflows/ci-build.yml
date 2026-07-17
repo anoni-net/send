@@ -1,0 +1,82 @@
+##
+# Baseline CI — known-good reference point.
+#
+# Builds the Docker image straight from the upstream source (unchanged) and
+# proves the resulting container boots and serves. This is intentionally
+# minimal: it does NOT push to any registry. Publishing a signed image, SBOM
+# and vulnerability scanning are a later increment (see README roadmap).
+#
+# The base image is pinned by the Dockerfile to node:16.13-alpine3.13 on
+# purpose: this workflow captures "does today's source still build and run"
+# before we start modernizing the stack.
+##
+name: ci-build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-smoke:
+    name: Build image + smoke test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build image (linux/amd64)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+          load: true
+          tags: send:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Smoke test (boot + health endpoints)
+        run: |
+          set -euo pipefail
+          docker network create sendci
+          docker run -d --name redis --network sendci redis:alpine
+          docker run -d --name send --network sendci \
+            -e REDIS_HOST=redis \
+            -e BASE_URL=http://localhost:1443 \
+            -p 1443:1443 send:ci
+
+          echo "Waiting for /__lbheartbeat__ (liveness) ..."
+          ok=""
+          for i in $(seq 1 30); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' http://localhost:1443/__lbheartbeat__ || true)
+            if [ "$code" = "200" ]; then ok=1; echo "  lbheartbeat 200 after ${i} tries"; break; fi
+            sleep 2
+          done
+          if [ -z "$ok" ]; then echo "  timed out waiting for liveness"; docker logs send; exit 1; fi
+
+          echo "Checking /__heartbeat__ (redis/storage backend) ..."
+          code=$(curl -s -o /dev/null -w '%{http_code}' http://localhost:1443/__heartbeat__ || true)
+          echo "  heartbeat -> ${code}"
+          if [ "$code" != "200" ]; then docker logs send; exit 1; fi
+
+          echo "Checking /__version__ (build artifact present) ..."
+          curl -fsS http://localhost:1443/__version__ | tee /dev/stderr | head -c 400
+          echo
+          echo "Smoke test passed."
+
+      - name: Dump container logs on failure
+        if: failure()
+        run: |
+          echo "=== send logs ==="; docker logs send  || true
+          echo "=== redis logs ==="; docker logs redis || true
