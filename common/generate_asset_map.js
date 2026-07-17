@@ -13,7 +13,10 @@ const fs = require('fs');
 const path = require('path');
 
 function kv(f) {
-  return `"${f}": require('../assets/${f}')`;
+  // webpack 5 asset modules are ES modules, so a CommonJS require() of one
+  // returns the namespace ({ default: url }). Take .default to keep the map
+  // values plain URL strings (file-loader with esModule:false used to do this).
+  return `"${f}": require('../assets/${f}').default`;
 }
 
 module.exports = function() {

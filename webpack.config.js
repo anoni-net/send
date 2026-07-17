@@ -63,22 +63,18 @@ const serviceWorker = {
     rules: [
       {
         test: /\.(png|jpg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[contenthash:8].[ext]',
-          esModule: false
+        type: 'asset/resource',
+        generator: {
+          filename: '[name].[contenthash:8][ext]'
         }
       },
       {
         test: /\.svg$/,
+        type: 'asset/resource',
+        generator: {
+          filename: '[name].[contenthash:8][ext]'
+        },
         use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[contenthash:8].[ext]',
-              esModule: false
-            }
-          },
           {
             loader: 'svgo-loader',
             options: {
@@ -164,22 +160,18 @@ const web = {
       },
       {
         test: /\.(png|jpg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[contenthash:8].[ext]',
-          esModule: false
+        type: 'asset/resource',
+        generator: {
+          filename: '[name].[contenthash:8][ext]'
         }
       },
       {
         test: /\.svg$/,
+        type: 'asset/resource',
+        generator: {
+          filename: '[name].[contenthash:8][ext]'
+        },
         use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[contenthash:8].[ext]',
-              esModule: false
-            }
-          },
           {
             loader: 'svgo-loader',
             options: {
@@ -222,7 +214,7 @@ const web = {
       },
       {
         test: /\.ftl$/,
-        use: 'raw-loader'
+        type: 'asset/source'
       },
       {
         // creates test.js for /test
