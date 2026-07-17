@@ -1,6 +1,10 @@
 import assets from '../common/assets';
-import { version } from '../package.json';
+// webpack 5: JSON modules only expose a default export; destructure it instead
+// of using a named import (which webpack warns is deprecated).
+import pkg from '../package.json';
 import Keychain from './keychain';
+
+const { version } = pkg;
 import { downloadStream } from './api';
 import { transformStream } from './streams';
 import Zip from './zip';
