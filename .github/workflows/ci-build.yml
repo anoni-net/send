@@ -6,9 +6,9 @@
 # minimal: it does NOT push to any registry. Publishing a signed image, SBOM
 # and vulnerability scanning are a later increment (see README roadmap).
 #
-# The base image is pinned by the Dockerfile to node:16.13-alpine3.13 on
-# purpose: this workflow captures "does today's source still build and run"
-# before we start modernizing the stack.
+# The fast gate on PRs and non-main branches: build the image, run the smoke
+# test (health endpoints + a real ffsend upload/download round-trip), and
+# report a vulnerability scan. Publishing signed images lives in publish.yml.
 ##
 name: ci-build
 
@@ -46,34 +46,29 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Smoke test (boot + health endpoints)
+      - name: Smoke test (health + E2EE upload round-trip)
+        run: bash .github/scripts/smoke.sh
+
+      # Report-only vulnerability scan so every PR/branch build shows the
+      # HIGH/CRITICAL count. This is how we measure the delta as the stack is
+      # modernized (Tier 3). Non-gating here; the hard gate lives in publish.yml.
+      - name: Trivy vulnerability scan (report-only)
         run: |
           set -euo pipefail
-          docker network create sendci
-          docker run -d --name redis --network sendci redis:alpine
-          docker run -d --name send --network sendci \
-            -e REDIS_HOST=redis \
-            -e BASE_URL=http://localhost:1443 \
-            -p 1443:1443 send:ci
+          docker run --rm \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            aquasec/trivy:latest image \
+              --scanners vuln --ignore-unfixed --no-progress \
+              --severity HIGH,CRITICAL \
+              send:ci | tee trivy-report.txt
 
-          echo "Waiting for /__lbheartbeat__ (liveness) ..."
-          ok=""
-          for i in $(seq 1 30); do
-            code=$(curl -s -o /dev/null -w '%{http_code}' http://localhost:1443/__lbheartbeat__ || true)
-            if [ "$code" = "200" ]; then ok=1; echo "  lbheartbeat 200 after ${i} tries"; break; fi
-            sleep 2
-          done
-          if [ -z "$ok" ]; then echo "  timed out waiting for liveness"; docker logs send; exit 1; fi
-
-          echo "Checking /__heartbeat__ (redis/storage backend) ..."
-          code=$(curl -s -o /dev/null -w '%{http_code}' http://localhost:1443/__heartbeat__ || true)
-          echo "  heartbeat -> ${code}"
-          if [ "$code" != "200" ]; then docker logs send; exit 1; fi
-
-          echo "Checking /__version__ (build artifact present) ..."
-          curl -fsS http://localhost:1443/__version__ | tee /dev/stderr | head -c 400
-          echo
-          echo "Smoke test passed."
+      - name: Upload Trivy report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-report
+          path: trivy-report.txt
+          if-no-files-found: warn
 
       - name: Dump container logs on failure
         if: failure()

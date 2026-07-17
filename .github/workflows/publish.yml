@@ -78,31 +78,8 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Smoke test (boot + health endpoints)
-        run: |
-          set -euo pipefail
-          docker network create sendci
-          docker run -d --name redis --network sendci redis:alpine
-          docker run -d --name send --network sendci \
-            -e REDIS_HOST=redis \
-            -e BASE_URL=http://localhost:1443 \
-            -p 1443:1443 send:ci
-
-          echo "Waiting for /__lbheartbeat__ (liveness) ..."
-          ok=""
-          for i in $(seq 1 30); do
-            code=$(curl -s -o /dev/null -w '%{http_code}' http://localhost:1443/__lbheartbeat__ || true)
-            if [ "$code" = "200" ]; then ok=1; echo "  lbheartbeat 200 after ${i} tries"; break; fi
-            sleep 2
-          done
-          if [ -z "$ok" ]; then echo "  timed out"; docker logs send; exit 1; fi
-
-          code=$(curl -s -o /dev/null -w '%{http_code}' http://localhost:1443/__heartbeat__ || true)
-          echo "  heartbeat -> ${code}"
-          [ "$code" = "200" ] || { docker logs send; exit 1; }
-
-          curl -fsS http://localhost:1443/__version__ && echo && echo "Smoke test passed."
-          docker rm -f send redis >/dev/null 2>&1 || true
+      - name: Smoke test (health + E2EE upload round-trip)
+        run: bash .github/scripts/smoke.sh
 
       # 2) Vulnerability scan of the exact image we are about to publish.
       #    Report-only (exit 0) while the base image is still EOL node:16.
