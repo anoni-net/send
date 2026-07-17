@@ -22,19 +22,39 @@ const page = await browser.newPage();
 // pre-existing external <use> references don't fail the check.
 const sameOrigin4xx = [];
 page.on('response', r => {
-  if (r.status() >= 400 && r.url().startsWith(origin)) {
-    sameOrigin4xx.push(`${r.status()} ${r.url()}`);
+  const u = r.url();
+  // Ignore incidental probes (favicon) and source maps so only real broken
+  // asset references (e.g. a /auto/ 404) fail the check.
+  const incidental = /\/favicon\.ico(\?|$)/.test(u) || u.endsWith('.map');
+  if (r.status() >= 400 && u.startsWith(origin) && !incidental) {
+    sameOrigin4xx.push(`${r.status()} ${u}`);
   }
 });
 
 let renderError = null;
 try {
   await page.goto(url, { waitUntil: 'networkidle', timeout: 20000 });
-  // The upload UI (file input) only exists once the client app has mounted;
-  // a blank page (failed bundle load) never gets here.
-  await page.waitForSelector('input[type=file]', { timeout: 15000 });
+  // The upload UI's file input only exists once the client app has mounted; a
+  // blank page (failed bundle load) never gets here. Use state:'attached' — the
+  // input is intentionally hidden (a styled button triggers it), so the default
+  // 'visible' wait would time out even on a healthy page.
+  await page.waitForSelector('input[type=file]', {
+    state: 'attached',
+    timeout: 15000
+  });
 } catch (e) {
   renderError = e.message;
+  try {
+    const diag = await page.evaluate(() => ({
+      title: document.title,
+      bodyText: document.body ? document.body.innerText.slice(0, 500) : '(no body)',
+      inputs: document.querySelectorAll('input').length,
+      fileInputs: document.querySelectorAll('input[type=file]').length
+    }));
+    console.error('  page diagnostics:', JSON.stringify(diag));
+  } catch (_) {
+    /* ignore */
+  }
 }
 
 const domProblems = renderError
