@@ -28,12 +28,12 @@ class DB {
   }
 
   async ttl(id) {
-    const result = await this.redis.ttlAsync(id);
+    const result = await this.redis.ttl(id);
     return Math.ceil(result) * 1000;
   }
 
   async getPrefixedId(id) {
-    const prefix = await this.redis.hgetAsync(id, 'prefix');
+    const prefix = await this.redis.hGet(id, 'prefix');
     return `${prefix}-${id}`;
   }
 
@@ -51,35 +51,42 @@ class DB {
     const prefix = getPrefix(expireSeconds);
     const filePath = `${prefix}-${id}`;
     await this.storage.set(filePath, file);
-    this.redis.hset(id, 'prefix', prefix);
+    await this.redis.hSet(id, 'prefix', String(prefix));
     if (meta) {
-      this.redis.hmset(id, meta);
+      await this.redis.hSet(id, meta);
     }
-    this.redis.expire(id, expireSeconds);
+    await this.redis.expire(id, expireSeconds);
   }
 
   setField(id, key, value) {
-    this.redis.hset(id, key, value);
+    // Coerce to string: redis stores strings and node-redis v4 rejects
+    // non-string/number values (e.g. the boolean `pwd`). Callers may not await,
+    // so guard the promise to avoid an unhandled rejection.
+    const p = this.redis.hSet(id, key, String(value));
+    p.catch(err => this.log.error('setField:', err));
+    return p;
   }
 
   incrementField(id, key, increment = 1) {
-    this.redis.hincrby(id, key, increment);
+    return this.redis.hIncrBy(id, key, increment);
   }
 
   async del(id) {
     const filePath = await this.getPrefixedId(id);
-    this.storage.del(filePath);
-    this.redis.del(id);
+    await this.storage.del(filePath);
+    await this.redis.del(id);
   }
 
   async ping() {
-    await this.redis.pingAsync();
+    await this.redis.ping();
     await this.storage.ping();
   }
 
   async metadata(id) {
-    const result = await this.redis.hgetallAsync(id);
-    return result && new Metadata(result);
+    const result = await this.redis.hGetAll(id);
+    return result && Object.keys(result).length > 0
+      ? new Metadata(result)
+      : null;
   }
 }
 
