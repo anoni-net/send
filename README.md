@@ -1,172 +1,67 @@
-# [![Send](./assets/icon-64x64.png)](https://gitlab.com/timvisee/send/) Send
+# Send — anoni.net self-hosted source
 
-[![Build status on GitLab CI][gitlab-ci-master-badge]][gitlab-ci-link]
-[![Latest release][release-badge]][release-link]
-[![Docker image][docker-image-badge]][docker-image-link]
-[![Project license][repo-license-badge]](LICENSE)
+This repository holds the source of [Send][upstream] that the [anoni.net][anoni]
+community self-hosts at **https://send.anoni.net**. Send is a simple, private,
+end-to-end encrypted file-sharing web app: files are encrypted in the browser
+and the server only ever stores ciphertext, never the decryption key.
 
-[docker-image-badge]: https://img.shields.io/badge/docker-latest-blue.svg
-[docker-image-link]: https://gitlab.com/timvisee/send/container_registry/eyJuYW1lIjoidGltdmlzZWUvc2VuZCIsInRhZ3NfcGF0aCI6Ii90aW12aXNlZS9zZW5kL3JlZ2lzdHJ5L3JlcG9zaXRvcnkvMTQxODUwNC90YWdzP2Zvcm1hdD1qc29uIiwiaWQiOjE0MTg1MDQsImNsZWFudXBfcG9saWN5X3N0YXJ0ZWRfYXQiOm51bGx9
-[gitlab-ci-link]: https://gitlab.com/timvisee/send/pipelines
-[gitlab-ci-master-badge]: https://gitlab.com/timvisee/send/badges/master/pipeline.svg
-[release-badge]: https://img.shields.io/github/v/tag/timvisee/send
-[release-link]: https://gitlab.com/timvisee/send/-/tags
-[repo-license-badge]: https://img.shields.io/github/license/timvisee/send.svg
+## Relationship to upstream
 
-A fork of Mozilla's [Firefox Send][mozilla-send].
-Mozilla discontinued Send, this fork is a community effort to keep the project
-up-to-date and alive.
+This is a **downstream copy, not a GitHub fork.** Send's canonical repository
+lives on GitLab and is only mirrored to GitHub, so the GitHub fork network does
+not apply here. We keep our own standalone repository instead:
 
-- Forked [at][fork-commit] Mozilla's last publicly hosted version
-- _Mozilla_ & _Firefox_ branding [is][remove-branding-pr] removed so you can legally self-host
-- Kept compatible with [`ffsend`][ffsend] (CLI for Send)
-- Dependencies have been updated
-- Mozilla's [changes][mozilla-patches] since the fork have been selectively [merged][mozilla-patches-pr]
-- Mozilla's experimental report feature, download tokens, trust warnings and FxA changes are not included
+- Upstream (maintained by Tim Visée): <https://gitlab.com/timvisee/send>
+  (mirror: <https://github.com/timvisee/send>)
+- Upstream is itself a community fork of Mozilla's discontinued
+  [Firefox Send](https://github.com/mozilla/send).
 
-Find an up-to-date Docker image here: [docs/docker.md](docs/docker.md)
+This repository exists so the anoni.net community can pin, review, build and
+(in future) modernize the exact code we run, with our own CI and signed images.
 
-The original project by Mozilla can be found [here][mozilla-send].
-The [`mozilla-master`][branch-mozilla-master] branch holds the `master` branch
-as left by Mozilla.
-The [`send-v3`][branch-send-v3] branch holds the commit tree of Mozilla's last
-publicly hosted version, which this fork is based on.
-The [`send-v4`][branch-send-v4] branch holds the commit tree of Mozilla's last
-experimental version which was still a work in progress (featuring file
-reporting, download tokens, trust warnings and FxA changes), this has
-selectively been merged into this fork.
-Please consider to [donate][donate] to allow me to keep working on this.
+We are **not affiliated with, nor endorsed by, Mozilla or Tim Visée.** All
+*Mozilla* and *Firefox* branding was already removed upstream so the project can
+be self-hosted legally.
 
-Thanks [Mozilla][mozilla] for building this amazing tool!
+### Staying in sync with upstream
 
-[branch-mozilla-master]: https://gitlab.com/timvisee/send/-/tree/mozilla-master
-[branch-send-v3]: https://gitlab.com/timvisee/send/-/tree/send-v3
-[branch-send-v4]: https://gitlab.com/timvisee/send/-/tree/send-v4
-[donate]: https://timvisee.com/donate
-[ffsend]: https://github.com/timvisee/ffsend
-[fork-commit]: https://gitlab.com/timvisee/send/-/commit/3e9be676413a6e1baaf6a354c180e91899d10bec
-[mozilla-patches-pr]: https://gitlab.com/timvisee/send/-/merge_requests/3
-[mozilla-patches]: https://gitlab.com/timvisee/send/-/compare/3e9be676413a6e1baaf6a354c180e91899d10bec...mozilla-master
-[mozilla-send]: https://github.com/mozilla/send
-[mozilla]: https://mozilla.org/
-[remove-branding-pr]: https://gitlab.com/timvisee/send/-/merge_requests/2
-
----
-
-**Docs:** [FAQ](docs/faq.md), [Encryption](docs/encryption.md), [Build](docs/build.md), [Docker](docs/docker.md), [More](docs/)
-
----
-
-## Table of Contents
-
-* [What it does](#what-it-does)
-* [Requirements](#requirements)
-* [Development](#development)
-* [Commands](#commands)
-* [Configuration](#configuration)
-* [Localization](#localization)
-* [Contributing](#contributing)
-* [Instances](#instances)
-* [Deployment](#deployment)
-* [Clients](#clients)
-* [License](#license)
-
----
-
-## What it does
-
-A file sharing experiment which allows you to send encrypted files to other users.
-
----
-
-## Requirements
-
-- [Node.js 16.x](https://nodejs.org/)
-- [Redis server](https://redis.io/) (optional for development)
-- [AWS S3](https://aws.amazon.com/s3/) or compatible service (optional)
-
----
-
-## Development
-
-To start an ephemeral development server, run:
+Upstream is tracked through a git remote named `upstream`:
 
 ```sh
-npm install
-npm start
+git remote -v
+# origin    https://github.com/anoni-net/send.git   (this repo)
+# upstream  https://gitlab.com/timvisee/send.git     (canonical)
+
+git fetch upstream
+git merge upstream/master   # review, then push to origin/main
 ```
 
-Then, browse to http://localhost:8080
+## What we changed
 
----
+- **Nothing in the application code yet.** `main` currently mirrors upstream
+  `master` (renamed to `main`) with full history and all tags preserved.
+- Our **deployment configuration** (Docker Compose, nginx, hostnames) is kept
+  separately and is not part of this repository.
 
-## Commands
+Planned work, tracked in issues: upgrade the runtime and build stack (Node,
+Redis client, webpack), harden the container and supply chain, and publish our
+own signed image. Until then, follow the upstream docs for build and run
+instructions.
 
-| Command          | Description |
-|------------------|-------------|
-| `npm run format` | Formats the frontend and server code using **prettier**.
-| `npm run lint`   | Lints the CSS and JavaScript code.
-| `npm test`       | Runs the suite of mocha tests.
-| `npm start`      | Runs the server in development configuration.
-| `npm run build`  | Builds the production assets.
-| `npm run prod`   | Runs the server in production configuration.
+## Upstream documentation
 
----
+The original project README is preserved verbatim as
+[README.upstream.md](README.upstream.md). Full docs live under [docs/](docs/):
+[FAQ](docs/faq.md), [Encryption](docs/encryption.md), [Build](docs/build.md),
+[Docker](docs/docker.md).
 
-## Configuration
+## License & attribution
 
-The server is configured with environment variables. See [server/config.js](server/config.js) for all options and [docs/docker.md](docs/docker.md) for examples.
+Send is licensed under the [Mozilla Public License 2.0](LICENSE) (MPL-2.0), and
+`qrcode.js` is licensed under MIT. This downstream copy keeps the same license,
+unchanged. Copyright remains with Mozilla, Tim Visée and the Send contributors
+listed in [CONTRIBUTORS](CONTRIBUTORS); anoni.net's own modifications are
+released under the same MPL-2.0.
 
----
-
-## Localization
-
-See: [docs/localization.md](docs/localization.md)
-
----
-
-## Contributing
-
-Pull requests are always welcome! Feel free to check out the list of "good first issues" (to be implemented).
-
----
-
-## Instances
-
-Find a list of public instances here: https://github.com/timvisee/send-instances/
-
----
-
-## Deployment
-
-See: [docs/deployment.md](docs/deployment.md)
-
-Docker quickstart: [docs/docker.md](docs/docker.md)
-
-AWS example using Ubuntu Server `20.04`: [docs/AWS.md](docs/AWS.md)
-
----
-
-## Clients
-
-- Web: _this repository_
-- Command-line: [`ffsend`](https://github.com/timvisee/ffsend)
-- Android: _see [Android](#android) section_
-- Thunderbird: [FileLink provider for Send](https://addons.thunderbird.net/thunderbird/addon/filelink-provider-for-send/)
-
-#### Android
-
-The android implementation is contained in the `android` directory,
-and can be viewed locally for easy testing and editing by running `ANDROID=1 npm
-start` and then visiting <http://localhost:8080>. CSS and image files are
-located in the `android/app/src/main/assets` directory.
-
----
-
-## License
-
-[Mozilla Public License Version 2.0](LICENSE)
-
-[qrcode.js](https://github.com/kazuhikoarase/qrcode-generator) licensed under MIT
-
----
+[upstream]: https://gitlab.com/timvisee/send
+[anoni]: https://anoni.net/
