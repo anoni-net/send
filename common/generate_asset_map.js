@@ -13,10 +13,12 @@ const fs = require('fs');
 const path = require('path');
 
 function kv(f) {
-  // webpack 5 asset modules are ES modules, so a CommonJS require() of one
-  // returns the namespace ({ default: url }). Take .default to keep the map
-  // values plain URL strings (file-loader with esModule:false used to do this).
-  return `"${f}": require('../assets/${f}').default`;
+  // Keep the map values plain URL strings. webpack 5 asset modules differ by
+  // type: png/jpg export ES modules (require() -> { default: url }), while SVGs
+  // (which also run through svgo-loader) export CommonJS (require() -> url, no
+  // .default). Handle both: use .default when present, else the module itself.
+  const r = `require('../assets/${f}')`;
+  return `"${f}": (${r}).default || ${r}`;
 }
 
 module.exports = function() {
