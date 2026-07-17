@@ -14,7 +14,7 @@ name: ci-build
 
 on:
   push:
-    branches: [main]
+    branches-ignore: [main]   # main is covered by publish.yml (build + smoke + publish)
   pull_request:
   workflow_dispatch:
 
