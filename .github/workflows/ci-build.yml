@@ -49,6 +49,13 @@ jobs:
   frontend-tests:
     name: Frontend tests (browser)
     runs-on: ubuntu-latest
+    # The workflow tests (fileSender/workflow) do a real upload through the test
+    # server, which needs a redis backend.
+    services:
+      redis:
+        image: redis:alpine
+        ports:
+          - 6379:6379
     steps:
       - name: Checkout
         uses: actions/checkout@v4

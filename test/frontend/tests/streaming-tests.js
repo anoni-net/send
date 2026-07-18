@@ -1,6 +1,3 @@
-const ece = require('http_ece');
-require('buffer');
-
 import assert from 'assert';
 import Archive from '../../../app/archive';
 import { b64ToArray } from '../../../app/utils';
@@ -15,16 +12,17 @@ const testSalt = 'I1BsxtFttlv3u_Oo94xnmw';
 const keystr = 'yqdlZ-tYemfogSmv7Ws5PQ';
 
 const buffer = Buffer.from(str);
-const params = {
-  version: 'aes128gcm',
-  rs: rs,
-  salt: testSalt,
-  keyid: '',
-  key: keystr
-};
 
-const encrypted = ece.encrypt(buffer, params);
-const decrypted = ece.decrypt(encrypted, params);
+async function collect(stream) {
+  const reader = stream.getReader();
+  let result = Buffer.from([]);
+  let state = await reader.read();
+  while (!state.done) {
+    result = Buffer.concat([result, Buffer.from(state.value)]);
+    state = await reader.read();
+  }
+  return result;
+}
 
 describe('Streaming', function() {
   describe('blobStream', function() {
@@ -64,48 +62,24 @@ describe('Streaming', function() {
     });
   });
 
-  //testing against http_ece's implementation
+  // App ECE self round-trip. This previously cross-checked against http_ece,
+  // which is a node library that can't run in a browser; the round-trip below
+  // exercises the same app code paths (encryptStream/decryptStream) end to end.
   describe('ECE', function() {
     const key = b64ToArray(keystr);
     const salt = b64ToArray(testSalt).buffer;
 
-    it('can encrypt', async function() {
-      const stream = new Archive([new Blob([str], { type: 'text/plain' })])
-        .stream;
-      const encStream = encryptStream(stream, key, rs, salt);
-      const reader = encStream.getReader();
+    it('encrypt then decrypt recovers the original', async function() {
+      const src = new Archive([new Blob([str], { type: 'text/plain' })]).stream;
+      const encrypted = await collect(encryptStream(src, key, rs, salt));
 
-      let result = Buffer.from([]);
+      assert.notDeepEqual(encrypted, buffer);
+      assert.equal(encrypted.length, encryptedSize(buffer.length, rs));
 
-      let state = await reader.read();
-      while (!state.done) {
-        result = Buffer.concat([result, state.value]);
-        state = await reader.read();
-      }
-
-      assert.deepEqual(result, encrypted);
-    });
-
-    it('can decrypt', async function() {
-      const stream = new Archive([new Blob([encrypted])]).stream;
-      const decStream = decryptStream(stream, key, rs);
-
-      const reader = decStream.getReader();
-      let result = Buffer.from([]);
-
-      let state = await reader.read();
-      while (!state.done) {
-        result = Buffer.concat([result, state.value]);
-        state = await reader.read();
-      }
-
-      assert.deepEqual(result, decrypted);
-    });
-  });
-
-  describe('encryptedSize', function() {
-    it('matches the size of an encrypted buffer', function() {
-      assert.equal(encryptedSize(buffer.length, rs), encrypted.length);
+      const decrypted = await collect(
+        decryptStream(new Archive([new Blob([encrypted])]).stream, key, rs)
+      );
+      assert.deepEqual(decrypted, buffer);
     });
   });
 });
