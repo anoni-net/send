@@ -44,7 +44,8 @@ const provideBuffer = new webpack.ProvidePlugin({
   // `process` is referenced by the assert polyfill in the test bundle; webpack 5
   // no longer injects it. The app itself only uses process.env.NODE_ENV (inlined
   // by EnvironmentPlugin), so the shim isn't pulled into the app bundle.
-  // `.js` is required: .mjs deps (asmcrypto) use fullySpecified resolution.
+  // Keep the `.js`: bare `process/browser` fails to resolve under the
+  // fullySpecified rules webpack 5 applies to .mjs dependencies.
   process: 'process/browser.js'
 });
 
