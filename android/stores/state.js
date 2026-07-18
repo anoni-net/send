@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+
 
 import User from '../user';
 import storage from '../../app/storage';

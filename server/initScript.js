@@ -5,12 +5,12 @@ const clientConstants = require('./clientConstants');
 
 let sentry = '';
 if (config.sentry_id) {
-  //eslint-disable-next-line node/no-missing-require
+
   const version = require('../dist/version.json');
   sentry = `
 var SENTRY_CONFIG = {
   dsn: '${config.sentry_id}',
-  release: '${version.version}',
+  release: '${version.release}',
   beforeSend: function (data) {
     var hash = window.location.hash;
     if (hash) {

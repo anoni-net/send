@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+
 
 export default function intentHandler(state, emitter) {
   window.addEventListener(

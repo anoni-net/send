@@ -1,4 +1,4 @@
-/* eslint-disable no-undef, no-process-exit */
+/* eslint-disable no-undef */
 const fs = require('fs');
 const path = require('path');
 const { chromium } = require('playwright');
