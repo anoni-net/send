@@ -10,7 +10,7 @@ if (config.sentry_id) {
   sentry = `
 var SENTRY_CONFIG = {
   dsn: '${config.sentry_id}',
-  release: '${version.version}',
+  release: '${version.release}',
   beforeSend: function (data) {
     var hash = window.location.hash;
     if (hash) {

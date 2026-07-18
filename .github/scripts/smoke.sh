@@ -35,7 +35,24 @@ code=$(curl -s -o /dev/null -w '%{http_code}' "http://localhost:${PORT}/__heartb
 echo "  heartbeat (redis/storage) -> ${code}"
 [ "$code" = "200" ] || { docker logs send; exit 1; }
 
-echo "  __version__: $(curl -fsS "http://localhost:${PORT}/__version__")"
+ver_json=$(curl -fsS "http://localhost:${PORT}/__version__")
+echo "  __version__: ${ver_json}"
+
+# The `version` field advertises the Send API generation, not our release. Third
+# party clients gate on it with no fallback: ffsend maps `>=3.0 <4.0` to its V3
+# API, so anything outside that range breaks every ffsend user with "unsupported
+# version". Our release number lives in `release`. Assert both, because the
+# failure is silent from the server's side.
+api_ver=$(printf '%s' "$ver_json" | sed -n 's/.*"version":"v\{0,1\}\([0-9][^"]*\)".*/\1/p')
+case "$api_ver" in
+  3.*) echo "  api version ${api_ver} is in ffsend's supported 3.x range" ;;
+  *)   echo "  UNSUPPORTED API VERSION '${api_ver}': ffsend accepts >=3.0 <4.0 only."
+       echo "  Report the protocol generation in 'version' and the release in 'release'."
+       docker logs send; exit 1 ;;
+esac
+
+printf '%s' "$ver_json" | grep -q '"release":' || {
+  echo "  __version__ is missing the 'release' field"; docker logs send; exit 1; }
 
 # Render the home page and confirm hashed assets resolve. This is the only check
 # that exercises the webpack asset map (server -> common/assets.js -> manifest);
