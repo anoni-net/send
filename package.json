@@ -16,7 +16,7 @@
     "build": "npm run clean && webpack",
     "lint": "npm-run-all lint:*",
     "lint:css": "stylelint app/*.css app/**/*.css",
-    "lint:js": "eslint .",
+    "lint:js": "eslint . --max-warnings 27",
     "lint-locales": "node scripts/lint-locales",
     "lint-locales:dev": "npm run lint-locales",
     "lint-locales:prod": "npm run lint-locales -- --production",
