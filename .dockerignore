@@ -1,8 +1,18 @@
-.circleci
+# Kept out of the build context.
+#
+# Two things that look excludable and are not:
+#
+#   .git    build/version_plugin.js reads the commit through git-rev-sync to
+#           fill /__version__. Excluding it does not fail the build, it just
+#           silently reports commit "unknown".
+#   test/   webpack.config.js calls require.resolve('./test/frontend/index.js')
+#           at module scope rather than behind the FRONTEND_TESTS check, so the
+#           config fails to load without it.
 .nyc_output
-.vscode
-.DS_Store
+.github
+assets_src
 coverage
 docs
-firefox
 node_modules
+.vscode
+.DS_Store
