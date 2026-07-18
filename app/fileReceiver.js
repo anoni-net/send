@@ -33,6 +33,10 @@ export default class FileReceiver extends Nanobus {
 
   cancel() {
     if (this.downloadRequest) {
+      // Remember the intent: a cancelled transfer can surface as any number of
+      // errors (a 400, a 'cancelled' message from the service worker, or a bare
+      // TypeError from an interrupted fetch), so don't rely on the error shape.
+      this.cancelled = true;
       this.downloadRequest.cancel();
     }
   }
@@ -41,6 +45,7 @@ export default class FileReceiver extends Nanobus {
     this.msg = 'fileSizeProgress';
     this.state = 'initialized';
     this.progress = [0, 1];
+    this.cancelled = false;
   }
 
   async getMetadata() {
@@ -73,6 +78,7 @@ export default class FileReceiver extends Nanobus {
 
   async downloadBlob(noSave = false) {
     this.state = 'downloading';
+    this.cancelled = false;
     this.downloadRequest = await downloadFile(
       this.fileInfo.id,
       this.keychain,
@@ -107,12 +113,16 @@ export default class FileReceiver extends Nanobus {
       this.state = 'complete';
     } catch (e) {
       this.downloadRequest = null;
+      if (this.cancelled) {
+        throw new Error(0);
+      }
       throw e;
     }
   }
 
   async downloadStream(noSave = false) {
     const start = Date.now();
+    this.cancelled = false;
     const onprogress = p => {
       this.progress = [p, this.fileInfo.size];
       this.emit('progress');
@@ -197,7 +207,7 @@ export default class FileReceiver extends Nanobus {
       this.state = 'complete';
     } catch (e) {
       this.downloadRequest = null;
-      if (e === 'cancelled' || e.message === '400') {
+      if (this.cancelled || e === 'cancelled' || e.message === '400') {
         throw new Error(0);
       }
       throw e;
