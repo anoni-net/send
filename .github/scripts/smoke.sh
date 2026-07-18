@@ -96,7 +96,9 @@ fi
 if [ -z "${SKIP_FFSEND:-}" ]; then
 echo "E2EE upload/download round-trip via ffsend ${FFSEND_VERSION} ..."
 FF=/tmp/ffsend
-curl -fsSL -o "$FF" \
+# Retry: this download has failed a build with "Recv failure: Connection reset
+# by peer". A hiccup fetching a test tool should not read as a broken image.
+curl -fsSL --retry 3 --retry-delay 2 --retry-all-errors -o "$FF" \
   "https://github.com/timvisee/ffsend/releases/download/${FFSEND_VERSION}/ffsend-${FFSEND_VERSION}-linux-x64-static"
 chmod +x "$FF"
 
