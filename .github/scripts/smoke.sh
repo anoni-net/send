@@ -82,6 +82,18 @@ echo "  asset ${asset} -> ${acode}"
 [ "$acode" = "200" ] || { echo "  page-referenced asset did not resolve (bad publicPath?)"; exit 1; }
 echo "  page render + asset resolution OK"
 
+# ffsend only publishes x86_64 Linux binaries, so this step cannot run on the
+# arm64 runner. Skipped loudly rather than silently: on arm64 this script still
+# covers boot, health, page render and the headless browser check, but NOT the
+# encrypted round-trip, and the log should say so.
+arch=$(uname -m)
+if [ "$arch" != "x86_64" ]; then
+  echo "E2EE round-trip SKIPPED: ffsend ships no ${arch} build (upstream releases x64 only)."
+  echo "  everything else in this script still ran on ${arch}."
+  SKIP_FFSEND=1
+fi
+
+if [ -z "${SKIP_FFSEND:-}" ]; then
 echo "E2EE upload/download round-trip via ffsend ${FFSEND_VERSION} ..."
 FF=/tmp/ffsend
 curl -fsSL -o "$FF" \
@@ -104,6 +116,7 @@ echo "  sha_out=${sha_out}"
 [ "$sha_in" = "$sha_out" ] || { echo "  ROUND-TRIP CHECKSUM MISMATCH"; docker logs send; exit 1; }
 
 echo "Smoke test + E2EE round-trip passed."
+fi
 
 # Headless browser render check (real chromium): catches client-side regressions
 # curl can't see (blank page from a bad publicPath, undefined asset URLs). Runs
