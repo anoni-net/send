@@ -44,7 +44,12 @@ const server = app.listen(async function() {
       );
     }
     const stats = results.stats;
-    exitCode = stats.failures;
+    // Guard against a silent no-op: if the test bundle crashed on load, mocha
+    // reports 0 tests and 0 failures, which must not pass as green.
+    exitCode = stats.tests > 0 ? stats.failures : 1;
+    if (stats.tests === 0) {
+      console.log('No tests ran (test bundle failed to register any tests).');
+    }
     console.log(`${stats.passes} passing (${stats.duration}ms)\n`);
     if (stats.failures) {
       console.log('Failures:\n');
