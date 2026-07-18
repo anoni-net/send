@@ -34,7 +34,14 @@ const webJsOptions = {
 const nodeResolve = {
   fallback: {
     buffer: require.resolve('buffer/'),
-    path: require.resolve('path-browserify')
+    path: require.resolve('path-browserify'),
+    // Needed only by the frontend test bundle (assert in the specs, and
+    // http_ece -> crypto/stream in streaming-tests). The app itself uses Web
+    // Crypto / Web Streams, so these fallbacks are unused in the prod build.
+    assert: require.resolve('assert/'),
+    crypto: require.resolve('crypto-browserify'),
+    stream: require.resolve('stream-browserify'),
+    vm: require.resolve('vm-browserify')
   }
 };
 const provideBuffer = new webpack.ProvidePlugin({
