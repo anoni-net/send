@@ -10,10 +10,8 @@ import controller from './controller';
 import dragManager from './dragManager';
 import pasteManager from './pasteManager';
 import storage from './storage';
-import experiments from './experiments';
 import * as Sentry from '@sentry/browser';
 import './main.css';
-import User from './user';
 import { getTranslator } from './locale';
 import Archive from './archive';
 import { setTranslate, locale } from './utils';
@@ -57,7 +55,6 @@ if (process.env.NODE_ENV === 'production') {
     translate,
     storage,
     sentry: Sentry,
-    user: new User(storage, LIMITS, window.AUTH_CONFIG),
     transfer: null,
     fileInfo: null,
     locale: locale()
@@ -66,7 +63,6 @@ if (process.env.NODE_ENV === 'production') {
   const app = routes(choo({ hash: true }));
 
   window.app = app;
-  app.use(experiments);
   app.use(controller);
   app.use(dragManager);
   app.use(pasteManager);

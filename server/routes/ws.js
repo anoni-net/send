@@ -3,7 +3,6 @@ const storage = require('../storage');
 const config = require('../config');
 const mozlog = require('../log');
 const Limiter = require('../limiter');
-const fxa = require('../fxa');
 const { encryptedSize } = require('../../app/utils');
 
 const { Transform } = require('stream');
@@ -29,19 +28,10 @@ module.exports = function(ws, req) {
       const dlimit = fileInfo.dlimit || config.default_downloads;
       const metadata = fileInfo.fileMetadata;
       const auth = fileInfo.authorization;
-      const user = await fxa.verify(fileInfo.bearer);
       const maxFileSize = config.max_file_size;
       const maxExpireSeconds = config.max_expire_seconds;
       const maxDownloads = config.max_downloads;
 
-      if (config.fxa_required && !user) {
-        ws.send(
-          JSON.stringify({
-            error: 401
-          })
-        );
-        return ws.close();
-      }
       if (
         !metadata ||
         !auth ||

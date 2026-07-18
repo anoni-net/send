@@ -21,7 +21,7 @@ module.exports = function(state, emit) {
   }
 
   const counts = state.DEFAULTS.DOWNLOAD_COUNTS.filter(
-    i => state.capabilities.account || i <= state.user.maxDownloads
+    i => i <= state.LIMITS.MAX_DOWNLOADS
   );
 
   const dlCountSelect = el.querySelector('#dlCount');
@@ -34,7 +34,7 @@ module.exports = function(state, emit) {
         const selected = parseInt(value);
         state.archive.dlimit = selected;
         emit('render');
-        if (selected > parseInt(state.user.maxDownloads || '0')) {
+        if (selected > parseInt(state.LIMITS.MAX_DOWNLOADS || '0')) {
           console.log('Chosen max download count is larger than the allowed limit', selected)
         }
       },
@@ -44,7 +44,7 @@ module.exports = function(state, emit) {
   );
 
   const expires = state.DEFAULTS.EXPIRE_TIMES_SECONDS.filter(
-    i => state.capabilities.account || i <= state.user.maxExpireSeconds
+    i => i <= state.LIMITS.MAX_EXPIRE_SECONDS
   );
 
   const timeSelect = el.querySelector('#timespan');
@@ -60,7 +60,7 @@ module.exports = function(state, emit) {
         const selected = parseInt(value);
         state.archive.timeLimit = selected;
         emit('render');
-        if (selected > parseInt(state.user.maxExpireSeconds || '0')) {
+        if (selected > parseInt(state.LIMITS.MAX_EXPIRE_SECONDS || '0')) {
           console.log('Chosen download expiration is larger than the allowed limit', selected)
         }
       },

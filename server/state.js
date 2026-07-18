@@ -2,7 +2,6 @@ const config = require('./config');
 const layout = require('./layout');
 const assets = require('../common/assets');
 const getTranslator = require('./locale');
-const { getFxaConfig } = require('./fxa');
 const fs = require('fs');
 const path = require('path');
 
@@ -15,18 +14,9 @@ module.exports = async function(req) {
       return req.language || 'en-US';
     }
   })();
-  let authConfig = null;
   let robots = 'none';
   if (req.route && req.route.path === '/') {
     robots = 'all';
-  }
-  if (config.fxa_client_id) {
-    try {
-      authConfig = await getFxaConfig();
-      authConfig.client_id = config.fxa_client_id;
-    } catch (e) {
-      // continue without accounts
-    }
   }
   const prefs = {};
   if (config.survey_url) {
@@ -72,9 +62,7 @@ module.exports = async function(req) {
     },
     fileInfo: {},
     cspNonce: req.cspNonce,
-    user: { avatar: assets.get('user.svg'), loggedIn: false },
     robots,
-    authConfig,
     prefs,
     layout
   };

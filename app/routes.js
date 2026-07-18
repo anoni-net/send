@@ -9,13 +9,6 @@ module.exports = function(app = choo({ hash: true })) {
   app.route('/unsupported/:reason', body(require('./ui/unsupported')));
   app.route('/error', body(require('./ui/error')));
   app.route('/blank', body(require('./ui/blank')));
-  app.route('/oauth', function(state, emit) {
-    emit('authenticate', state.query.code, state.query.state);
-  });
-  app.route('/login', function(state, emit) {
-    emit('replaceState', '/');
-    setTimeout(() => emit('render'));
-  });
   app.route('*', body(require('./ui/notFound')));
   return app;
 };

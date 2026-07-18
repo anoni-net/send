@@ -23,9 +23,6 @@ var SENTRY_CONFIG = {
 }
 
 module.exports = function(state) {
-  const authConfig = state.authConfig
-    ? `var AUTH_CONFIG = ${JSON.stringify(state.authConfig)};`
-    : '';
 
   /* eslint-disable no-useless-escape */
   const jsconfig = `
@@ -49,7 +46,6 @@ module.exports = function(state) {
   var downloadMetadata = ${
     state.downloadMetadata ? raw(JSON.stringify(state.downloadMetadata)) : '{}'
   };
-  ${authConfig};
   ${sentry}
   `;
   return state.cspNonce

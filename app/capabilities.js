@@ -1,4 +1,3 @@
-/* global AUTH_CONFIG */
 import { browserName, locale } from './utils';
 
 async function checkCrypto() {
@@ -85,12 +84,6 @@ export default async function getCapabilities() {
   if (!nativeStreams) {
     polyStreams = await polyfillStreams();
   }
-  let account = typeof AUTH_CONFIG !== 'undefined';
-  try {
-    account = account && !!localStorage;
-  } catch (e) {
-    account = false;
-  }
   const share =
     isMobile &&
     typeof navigator.share === 'function' &&
@@ -103,7 +96,6 @@ export default async function getCapabilities() {
   const mobileFirefox = browser === 'firefox' && isMobile;
 
   return {
-    account,
     crypto,
     serviceWorker,
     streamUpload: nativeStreams || polyStreams,

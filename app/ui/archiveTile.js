@@ -470,22 +470,6 @@ module.exports.uploading = function(state, emit) {
 };
 
 module.exports.empty = function(state, emit) {
-  const upsell =
-    state.user.loggedIn || !state.capabilities.account
-      ? ''
-      : html`
-          <button
-            class="center font-medium text-sm link-primary mt-4 mb-2"
-            onclick="${event => {
-              event.stopPropagation();
-              emit('signup-cta', 'drop');
-            }}"
-          >
-            ${state.translate('signInSizeBump', {
-              size: bytes(state.LIMITS.MAX_FILE_SIZE)
-            })}
-          </button>
-        `;
   const uploadNotice = state.WEB_UI.UPLOAD_AREA_NOTICE_HTML
     ? html`
         <p
@@ -513,7 +497,7 @@ module.exports.empty = function(state, emit) {
       </div>
       <div class="pb-6 text-center text-base">
         ${state.translate('orClickWithSize', {
-          size: bytes(state.user.maxSize)
+          size: bytes(state.LIMITS.MAX_FILE_SIZE)
         })}
       </div>
       <input
@@ -531,12 +515,12 @@ module.exports.empty = function(state, emit) {
         role="button"
         class="btn rounded-lg flex items-center mt-4"
         title="${state.translate('addFilesButton', {
-          size: bytes(state.user.maxSize)
+          size: bytes(state.LIMITS.MAX_FILE_SIZE)
         })}"
       >
         ${state.translate('addFilesButton')}
       </label>
-      ${upsell} ${uploadNotice}
+      ${uploadNotice}
     </send-upload-area>
   `;
 
