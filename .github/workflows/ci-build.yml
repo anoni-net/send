@@ -131,17 +131,19 @@ jobs:
       - name: Smoke test (health + E2EE round-trip + browser render)
         run: bash .github/scripts/smoke.sh
 
-      # Report-only vulnerability scan so every PR/branch build shows the
-      # HIGH/CRITICAL count. This is how we measure the delta as the stack is
-      # modernized (Tier 3). Non-gating here; the hard gate lives in publish.yml.
-      - name: Trivy vulnerability scan (report-only)
+      # Gates on PRs too, deliberately. Gating only at publish would mean
+      # finding out after a merge, with main red. The cost is that a newly
+      # disclosed CVE can block an unrelated PR, which is the correct signal:
+      # that code should not ship either. --ignore-unfixed keeps it to
+      # findings someone can actually act on.
+      - name: Trivy vulnerability scan (gate)
         run: |
           set -euo pipefail
           docker run --rm \
             -v /var/run/docker.sock:/var/run/docker.sock \
             aquasec/trivy:latest image \
               --scanners vuln --ignore-unfixed --no-progress \
-              --severity HIGH,CRITICAL \
+              --severity HIGH,CRITICAL --exit-code 1 \
               send:ci | tee trivy-report.txt
 
       - name: Upload Trivy report
