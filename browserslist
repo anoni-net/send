@@ -1,6 +1,13 @@
+# Browsers we build for. Each entry here costs bundle size: core-js polyfills
+# down to the oldest target, and every visitor downloads the result.
+#
+# `firefox esr` is deliberate and should stay. Tor Browser tracks Firefox ESR,
+# and Tor users are part of who this instance is for.
+#
+# `edge 18` (legacy EdgeHTML, discontinued by Microsoft in 2021) was dropped in
+# v5: it was pulling in 24 KB gzipped of polyfills on its own.
 last 2 chrome versions
 last 2 firefox versions
 last 2 safari versions
 last 2 edge versions
-edge 18
 firefox esr
