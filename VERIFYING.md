@@ -14,7 +14,8 @@ you cannot check is not worth much.
 
 You **can** confirm that the JavaScript served to you right now matches what our
 public source builds, that the image we publish is the one our CI built, and
-that our CI built it from a commit you can read.
+that our CI built it from a commit you can read. That covers the code, which is
+the part that can do anything to you. Images are a separate case, covered below.
 
 You **cannot** rule out a server that behaves differently for one visitor. If it
 served you tampered code and served everyone else, including you when you check,
@@ -62,6 +63,36 @@ sha256sum -c SHA256SUMS.txt --ignore-missing    # macOS: shasum -a 256 -c
 `OK` means the bundle you were served is the one in that release. To check
 everything rather than one file, fetch each name listed in `SHA256SUMS.txt` the
 same way.
+
+### Images may not match, and that is expected
+
+Check `.js` and `.css`. Those are the files that can execute, and they arrive
+untouched.
+
+Images often will not match, because a CDN in front of an instance may
+re-compress them in transit. send.anoni.net sits behind Cloudflare, whose Polish
+feature re-encodes PNGs: the 32×32 favicon leaves the server at 1025 bytes and
+arrives at 746, with a `cf-polished: ok, orig_size=1025` header saying so. The
+image is re-encoded, not replaced.
+
+So a `FAILED` on a `.png` next to `OK` on the JavaScript means a CDN is
+optimising images. **A `FAILED` on a `.js` file is the one that matters.** Check
+for `cf-polished` or similar headers before concluding anything:
+
+```sh
+curl -sI "${BASE}/favicon-32x32.<hash>.png" | grep -i 'cf-polished\|content-length'
+```
+
+### A CDN is one more party who could change the code
+
+This cuts both ways, and it is worth being plain about. A CDN terminates TLS,
+which means it serves the JavaScript, which means it *could* serve different
+JavaScript. That is not a hypothetical property of send.anoni.net specifically:
+it is true of any site behind any CDN.
+
+It is also the argument for doing the check at all. Comparing what you were
+served against a manifest published somewhere else is exactly what would catch
+it, whoever did it, including us.
 
 ## 2. Check the image is the one our CI built
 
