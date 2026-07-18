@@ -146,6 +146,17 @@ export default [
   },
 
   {
+    // These require build output (dist/manifest.json, dist/version.json) that
+    // does not exist in a clean checkout. Handled here rather than with inline
+    // disable comments on purpose: with dist/ present the comments become
+    // "unused directives" and lint fails, so the result would depend on
+    // whether you had run a build. `eslint --fix` deletes them in that state,
+    // which is exactly how they went missing in the first place.
+    files: ['common/assets.js', 'server/initScript.js', 'server/routes/index.js'],
+    rules: { 'n/no-missing-require': 'off' }
+  },
+
+  {
     // Command-line tooling: exiting with a status code and printing is the job.
     files: ['scripts/**/*.js', 'test/frontend/runner.js'],
     rules: {
