@@ -10,15 +10,10 @@ import controller from './controller';
 import dragManager from './dragManager';
 import pasteManager from './pasteManager';
 import storage from './storage';
-import * as Sentry from '@sentry/browser';
 import './main.css';
 import { getTranslator } from './locale';
 import Archive from './archive';
 import { setTranslate, locale } from './utils';
-
-if (navigator.doNotTrack !== '1' && window.SENTRY_CONFIG) {
-  Sentry.init(window.SENTRY_CONFIG);
-}
 
 if (process.env.NODE_ENV === 'production') {
   nanotiming.disabled = true;
@@ -54,7 +49,6 @@ if (process.env.NODE_ENV === 'production') {
     capabilities,
     translate,
     storage,
-    sentry: Sentry,
     transfer: null,
     fileInfo: null,
     locale: locale()

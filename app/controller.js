@@ -59,7 +59,7 @@ export default function(state, emitter) {
       state.storage.remove(ownedFile.id);
       await ownedFile.del();
     } catch (e) {
-      state.sentry.captureException(e);
+      console.error('delete failed', e);
     }
     render();
   });
@@ -134,11 +134,10 @@ export default function(state, emitter) {
         render();
       } else {
 
-        console.error(err);
-        state.sentry.withScope(scope => {
-          scope.setExtra('duration', err.duration);
-          scope.setExtra('size', err.size);
-          state.sentry.captureException(err);
+        console.error('upload failed', {
+          error: err,
+          duration: err.duration,
+          size: err.size
         });
         emitter.emit('pushState', '/error');
       }
@@ -214,11 +213,11 @@ export default function(state, emitter) {
         state.transfer = null;
         const location = err.message === '404' ? '/404' : '/error';
         if (location === '/error') {
-          state.sentry.withScope(scope => {
-            scope.setExtra('duration', err.duration);
-            scope.setExtra('size', err.size);
-            scope.setExtra('progress', err.progress);
-            state.sentry.captureException(err);
+          console.error('download failed', {
+            error: err,
+            duration: err.duration,
+            size: err.size,
+            progress: err.progress
           });
         }
         emitter.emit('pushState', location);
