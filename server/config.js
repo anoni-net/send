@@ -251,7 +251,10 @@ const conf = convict({
   },
   footer_source_url: {
     format: String,
-    default: 'https://github.com/timvisee/send',
+    // Points at the source this build was made from, which is what a visitor
+    // auditing the page is actually running. Operators serving a modified
+    // build should override this with their own repository.
+    default: 'https://github.com/anoni-net/send',
     env: 'SEND_FOOTER_SOURCE_URL'
   },
   custom_footer_text: {

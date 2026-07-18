@@ -173,7 +173,7 @@ export default function(state, emitter) {
         }
         emitter.emit('pushState', '/error');
       } else {
-        // eslint-disable-next-line no-console
+
         console.error(err);
         state.sentry.withScope(scope => {
           scope.setExtra('duration', err.duration);
@@ -200,7 +200,7 @@ export default function(state, emitter) {
       state.storage.writeFile(file);
       await delay(1000);
     } catch (err) {
-      // eslint-disable-next-line no-console
+
       console.error(err);
       state.passwordSetError = err;
     } finally {
@@ -250,7 +250,7 @@ export default function(state, emitter) {
         state.transfer.reset();
         render();
       } else {
-        // eslint-disable-next-line no-console
+
         state.transfer = null;
         const location = err.message === '404' ? '/404' : '/error';
         if (location === '/error') {

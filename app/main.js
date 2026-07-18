@@ -46,7 +46,7 @@ if (process.env.NODE_ENV === 'production') {
 
   const translate = await getTranslator(locale());
   setTranslate(translate);
-  // eslint-disable-next-line require-atomic-updates
+
   window.initialState = {
     LIMITS,
     DEFAULTS,
@@ -64,7 +64,7 @@ if (process.env.NODE_ENV === 'production') {
   };
 
   const app = routes(choo({ hash: true }));
-  // eslint-disable-next-line require-atomic-updates
+
   window.app = app;
   app.use(experiments);
   app.use(controller);

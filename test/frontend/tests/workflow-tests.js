@@ -7,6 +7,9 @@ const headless = /Headless/.test(navigator.userAgent);
 // TODO: save on headless doesn't work as it used to since it now
 // follows a link instead of fetch. Maybe there's a way to make it
 // work? For now always set noSave.
+// The `true ||` is the override described above. The `!headless` arm is kept
+// for when saving works again in headless mode.
+// eslint-disable-next-line no-constant-binary-expression
 const options = { noSave: true || !headless, stream: true }; // only run the saveFile code if headless
 
 // FileSender uses a File in real life but a Blob works for testing
@@ -17,6 +20,7 @@ navigator.serviceWorker.register('/serviceWorker.js');
 
 describe('Upload / Download flow', function() {
   this.timeout(0);
+
   it('can only download once by default', async function() {
     const fs = new FileSender();
     const file = await fs.upload(archive);

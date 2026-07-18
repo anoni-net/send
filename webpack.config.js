@@ -289,7 +289,7 @@ const web = {
 
 module.exports = (env, argv) => {
   const mode = argv.mode || 'production';
-  // eslint-disable-next-line no-console
+
   console.error(`mode: ${mode}`);
   process.env.NODE_ENV = web.mode = serviceWorker.mode = mode;
   if (mode === 'development') {

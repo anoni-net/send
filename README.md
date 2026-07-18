@@ -17,7 +17,10 @@ not apply here. We keep our own standalone repository instead:
   [Firefox Send](https://github.com/mozilla/send).
 
 This repository exists so the anoni.net community can pin, review, build and
-(in future) modernize the exact code we run, with our own CI and signed images.
+modernize the exact code we run, with our own CI and signed images.
+
+Since **v4.0.0** our version numbers no longer track upstream's. Upstream's last
+release was v3.4.27, which is the commit this repository diverged from.
 
 We are **not affiliated with, nor endorsed by, Mozilla or Tim Visée.** All
 *Mozilla* and *Firefox* branding was already removed upstream so the project can
@@ -38,15 +41,43 @@ git merge upstream/master   # review, then push to origin/main
 
 ## What we changed
 
-- **Nothing in the application code yet.** `main` currently mirrors upstream
-  `master` (renamed to `main`) with full history and all tags preserved.
-- Our **deployment configuration** (Docker Compose, nginx, hostnames) is kept
-  separately and is not part of this repository.
+The full history was imported from upstream and preserved, including all tags.
+Everything below was done on top of upstream v3.4.27. See
+[CHANGELOG.md](CHANGELOG.md) for the detailed list.
 
-Planned work, tracked in issues: upgrade the runtime and build stack (Node,
-Redis client, webpack), harden the container and supply chain, and publish our
-own signed image. Until then, follow the upstream docs for build and run
-instructions.
+- **Runtime and build stack modernized** — Node 16 to 22, webpack 4 to 5,
+  node-redis 3 to 6, aws-sdk v2 to v3, `@google-cloud/storage` 6 to 7,
+  `@sentry/browser` 6 to 7.
+- **Supply chain** — we build and publish our own multi-arch image to
+  `ghcr.io/anoni-net/send`, signed with cosign (keyless, Sigstore), with an SBOM
+  and SLSA provenance attached, and scanned with Trivy.
+- **Tests** — backend, frontend (Playwright) and a headless browser check now
+  run in CI, alongside a real end-to-end encrypted upload and download
+  round-trip against a freshly built image.
+- **No protocol or crypto changes.** The wire format, URL format and encryption
+  are untouched, so existing links and third-party clients such as `ffsend`
+  keep working.
+
+Our **deployment configuration** (Docker Compose, nginx, hostnames) is kept
+separately and is not part of this repository.
+
+## Using our image
+
+The image is public, so pulling needs no login:
+
+```sh
+docker pull ghcr.io/anoni-net/send:4.0.0
+```
+
+Every published image is signed by our CI. Verify it before you run it:
+
+```sh
+cosign verify ghcr.io/anoni-net/send:4.0.0 \
+  --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+  --certificate-identity-regexp '^https://github.com/anoni-net/send/.github/workflows/publish.yml@.*$'
+```
+
+Pin by digest (`@sha256:...`) in production so the tag cannot move under you.
 
 ## Upstream documentation
 
