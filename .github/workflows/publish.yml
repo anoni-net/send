@@ -47,6 +47,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # QEMU is only needed for the multi-arch publish below; the smoke-tested
+      # image is still built natively for amd64.
+      - name: Set up QEMU (arm64 emulation)
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm64
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -109,12 +116,16 @@ jobs:
           if-no-files-found: warn
 
       # 3) Build & push the tested image with SBOM + SLSA provenance attestations.
-      - name: Build and push to GHCR
+      # Published as a multi-arch manifest list. amd64 reuses the cache from the
+      # smoke-test build; arm64 is built under QEMU, which is slow but only runs
+      # on main. cosign signs the manifest-list digest, covering both arches.
+      - name: Build and push to GHCR (amd64 + arm64)
         id: push
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
