@@ -138,11 +138,8 @@ const conf = convict({
     arg: 'port',
     env: 'PORT'
   },
-  sentry_id: {
-    format: String,
-    default: '',
-    env: 'SENTRY_CLIENT'
-  },
+  // Server-side error reporting only. There is deliberately no browser
+  // equivalent: see the v5 notes on why the browser SDK was removed.
   sentry_dsn: {
     format: String,
     default: '',
