@@ -39,7 +39,6 @@ expiresMinutes = { $minutes }ⵙⴷ
 # A short status message shown when the user enters a long password
 maxPasswordLength = ⵜⵉⵖⵣⵉ ⵜⴰⵎⵓⵣⵣⵓⵔⵜ ⵏ ⵜⴳⵓⵔⵉ ⵏ ⵓⵣⵔⴰⵢ: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = ⵓⵔ ⵜⵣⵎⵉⵔ ⵜⴳⵓⵔⵉ ⴰ ⵏ ⵓⵣⵔⴰⵢ ⴰⴷ ⵜⴻⵜⵜⵓⵙⵖⵍ
 
 ## Send version 2 strings
 
@@ -61,11 +60,6 @@ timespanDays =
     { $num ->
         [one] { $num } ⵡⴰⵙⵙ
        *[other] { $num } ⵡⵓⵙⵙⴰⵏ
-    }
-timespanWeeks =
-    { $num ->
-        [one] { $num } ⵉⵎⴰⵍⴰⵙⵙ
-       *[other] { $num } ⵉⵎⴰⵍⴰⵙⵙⵏ
     }
 fileCount =
     { $num ->
@@ -105,8 +99,6 @@ tooManyArchives =
 expiredTitle = ⵉⵎⵎⵓⵜ ⵓⵙⵖⵏ ⴰ.
 notSupportedDescription = ⵓⵔ ⵔⴰⴷ ⵉⵙⵡⵓⵔⵉ { -send-brand } ⵙ ⵓⵎⵙⵙⴰⵔⴰ ⴰ. ⴷⴰ ⵉⵙⵡⵓⵔⵓⵢ { -send-short-brand } ⵎⵍⵉⵃ ⵙ ⵜⵍⵇⵇⵎⵜ ⵜⴰⵎⴳⴳⴰⵔⵓⵜ ⵏ { -firefox }, ⴷ ⵔⴰⴷ ⵉⵙⵡⵓⵔⵉ ⵙ ⵜⵍⵇⵇⵎⵜ ⵜⴰⵎⵉⵔⴰⵏⵜ ⵏ ⵓⵎⴰⵜⴰ ⵏ ⵉⵎⵙⵙⴰⵔⴰⵜⵏ.
 downloadFirefox = ⴰⴳⵎ { -firefox }
-legalTitle = ⵜⵓⵙⵎⵉⵔⵜ ⵏ ⵜⵉⵏⵏⵓⵜⵍⴰ ⵏ { -send-short-brand }
-legalDateStamp = ⵜⴰⵍⵇⵇⵎⵜ 1.0, ⵜⵉⵏ 12 ⵎⴰⵕⵚ 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }ⵙ { $hours }ⵙⵔⴳ { $minutes }ⵙⴷ
 addFilesButton = ⵙⵜⵢ ⵉⴼⵓⵢⵍⴰ ⵉ ⵓⵙⵙⴽⵜⵔ
@@ -117,33 +109,17 @@ dragAndDropFiles = ⵙⵓⵛⵛⴹⴰⵜ, ⵜⵙⵔⵙⵎ ⵉⴼⵓⵢⵍⴰ
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = ⵏⵉⵖ ⵜⴽⵍⵉⴽⵉⵎ ⴰⴼⴰⴷ ⴰⴷ ⵜⴰⵣⵏⵎ ⴰⵔ { $size }
 addPassword = ⴰⵔⵢ ⵙ ⵜⴳⵓⵔⵉ ⵏ ⵓⵣⵔⴰⵢ
-emailPlaceholder = ⵙⵙⴽⵛⵎⴰⵜ ⵉⵎⴰⵢⵍ ⵏⵏⵓⵏ
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = ⴽⵛⵎ ⴰⴼⴰⴷ ⴰⴷ ⵜⴰⵣⵏⴷ ⴰⵔ { $size }
-signInOnlyButton = ⴽⵛⵎ
-accountBenefitTitle = ⵙⵏⴼⵍⵓⵍ ⴰⵎⵉⴹⴰⵏ ⵏ { -firefox } ⵏⵉⵖ ⵜⵣⵎⵎⴻⵎⴷ
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = ⴱⴹⵓ ⵉⴼⵓⵢⵍⴰ ⴰⵔ { $size }
-accountBenefitDownloadCount = ⴱⴹⵓ ⵉⴼⵓⵢⵍⴰ ⴰⴽⴷ ⵡⵓⴳⴳⴰⵔ ⵏ ⵎⴷⴷⵏ
-accountBenefitTimeLimit =
-    { $count ->
-        [one] ⴰⵊⵊⴰⵜ ⵉⵙⵖⴰⵏ ⴰⴷ ⵜⵜⵏⵓⵛⵛⵓⴳⵏ ⴰⵔ { $count } ⵡⴰⵙⵙ
-       *[other] ⴰⵊⵊⴰⵜ ⵉⵙⵖⴰⵏ ⴰⴷ ⵜⵜⵏⵓⵛⵛⵓⴳⵏ ⴰⵔ { $count } ⵡⵓⵙⵙⴰⵏ
-    }
-accountBenefitSync = ⵙⵡⵓⴷⴷⵡⴰⵜ ⵉⴼⵓⵢⵍⴰ ⵜⵜⵓⴱⴹⴰⵏⵉⵏ ⵙⴳ ⴽⵓ ⴰⵍⵍⴰⵍ
-accountBenefitMoz = ⵍⵎⴷ ⵖⴼ ⵜⵏⵓⴼⴰ ⵢⴰⴹⵏⵉⵏ ⵏ { -mozilla }
-signOut = ⴼⴼⵖ
 okButton = ⵡⴰⵅⵅⴰ
 downloadingTitle = ⴰⴳⴰⵎ
 noStreamsWarning = ⵉⵣⵎⵔ ⵓⵎⵙⵙⴰⵔⴰ ⴰ ⴰⴷ ⵓⵔ ⵉⵖⴰⵢ ⴰⴷ ⵉⴽⴽⵙ ⴰⵙⵙⵏⵜⵍ ⵉ ⵢⴰⵏ ⵓⴼⴰⵢⵍⵓ ⵉⵎⵇⵇⵓⵔⵏ ⵙ ⵡⴰⵏⵛⵜ ⴰ.
 noStreamsOptionCopy = ⵙⵙⵏⵖⵍⴰⵜ ⴰⵙⵖⵏ ⴰⴼⴰⴷ ⴰⴷ ⵜ ⵜⵕⵥⵎⵎ ⴳ ⴽⵔⴰ ⵏ ⵓⵎⵙⵙⴰⵔⴰ ⵢⴰⴹⵏ
 noStreamsOptionFirefox = ⴰⵔⵎⴰⵜ ⴰⵎⵙⵙⴰⵔⴰ ⵏⵏⵖ ⴰⵎⵓⴼⴰⵢ
 noStreamsOptionDownload = ⵙⵎⴷ ⵙ ⵓⵎⵙⵙⴰⵔⴰ ⴰ
-downloadFirefoxPromo = ⵉⵜⵜⵓⵙⵓⵎⵔ ⴰⵡⵏ { -send-short-brand } ⵙⴳ ⵖⵓⵔ { -firefox } ⴰⵎⴰⵢⵏⵓ ⴰⴽⴽⵯ.
 # the next line after the colon contains a file name
 shareLinkDescription = ⴱⴹⵓⵢⴰⵜ ⴰⵙⵖⵏ ⵖⵔ ⵓⴼⴰⵢⵍⵓ ⵏⵏⵓⵏ:
 shareLinkButton = ⴱⴹⵓ ⴰⵙⵖⵏ
 # $name is the name of the file
 shareMessage = ⴰⴳⵎⴰⵜ "{ $name }" ⵙ { -send-brand }: ⴰⴱⵟⵟⵓ ⴰⴼⵔⴰⵔ ⴷ ⵡⵓⵙⵍⵉⴳ ⵏ ⵉⴼⵓⵢⵍⴰ
 trailheadPromo = ⵜⵍⵍⴰ ⵢⴰⵜ ⵜⵖⴰⵔⴰⵙⵜ ⴰⴼⴰⴷ ⴰⴷ ⵜⴼⵔⴳⵎ ⵜⵉⵏⵏⵓⵜⵍⴰ ⵏⵏⵓⵏ. ⵍⴽⵎⴰⵜ ⴼⴰⵢⵔⴼⵓⴽⵙ.
-learnMore = ⵙⵙⵏ ⵓⴳⴳⴰⵔ.

@@ -39,7 +39,6 @@ expiresMinutes = m { $minutes }
 # A short status message shown when the user enters a long password
 maxPasswordLength = Longitud máxima de la contraseña: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = No se pudo establecer la contraseña
 
 ## Send version 2 strings
 
@@ -61,11 +60,6 @@ timespanDays =
     { $num ->
         [one] 1 día
        *[other] { $num } días
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 semana
-       *[other] { $num } semanas
     }
 fileCount =
     { $num ->
@@ -105,8 +99,6 @@ tooManyArchives =
 expiredTitle = Este enlace caducó.
 notSupportedDescription = { -send-brand } no funcionará con este navegador. { -send-short-brand } funciona mejor con la última versión de { -firefox }, y funcionará con la versión actual de la mayoría de los navegadores.
 downloadFirefox = Descargue { -firefox }
-legalTitle = Aviso de privacidad de { -send-short-brand }
-legalDateStamp = Versión 1.0, con fecha 12 de marzo de 2019.
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }h { $minutes }m
 addFilesButton = Seleccionar archivos para subir
@@ -117,33 +109,17 @@ dragAndDropFiles = Arrastrar y soltar archivos
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = o haga clic para enviar hasta { $size }
 addPassword = Proteger con contraseña
-emailPlaceholder = Ingrese su correo electrónico
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Inicie sesión para enviar hasta { $size }
-signInOnlyButton = Iniciar sesión
-accountBenefitTitle = Cree una cuenta de { -firefox } o inicie la sesión
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Compartir archivos hasta { $size }
-accountBenefitDownloadCount = Compartir archivos con más personas
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Mantenga los enlaces activos hasta por 1 día
-       *[other] Mantenga los enlaces activos hasta por { $count } días
-    }
-accountBenefitSync = Administre archivos compartidos desde cualquier dispositivo.
-accountBenefitMoz = Conocer sobre otros servicios de { -mozilla }
-signOut = Salir
 okButton = Aceptar
 downloadingTitle = Descargando
 noStreamsWarning = Es posible que este navegador no pueda descifrar un archivo tan grande.
 noStreamsOptionCopy = Copiar el enlace para abrir en otro navegador.
 noStreamsOptionFirefox = Pruebe nuestro navegador favorito
 noStreamsOptionDownload = Continuar con este navegador
-downloadFirefoxPromo = El nuevo { -firefox } te ofrece { -send-short-brand }.
 # the next line after the colon contains a file name
 shareLinkDescription = Compartir el enlace con tu dispositivo:
 shareLinkButton = Compartir el enlace
 # $name is the name of the file
 shareMessage = Descargar "{ $name }" con { -send-brand }: compartir archivos de forma simple y segura
 trailheadPromo = Hay una forma de proteger tu privacidad. Unite a Firefox.
-learnMore = Conocer más.

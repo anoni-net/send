@@ -39,7 +39,6 @@ expiresMinutes = { $minutes }p
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maximális jelszóhossz: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Ez a jelszó nem állítható be
 
 ## Send version 2 strings
 
@@ -61,11 +60,6 @@ timespanDays =
     { $num ->
         [one] 1 nap
        *[other] { $num } nap
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 hét
-       *[other] { $num } hét
     }
 fileCount =
     { $num ->
@@ -105,8 +99,6 @@ tooManyArchives =
 expiredTitle = Ez a hivatkozás elévült.
 notSupportedDescription = A { -send-brand } nem működik ebben a böngészőben. A { -send-short-brand } a { -firefox } legfrissebb verziójával működik a legjobban, de működik a legtöbb böngésző aktuális verziójával is.
 downloadFirefox = A { -firefox } letöltése
-legalTitle = { -send-short-brand } adatvédelmi nyilatkozat
-legalDateStamp = 1.0-s verzió, kelt 2019. március 12-én
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }n { $hours }ó { $minutes }p
 addFilesButton = Válassza ki a feltöltendő fájlokat
@@ -117,33 +109,17 @@ dragAndDropFiles = Húzza ide a fájlokat
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = vagy jelentkezzen be, és küldjön legfeljebb { $size }-ot
 addPassword = Jelszavas védelem
-emailPlaceholder = Adja meg az e-mail címét
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Jelentkezzen be, és küldjön legfeljebb { $size }-ot
-signInOnlyButton = Bejelentkezés
-accountBenefitTitle = Hozzon létre egy { -firefox } fiókot vagy jelentkezzen be
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Osszon meg fájlokat { $size }-ig
-accountBenefitDownloadCount = Osszon meg fájlokat több emberrel
-accountBenefitTimeLimit =
-    { $count ->
-        [one] A hivatkozások aktívan tartása legfeljebb 1 napig
-       *[other] A hivatkozások aktívan tartása legfeljebb { $count } napig
-    }
-accountBenefitSync = Kezelje a megosztott fájlokat bármely eszközről
-accountBenefitMoz = Ismerje meg a többi { -mozilla } szolgáltatást
-signOut = Kijelentkezés
 okButton = OK
 downloadingTitle = Letöltés
 noStreamsWarning = Előfordulhat, hogy a böngésző nem fog tudni visszafejteni egy ekkora fájlt.
 noStreamsOptionCopy = Másolja a hivatkozást, és nyissa meg egy másik böngészőben
 noStreamsOptionFirefox = Próbálja ki a kedvenc böngészőnket
 noStreamsOptionDownload = Folytatás ezzel a böngészővel
-downloadFirefoxPromo = A { -send-short-brand }et a vadonatúj { -firefox } hozza el Önnek.
 # the next line after the colon contains a file name
 shareLinkDescription = Ossza meg a fájlja hivatkozását:
 shareLinkButton = Hivatkozás megosztása
 # $name is the name of the file
 shareMessage = „{ $name }” letöltése a { -send-brand } segítségével: egyszerű, biztonságos fájlmegosztás
 trailheadPromo = Védje meg a magánszféráját. Csatlakozzon a Firefoxhoz.
-learnMore = További tudnivalók.

@@ -42,7 +42,6 @@ expiresMinutes = { $minutes } 分钟
 # A short status message shown when the user enters a long password
 maxPasswordLength = 最大密码长度：{ $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = 未能设置此密码
 
 ## Send version 2 strings
 
@@ -64,11 +63,6 @@ timespanDays =
     { $num ->
         [one] 1 天
        *[other] { $num } 天
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 周
-       *[other] { $num } 周
     }
 fileCount =
     { $num ->
@@ -107,8 +101,6 @@ tooManyArchives =
 expiredTitle = 此链接已过期。
 notSupportedDescription = { -send-brand } 无法在此浏览器上正常工作。{ -send-short-brand } 与最新版本 { -firefox } 配合使用体验最佳，也适用于目前的大多数浏览器。
 downloadFirefox = 下载 { -firefox }
-legalTitle = { -send-short-brand } 隐私声明
-legalDateStamp = 版本 1.0，于 2019年3月12日
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } 天 { $hours } 小时 { $minutes } 分钟
 addFilesButton = 选择要上传的文件
@@ -119,32 +111,16 @@ dragAndDropFiles = 拖放文件
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = 或点此传送最大 { $size } 的文件
 addPassword = 密码保护
-emailPlaceholder = 请输入您的电子邮件地址
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = 登录以传送最大 { $size } 文件
-signInOnlyButton = 登录
-accountBenefitTitle = 创建一个 { -firefox } 账户或登录
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = 分享最大 { $size } 文件
-accountBenefitDownloadCount = 可以与更多人分享
-accountBenefitTimeLimit =
-    { $count ->
-        [one] 链接有效期延至 1 天
-       *[other] 链接有效期延至 { $count } 天
-    }
-accountBenefitSync = 任何设备上都能管理分享的文件
-accountBenefitMoz = 了解其他 { -mozilla } 服务
-signOut = 退出
 okButton = 确定
 downloadingTitle = 正在下载
 noStreamsWarning = 此浏览器可能无法解密这么大的文件。
 noStreamsOptionCopy = 复制链接以在其他浏览器中打开
 noStreamsOptionFirefox = 试试大家最爱的浏览器
 noStreamsOptionDownload = 使用此浏览器继续
-downloadFirefoxPromo = { -send-short-brand } 由焕然一新的 { -firefox } 为您奉上。
 # the next line after the colon contains a file name
 shareLinkDescription = 您的文件链接：
 shareLinkButton = 分享链接
 # $name is the name of the file
 shareMessage = 使用 { -send-brand } 下载“{ $name }”：简单、安全的文件分享服务
-learnMore = 详细了解。

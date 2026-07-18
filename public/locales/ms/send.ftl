@@ -108,4 +108,3 @@ passwordIsSet = Kata laluan ditetapkan
 # A short status message shown when the user enters a long password
 maxPasswordLength = Panjang kata laluan maksimum: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Kata laluan ini tidak boleh ditetapkan

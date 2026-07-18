@@ -47,7 +47,6 @@ expiresMinutes = { $minutes }د
 # A short status message shown when the user enters a long password
 maxPasswordLength = أقصر طول لكلمة السر: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = يجب ألا تُضبط كلمة السر هذه
 
 ## Send version 2 strings
 
@@ -77,15 +76,6 @@ timespanDays =
         [few] { $num } أيام
         [many] { $num } يومًا
        *[other] { $num } يوم
-    }
-timespanWeeks =
-    { $num ->
-        [zero] أقل من أسبوع
-        [one] أسبوع واحد
-        [two] أسبوعين اثنين
-        [few] { $num } أسابيع
-        [many] { $num } أسبوعًا
-       *[other] { $num } أسبوع
     }
 fileCount =
     { $num ->
@@ -137,8 +127,6 @@ tooManyArchives =
 expiredTitle = انقضى وقت الرابط.
 notSupportedDescription = لن يعمل { -send-brand } في هذا المتصفح. أفضل المتصفحات التي يعمل معها { -send-short-brand } هو { -firefox } بآخر إصدارة، كما وأحدث إصدارة من أغلب المتصفحات الموجودة.
 downloadFirefox = نزِّل { -firefox }
-legalTitle = تنويه خصوصية { -send-short-brand }
-legalDateStamp = الإصدارة ١٫٠ بتاريخ ١٢ مارس ٢٠١٩
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }يوم { $hours }سا { $minutes }دق
 addFilesButton = حدّد الملفات التي تريد رفعها
@@ -149,37 +137,17 @@ dragAndDropFiles = اسحب الملفات وأفلِتها هنا
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = أو انقر لإرسال ملفات يصل حجمها { $size }
 addPassword = احمِه بكلمة سر
-emailPlaceholder = أدخل بريدك الإلكتروني
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = لِج وأرسِل ملفات يصل حجمها { $size }
-signInOnlyButton = لِج
-accountBenefitTitle = أنشِئ حساب { -firefox } أو لِج إلى حسابك
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = شارِك ملفات يصل حجمها { $size }
-accountBenefitDownloadCount = شارِك الملفات مع أناس أكثر وأكثر
-accountBenefitTimeLimit =
-    { $count ->
-        [zero] لا تُبقِ أي روابط نشطة
-        [one] أبقِ الروابط نشطة لمدة تصل إلى يوم واحد
-        [two] أبقِ الروابط نشطة لمدة تصل إلى يومين اثنين
-        [few] أبقِ الروابط نشطة لمدة تصل إلى { $count } أيام
-        [many] أبقِ الروابط نشطة لمدة تصل إلى { $count } يومًا
-       *[other] أبقِ الروابط نشطة لمدة تصل إلى { $count } يوم
-    }
-accountBenefitSync = أدِر ملفاتك التي شاركتها من أيّ جهاز تريد
-accountBenefitMoz = اطّلع على المزيد حول خدمات { -mozilla }
-signOut = اخرج
 okButton = حسنًا
 downloadingTitle = يجري التنزيل
 noStreamsWarning = هناك احتمال بألا يقدر هذا المتصفح على فكّ تعمية الملفات الكبيرة كهذا.
 noStreamsOptionCopy = انسخ الرابط لتفتحه في متصفح آخر
 noStreamsOptionFirefox = جرّب متصفّحنا المفضل
 noStreamsOptionDownload = واصِل بهذا المتصفح
-downloadFirefoxPromo = ‏{ -send-short-brand } تقدمة { -firefox } الجديد الأنيق.
 # the next line after the colon contains a file name
 shareLinkDescription = شارِك الرابط الذي يصل إلى الملف:
 shareLinkButton = شارِك الرابط
 # $name is the name of the file
 shareMessage = نزِّل ”{ $name }“ عبر { -send-brand }: خدمة لمشاركة الملفات بلا عناء وبخصوصية تامة
 trailheadPromo = يمكنك حماية خصوصيتك، طبعا. انضم إلى فَيَرفُكس.
-learnMore = اطّلع على المزيد.

@@ -41,7 +41,6 @@ expiresMinutes = { $minutes } хв.
 # A short status message shown when the user enters a long password
 maxPasswordLength = Максімальная даўжыня пароля: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Гэты пароль немагчыма паставіць
 
 ## Send version 2 strings
 
@@ -65,12 +64,6 @@ timespanDays =
         [one] { $num } дзень
         [few] { $num } дні
        *[many] { $num } дзён
-    }
-timespanWeeks =
-    { $num ->
-        [one] { $num } тыдзень
-        [few] { $num } тыдні
-       *[many] { $num } тыдняў
     }
 fileCount =
     { $num ->
@@ -113,8 +106,6 @@ tooManyArchives =
 expiredTitle = Тэрмін дзеяння гэтай спасылкі сышоў.
 notSupportedDescription = { -send-brand } не будзе працаваць у гэтым браўзеры. Лепей за ўсё { -send-short-brand } працуе з апошняй версіяй { -firefox } і будзе працаваць з бягучай версіяй большасці браўзераў.
 downloadFirefox = Сцягнуць { -firefox }
-legalTitle = Палітыка прыватнасці { -send-short-brand }
-legalDateStamp = Версія 1.0 ад 12 сакавіка 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } д. { $hours } г. { $minutes } хв.
 addFilesButton = Выберыце файлы для загрузкі
@@ -125,34 +116,17 @@ dragAndDropFiles = Перацягніце файлы сюды
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = або клікніце, каб адправіць да { $size }:
 addPassword = Абараніць паролем
-emailPlaceholder = Увядзіце сваю электронную пошту
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Увайдзіце, каб адпраўляць да { $size }
-signInOnlyButton = Увайсці
-accountBenefitTitle = Стварыце ўліковы запіс { -firefox } або ўвайдзіце
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Дзяліцеся файламі да { $size }
-accountBenefitDownloadCount = Дзяліцеся файламі з большай колькасцю людзей
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Трымайце спасылкі актыўнымі да { $count } дня
-        [few] Трымайце спасылкі актыўнымі да { $count } дзён
-       *[many] Трымайце спасылкі актыўнымі да { $count } дзён
-    }
-accountBenefitSync = Кіруйце адпраўленымі файламі з любой прылады
-accountBenefitMoz = Даведайцеся пра іншыя сэрвісы { -mozilla }
-signOut = Выйсці
 okButton = ОК
 downloadingTitle = Сцягваецца
 noStreamsWarning = Гэты браўзер не мае магчымасці расшыфраваць такі вялікі файл.
 noStreamsOptionCopy = Скапіруйце спасылку, каб адкрыць у іншым браўзеры
 noStreamsOptionFirefox = Паспрабуйце наш любімы браўзер
 noStreamsOptionDownload = Працягнуць з гэтым браўзерам
-downloadFirefoxPromo = { -send-short-brand } прыйшоў да вас з цалкам новага { -firefox }.
 # the next line after the colon contains a file name
 shareLinkDescription = Падзяліцеся спасылкай на свой файл:
 shareLinkButton = Падзяліцца спасылкай
 # $name is the name of the file
 shareMessage = Сцягніце «{ $name }» з { -send-brand }: простага і бяспечнага файлаабменніка
 trailheadPromo = Ёсць спосаб абараніць вашу прыватнасць. Далучайцеся да Firefox.
-learnMore = Падрабязней.

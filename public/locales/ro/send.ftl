@@ -41,7 +41,6 @@ expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Lungime minimă a parolei: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Această parolă nu a putut fi setată
 
 ## Send version 2 strings
 
@@ -65,12 +64,6 @@ timespanDays =
         [one] 1 zi
         [few] { $num } zile
        *[other] { $num } de zile
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 săptămână
-        [few] { $num } săptămâni
-       *[other] { $num } de săptămâni
     }
 fileCount =
     { $num ->
@@ -113,8 +106,6 @@ tooManyArchives =
 expiredTitle = Acest link a expirat.
 notSupportedDescription = { -send-brand } nu va funcționa pe acest browser. { -send-short-brand } funcționează cel mai bine cu ultima versiune de { -firefox } și va funcționa cu versiunea curentă a majorității browserelor.
 downloadFirefox = Descarcă { -firefox }
-legalTitle = Declarație de confidențialitate { -send-short-brand }
-legalDateStamp = Versiunea 1.0 din data de 12 martie 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }z { $hours }h { $minutes }m
 addFilesButton = Selectează fișierele pentru încărcare
@@ -125,34 +116,17 @@ dragAndDropFiles = Trage și plasează fișierele
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = sau dă clic pentru a trimite până la { $size }
 addPassword = Protejează cu parolă
-emailPlaceholder = Introdu e-mailul tău
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Autentifică-te pentru a trimite până la { $size }
-signInOnlyButton = Autentificare
-accountBenefitTitle = Creează un cont { -firefox } sau autentifică-te
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Partajează fișiere de până la { $size }
-accountBenefitDownloadCount = Partajează fișiere cu mai multe persoane
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Păstrează linkurile active până la 1 zi
-        [few] Păstrează linkurile active până la { $count } zile
-       *[other] Păstrează linkurile active până la { $count } de zile
-    }
-accountBenefitSync = Gestionează fișierele partajate de pe orice dispozitiv
-accountBenefitMoz = Află despre celelalte servicii { -mozilla }
-signOut = Deconectare
 okButton = Ok
 downloadingTitle = Se descarcă
 noStreamsWarning = Este posibil ca acest browser să nu poată decripta un fișier atât de mare.
 noStreamsOptionCopy = Copiază linkul pentru a-l deschide într-un alt browser
 noStreamsOptionFirefox = Încearcă browserul nostru favorit
 noStreamsOptionDownload = Continuă cu acest browser
-downloadFirefoxPromo = { -send-short-brand } îți este adus de noul { -firefox }.
 # the next line after the colon contains a file name
 shareLinkDescription = Partajează linkul către fișier:
 shareLinkButton = Partajează linkul
 # $name is the name of the file
 shareMessage = Descarcă „{ $name }” cu { -send-brand }: partajare simplă și sigură a fișierelor
 trailheadPromo = Există o modalitate de a-ți proteja viața privată. Folosește Firefox.
-learnMore = Află mai multe.

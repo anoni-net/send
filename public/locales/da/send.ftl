@@ -39,7 +39,6 @@ expiresMinutes = { $minutes } m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maksimum længde af adgangskode: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Adgangskoden kunne ikke sættes
 
 ## Send version 2 strings
 
@@ -61,11 +60,6 @@ timespanDays =
     { $num ->
         [one] 1 dag
        *[other] { $num } dage
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 uge
-       *[other] { $num } uger
     }
 fileCount =
     { $num ->
@@ -105,8 +99,6 @@ tooManyArchives =
 expiredTitle = Dette link er udløbet.
 notSupportedDescription = { -send-brand } virker ikke med denne browser. { -send-short-brand } virker bedst med den nyeste version af { -firefox } og med de fleste andre nye browsere.
 downloadFirefox = Hent { -firefox }
-legalTitle = { -send-short-brand }, om privatlivspolitik
-legalDateStamp = Version 1.0, udsendt d. 12. marts 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } d. { $hours } t. { $minutes } m.
 addFilesButton = Vælg filer, der skal uploades
@@ -117,33 +109,17 @@ dragAndDropFiles = Træk og slip filer
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = eller klik for at sende filer på op til { $size }
 addPassword = Beskyt med adgangskode
-emailPlaceholder = Indtast din mailadresse
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Log ind for at sende filer på op til { $size }
-signInOnlyButton = Log ind
-accountBenefitTitle = Opret en { -firefox }-konto eller log ind
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Del filer på op til { $size }
-accountBenefitDownloadCount = Del filer med flere personer
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Bevar links aktive i op til 1 dag
-       *[other] Bevar links aktive i op til { $count } dage
-    }
-accountBenefitSync = Håndter delte filer på enhver enhed
-accountBenefitMoz = Læs om andre tjenester fra { -mozilla }
-signOut = Log ud
 okButton = OK
 downloadingTitle = Henter
 noStreamsWarning = Denne browser kan muligvis ikke dekryptere en fil, der er så stor.
 noStreamsOptionCopy = Kopier linket for at åbne det i en anden browser
 noStreamsOptionFirefox = Prøv vores favorit-browser
 noStreamsOptionDownload = Fortsæt med denne browser
-downloadFirefoxPromo = { -send-short-brand } præsenteres af den nye { -firefox }.
 # the next line after the colon contains a file name
 shareLinkDescription = Del linket til din fil:
 shareLinkButton = Del link
 # $name is the name of the file
 shareMessage = Hent { $name } med { -send-brand } - simpel og sikker fildeling
 trailheadPromo = Beskyt dine digitale rettigheder. Slut dig til Firefox.
-learnMore = Læs mere.

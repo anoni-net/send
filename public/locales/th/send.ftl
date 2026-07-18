@@ -37,7 +37,6 @@ expiresMinutes = { $minutes } นาที
 # A short status message shown when the user enters a long password
 maxPasswordLength = ความยาวรหัสผ่านสูงสุด: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = ไม่สามารถตั้งรหัสผ่านนี้ได้
 
 ## Send version 2 strings
 
@@ -57,10 +56,6 @@ timespanMinutes =
 timespanDays =
     { $num ->
        *[other] { $num } วัน
-    }
-timespanWeeks =
-    { $num ->
-       *[other] { $num } สัปดาห์
     }
 fileCount =
     { $num ->
@@ -97,8 +92,6 @@ tooManyArchives =
 expiredTitle = ลิงก์นี้หมดอายุแล้ว
 notSupportedDescription = { -send-brand } จะไม่ทำงานกับเบราว์เซอร์นี้ { -send-short-brand } จะทำงานได้ดีที่สุดกับ { -firefox } รุ่นล่าสุด และจะทำงานกับเบราว์เซอร์ส่วนใหญ่ที่เป็นรุ่นปัจจุบัน
 downloadFirefox = ดาวน์โหลด { -firefox }
-legalTitle = ประกาศความเป็นส่วนตัวของ { -send-short-brand }
-legalDateStamp = รุ่น 1.0 วันที่ 12 มีนาคม 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } วัน { $hours } ชม. { $minutes } นาที
 addFilesButton = เลือกไฟล์ที่จะอัปโหลด
@@ -109,32 +102,17 @@ dragAndDropFiles = ลากแล้วปล่อยไฟล์
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = หรือคลิกเพื่อส่งได้ถึง { $size }
 addPassword = ปกป้องด้วยรหัสผ่าน
-emailPlaceholder = ป้อนอีเมลของคุณ
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = ลงชื่อเข้าเพื่อส่งได้ถึง { $size }
-signInOnlyButton = ลงชื่อเข้า
-accountBenefitTitle = สร้างบัญชี { -firefox } หรือลงชื่อเข้า
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = แบ่งปันไฟล์สูงสุดถึง { $size }
-accountBenefitDownloadCount = แบ่งปันไฟล์กับผู้คนมากขึ้น
-accountBenefitTimeLimit =
-    { $count ->
-       *[other] ให้ลิงก์ใช้งานได้นานถึง { $count } วัน
-    }
-accountBenefitSync = จัดการไฟล์ที่แบ่งปันจากอุปกรณ์ใด ๆ
-accountBenefitMoz = เรียนรู้เกี่ยวกับบริการ { -mozilla } อื่น ๆ
-signOut = ลงชื่อออก
 okButton = ตกลง
 downloadingTitle = กำลังดาวน์โหลด
 noStreamsWarning = เบราว์เซอร์นี้อาจไม่สามารถถอดรหัสไฟล์ขนาดใหญ่เท่านี้ได้
 noStreamsOptionCopy = คัดลอกลิงก์เพื่อเปิดในเบราว์เซอร์อื่น
 noStreamsOptionFirefox = ลองเบราว์เซอร์โปรดของเรา
 noStreamsOptionDownload = ดำเนินการต่อด้วยเบราว์เซอร์นี้
-downloadFirefoxPromo = { -send-short-brand } สนับสนุนโดย { -firefox } โฉมใหม่
 # the next line after the colon contains a file name
 shareLinkDescription = แบ่งปันลิงก์ไปยังไฟล์ของคุณ:
 shareLinkButton = แบ่งปันลิงก์
 # $name is the name of the file
 shareMessage = ดาวน์โหลด “{ $name }” ด้วย { -send-brand }: การแบ่งปันไฟล์ที่ง่ายและเป็นส่วนตัว
 trailheadPromo = มีวิธีปกป้องความเป็นส่วนตัวของคุณ เข้าร่วม Firefox
-learnMore = เรียนรู้เพิ่มเติม

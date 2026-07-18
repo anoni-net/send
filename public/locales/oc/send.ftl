@@ -39,7 +39,6 @@ expiresMinutes = { $minutes } min
 # A short status message shown when the user enters a long password
 maxPasswordLength = Talha maximala del senhal : { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Aqueste senhal a pas pogut èsser definit
 
 ## Send version 2 strings
 
@@ -61,11 +60,6 @@ timespanDays =
     { $num ->
         [one] 1 jorn
        *[other] { $num } jorns
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 setmana
-       *[other] { $num } setmanas
     }
 fileCount =
     { $num ->
@@ -105,8 +99,6 @@ tooManyArchives =
 expiredTitle = Aqueste ligam a expirat.
 notSupportedDescription = { -send-brand } foncionarà pas amb aqueste navegador. { -send-short-brand } fonciona melhor amb la darrièra version de { -firefox } e foncionarà amb la version mai recenta de la màger part dels navegadors.
 downloadFirefox = Telecargar { -firefox }
-legalTitle = Avís de confidencialitat de { -send-short-brand }
-legalDateStamp = Version 1.0 del 12 de març de 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } j { $hours } h { $minutes } min
 addFilesButton = Seleccionatz los fichièrs de mandar
@@ -117,33 +109,17 @@ dragAndDropFiles = Lisatz-depausatz de fichièrs
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = o clicatz per enviar fins a { $size }
 addPassword = Protegir amb un senhal
-emailPlaceholder = Picatz vòstra adreça electronica
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Connectatz-vos per enviar fins a { $size }
-signInOnlyButton = Connexion
-accountBenefitTitle = Creatz un compte { -firefox } o connectatz-vos
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Partejatz de fichièrs fins a { $size }
-accountBenefitDownloadCount = Partejatz de fichièrs amb mai de personas
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Mantenètz los ligams actius fins a 1 jorn
-       *[other] Mantenètz los ligams actius fins a { $count } jorns
-    }
-accountBenefitSync = Gerissètz los fichièrs partejats de qualque siá periferic estant
-accountBenefitMoz = Aprenètz-ne mai suls autres servicis { -mozilla }
-signOut = Desconnexion
 okButton = D'acòrd
 downloadingTitle = Telecargament
 noStreamsWarning = Pòt arribar qu’aqueste navegador pòsca pas deschifrar un fichièr tan gròs.
 noStreamsOptionCopy = Copiatz lo ligam per lo dobrir dins un autre navegador
 noStreamsOptionFirefox = Ensajatz nòstre navegador preferit
 noStreamsOptionDownload = Contunhar amb aqueste navegador
-downloadFirefoxPromo = Lo nòu { -firefox } vos provesís { -send-short-brand }.
 # the next line after the colon contains a file name
 shareLinkDescription = Partejatz lo ligam cap a vòstre fichièr :
 shareLinkButton = Partejar lo ligam
 # $name is the name of the file
 shareMessage = Telecargar « { $name } » amb { -send-brand } : un biais simple e segur de partejar de fichièrs.
 trailheadPromo = Existís un biais de protegir vòstra vida privada. Rejonhètz Firefox.
-learnMore = Ne saber mai.

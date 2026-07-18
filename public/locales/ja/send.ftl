@@ -37,7 +37,6 @@ expiresMinutes = { $minutes } 分
 # A short status message shown when the user enters a long password
 maxPasswordLength = パスワード最長文字数: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = このパスワードは設定できませんでした
 
 ## Send version 2 strings
 
@@ -57,10 +56,6 @@ timespanMinutes =
 timespanDays =
     { $num ->
        *[other] { $num } 日
-    }
-timespanWeeks =
-    { $num ->
-       *[other] { $num } 週間
     }
 fileCount =
     { $num ->
@@ -97,8 +92,6 @@ tooManyArchives =
 expiredTitle = このリンクは期限切れです。
 notSupportedDescription = { -send-brand } は、このブラウザーでは動作しません。{ -send-short-brand } は最新バージョンの { -firefox } で最もよく動作し、その他の現バージョンのブラウザーでも動作します。
 downloadFirefox = { -firefox } をダウンロード
-legalTitle = { -send-short-brand } プライバシー通知
-legalDateStamp = バージョン 1.0, 2019年3月12日時点
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } 日 { $hours } 時 { $minutes } 分
 addFilesButton = アップロードするファイルを選択
@@ -109,32 +102,17 @@ dragAndDropFiles = ファイルをドラッグ＆ドロップ
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = または、クリックして最大 { $size } のファイルを送信
 addPassword = パスワードで保護
-emailPlaceholder = メールアドレスを入力
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = ログインすると最大 { $size } のファイルを送信できます
-signInOnlyButton = ログイン
-accountBenefitTitle = { -firefox } アカウントを作成またはログイン
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = 最大 { $size } までのファイルを共有
-accountBenefitDownloadCount = より多くの人とファイルを共有
-accountBenefitTimeLimit =
-    { $count ->
-       *[other] リンクを { $count } 日間有効化
-    }
-accountBenefitSync = 様々な端末から共有したファイルを管理
-accountBenefitMoz = { -mozilla } の他のサービスについて詳しく学ぶ
-signOut = ログアウト
 okButton = OK
 downloadingTitle = ダウンロード中
 noStreamsWarning = このブラウザーは、この大きさのファイルを復号化できません。
 noStreamsOptionCopy = リンクをコピーして他のブラウザーで開いてください
 noStreamsOptionFirefox = Firefox を試してみる
 noStreamsOptionDownload = このブラウザーで続ける
-downloadFirefoxPromo = { -send-short-brand } はすべてが新しくなった { -firefox } により提供されています。
 # the next line after the colon contains a file name
 shareLinkDescription = ファイルへのリンクを共有しましょう:
 shareLinkButton = リンクを共有
 # $name is the name of the file
 shareMessage = { -send-brand } で "{ $name }" をダウンロード: シンプルで安全なファイル共有
 trailheadPromo = プライバシーを保護する方法があります。Firefox を試してください。
-learnMore = 詳細情報

@@ -43,7 +43,6 @@ expiresMinutes = { $minutes } min.
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maksimalna dłujkosć gronidła: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Toś to gronidło njedajo se nastajiś
 
 ## Send version 2 strings
 
@@ -69,13 +68,6 @@ timespanDays =
         [two] { $num } dnja
         [few] { $num } dny
        *[other] { $num } dnjow
-    }
-timespanWeeks =
-    { $num ->
-        [one] { $num } tyźeń
-        [two] { $num } tyźenja
-        [few] { $num } tyźenje
-       *[other] { $num } tyźenjow
     }
 fileCount =
     { $num ->
@@ -121,8 +113,6 @@ tooManyArchives =
 expiredTitle = Toś ten wótkaz jo spadnjony.
 notSupportedDescription = { -send-brand } z toś tym wobglědowakom njefunkcioněrujo. { -send-short-brand } nejlěpjej z nejnowšeju wersiju { -firefox } funkcioněrujo, a funkcioněrujo z aktualneju wersiju nejwěcej wobglědowakow.
 downloadFirefox = { -firefox } ześěgnuś
-legalTitle = Powěźeńka priwatnosći { -send-short-brand }
-legalDateStamp = Wersija 1.0 wót 12. měrca 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }ź { $hours }g { $minutes }m
 addFilesButton = Dataje za nagrawanje wubraś
@@ -133,35 +123,17 @@ dragAndDropFiles = Śěgniśo a wótpołožćo dataje
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = abo klikniśo, aby do { $size } pósłał
 addPassword = Z gronidłom šćitaś
-emailPlaceholder = Zapódajśo swóju e-mailowu adresu
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Pśizjawśo se, aby do { $size } pósłał
-signInOnlyButton = Pśizjawiś
-accountBenefitTitle = Załožćo konto { -firefox } abo pśizjawśo se
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Dataje do { $size } źěliś
-accountBenefitDownloadCount = Dataje z wěcej luźimi źěliś
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Wótkaze do { $count } dnja aktiwne źaržaś
-        [two] Wótkaze do { $count } dnjowu aktiwne źaržaś
-        [few] Wótkaze do { $count } dnjow aktiwne źaržaś
-       *[other] Wótkaze do { $count } dnjow aktiwne źaržaś
-    }
-accountBenefitSync = Źělone dataje z někakego rěda zastojaś
-accountBenefitMoz = Zgóńśo wěcej wó drugich słužbach { -mozilla }
-signOut = Wótzjawiś
 okButton = W pórěźe
 downloadingTitle = Ześěgujo se
 noStreamsWarning = Toś ten wobglědowak njamógał taku wjeliku dataju dešifrěrowaś.
 noStreamsOptionCopy = Kopěrujśo wótkaz, aby jen w drugim wobglědowaku wócynił
 noStreamsOptionFirefox = Wopytajśo naš nejlubšy wobglědowak
 noStreamsOptionDownload = Z toś tym wobglědowakom pókšacowaś
-downloadFirefoxPromo = { -send-short-brand } se wam pśez cele nowy { -firefox } pśinjaso.
 # the next line after the colon contains a file name
 shareLinkDescription = Źělśo wótkaz k swójej dataji:
 shareLinkButton = Wótkaz źěliś
 # $name is the name of the file
 shareMessage = Ześěgniśo „{ $name }“ z { -send-brand }: jadnore, wěste źělenje datajow
 trailheadPromo = Jo móžnosć, wašu priwatnosć šćitaś. Pśiźćo k Firefox.
-learnMore = Dalšne informacije.

@@ -39,7 +39,6 @@ expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Kua tu'un see: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Ma ku ntanii tu'un see
 
 ## Send version 2 strings
 
@@ -61,11 +60,6 @@ timespanDays =
     { $num ->
         [one] 1 kii
        *[other] { $num } kii
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 semana
-       *[other] { $num } semanas
     }
 fileCount =
     { $num ->
@@ -105,8 +99,6 @@ tooManyArchives =
 expiredTitle = Koo enlace inka
 notSupportedDescription = { -send-brand } ma ku Kuachu'un navegador yo. { -send-short-brand } Sachu'in va'a la  versión da ntii { -firefox }, sachu'un tsi  versión tsa'a su inka kue navegador.
 downloadFirefox = Snuú { -firefox }
-legalTitle = Tu'un privacidad { -send-short-brand }
-legalDateStamp = Versión 1.0 del 12 de marzo de 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }h { $minutes }m
 addFilesButton = Katsi tutu ku skau
@@ -117,33 +109,17 @@ dragAndDropFiles = Xita cha sia kue tutu
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = katavi takua stuchaku ña mancha { $size }
 addPassword = Inka vai tsi tu'un seé
-emailPlaceholder = Chaa korreo ku
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = kitsa takua kuachu'una mancha { $size }
-signInOnlyButton = Kitsaa
-accountBenefitTitle = Saa iin kuenta ña { -firefox } a kitsa
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Stucha tutu mancha { $size }
-accountBenefitDownloadCount = Stucha tutu tsi kuaka nivi
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Ku kunka tutu ku mancha 1 kii
-       *[other] Ku kunka tutu ku mancha { $count } kii
-    }
-accountBenefitSync = Stucha tutu tsí nchi kaa ndusu niku
-accountBenefitMoz = Kavi tutú tsa { -mozilla }
-signOut = Kee
 okButton = Vaá
 downloadingTitle = Snuì
 noStreamsWarning = Ku ña navegador yo ma ku mini iin tutú kanu.
 noStreamsOptionCopy = Ndatava enlace takua kunu tsí inka navegador
 noStreamsOptionFirefox = Kuachu'un navegador ña va'a nu ntia
 noStreamsOptionDownload = Kunka tsi navegador yo
-downloadFirefoxPromo = { -send-short-brand } snai ña tsaa { -firefox }.
 # the next line after the colon contains a file name
 shareLinkDescription = Stucha enlace tutu ku:
 shareLinkButton = Stucha Enlace
 # $name is the name of the file
 shareMessage = Snuu «{ $name }» tsi { -send-brand }: kue nchichi
 trailheadPromo = Ku china vau ña chau. Kita'an tsi Firefox.
-learnMore = Skua'a kuakaa.

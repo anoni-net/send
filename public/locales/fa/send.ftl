@@ -39,7 +39,6 @@ expiresMinutes = { $minutes } دقیقه
 # A short status message shown when the user enters a long password
 maxPasswordLength = حداکثر اندازهٔ گذرواژه: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = امکان ثبت این گذواژه نیست
 
 ## Send version 2 strings
 
@@ -61,11 +60,6 @@ timespanDays =
     { $num ->
         [one] 1 روز
        *[other] { $num } روز
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 هفته
-       *[other] { $num } هفته
     }
 fileCount =
     { $num ->
@@ -105,8 +99,6 @@ tooManyArchives =
 expiredTitle = این پیوند منقضی شده است.
 notSupportedDescription = { -send-brand } با این مرورگر کار نخواهد کرد. { -send-short-brand } بهترین عملکرد را با آخرین نسخه { -firefox } خواهد داشت، و با آخرین نسخه اکثر مرورگر‌های کنونی کار می‌کند.
 downloadFirefox = دریافت { -firefox }
-legalTitle = { -send-short-brand } نکات حفظ حریم خصوصی
-legalDateStamp = نسخه ۱.۰، مورخ ۱۲، ۲۰۱۹
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } روز { $hours } ساعت { $minutes } دقیقه
 addFilesButton = پرونده‌ها را برای بارگذاری انتخاب کنید
@@ -117,33 +109,17 @@ dragAndDropFiles = فایل‌ها را بکشید و اینجا رها کنید
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = یا برای ارسال تا { $size } کلیک کنید
 addPassword = با گذرواژه محافظت کنید
-emailPlaceholder = ایمیل خود را وارد کنید
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = برای ارسال تا { $size } وارد شوید
-signInOnlyButton = ورود
-accountBenefitTitle = یک حساب { -firefox } ایجاد کنید یا وارد شوید
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = پرونده‌هایی تا { $size } را اشتراک‌گذاری کنید
-accountBenefitDownloadCount = پرونده‌ها را با افراد بیشتری به اشتراک بگذارید
-accountBenefitTimeLimit =
-    { $count ->
-        [one] پیوند‌ها را تا 1 روز فعال نگه دارید
-       *[other] پیوند‌ها را تا { $count } روز فعال نگه دارید
-    }
-accountBenefitSync = فایل‌های اشتراکی را از هر دستگاه مدیریت کنید
-accountBenefitMoz = در مورد سایر خدمات { -mozilla } اطلاعات کسب کنید
-signOut = خروج
 okButton = تأیید
 downloadingTitle = در حال بارگیری
 noStreamsWarning = ممکن است این مرورگر نتواند یک پرونده به این بزرگی را رمزگشایی کند.
 noStreamsOptionCopy = لینک را کپی کنید تا در مرورگر دیگری باز شود
 noStreamsOptionFirefox = مرورگر مورد علاقه ما را امتحان کنید
 noStreamsOptionDownload = با این مرورگر ادامه دهید
-downloadFirefoxPromo = { -send-short-brand } با جدیدترین { -firefox } برای شما آماده شده است.
 # the next line after the colon contains a file name
 shareLinkDescription = پیوند مربوط به پرونده خود را به اشتراک بگذارید:
 shareLinkButton = اشتراک‌گذاری پیوند
 # $name is the name of the file
 shareMessage = “{ $name }” را با { -send-brand } دانلود کنید: اشتراک‌گذاری ساده و امن فایل
 trailheadPromo = راهی برای محافظت از حریم خصوصی شما وجود دارد. به Firefox بپیوندید.
-learnMore = بیشتر بدانید.

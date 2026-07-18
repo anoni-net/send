@@ -39,7 +39,6 @@ expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maksimale wachtwurdlingte: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Dit wachtwurd koe net ynsteld wurde
 
 ## Send version 2 strings
 
@@ -61,11 +60,6 @@ timespanDays =
     { $num ->
         [one] 1 dei
        *[other] { $num } dagen
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 wike
-       *[other] { $num } wiken
     }
 fileCount =
     { $num ->
@@ -105,8 +99,6 @@ tooManyArchives =
 expiredTitle = Dizze keppeling is ferrûn.
 notSupportedDescription = { -send-brand } funksjonearret net mei dizze browser. { -send-short-brand } funksjonearret it bêste mei de nijste ferzje fan { -firefox } en funksjonearret mei de aktuele ferzje fan de measte browsers.
 downloadFirefox = { -firefox } downloade
-legalTitle = { -send-short-brand }-privacyferklearring
-legalDateStamp = Ferzje 1.0, datearre 12 maart 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }o { $minutes }m
 addFilesButton = Bestannen selektearje om op te laden
@@ -117,33 +109,17 @@ dragAndDropFiles = Sleep en pleats bestannen
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = of stjoer oant { $size } troch te klikken
 addPassword = Mei wachtwurd beskermje
-emailPlaceholder = Fier jo e-mailadres yn
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Meld jo oan, om bestannen oant { $size } te stjoeren
-signInOnlyButton = Oanmelde
-accountBenefitTitle = Meitsje in { -firefox }-account of meld jo oan
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Diel bestannen oant { $size }
-accountBenefitDownloadCount = Diel bestannen mei mear minsken
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Keppeling oant ien dei lang aktyf hâlde
-       *[other] Keppeling oant { $count } dagen lang aktyf hâlde
-    }
-accountBenefitSync = Behear dielde bestannen fan elk apparaat ôf
-accountBenefitMoz = Lês mear oer oare { -mozilla }-tsjinsten
-signOut = Ofmelde
 okButton = OK
 downloadingTitle = Downloade
 noStreamsWarning = Dizze browser kin in sa'n grut bestân mooglik net fersiferje.
 noStreamsOptionCopy = Kopiearje de koppeling om yn in oare browser te iepenjen
 noStreamsOptionFirefox = Probearje ús favorite browser
 noStreamsOptionDownload = Trochgean mei dizze browser
-downloadFirefoxPromo = { -send-short-brand } wurdt jo oanbean troch it folslein fernijde { -firefox }.
 # the next line after the colon contains a file name
 shareLinkDescription = Diel de keppeling nei jo bestân:
 shareLinkButton = Keppeling diele
 # $name is the name of the file
 shareMessage = Download ‘{ $name }’ mei { -send-brand }: ienfâldich, feilich bestannen diele
 trailheadPromo = Der is in manier om jo privacy te beskermjen. Doch mei mei Firefox.
-learnMore = Mear ynfo.

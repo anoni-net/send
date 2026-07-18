@@ -44,7 +44,6 @@ expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maximum password length: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = This password could not be set
 
 ## Send version 2 strings
 
@@ -66,11 +65,6 @@ timespanDays =
     { $num ->
         [one] 1 day
        *[other] { $num } days
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 week
-       *[other] { $num } weeks
     }
 fileCount =
     { $num ->
@@ -110,8 +104,6 @@ tooManyArchives =
 expiredTitle = This link has expired.
 notSupportedDescription = { -send-brand } will not work with this browser. { -send-short-brand } works best with the latest version of { -firefox }, and will work with the current version of most browsers.
 downloadFirefox = Download { -firefox }
-legalTitle = { -send-short-brand } Privacy Notice
-legalDateStamp = Version 1.0, dated March 12, 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }h { $minutes }m
 addFilesButton = Select files to upload
@@ -122,35 +114,19 @@ dragAndDropFiles = Drag and drop files
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = or click to send up to { $size }
 addPassword = Protect with password
-emailPlaceholder = Enter your email
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Sign in to send up to { $size }
-signInOnlyButton = Sign in
-accountBenefitTitle = Create a { -firefox } Account or sign in
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Share files up to { $size }
-accountBenefitDownloadCount = Share files with more people
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Keep links active for up to 1 day
-       *[other] Keep links active for up to { $count } days
-    }
-accountBenefitSync = Manage shared files from any device
-accountBenefitMoz = Learn about other { -mozilla } services
-signOut = Sign out
 okButton = OK
 downloadingTitle = Downloading
 noStreamsWarning = This browser might not be able to decrypt a file this big.
 noStreamsOptionCopy = Copy the link to open in another browser
 noStreamsOptionFirefox = Try our favourite browser
 noStreamsOptionDownload = Continue with this browser
-downloadFirefoxPromo = { -send-short-brand } is brought to you by the all-new { -firefox }.
 # the next line after the colon contains a file name
 shareLinkDescription = Share the link to your file:
 shareLinkButton = Share link
 # $name is the name of the file
 shareMessage = Download “{ $name }” with { -send-brand }: simple, safe file sharing
 trailheadPromo = There is a way to protect your privacy. Join Firefox.
-learnMore = Learn more.
 
 sponsoredByThunderbird = Sponsored by Thunderbird

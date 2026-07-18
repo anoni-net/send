@@ -39,7 +39,6 @@ expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Dānaj gā yachìj da'nga huìi: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Na'ue gārayinaj da'nga huìi
 
 ## Send version 2 strings
 
@@ -61,11 +60,6 @@ timespanDays =
     { $num ->
         [one] 1 gui
        *[other] { $num } gui
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 semâna
-       *[other] { $num } semâna
     }
 fileCount =
     { $num ->
@@ -89,7 +83,5 @@ copyLinkDescription = Guxūn lînk da' ga'ue duyingâ't archibô:
 copyLinkButton = Guxûn lînk
 downloadTitle = Nadunïnj nej archîbo
 downloadFirefox = Nadunïnj { -firefox }
-legalTitle = Nuguan huì nikāj { -send-short-brand }
-signOut = Narun' sesiôn
 okButton = Ga'ue
 shareLinkButton = Duguachîn enlâse

@@ -39,7 +39,6 @@ expiresMinutes = { $minutes }ր
 # A short status message shown when the user enters a long password
 maxPasswordLength = Գանղտնաբառի առավելագույն չափ. { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Այս գաղտնաբառը հնարավոր չէ սահմանել
 
 ## Send version 2 strings
 
@@ -61,11 +60,6 @@ timespanDays =
     { $num ->
         [one] 1 օր
        *[other] { $num } օր
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 շաբաթ
-       *[other] { $num } շաբաթ
     }
 fileCount =
     { $num ->
@@ -105,8 +99,6 @@ tooManyArchives =
 expiredTitle = Այս հղումն ավարտված է:
 notSupportedDescription = { -send-brand }-ը չի աշխատի այս զննարկչի հետ: { -send-short-brand }-ը լավագույն կերպով աշխատում է { -firefox }-ի վերջին տարբերակի հետ և կաշխատի զննարկիչների մեծամասնության վերջին տարբերակների հետ:
 downloadFirefox = Ներբեռնել { -firefox }-ը
-legalTitle = { -send-short-brand }-ի Գաղտնիության ծանուցում
-legalDateStamp = Տարբերակ 1.0, թվագրված՝ 2019 թ. մարտի 12-ով
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }օր { $hours }ժ { $minutes }ր
 addFilesButton = Ընտրեք ֆայլեր՝ վերբեռնելու համար
@@ -117,33 +109,17 @@ dragAndDropFiles = Քաշեք և գցեք ֆայլերը
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = կամ կտտացրեք`ուղարկելու համար մինչև { $size }
 addPassword = Պաշտպանեք գաղտնաբառով
-emailPlaceholder = Մուտքագրեք ձեր էլ. փոստը
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Մուտք գործեք՝ { $size } ուղարկելու համար
-signInOnlyButton = Մուտք գործել
-accountBenefitTitle = Ստեղծեք { -firefox } հաշիվ կամ մուտք գործեք
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Կիսվեք մինչև { $size } ֆայլերով
-accountBenefitDownloadCount = Կիսվեք ֆայլերով ավելի շատ մարդկանց հետ
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Հղումներն ակտիվ պահել մինչև 1 օր
-       *[other] Հղումներն ակտիվ պահել մինչև { $count } օր
-    }
-accountBenefitSync = Կառավարեք համօգտագործվող ֆայլերը ցանկացած սարքից
-accountBenefitMoz = Իմացեք { -mozilla }-ի այլ ծառայությունների մասին
-signOut = Դուրս գրվել
 okButton = Լավ
 downloadingTitle = Ներբեռնվում է
 noStreamsWarning = Այս զննարկիչը չի կարողանա վերծանել այսպիսի մեծ ֆայլը
 noStreamsOptionCopy = Պատճենեք հղումը`այլ զննարկիչում բացելու համար
 noStreamsOptionFirefox = Փորձեք մեր սիրած զննարկիչը
 noStreamsOptionDownload = Շարունակեք այս զննարկիչով
-downloadFirefoxPromo = { -send-short-brand }-ը ձեզ է առաջարկում ամբողջովին նոր { -firefox }:
 # the next line after the colon contains a file name
 shareLinkDescription = Կիսվեք ձեր ֆայլի հղումով.
 shareLinkButton = Համօգտագործել հղումը
 # $name is the name of the file
 shareMessage = Ներբեռնեք “{ $name }”-ը { -send-brand }-ով ՝ պարզ և ապահով՝ ֆայլերի համօգտագործում
 trailheadPromo = Ձեր գաղտնիությունը պաշտպանելու միջոց կա: Միացեք Firefox- ին:
-learnMore = Իմանալ ավելին

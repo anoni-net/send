@@ -76,9 +76,6 @@ expiresMinutes = { $minutes }i
 # A short status message shown when the user enters a long password
 maxPasswordLength = Ìdíwọ̀n ọ̀rọ̀-aṣínà: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError =
-    Ọ̀rọ̀-aṣínà yí kò ṣeé gbé kalẹ̀
-    Ọ̀rọ̀-aṣínà yí kò leè fẹsẹ̀ múlẹ̀
 
 ## Send version 2 strings
 
@@ -103,11 +100,8 @@ downloadTitle = Se igabisile faili
 addFilesButton = E yan awon faili lati gbasoke
 # the first part of the string 'Drag and drop files or click to send up to 1GB'
 dragAndDropFiles = E mu awon faili ki ede ju si bi
-emailPlaceholder = E fi imeli si
-accountBenefitDownloadCount = E pin faili pelu awon eyan si
 okButton = O DA
 downloadingTitle = N se igabsile
 noStreamsOptionFirefox = E gbiyanju asawakiri to je ayanfe wa
 noStreamsOptionDownload = Tesiwaju pelu aṣàwákiri yi
 trailheadPromo = Ona wa lati dabobo ipamo re. Darapo mo Firefox
-learnMore = Keeko si

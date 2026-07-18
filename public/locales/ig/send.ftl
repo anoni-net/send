@@ -39,7 +39,6 @@ expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Oke okwuntughe kachasị: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Enweghị ike ịtọ paswọọdụ a
 
 ## Send version 2 strings
 
@@ -56,11 +55,6 @@ timespanDays =
     { $num ->
         [one] 1 ụbọchị
        *[other] ụbọchị { $num }
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 izu
-       *[other] izu { $num }
     }
 # byte abbreviation
 bytes = B
@@ -83,6 +77,4 @@ trySendDescription = Gbalịa maka nyefe faịlụ dị mfe.
 expiredTitle = Njikọ a emebiela.
 notSupportedDescription = agaghị eji ihe nchọgharị a rụọ ọrụ. na arụ ọrụ kacha mma na ụdị nke , ọ ga-arụkwa ụdị nke ihe nchọgharị ka ugbu a.
 downloadFirefox = Budata
-legalTitle = Nkwupụta Nzuzo
-legalDateStamp = 1.dị 1.0, akara ụbọchị Maachi 12, 2019
 okButton = O

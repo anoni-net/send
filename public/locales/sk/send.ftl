@@ -41,7 +41,6 @@ expiresMinutes = { $minutes } min.
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maximálna dĺžka hesla: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Heslo nešlo nastaviť
 
 ## Send version 2 strings
 
@@ -65,12 +64,6 @@ timespanDays =
         [one] 1 dni
         [few] { $num } dňoch
        *[other] { $num } dňoch
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 týždni
-        [few] { $num } týždňoch
-       *[other] { $num } týždňoch
     }
 fileCount =
     { $num ->
@@ -113,8 +106,6 @@ tooManyArchives =
 expiredTitle = Platnosť odkazu vypršala.
 notSupportedDescription = { -send-brand } nebude v tomto prehliadači fungovať. { -send-short-brand } najlepšie funguje v najnovšej verzii { -firefox(case: "gen") } alebo aktuálnych verziách najpoužívanejších prehliadačov.
 downloadFirefox = Prevziať { -firefox }
-legalTitle = Zásady ochrany súkromia služby { -send-short-brand }
-legalDateStamp = Verzia 1.0, z 12. marca 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } d { $hours } h { $minutes } min
 addFilesButton = Vyberte súbory pre nahratie
@@ -125,34 +116,17 @@ dragAndDropFiles = Pretiahnutím súboru alebo kliknutím sem
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = môžete poslať až { $size }
 addPassword = Chrániť heslom
-emailPlaceholder = Zadajte e-mailovú adresu
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Pre odoslanie súborov s veľkosťou až { $size }, sa, prosím, prihláste
-signInOnlyButton = Prihlásiť sa
-accountBenefitTitle = Vytvorte si účet { -firefox } alebo sa prihláste
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Zdieľanie súborov s veľkosťou až { $size }
-accountBenefitDownloadCount = Zdieľanie súborov s viacerými ľuďmi
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Odkazy platné až 1 deň
-        [few] Odkazy platné až { $count } dni
-       *[other] Odkazy platné až { $count } dní
-    }
-accountBenefitSync = Správa zdieľaných súborov z akéhokoľvek zariadenia
-accountBenefitMoz = Ďalšie informácie o ďalších službách od { -mozilla(case: "gen") }
-signOut = Odhlásiť sa
 okButton = OK
 downloadingTitle = Preberá sa
 noStreamsWarning = Tento prehliadač nemusí byť schopný dešifrovať takto veľký súbor.
 noStreamsOptionCopy = Skopírovať odkaz pre otvorenie v inom prehliadači
 noStreamsOptionFirefox = Vyskúšajte náš obľúbený prehliadač
 noStreamsOptionDownload = Pokračovať v tomto prehliadači
-downloadFirefoxPromo = { -send-short-brand } vám prináša najnovší { -firefox }.
 # the next line after the colon contains a file name
 shareLinkDescription = Zdieľajte odkaz na súbor:
 shareLinkButton = Zdieľať odkaz
 # $name is the name of the file
 shareMessage = Prevezmite si súbor „{ $name }“ so službou { -send-brand } - jednoduché a bezpečné zdieľanie súborov
 trailheadPromo = Existuje spôsob, ako chrániť vaše súkromie. Prihláste sa do Firefoxu.
-learnMore = Ďalšie informácie.

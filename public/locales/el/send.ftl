@@ -39,7 +39,6 @@ expiresMinutes = { $minutes }λ
 # A short status message shown when the user enters a long password
 maxPasswordLength = Μέγιστο μήκος κωδικού: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Δεν ήταν δυνατός ο ορισμός αυτού του κωδικού
 
 ## Send version 2 strings
 
@@ -61,11 +60,6 @@ timespanDays =
     { $num ->
         [one] 1 ημέρα
        *[other] { $num } ημέρες
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 εβδομάδα
-       *[other] { $num } εβδομάδες
     }
 fileCount =
     { $num ->
@@ -105,8 +99,6 @@ tooManyArchives =
 expiredTitle = Αυτός ο σύνδεσμος έχει λήξει.
 notSupportedDescription = Το { -send-brand } δεν θα λειτουργήσει με αυτό το πρόγραμμα περιήγησης. Το { -send-short-brand } λειτουργεί καλύτερα με την πιο πρόσφατη έκδοση του { -firefox }, καθώς και με την τρέχουσα έκδοση των περισσότερων προγραμμάτων περιήγησης.
 downloadFirefox = Λήψη του { -firefox }
-legalTitle = Σημείωση Απορρήτου { -send-short-brand }
-legalDateStamp = Έκδοση 1.0, από 12 Μαρτίου 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }η { $hours }ώ { $minutes }λ
 addFilesButton = Επιλέξτε αρχεία για μεταφόρτωση
@@ -117,33 +109,17 @@ dragAndDropFiles = Σύρετε και εναποθέστε αρχεία
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = ή κάντε κλικ για να στείλετε μέχρι { $size }
 addPassword = Προστασία με κωδικό πρόσβασης
-emailPlaceholder = Εισάγετε το email σας
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Συνδεθείτε για να στείλετε μέχρι { $size }
-signInOnlyButton = Σύνδεση
-accountBenefitTitle = Δημιουργία λογαριασμού { -firefox } ή σύνδεση
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Μοιραστείτε αρχεία έως { $size }
-accountBenefitDownloadCount = Μοιραστείτε αρχεία με περισσότερα άτομα
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Να παραμείνουν οι σύνδεσμοι ενεργοί έως και 1 ημέρα
-       *[other] Να παραμείνουν οι σύνδεσμοι ενεργοί έως και { $count } ημέρες
-    }
-accountBenefitSync = Διαχειριστείτε τα διαμοιρασμένα αρχεία από οποιαδήποτε συσκευή
-accountBenefitMoz = Μάθετε για τις άλλες υπηρεσίες της { -mozilla }
-signOut = Αποσύνδεση
 okButton = OK
 downloadingTitle = Γίνεται λήψη
 noStreamsWarning = Αυτό το πρόγραμμα περιήγησης ενδέχεται να μην μπορέσει να αποκρυπτογραφήσει αρχεία αυτού του μεγέθους.
 noStreamsOptionCopy = Αντιγράψτε το σύνδεσμο για άνοιγμα σε άλλο πρόγραμμα περιήγησης
 noStreamsOptionFirefox = Δοκιμάστε το αγαπημένο μας πρόγραμμα περιήγησης
 noStreamsOptionDownload = Συνέχεια με αυτό το πρόγραμμα περιήγησης
-downloadFirefoxPromo = Το { -send-short-brand } παρέχεται σε εσάς από το ολοκαίνουριο { -firefox }.
 # the next line after the colon contains a file name
 shareLinkDescription = Μοιραστείτε το σύνδεσμο του αρχείου σας:
 shareLinkButton = Κοινή χρήση συνδέσμου
 # $name is the name of the file
 shareMessage = Λήψη του “{ $name }” με το { -send-brand }: απλός και ασφαλής διαμοιρασμός αρχείων
 trailheadPromo = Υπάρχει τρόπος να προστατέψετε το απόρρητό σας. Γίνετε μέλος του Firefox.
-learnMore = Μάθετε περισσότερα.
