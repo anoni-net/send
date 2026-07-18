@@ -101,16 +101,12 @@ class Storage {
     );
   }
 
-  get user() {
-    try {
-      return JSON.parse(this.engine.getItem('user'));
-    } catch (e) {
-      return null;
-    }
+  get surveyed() {
+    return this.engine.getItem('surveyed') === 'true';
   }
 
-  set user(info) {
-    this.engine.setItem('user', JSON.stringify(info));
+  set surveyed(yes) {
+    this.engine.setItem('surveyed', yes);
   }
 
   getFileById(id) {

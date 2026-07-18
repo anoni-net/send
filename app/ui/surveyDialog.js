@@ -6,9 +6,9 @@ module.exports = function() {
   return function(state, emit, close) {
     const surveyUrl = `${
       state.PREFS.surveyUrl
-    }?ver=${version}&browser=${browserName()}&anon=${
-      state.user.loggedIn
-    }&active_count=${state.storage.files.length}`;
+    }?ver=${version}&browser=${browserName()}&anon=false&active_count=${
+      state.storage.files.length
+    }`;
     return html`
       <send-survey-dialog
         class="flex flex-col items-center text-center p-4 max-w-sm m-auto"
