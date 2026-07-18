@@ -14,8 +14,8 @@
 # also slow, roughly seven extra minutes per publish. GitHub's arm64 runners are
 # free for public repositories, so the emulation layer is gone entirely.
 #
-# The vulnerability scan is REPORT-ONLY. Flip `--exit-code 1` on the Trivy step
-# to make it a hard gate.
+# The vulnerability scan GATES: a HIGH or CRITICAL with a fix available stops
+# the publish.
 #
 # Verify a published image (keyless):
 #   cosign verify ghcr.io/anoni-net/send@<digest> \
@@ -103,9 +103,11 @@ jobs:
         run: bash .github/scripts/smoke.sh
 
       # 2) Vulnerability scan of the exact image we are about to publish.
-      #    Report-only (exit 0). amd64 only: the findings are the same package
-      #    set on both, and one report is enough to track the delta.
-      - name: Trivy vulnerability scan (report-only)
+      #    This GATES: a HIGH or CRITICAL with a fix available stops the
+      #    publish. Viable now that the count is zero; it was report-only while
+      #    the base image was EOL node:16 and the count was in the twenties.
+      #    amd64 only, the package set being identical on both.
+      - name: Trivy vulnerability scan (gate)
         if: matrix.arch == 'amd64'
         run: |
           set -euo pipefail
@@ -113,10 +115,8 @@ jobs:
             -v /var/run/docker.sock:/var/run/docker.sock \
             aquasec/trivy:latest image \
               --scanners vuln --ignore-unfixed --no-progress \
-              --severity HIGH,CRITICAL \
+              --severity HIGH,CRITICAL --exit-code 1 \
               send:ci | tee trivy-report.txt
-          # To make this a hard gate, add:
-          #   --exit-code 1
 
       - name: Upload Trivy report
         if: always() && matrix.arch == 'amd64'
