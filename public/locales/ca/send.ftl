@@ -39,7 +39,6 @@ expiresMinutes = { $minutes } min
 # A short status message shown when the user enters a long password
 maxPasswordLength = Longitud màxima de la contrasenya: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = No s'ha pogut definir la contrasenya
 
 ## Send version 2 strings
 
@@ -61,11 +60,6 @@ timespanDays =
     { $num ->
         [one] 1 dia
        *[other] { $num } dies
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 setmana
-       *[other] { $num } setmanes
     }
 fileCount =
     { $num ->
@@ -105,8 +99,6 @@ tooManyArchives =
 expiredTitle = Aquest enllaç ha caducat.
 notSupportedDescription = El { -send-brand } no funcionarà amb aquest navegador. El { -send-short-brand } funciona millor amb l'última versió del { -firefox } i funcionarà amb la versió més recent de la majoria de navegadors.
 downloadFirefox = Baixa el { -firefox }
-legalTitle = Avís de privadesa del { -send-short-brand }
-legalDateStamp = Versió 1.0, amb data del 12 de març de 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } d { $hours } h { $minutes } min
 addFilesButton = Seleccioneu els fitxers que voleu pujar
@@ -117,33 +109,17 @@ dragAndDropFiles = Arrossegueu i deixeu anar els fitxers
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = o feu clic aquí per enviar fins a { $size }
 addPassword = Protegeix amb contrasenya
-emailPlaceholder = Introduïu la vostra adreça electrònica
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Inicieu la sessió per enviar fins a { $size }
-signInOnlyButton = Inicia la sessió
-accountBenefitTitle = Creeu un compte del { -firefox } o inicieu la sessió
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Compartiu fitxers fins a { $size }
-accountBenefitDownloadCount = Compartiu fitxers amb més persones
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Manteniu els enllaços actius fins a 1 dia
-       *[other] Manteniu els enllaços actius fins a { $count } dies
-    }
-accountBenefitSync = Gestioneu els fitxers compartits des de qualsevol dispositiu
-accountBenefitMoz = Descobriu els altres serveis de { -mozilla }
-signOut = Tanca la sessió
 okButton = D'acord
 downloadingTitle = S'està baixant
 noStreamsWarning = Pot ser que aquest navegador no pugui desxifrar un fitxer tan gran.
 noStreamsOptionCopy = Copieu l'enllaç per obrir-lo en un altre navegador
 noStreamsOptionFirefox = Proveu el nostre navegador preferit
 noStreamsOptionDownload = Segueix amb aquest navegador
-downloadFirefoxPromo = El nou { -firefox } us ofereix el { -send-short-brand }
 # the next line after the colon contains a file name
 shareLinkDescription = Compartiu l'enllaç al vostre fitxer:
 shareLinkButton = Comparteix l'enllaç
 # $name is the name of the file
 shareMessage = Baixeu «{ $name }» amb el { -send-brand }: compartició de fitxers senzilla i segura
 trailheadPromo = Hi ha una manera de protegir la vostra privadesa. Uniu-vos al Firefox.
-learnMore = Més informació.

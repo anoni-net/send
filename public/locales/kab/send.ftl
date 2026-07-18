@@ -39,7 +39,6 @@ expiresMinutes = { $minutes }Tisdatin
 # A short status message shown when the user enters a long password
 maxPasswordLength = Tuγzi tafellayt n wawal uffir: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Awal-agi uffir ur izmir ara ad ittwabaded
 
 ## Send version 2 strings
 
@@ -61,11 +60,6 @@ timespanDays =
     { $num ->
         [one] 1 n wass
        *[other] { $num } n wussan
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 n dduṛt
-       *[other] { $num } n ledwaṛ
     }
 fileCount =
     { $num ->
@@ -105,8 +99,6 @@ tooManyArchives =
 expiredTitle = Immut useɣwen.
 notSupportedDescription = { -send-brand } ur iteddu ara s yiminig-a. { -send-short-brand } iteddu akken iwata s lqem aneggaru n { -firefox }, daɣen iteddu s lqem amiran n tuget n yiminigen.
 downloadFirefox = Sider { -firefox }
-legalTitle = Tasertit tabaḍnit n { -send-short-brand }
-legalDateStamp = Lqem  1.0, azemz n 12 Meɣres 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } ass { $hours } srg { $minutes } tsd
 addFilesButton = Fren ifuyla ad tessaliḍ
@@ -117,33 +109,17 @@ dragAndDropFiles = Ẓuɣer sakin sers ifuyla
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = neɣ sit akken ad tazneḍ arma d { $size }
 addPassword = Ḥrez s wawal uffir
-emailPlaceholder = Sekcem imayl inek
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Qqen akken ad tazneḍ arma d { $size }
-signInOnlyButton = Qqen
-accountBenefitTitle = Rnu amiḍan { -firefox } akken ad teqqneḍ
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Bḍu ifuyla arma d { $size }
-accountBenefitDownloadCount = Bḍu ifuyla d wugan n medden
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Eǧǧ iseɣwan d urmiden arma d 1 n wass
-       *[other] Eǧǧ iseɣwan d urmiden arma d { $count } n wassan
-    }
-accountBenefitSync = Sefrek ifuyla yebdan seg yal ibenk
-accountBenefitMoz = Issin ugar ɣef yimeẓla-nniḍen n { -mozilla }
-signOut = Ffeɣ
 okButton = IH
 downloadingTitle = Azdam
 noStreamsWarning = Iminig-a ur yezmir ara ad yezmek afaylu meqqren.
 noStreamsOptionCopy = Nɣel aseɣwen i tulya deg yiminig-nniden
 noStreamsOptionFirefox = Ɛreḍ iminig-ik ufrin
 noStreamsOptionDownload = Kemmel akked iminig-a
-downloadFirefoxPromo = { -send-short-brand } yettwasumer i yal { -firefox } amaynut.
 # the next line after the colon contains a file name
 shareLinkDescription = Bḍu aseɣwen ɣer ufaylu-ik:
 shareLinkButton = Bḍu aseɣwen
 # $name is the name of the file
 shareMessage = Sider "{ $name }" s { -send-brand }: d fessas, d aɣelsan i beṭṭu n yifuyla.
 trailheadPromo = Yella wallal n ummesten n tudert-ik tusligt. Ddu ɣer Firefox.
-learnMore = Issin ugar.

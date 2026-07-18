@@ -45,7 +45,6 @@ expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Hirder brasañ aotreet evit ar ger-tremen: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = N'haller ket despizañ ar ger-tremen
 
 ## Send version 2 strings
 
@@ -73,14 +72,6 @@ timespanDays =
         [few] { $num } devezh
         [many] { $num } a zevezhioù
        *[other] { $num } devezh
-    }
-timespanWeeks =
-    { $num ->
-        [one] { $num } sizhun
-        [two] { $num } sizhun
-        [few] { $num } sizhun
-        [many] { $num } a sizhunioù
-       *[other] { $num } sizhun
     }
 fileCount =
     { $num ->
@@ -129,8 +120,6 @@ tooManyArchives =
 expiredTitle = Diamzeret eo an ere.
 notSupportedDescription = { -send-brand } n'aio ket en-dro war ar merdeer-mañ. { -send-short-brand } a za en-dro gwelloc'h gant handelv diwezhañ { -firefox }, ha mont a raio en-dro gant handelv bremanel lodenn vrasañ ar merdeerioù.
 downloadFirefox = Pellgargañ { -firefox }
-legalTitle = Evezhiadenn a fed buhez prevez { -send-short-brand }
-legalDateStamp = Handelv 1.0, d'an 12 a viz Meurzh 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }e { $minutes }m
 addFilesButton = Diuzit ur restr da bellgas
@@ -141,36 +130,17 @@ dragAndDropFiles = Riklit ha laoskit restroù
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = pe klikit evit kas betek { $size }
 addPassword = Gwareziñ gant ur ger-tremen
-emailPlaceholder = Enankit ho chomlec'h postel
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Kennaskit evit kas betek { $size }
-signInOnlyButton = Kennaskañ
-accountBenefitTitle = Krouit ur gont { -firefox } pe kennaskit
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Rannit restroù betek { $size }
-accountBenefitDownloadCount = Rannit restroù gant muioc'h a dud
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Dalc'hit an ereoù oberiant e-pad { $count } devezh
-        [two] Dalc'hit an ereoù oberiant e-pad { $count } zevezh
-        [few] Dalc'hit an ereoù oberiant e-pad { $count } devezh
-        [many] Dalc'hit an ereoù oberiant e-pad { $count } a zevezhioù
-       *[other] Dalc'hit an ereoù oberiant e-pad { $count } devezh
-    }
-accountBenefitSync = Merit ar restroù rannet gant forzh peseurt trevnad
-accountBenefitMoz = Gouzout hiroc'h a-zivout gwazerezhioù all { -mozilla }
-signOut = Digennaskañ
 okButton = Mat eo
 downloadingTitle = O pellgargañ
 noStreamsWarning = Posupl eo ne vefe ket gouest ar merdeer-mañ da ezrinegañ ur restr ken bras.
 noStreamsOptionCopy = Eilit an ere evit digeriñ anezhañ en ur merdeer all
 noStreamsOptionFirefox = Esaeit hor merdeer karetañ
 noStreamsOptionDownload = Kenderc'hel gant ar merdeer-mañ
-downloadFirefoxPromo = { -send-short-brand } a zo kinniget deoc'h gant ar { -firefox } nevez-flamm.
 # the next line after the colon contains a file name
 shareLinkDescription = Rannit an ere etrezek ho restr:
 shareLinkButton = Rannañ an ere
 # $name is the name of the file
 shareMessage = Pellgargañ "{ $name }" gant { -send-brand }: rannañ restroù en un doare eeun ha prevez
 trailheadPromo = Un doare a zo da wareziñ ho puhez prevez. Tremenit da Firefox.
-learnMore = Gouzout hiroc'h.

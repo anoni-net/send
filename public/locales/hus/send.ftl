@@ -37,7 +37,6 @@ expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = In puwél an tsinat japixtaláb pel: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Axi tsinat japixtaláb yab u awil ka eyendha'
 
 ## Send version 2 strings
 
@@ -57,10 +56,6 @@ timespanMinutes =
 timespanDays =
     { $num ->
        *[other] 1 k'icháj { $num } k'ichajchik
-    }
-timespanWeeks =
-    { $num ->
-       *[other] 1 semana { $num } i semanachik
     }
 fileCount =
     { $num ->
@@ -101,8 +96,6 @@ tooManyArchives =
 expiredTitle = An enlace talíts in tsap.
 notSupportedDescription = { -send-brand } yab u t'ojnal al axi navegador. { -send-short-brand } u t'ojnal alwa' k'al an { -firefox } axi it, ani ne'ets ka t'ojon alwa' k'al an it navegadorchik.
 downloadFirefox = Ka pa'ba' { -firefox }
-legalTitle = Tin kwentaj an "Tsinaxtaláb a k'al" { -send-short-brand }
-legalDateStamp = Versión 1.0 ani t'ajadh ti Marzo 12 ti tamub 2019.
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } k'icháj { $hours } hora { $minutes } minuto
 addFilesButton = Ka takuy an t'ojláb axi ne'ets ka k'adhba'
@@ -113,34 +106,17 @@ dragAndDropFiles = Ka kina' a t'ojlabil ani ka walka' te'
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = o ka t'aja' an clic abal ka abna' ma { $size }
 addPassword = Ka k'aniy k'al jún i tsinat japixtaláb
-emailPlaceholder = Ka punuw a abnax dhuchlab Correo Electrónico.
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Kit otsits abal ka ejtow ka abna' ma { $size }
-signInOnlyButton = Kit otsits
-accountBenefitTitle = Ka ts'ejka' jún a it k'al (cuenta) { -firefox } o kit otsits max a kwa'alits jún.
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Ka buk'uw a t'ojlabil, ma { $size }
-accountBenefitDownloadCount = Ka buk'uw a t'ojlabil k'al pil i atiklabchik
-accountBenefitTimeLimit =
-    { $count ->
-       *[other]
-            Ka ko'oy an enlace ma 1 a k'icháj
-            Ka ko'oy an enlacechik ma { $count } a k'icháhchik
-    }
-accountBenefitSync = Ka ejtow tit t'ojnal k'al t'ojlabil al jawakitsk'ij tum eyendhabnél
-accountBenefitMoz = Ka exla' jant'oj ti pidhál { -mozilla }
-signOut = Kit kalej
 okButton = Ka bats'uw
 downloadingTitle = K'wajat ti pa'íl
 noStreamsWarning = Walám axi navegador yab ne'ets kin ejtow kin japiy jún i t'ojláb tekedh pulik.
 noStreamsOptionCopy = Ka k'ot'biy an enlace abal ka japiy al pil i navegador
 noStreamsOptionFirefox = Ka eyendha' i navegador
 noStreamsOptionDownload = yab kit kalej al axi navegador
-downloadFirefoxPromo = An it { -firefox } ti pidhál { -send-short-brand }
 # the next line after the colon contains a file name
 shareLinkDescription = Ka abna' an enlace al an eyendhanél:
 shareLinkButton = Ka abna' an enlace
 # $name is the name of the file
 shareMessage = Ka pa'ba' “{ $name }” k'al { -send-brand }: ka abna' a t'ojlabil, yab k'ibat ani k'anidh
 trailheadPromo = U awil ka k'aniy axi tat a k'al. Kit tamkun k'al Firefox.
-learnMore = Ka ajiy más.

@@ -34,7 +34,6 @@ expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Pinakamataas na haba ng password: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Hindi maitakda ang password na ito
 
 ## Send version 2 strings
 
@@ -55,11 +54,6 @@ timespanDays =
     { $num ->
         [one] 1 araw
        *[other] { $num } mga araw
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 linggo
-       *[other] { $num } mga linggo
     }
 fileCount =
     { $num ->
@@ -84,8 +78,6 @@ copyLinkButton = Kopyahin ang link
 downloadTitle = I-download ang mga file
 expiredTitle = Ang link na ito ay nag-expire.
 downloadFirefox = I-download { -firefox }
-legalTitle = { -send-short-brand } Abiso sa Privacy
-legalDateStamp = Bersyon 1.0, petsa ng Marso 12, 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }h { $minutes }m
 addFilesButton = Piliin ang mga file na mai-upload
@@ -93,15 +85,8 @@ uploadButton = I-upload
 # the first part of the string 'Drag and drop files or click to send up to 1GB'
 dragAndDropFiles = I-drag at i-drop ang mga file
 addPassword = Protektahan gamit ang password
-emailPlaceholder = Ipasok ang iyong email
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Mag-sign in upang magpadala ng hanggang sa { $size }
-signInOnlyButton = Mag sign-in
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Ibahagi ang mga file hanggang sa { $size }
-accountBenefitDownloadCount = Ibahagi ang mga file sa ibang tao
-accountBenefitMoz = Alamin ang tungkol sa iba pang mga serbisyo ng { -mozilla }
-signOut = Mag sign-out
 okButton = OK
 downloadingTitle = Pag-download
 noStreamsWarning = Maaaring hindi mai-decrypt ng browser na ito ang isang file na malaki.
@@ -109,4 +94,3 @@ noStreamsOptionCopy = Kopyahin ang link upang buksan sa isa pang browser
 noStreamsOptionFirefox = Subukan ang aming paboritong browser
 noStreamsOptionDownload = Magpatuloy sa browser na ito
 shareLinkButton = Ibahagi ang link
-learnMore = Matuto ng higit pa.

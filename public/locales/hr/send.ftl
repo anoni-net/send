@@ -41,7 +41,6 @@ expiresMinutes = { $minutes }min
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maksimalna duljina lozinke: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Lozinku nije moguće postaviti
 
 ## Send version 2 strings
 
@@ -65,12 +64,6 @@ timespanDays =
         [one] { $num } dan
         [few] { $num } dana
        *[other] { $num } dana
-    }
-timespanWeeks =
-    { $num ->
-        [one] { $num } tjedan
-        [few] { $num } tjedna
-       *[other] { $num } tjedana
     }
 fileCount =
     { $num ->
@@ -113,8 +106,6 @@ tooManyArchives =
 expiredTitle = Poveznica je istekla.
 notSupportedDescription = { -send-brand } neće raditi s ovim preglednikom. { -send-short-brand } najbolje radi sa zadnjom { -firefox } verzijom i radit će s aktualnim verzijama većine preglednika.
 downloadFirefox = Preuzmi { -firefox }
-legalTitle = { -send-short-brand } politika privatnosti
-legalDateStamp = Verzija 1.0, od 12. ožujka 2019. godine
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }s { $minutes }m
 addFilesButton = Odaberi datoteke za prijenos
@@ -125,34 +116,17 @@ dragAndDropFiles = Povuci i ispusti datoteke
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = ili pritisni gumb, za slanje do { $size }
 addPassword = Zaštiti s lozinkom
-emailPlaceholder = Upiši svoju e-adresu
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Prijavi se, za slanje do { $size }
-signInOnlyButton = Prijavi se
-accountBenefitTitle = Otvori { -firefox } račun ili se prijavi
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Dijeli datoteke do { $size }
-accountBenefitDownloadCount = Dijeli datoteke s više osoba
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Ostavi poveznice aktivnima { $count } dan
-        [few] Ostavi poveznice aktivnima { $count } dana
-       *[other] Ostavi poveznice aktivnima { $count } dana
-    }
-accountBenefitSync = Upravljaj dijeljenim datotekama s bilo kojeg uređaja
-accountBenefitMoz = Saznaj više o drugim { -mozilla } uslugama
-signOut = Odjavi se
 okButton = U redu
 downloadingTitle = Preuzimanje
 noStreamsWarning = Ovaj preglednik možda neće moći dešifrirati datoteku ove veličine.
 noStreamsOptionCopy = Za otvaranje u drugom pregledniku, kopiraj poveznicu
 noStreamsOptionFirefox = Isprobaj naš omiljeni preglednik
 noStreamsOptionDownload = Nastavi s ovim preglednikom
-downloadFirefoxPromo = Potpuno novi { -firefox } donosi { -send-short-brand }.
 # the next line after the colon contains a file name
 shareLinkDescription = Dijeli poveznicu na tvoju datoteku:
 shareLinkButton = Dijeli poveznicu
 # $name is the name of the file
 shareMessage = Preuzmi „{ $name }” pomoću { -send-brand }: jednostavno i sigurno dijeljenje datoteka
 trailheadPromo = Postoji način, kako zaštititi vlastitu privatnost. Pridruži se Firefoxu.
-learnMore = Saznaj više.

@@ -42,7 +42,6 @@ expiresMinutes = { $minutes } 分鐘
 # A short status message shown when the user enters a long password
 maxPasswordLength = 最大密碼長度: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = 無法設定此密碼
 
 ## Send version 2 strings
 
@@ -63,10 +62,6 @@ timespanMinutes = { $num ->
 timespanDays = { $num ->
         [one] 1 天
        *[other] { $num } 天
-    }
-timespanWeeks = { $num ->
-        [one] 1 週
-       *[other] { $num } 週
     }
 fileCount = { $num ->
     [one] 1 個檔案
@@ -103,8 +98,6 @@ tooManyArchives = { $count ->
 expiredTitle = 此鏈結已經失效。
 notSupportedDescription = 無法於此瀏覽器使用 { -send-brand }。在最新版的 { -firefox } 中使用 { -send-short-brand } 會有最佳效果，也可在大部分瀏覽器的最新版本當中使用。
 downloadFirefox = 下載 { -firefox }
-legalTitle = { -send-short-brand } 隱私權公告
-legalDateStamp = 1.0 版，2019 年 3 月 12 日生效
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } 天 { $hours } 小時 { $minutes } 分鐘
 addFilesButton = 選擇要上傳的檔案
@@ -115,31 +108,16 @@ dragAndDropFiles = 拖放檔案到此處
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = 或點擊即可傳送最大 { $size } 的檔案
 addPassword = 使用密碼保護
-emailPlaceholder = 輸入您的電子郵件地址
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = 登入後即可傳送最大 { $size } 的檔案
-signInOnlyButton = 登入
-accountBenefitTitle = 註冊 { -firefox } 帳號或登入
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = 分享最大 { $size } 的檔案
-accountBenefitDownloadCount = 分享檔案給更多人
-accountBenefitTimeLimit =
-    { $count ->
-       *[other] 將檔案鏈結保留 { $count } 天有效
-    }
-accountBenefitSync = 從任何裝置管理分享的檔案
-accountBenefitMoz = 了解其他 { -mozilla } 服務的更多資訊
-signOut = 登出
 okButton = 確定
 downloadingTitle = 下載中
 noStreamsWarning = 此瀏覽器無法解密這麼大的檔案。
 noStreamsOptionCopy = 複製鏈結，用其他瀏覽器開啟
 noStreamsOptionFirefox = 試試我們最愛的瀏覽器
 noStreamsOptionDownload = 繼續使用目前的瀏覽器
-downloadFirefoxPromo = { -send-short-brand } 是由全新的 { -firefox } 提供。
 # the next line after the colon contains a file name
 shareLinkDescription = 您的檔案鏈結:
 shareLinkButton = 分享鏈結
 # $name is the name of the file
 shareMessage = 使用 { -send-brand } 下載「{ $name }」: 簡單安全的檔案分享機制
-learnMore = 了解更多。

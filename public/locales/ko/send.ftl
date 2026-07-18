@@ -32,7 +32,6 @@ expiresMinutes = { $minutes }분
 # A short status message shown when the user enters a long password
 maxPasswordLength = 최대 비밀번호 길이: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = 이 비밀번호를 설정할 수 없었습니다
 
 ## Send version 2 strings
 
@@ -52,10 +51,6 @@ timespanMinutes =
 timespanDays =
     { $num ->
        *[other] { $num }일
-    }
-timespanWeeks =
-    { $num ->
-       *[other] { $num }주
     }
 fileCount =
     { $num ->
@@ -92,8 +87,6 @@ tooManyArchives =
 expiredTitle = 이 링크는 만료되었습니다.
 notSupportedDescription = { -send-brand }는 이 브라우저와 작동하지 않습니다. { -send-short-brand }는 최신 { -firefox }와 가장 잘 작동하며, 대부분의 최신 웹 브라우저와도 잘 작동합니다.
 downloadFirefox = { -firefox } 다운로드
-legalTitle = { -send-short-brand } 개인정보처리방침
-legalDateStamp = 버전 1.0, 2019년 3월 12일자
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }일 { $hours }시간 { $minutes }분
 addFilesButton = 업로드할 파일들을 선택하세요
@@ -104,32 +97,17 @@ dragAndDropFiles = 파일들을 여기에 끌어서 놓으세요
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = 또는 여기를 클릭하여 { $size }까지의 파일을 공유하세요.
 addPassword = 비밀번호로 파일 보호
-emailPlaceholder = 이메일 입력
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = { $size }까지 파일을 보낼 수 있게 로그인
-signInOnlyButton = 로그인
-accountBenefitTitle = { -firefox } 계정 생성 또는 로그인
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = { $size }까지의 파일 공유
-accountBenefitDownloadCount = 더 많은 사람들과 함께 파일 공유
-accountBenefitTimeLimit =
-    { $count ->
-       *[other] 최대 { $count }일까지 링크 유지
-    }
-accountBenefitSync = 어떤 기기에서든지 공유된 링크 관리
-accountBenefitMoz = 다른 { -mozilla } 서비스에 대해 알아보기
-signOut = 로그아웃
 okButton = 확인
 downloadingTitle = 다운로드 중
 noStreamsWarning = 이 브라우저는 이렇게 큰 파일은 암호화 해제를 못할 수도 있습니다.
 noStreamsOptionCopy = 다른 브라우저에서 열 수 있도록 링크를 복사
 noStreamsOptionFirefox = 우리가 애용하는 브라우저를 사용해 보세요
 noStreamsOptionDownload = 이 브라우저로 계속하기
-downloadFirefoxPromo = 완전히 새로운 { -firefox }로 { -send-short-brand }가 제공됩니다.
 # the next line after the colon contains a file name
 shareLinkDescription = 파일 링크 공유:
 shareLinkButton = 링크 공유
 # $name is the name of the file
 shareMessage = { -send-brand }으로 “{ $name }” 파일을 내려받으세요: 쉽고 안전한 파일 공유입니다.
 trailheadPromo = 개인 정보를 보호하는 방법이 있습니다. Firefox에 가입하세요.
-learnMore = 더 알아보기.

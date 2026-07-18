@@ -35,7 +35,6 @@ expiresMinutes = { $minutes } dk
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maksimum parola uzunluğu: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Parola ayarlanamadı
 
 ## Send version 2 strings
 
@@ -57,11 +56,6 @@ timespanDays =
     { $num ->
         [one] 1 gün
        *[other] { $num } gün
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 hafta
-       *[other] { $num } hafta
     }
 fileCount =
     { $num ->
@@ -101,8 +95,6 @@ tooManyArchives =
 expiredTitle = Bu bağlantının süresi doldu.
 notSupportedDescription = { -send-brand } bu tarayıcıyı desteklemiyor. { -send-short-brand } en iyi şekilde { -firefox }’un son sürümüyle ve çoğu tarayıcının güncel sürümüyle çalışır.
 downloadFirefox = { -firefox }’u indir
-legalTitle = { -send-short-brand } Gizlilik Bildirimi
-legalDateStamp = Sürüm 1.0, 12 Mart 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } g { $hours } sa { $minutes } dk
 addFilesButton = Yüklenecek dosyaları seçin
@@ -113,33 +105,17 @@ dragAndDropFiles = Dosyaları sürükleyip bırakarak
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = veya buraya tıklayarak { $size }’ye kadar dosyalarınızı gönderebilirsiniz
 addPassword = Parola koruması ekle
-emailPlaceholder = E-posta adresinizi yazın
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = { $size }’ye kadar dosya göndermek için giriş yapın
-signInOnlyButton = Giriş yap
-accountBenefitTitle = { -firefox } Hesabı açın veya giriş yapın
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = { $size } boyutlu dosyaları paylaşma
-accountBenefitDownloadCount = Daha fazla kişiyle dosya paylaşma
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Bağlantıları 1 güne kadar aktif tutma
-       *[other] Bağlantıları { $count } güne kadar aktif tutma
-    }
-accountBenefitSync = Paylaştığınız dosyaları başka cihazlardan yönetebilme
-accountBenefitMoz = Diğer { -mozilla } servisleri hakkında bilgi alma
-signOut = Çıkış yap
 okButton = Tamam
 downloadingTitle = İndiriliyor
 noStreamsWarning = Bu tarayıcı bu kadar büyük bir dosyanın şifresini çözemeyebilir.
 noStreamsOptionCopy = Bağlantıyı başka bir tarayıcıda açmak için kopyala
 noStreamsOptionFirefox = En sevdiğimiz tarayıcıyı deneyin
 noStreamsOptionDownload = Bu tarayıcıyla devam edin
-downloadFirefoxPromo = { -send-short-brand }, yepyeni { -firefox } tarafından sunulmaktadır.
 # the next line after the colon contains a file name
 shareLinkDescription = Dosyanızın bağlantısını paylaşın:
 shareLinkButton = Bağlantıyı paylaş
 # $name is the name of the file
 shareMessage = “{ $name }” dosyasını { -send-brand } ile indirin: basit ve güvenli dosya paylaşımı
 trailheadPromo = Gizliliğinizi korumanın bir yolu var. Firefox’a katılın.
-learnMore = Daha fazla bilgi alın.

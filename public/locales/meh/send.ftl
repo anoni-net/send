@@ -38,7 +38,6 @@ expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Naja ka´nu koo contraseña: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Ntu nkuvi sá´á contraseña
 
 ## Send version 2 strings
 
@@ -60,11 +59,6 @@ timespanDays =
     { $num ->
         [one] 1 día
        *[other] { $num } días
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 semana
-       *[other] { $num } semanas
     }
 fileCount =
     { $num ->
@@ -104,8 +98,6 @@ tooManyArchives =
 expiredTitle = Nnɨ'ɨ link ya´a.
 notSupportedDescription = { -send-brand } nsatiñu jii ka̱a̱ nánuku ya´a. { -send-short-brand } satiñu va´a jii tuni íchi yata { -firefox }, jee satiñu va´a jii tuni íyo ntañu´u kuaiyo daa ka̱a̱ nánuku.
 downloadFirefox = Xinuun { -firefox }
-legalTitle = Tu´un xitu a kumiji noo´o { -send-short-brand }
-legalDateStamp = Versión 1.0 del 12 de marzo de 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }h { $minutes }m
 addFilesButton = Kaji archivos ska
@@ -116,33 +108,17 @@ dragAndDropFiles = Staka jee sía  daa archivo
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = a xiin kuaxin saa chu´un íchi nee { $size }
 addPassword = Iyo yu´u jii contraseña
-emailPlaceholder = Chu´un email noo´o
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Kajie´e sesión saa chu´un íchi nee { $size }
-signInOnlyButton = Kajie´e sesión
-accountBenefitTitle = Sá´á iin cuenta { -firefox } a xiin kajie´e sesión
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Kua´a archivo ka´nu { $size }
-accountBenefitDownloadCount = Kua´a archivos jii inka ñivɨ
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Kuteku enlaces 1 kivɨ
-       *[other] Kuteku daa enlaces { $count } kivɨ
-    }
-accountBenefitSync = Tetiñu archivos jia´anu ntaka ka̱a̱
-accountBenefitMoz = Ka´vi kue´eka jiee inka tiñu { -mozilla }
-signOut = Kasɨ sesión
 okButton = Kuvi
 downloadingTitle = Xinuu
 noStreamsWarning = Kuvi ka̱a̱ nánaku ya´a nxituvi a vaji nuu iin archivo ka´nu.
 noStreamsOptionCopy = Tɨɨn enlace jee síne nuu inka ka̱a̱ nánuku
 noStreamsOptionFirefox = Ni´i ka̱a̱ nánuku va´a
 noStreamsOptionDownload = Kaka jii ka̱a̱ nánuku ya´a
-downloadFirefoxPromo = { -send-short-brand } taji jíía { -firefox }.
 # the next line after the colon contains a file name
 shareLinkDescription = Kua´a enlace archivo noo´o
 shareLinkButton = Kua´a link
 # $name is the name of the file
 shareMessage = Xinuu “{ $name }” jii { -send-brand }: ntu viji
 trailheadPromo = Iyo iin kuvi kumi privacidad noo´o. Nayonika Firefox.
-learnMore = Ka´vi kue´eka

@@ -39,7 +39,6 @@ expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Llargor máximu de la contraseña: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Nun pudo afitase esta contraseña
 
 ## Send version 2 strings
 
@@ -61,11 +60,6 @@ timespanDays =
     { $num ->
         [one] 1 día
        *[other] { $num } díes
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 selmana
-       *[other] { $num } selmanes
     }
 fileCount =
     { $num ->
@@ -105,8 +99,6 @@ tooManyArchives =
 expiredTitle = Esti enllaz caducó.
 notSupportedDescription = { -send-brand } nun va funcionar con esti restolador. { -send-short-brand } funciona meyor cola última versión de { -firefox } y l'actual de la mayoría de restoladores.
 downloadFirefox = Baxar { -firefox }
-legalTitle = Avisu de privacidá de { -send-short-brand }
-legalDateStamp = Versión 1.0, con data del 12 de marzu de 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }h { $minutes }m
 addFilesButton = Esbillar los ficheros a unviar
@@ -117,24 +109,9 @@ dragAndDropFiles = Arrastra y suelta ficheros
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = o calca pa unviar hasta { $size }
 addPassword = Protexer con una contraseña
-emailPlaceholder = Introduz el to corréu
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Anicia sesión pa unviar hasta { $size }
-signInOnlyButton = Aniciar sesión
-accountBenefitTitle = Creación d'una cuenta de { -firefox } o aniciu de sesión nella
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Comparti ficheros d'hasta { $size }
-accountBenefitDownloadCount = Comparti ficheros con más xente
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Caltién activos los enllaces demientres 1 día
-       *[other] Caltién activos los enllaces demientres { $count } díes
-    }
-accountBenefitSync = Xestiona los ficheros compartíos dende cualesquier preséu
-accountBenefitMoz = Deprendi más tocante a otros servicios de { -mozilla }
-signOut = Zarrar sesión
 okButton = Aceutar
 downloadingTitle = Baxando
 noStreamsWarning = Esti restolador quiciabes nun seya a descifrar un ficheru d'esti tamañu.
 trailheadPromo = Hai un mou de protexer la to privacidá. Xúnite a Firefox.
-learnMore = Deprender más.

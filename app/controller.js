@@ -160,8 +160,7 @@ export default function(state, emitter) {
       await delay(1000);
     } catch (err) {
 
-      console.error(err);
-      state.passwordSetError = err;
+      console.error('setting password failed', err);
     } finally {
       state.settingPassword = false;
     }

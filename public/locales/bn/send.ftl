@@ -39,7 +39,6 @@ expiresMinutes = { $minutes }মি
 # A short status message shown when the user enters a long password
 maxPasswordLength = সর্বোচ্চ পাসওয়ার্ড দৈর্ঘ্য:{ $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = এই পাসওয়ার্ড সেট করা যাবে না
 
 ## Send version 2 strings
 
@@ -61,11 +60,6 @@ timespanDays =
     { $num ->
         [one] ১ দিন
        *[other] { $num } দিন
-    }
-timespanWeeks =
-    { $num ->
-        [one] ১ সপ্তাহ
-       *[other] { $num } সপ্তাহ
     }
 fileCount =
     { $num ->
@@ -105,8 +99,6 @@ tooManyArchives =
 expiredTitle = এই লিঙ্কের মেয়াদ শেষ হয়ে গেছে।
 notSupportedDescription = { -send-brand } এই ব্রাউজারের সাথে কাজ করবে না। { -firefox } এর সাম্প্রতিকতম সংস্করণে { -send-short-brand } সর্বোত্তমভাবে কাজ করবে, এবং এটি বেশিরভাগ ব্রাউজারের বর্তমান সংস্করণে কাজ করবে।
 downloadFirefox = { -firefox } ডাউনলোড করুন
-legalTitle = { -send-short-brand } গোপনীয়তা নোটিশ
-legalDateStamp = সংস্করণ ১.০, ১২ মার্চ, ২০১৯ তারিখ
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }দি { $hours }ঘ { $minutes }মি
 addFilesButton = আপলোডের জন্য ফাইল নির্বাচন করুন
@@ -117,33 +109,17 @@ dragAndDropFiles = ফাইল টেনে এনে ছাড়ুন
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = বা সর্বোচ্চ { $size } আকারের ফাইল পাঠাতে ক্লিক করুন
 addPassword = পাসওয়ার্ড দ্বারা সুরক্ষিত রাখুন
-emailPlaceholder = আপনার ইমেইল দিন
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = সর্বোচ্চ { $size } আকারের ফাইল প্রেরণ করতে সাইন ইন করুন
-signInOnlyButton = সাইন ইন
-accountBenefitTitle = { -firefox } অ্যাকাউন্ট তৈরি অথবা সাইন ইন করুন
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = সর্বোচ্চ { $size } আকারের ফাইল শেয়ার করুন
-accountBenefitDownloadCount = আরও মানুষের সাথে ফাইল শেয়ার করুন
-accountBenefitTimeLimit =
-    { $count ->
-        [one] ১ দিন পর্যন্ত লিঙ্ক সক্রিয় রাখুন
-       *[other] { $count } দিন পর্যন্ত লিঙ্ক সক্রিয় রাখুন
-    }
-accountBenefitSync = যেকোন ডিভাইস থেকে শেয়ার করা ফাইল পরিচালনা করুন
-accountBenefitMoz = অন্যান্য { -mozilla } সেবা সম্পর্কে জানুন
-signOut = সাইন আউট
 okButton = ঠিক আছে
 downloadingTitle = ডাউনলোড হচ্ছে
 noStreamsWarning = এই ব্রাউজার এতো বড় একটি ফাইল ডিক্রিপ্ট করতে সক্ষম নয়।
 noStreamsOptionCopy = অন্য ব্রাউজারে খুলতে লিঙ্ক অনুলিপি করুন
 noStreamsOptionFirefox = আমাদের জনপ্রিয় ব্রাউজার ব্যবহার করুন
 noStreamsOptionDownload = এই ব্রাউজার ব্যবহার অব্যহত রাখুন
-downloadFirefoxPromo = { -send-short-brand } আপনারদের জন্য নিয়ে এসেছে একেবারে নতুন { -firefox }।
 # the next line after the colon contains a file name
 shareLinkDescription = আপনার ফাইলে লিঙ্ক শেয়ার করুন:
 shareLinkButton = লিঙ্ক শেয়ার করুন
 # $name is the name of the file
 shareMessage = { -send-brand } এর মাধ্যমে "{ $name }" ডাউনলোড করুন: সরল, নিরাপদ ফাইল শেয়ারিং
 trailheadPromo = আপনার গোপনীয়তা রক্ষা করার একটি উপায় আছে। Firefox এ যোগ দিন।
-learnMore = আরও জানুন।

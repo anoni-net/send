@@ -39,7 +39,6 @@ expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maxime longor del contrasigno: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Iste contrasigno non ha potite esser establite
 
 ## Send version 2 strings
 
@@ -61,11 +60,6 @@ timespanDays =
     { $num ->
         [one] 1 die
        *[other] { $num } dies
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 septimana
-       *[other] { $num } septimanas
     }
 fileCount =
     { $num ->
@@ -105,8 +99,6 @@ tooManyArchives =
 expiredTitle = Iste ligamine ha expirate.
 notSupportedDescription = { -send-brand } non functionara con iste navigator. { -send-short-brand } functiona melio con le ultime version de { -firefox }, e functionara con le version actual de plure navigatores.
 downloadFirefox = Discargar { -firefox }
-legalTitle = Aviso de confidentialitate de { -send-short-brand }
-legalDateStamp = Version 1.0 del 12 martio 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }h { $minutes }m
 addFilesButton = Selige le files a incargar
@@ -117,33 +109,17 @@ dragAndDropFiles = Traher e deponer files
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = o cliccar pro inviar usque { $size }
 addPassword = Proteger per contrasigno
-emailPlaceholder = Insere tu adresse de e-mail
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Aperi session pro inviar usque a { $size }
-signInOnlyButton = Aperir session
-accountBenefitTitle = Crea un conto { -firefox } o registra te
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Comparti files usque { $size }
-accountBenefitDownloadCount = Comparti files con plus de personas
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Retene active le ligamine pro 1 die
-       *[other] Retene active le ligamine pro { $count } dies
-    }
-accountBenefitSync = Gere files compartite ab non importa qual apparato
-accountBenefitMoz = Discoperi altere servicios de { -mozilla }
-signOut = Clauder session
 okButton = OK
 downloadingTitle = Discargamento
 noStreamsWarning = Es possibile que iste navigator non pote decryptar un file de iste proportiones.
 noStreamsOptionCopy = Copiar le ligamine e aperir lo in un altere navigator
 noStreamsOptionFirefox = Prova nostre navigator favorite
 noStreamsOptionDownload = Continuar con iste navigator
-downloadFirefoxPromo = { -send-short-brand } es portate a te per le novissime { -firefox }.
 # the next line after the colon contains a file name
 shareLinkDescription = Condivide le ligamine a tu file:
 shareLinkButton = Condivide ligamine
 # $name is the name of the file
 shareMessage = Discarga “{ $name }” con { -send-brand }: condivide files in modo simple e secur
 trailheadPromo = Il ha un via pro proteger tu confidentialitate. Junge te a Firefox!
-learnMore = Saper plus.

@@ -39,7 +39,6 @@ expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Gjatësi maksimum fjalëkalimi: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Ky fjalëkalim s’u caktua dot
 
 ## Send version 2 strings
 
@@ -61,11 +60,6 @@ timespanDays =
     { $num ->
         [one] 1 ditë
        *[other] { $num } ditë
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 javë
-       *[other] { $num } javë
     }
 fileCount =
     { $num ->
@@ -105,8 +99,6 @@ tooManyArchives =
 expiredTitle = Kjo lidhje ka skaduar.
 notSupportedDescription = { -send-brand } s’do të funksionojë me këtë shfletues. { -send-short-brand } funksionin më mirë me versionin më të ri të { -firefox }, dhe do të funksionojë me versionin e tanishëm të shumicës së shfletuesve.
 downloadFirefox = Shkarkoni { -firefox }
-legalTitle = Njoftim Privatësie Për { -send-short-brand }
-legalDateStamp = Version 1.0, daton 12 mars, 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }h { $minutes }m
 addFilesButton = Përzgjidhni kartela për ngarkim
@@ -117,33 +109,17 @@ dragAndDropFiles = Tërhiqni dhe lini kartela
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = ose klikoni që të dërgohen deri në { $size }
 addPassword = Mbrojini me fjalëkalim
-emailPlaceholder = Jepni email-in tuaj
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Bëni hyrjen që të dërgoni deri më { $size }
-signInOnlyButton = Hyni
-accountBenefitTitle = Krijoni një Llogari { -firefox } ose bëni hyrjen në një të tillë
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Ndani me të tjerët kartela deri { $size }
-accountBenefitDownloadCount = Ndani kartela me më tepër persona
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Mbaji aktive lidhjet për deri 1 ditë
-       *[other] Mbaji aktive lidhjet për deri { $count } ditë
-    }
-accountBenefitSync = Administroni nga çfarëdo pajisje kartela të përbashkëta
-accountBenefitMoz = Mësoni më tepër rreth shërbimesh { -mozilla }
-signOut = Dilni
 okButton = OK
 downloadingTitle = Shkarkim
 noStreamsWarning = Ky shfletues mund të mos jetë në gjendje të shfshehtëzojë një kartelë kaq të madhe.
 noStreamsOptionCopy = Kopjoje lidhjen për ta hapur në një tjetër shfletues
 noStreamsOptionFirefox = Provoni shfletuesin tonë të parapëlqyer
 noStreamsOptionDownload = Vazhdo me këtë shfletues
-downloadFirefoxPromo = { -send-short-brand } ju vjen nga { -firefox }-i i ri fringo.
 # the next line after the colon contains a file name
 shareLinkDescription = Ndani me të tjerët lidhjen për te kartela juaj:
 shareLinkButton = Ndani me të tjerët lidhjen
 # $name is the name of the file
 shareMessage = Shkarkojeni “{ $name }” me { -send-brand }: shkëmbim kartelash dhe thjesht dhe pa rrezik
 trailheadPromo = Ka një rrugë për të mbrojtur privatësinë tuaj. Bëhuni pjesë e Firefox-it.
-learnMore = Mësoni më tepër.

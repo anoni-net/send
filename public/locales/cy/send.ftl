@@ -47,7 +47,6 @@ expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Hyd mwyaf cyfrinair: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Nid oedd modd gosod y cyfrinair hwn
 
 ## Send version 2 strings
 
@@ -77,15 +76,6 @@ timespanDays =
         [few] { $num } diwrnod
         [many] { $num } diwrnod
        *[other] { $num } diwrnod
-    }
-timespanWeeks =
-    { $num ->
-        [zero] 0 wythnos
-        [one] 1 wythnos
-        [two] { $num } wythnos
-        [few] { $num } wythnos
-        [many] { $num } wythnos
-       *[other] { $num } wythnos
     }
 fileCount =
     { $num ->
@@ -137,8 +127,6 @@ tooManyArchives =
 expiredTitle = Mae'r ddolen hon wedi dod i ben.
 notSupportedDescription = Ni fydd { -send-brand } yn gweithio gyda'r porwr hwn. Mae { -send-short-brand } yn gweithio orau gyda'r fersiwn ddiweddaraf o { -firefox }, a bydd yn gweithio gyda'r fersiwn gyfredol o'r rhan fwyaf o borwyr.
 downloadFirefox = Llwytho { -firefox } i Lawr
-legalTitle = Hysbysiad Preifatrwydd { -send-short-brand }
-legalDateStamp = Fersiwn 1.0, dyddiedig Mawrth 12, 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } d { $hours } a { $minutes } m
 addFilesButton = Dewis ffeiliau i'w llwytho i fyny
@@ -149,37 +137,17 @@ dragAndDropFiles = Llusgo a gollwng ffeiliau
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = neu glicio i anfon hyd at { $size }
 addPassword = Diogelu gyda chyfrinair
-emailPlaceholder = Rhowch eich e-bost
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Mewngofnodi i anfon hyd at { $size }
-signInOnlyButton = Mewngofnodi
-accountBenefitTitle = Creu Cyfrif { -firefox } neu fewngofnodi
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Rhannu ffeiliau hyd at { $size }
-accountBenefitDownloadCount = Rhannu ffeiliau gyda mwy o bobl
-accountBenefitTimeLimit =
-    { $count ->
-        [zero] Cadw dolenni'n weithredol am hyd at 0 diwrnod
-        [one] Cadw dolenni'n weithredol am hyd at 1 diwrnod
-        [two] Cadw dolenni'n weithredol am hyd at { $count } diwrnod
-        [few] Cadw dolenni'n weithredol am hyd at { $count } diwrnod
-        [many] Cadw dolenni'n weithredol am hyd at { $count } diwrnod
-       *[other] Cadw dolenni'n weithredol am hyd at { $count } diwrnod
-    }
-accountBenefitSync = Rheoli ffeiliau sy'n cael eu rhannu o unrhyw ddyfais
-accountBenefitMoz = Dysgu am wasanaethau eraill { -mozilla }
-signOut = Allgofnodi
 okButton = Iawn
 downloadingTitle = Llwytho i Lawr
 noStreamsWarning = Efallai na fydd y porwr hwn yn gallu dadgryptio ffeil mor fawr a hon.
 noStreamsOptionCopy = Copïwch y ddolen i'w agor mewn porwr arall
 noStreamsOptionFirefox = Rhowch gynnig ar ein hoff porwr
 noStreamsOptionDownload = Parhau gyda'r porwr hwn
-downloadFirefoxPromo = Mae { -send-short-brand } yn cael ei gynnig i ci gan y { -firefox } newydd.
 # the next line after the colon contains a file name
 shareLinkDescription = Rhannu'r ddolen i'ch ffeil:
 shareLinkButton = Rhannu'r ddolen
 # $name is the name of the file
 shareMessage = Llwytho i lawr “{ $name }” gyda { -send-brand }: rhannu ffeiliau syml a diogel
 trailheadPromo = Mae ffordd o ddiogelu eich preifatrwydd. Ymunwch â Firefox.
-learnMore = Dysgu rhagor.

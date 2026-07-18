@@ -44,7 +44,6 @@ expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maximale wachtwoordlengte: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Dit wachtwoord kon niet worden ingesteld
 
 ## Send version 2 strings
 
@@ -66,11 +65,6 @@ timespanDays =
     { $num ->
         [one] 1 dag
        *[other] { $num } dagen
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 week
-       *[other] { $num } weken
     }
 fileCount =
     { $num ->
@@ -110,8 +104,6 @@ tooManyArchives =
 expiredTitle = Deze koppeling is verlopen.
 notSupportedDescription = { -send-brand } werkt niet met deze browser. { -send-short-brand } werkt het beste met de nieuwste versie van { -firefox }, en werkt met de huidige versie van de meeste browsers.
 downloadFirefox = { -firefox } downloaden
-legalTitle = Privacybeleid van { -send-short-brand }
-legalDateStamp = Versie 1.0 d.d. 12 maart 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }u { $minutes }m
 addFilesButton = Selecteer te uploaden bestanden
@@ -122,35 +114,19 @@ dragAndDropFiles = Versleep bestanden
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = of klik om tot { $size } te versturen
 addPassword = Beveiligen met wachtwoord
-emailPlaceholder = Voer uw e-mailadres in
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Meld u aan om tot { $size } te versturen
-signInOnlyButton = Aanmelden
-accountBenefitTitle = Maak een { -firefox }-account of meld u aan
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Bestanden tot { $size } delen
-accountBenefitDownloadCount = Bestanden met meerdere personen delen
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Koppelingen tot één dag actief houden
-       *[other] Koppelingen tot { $count } dagen actief houden
-    }
-accountBenefitSync = Gedeelde bestanden vanaf andere apparaten beheren
-accountBenefitMoz = Info over andere services van { -mozilla }
-signOut = Afmelden
 okButton = OK
 downloadingTitle = Downloaden
 noStreamsWarning = Deze browser kan een bestand van deze omvang mogelijk niet ontcijferen.
 noStreamsOptionCopy = Koppeling kopiëren om in een andere browser te openen
 noStreamsOptionFirefox = Onze favoriete browser proberen
 noStreamsOptionDownload = Doorgaan met deze browser
-downloadFirefoxPromo = { -send-short-brand } wordt u aangeboden door het volledig vernieuwde { -firefox }.
 # the next line after the colon contains a file name
 shareLinkDescription = Deel de koppeling naar uw bestand:
 shareLinkButton = Koppeling delen
 # $name is the name of the file
 shareMessage = Download ‘{ $name }’ met { -send-brand }: eenvoudig, veilig bestanden delen
 trailheadPromo = Er is een manier om uw privacy te beschermen. Doe mee met Firefox.
-learnMore = Meer info.
 
 sponsoredByThunderbird = Gesponsord door Thunderbird

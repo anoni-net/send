@@ -37,7 +37,6 @@ expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Panjang sandi maksimal: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Ieu kecap sandi teu bisa disét
 
 ## Send version 2 strings
 
@@ -59,11 +58,6 @@ timespanDays =
     { $num ->
         [one] sapoé
        *[other] { $num } poé
-    }
-timespanWeeks =
-    { $num ->
-        [one] saminggu
-       *[other] { $num } minggu
     }
 fileCount =
     { $num ->
@@ -103,8 +97,6 @@ tooManyArchives =
 expiredTitle = Ieu tutumbu geus kadaluwarsa.
 notSupportedDescription = { -send-brand } moal jalan di ieu panyungsi. { -send-short-brand } jalan naker dina { -firefox } vérsi pamganyarna, sarta bakal jalan di loba panyungsi vérsi kiwari.
 downloadFirefox = Undeur { -firefox }
-legalTitle = { -send-short-brand } Wawar Privasi
-legalDateStamp = Versi 1.0, kaping 12 Maret 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }p { $hours }j { $minutes }m
 addFilesButton = Pilih koropak unjalkeuneun
@@ -115,33 +107,17 @@ dragAndDropFiles = Ésérkeun sarta ésotkeun koropak
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = atawa klik pikeun ngirim nika { $size }
 addPassword = Piningan ku kecap sandi
-emailPlaceholder = Asupkeun surélék anjeun
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Asup sangkan bisa ngirim nika { $size }
-signInOnlyButton = Asup
-accountBenefitTitle = Jieun akun { -firefox } atawa asup
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Bagikeun koropak nika { $size }
-accountBenefitDownloadCount = Bagikeun koropak ka balaréa
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Aktipkeun tutumbu jang sapoéeun
-       *[other] Aktipkeun tutumbu jang { $count } poé
-    }
-accountBenefitSync = Kokolakeun koropak nu dibagikeun ti parangkat mana wé
-accountBenefitMoz = Tengetan ngeunaan layanan { -mozilla } lianna
-signOut = Kaluar
 okButton = OKÉH
 downloadingTitle = Ngundeur
 noStreamsWarning = Ieu panyungsi kawasna mah teu bisa ngadékrip koropak badag kieu.
 noStreamsOptionCopy = Tiron tutumbu jang bukaeun di panyungsi séjén
 noStreamsOptionFirefox = Pecakan panyungsi karesep kami
 noStreamsOptionDownload = Tuluykeun ku ieu panyungsi
-downloadFirefoxPromo = { -send-short-brand } téh disanggakeun keur anjeun kalawan { -firefox } sarwa anyar.
 # the next line after the colon contains a file name
 shareLinkDescription = Bagikeun tutumbu ka koropak anjeun:
 shareLinkButton = Bagikeun tutumbu
 # $name is the name of the file
 shareMessage = Undeur "{ $name }" ku { -send-brand }: simpel, babagi koropak aman
 trailheadPromo = Aya cara pikeun ngamankeun privasi anjeun.  Jabung jeung Firefox.
-learnMore = Lenyepan.

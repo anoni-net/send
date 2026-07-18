@@ -39,7 +39,6 @@ expiresMinutes = { $minutes } min
 # A short status message shown when the user enters a long password
 maxPasswordLength = Salasanan enimmäispituus: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Tätä salasanaa ei voitu asettaa
 
 ## Send version 2 strings
 
@@ -61,11 +60,6 @@ timespanDays =
     { $num ->
         [one] 1 päivän
        *[other] { $num } päivän
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 viikon
-       *[other] { $num } viikon
     }
 fileCount =
     { $num ->
@@ -105,8 +99,6 @@ tooManyArchives =
 expiredTitle = Tämä linkki on vanhentunut.
 notSupportedDescription = { -send-brand } ei toimi tällä selaimella. { -send-short-brand } toimii parhaiten { -firefox }in uusimmalla versiolla, ja toimii useimpien selainten uusimmilla versioilla.
 downloadFirefox = Lataa { -firefox }
-legalTitle = { -send-short-brand }-yksityisyyskäytäntö
-legalDateStamp = Versio 1.0, päivätty 13. maaliskuuta 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } pv { $hours } t { $minutes } min
 addFilesButton = Valitse lähetettävät tiedostot
@@ -117,33 +109,17 @@ dragAndDropFiles = Vedä ja pudota tiedostot
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = tai napsauta lähettääksesi tiedostoja, joiden koko voi olla enintään { $size }
 addPassword = Suojaa salasanalla
-emailPlaceholder = Kirjoita sähköpostiosoitteesi
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Kirjautumalla voit lähettää jopa { $size } kokoisia tiedostoja
-signInOnlyButton = Kirjaudu sisään
-accountBenefitTitle = Luo { -firefox }-tili tai kirjaudu sisään
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Jaa jopa { $size } kokoisia tiedostoja
-accountBenefitDownloadCount = Jaa tiedostoja useamman ihmisen kesken
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Säilytä linkit aktiivisina 1 päivän ajan
-       *[other] Säilytä linkit aktiivisina { $count } päivän ajan
-    }
-accountBenefitSync = Hallitse jaettuja tiedostoja miltä tahansa laitteelta
-accountBenefitMoz = Lue lisää muista { -mozilla }-palveluista
-signOut = Kirjaudu ulos
 okButton = OK
 downloadingTitle = Ladataan
 noStreamsWarning = Tämä selain ei välttämättä osaa purkaa salausta näin suurikokoisista tiedostoista.
 noStreamsOptionCopy = Kopioi linkki avataksesi sen toisessa selaimessa
 noStreamsOptionFirefox = Kokeile suosikkiselaintamme
 noStreamsOptionDownload = Jatka tällä selaimella
-downloadFirefoxPromo = { -send-short-brand } on olemassa kiitos uuden { -firefox }in.
 # the next line after the colon contains a file name
 shareLinkDescription = Jaa linkki tiedostoosi:
 shareLinkButton = Jaa linkki
 # $name is the name of the file
 shareMessage = Lataa tiedosto ”{ $name }” { -send-brand } -palvelusta: yksinkertaista ja turvallista tiedostonjakoa
 trailheadPromo = On tapa suojata yksityisyyttään. Liity Firefoxiin.
-learnMore = Lue lisää.

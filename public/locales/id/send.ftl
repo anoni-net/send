@@ -37,7 +37,6 @@ expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Panjang sandi maksimal: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Tidak bisa menyetel sandi ini
 
 ## Send version 2 strings
 
@@ -57,10 +56,6 @@ timespanMinutes =
 timespanDays =
     { $num ->
        *[other] { $num } hari
-    }
-timespanWeeks =
-    { $num ->
-       *[other] { $num } pekan
     }
 fileCount =
     { $num ->
@@ -97,8 +92,6 @@ tooManyArchives =
 expiredTitle = Tautan ini telah kadaluarsa.
 notSupportedDescription = { -send-brand } tidak dapat digunakan dengan peramban ini. { -send-short-brand } bekerja maksimal dengan versi terbaru { -firefox }, dan akan bekerja dengan versi terkini mayoritas peramban.
 downloadFirefox = Unduh { -firefox }
-legalTitle = Pemberitahuan Privasi { -send-short-brand }
-legalDateStamp = Versi 1.0, tertanggal 12 Maret 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }h { $hours }j { $minutes }m
 addFilesButton = Pilih berkas untuk diunggah
@@ -109,32 +102,17 @@ dragAndDropFiles = Seret dan jatuhkan berkas
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = atau klik untuk mengirim hingga { $size }
 addPassword = Lindungi dengan kata sandi
-emailPlaceholder = Masukkan surel Anda
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Masuk untuk dapat mengirim hingga { $size }
-signInOnlyButton = Masuk
-accountBenefitTitle = Buat { -firefox } Account atau masuk
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Bagikan berkas hingga { $size }
-accountBenefitDownloadCount = Bagikan berkas kepada lebih banyak orang
-accountBenefitTimeLimit =
-    { $count ->
-       *[other] Buat tautan aktif selama { $count } hari
-    }
-accountBenefitSync = Kelola berkas yang dibagikan dari perangkat apa pun
-accountBenefitMoz = Pelajari tentang layanan { -mozilla } lainnya
-signOut = Keluar
 okButton = Oke
 downloadingTitle = Mengunduh
 noStreamsWarning = Peramban ini mungkin tidak dapat mendekripsi berkas sebesar ini.
 noStreamsOptionCopy = Salin tautan untuk dibuka di peramban lainnya
 noStreamsOptionFirefox = Coba peramban favorit kami
 noStreamsOptionDownload = Lanjutkan dengan peramban ini
-downloadFirefoxPromo = { -send-short-brand } dipersembahkan untuk Anda oleh { -firefox } terbaru.
 # the next line after the colon contains a file name
 shareLinkDescription = Bagikan tautan ke berkas Anda:
 shareLinkButton = Bagikan tautan
 # $name is the name of the file
 shareMessage = Unduh "{ $name }" dengan { -send-brand }: berbagi berkas dengan sederhana dan aman
 trailheadPromo = Ada cara untuk melindungi privasi Anda. Bergabunglah dengan Firefox.
-learnMore = Pelajari lebih lanjut.

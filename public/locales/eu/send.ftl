@@ -39,7 +39,6 @@ expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Pasahitzaren gehienezko luzera: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Pasahitz hau ezin da ezarri
 
 ## Send version 2 strings
 
@@ -61,11 +60,6 @@ timespanDays =
     { $num ->
         [one] egun 1
        *[other] { $num } egun
-    }
-timespanWeeks =
-    { $num ->
-        [one] aste 1
-       *[other] { $num } aste
     }
 fileCount =
     { $num ->
@@ -105,8 +99,6 @@ tooManyArchives =
 expiredTitle = Lotura hau iraungi da.
 notSupportedDescription = { -send-brand } ez da nabigatzaile honetan ibiliko. { -send-short-brand } hobeto dabil { -firefox }(r)en azken bertsioarekin; halaber, nabigatzaile gehienen azken bertsioarekin ibiliko da.
 downloadFirefox = Deskargatu { -firefox }
-legalTitle = { -send-short-brand } pribatutasun-oharra
-legalDateStamp = 1.0 bertsioa, 2019ko martxoaren 12koa.
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }e { $hours }h { $minutes }m
 addFilesButton = Hautatu igotzeko fitxategiak
@@ -117,33 +109,17 @@ dragAndDropFiles = Arrastatu eta jaregin fitxategiak
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = edo egin klik { $size } arte igotzeko
 addPassword = Babestu pasahitzarekin
-emailPlaceholder = Idatzi zure helbide elektronikoa
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Hasi saioa { $size } arte bidaltzeko
-signInOnlyButton = Hasi saioa
-accountBenefitTitle = Sortu { -firefox } kontu bat edo hasi saioa
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Partekatu { $size } arteko fitxategiak
-accountBenefitDownloadCount = Partekatu fitxategiak jende gehiagorekin
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Utzi loturak erabilgarri egun batez
-       *[other] Utzi loturak erabilgarri { $count } egunez
-    }
-accountBenefitSync = Kudeatu partekatutako fitxategiak edozein gailutatik
-accountBenefitMoz = { -mozilla }ren beste zerbitzuei buruzko argibide gehiago
-signOut = Amaitu saioa
 okButton = Ados
 downloadingTitle = Deskargatzen
 noStreamsWarning = Baliteke nabigatzailea gai ez izatea horrelako tamaina handiko fitxategiak deszifratzeko.
 noStreamsOptionCopy = Kopiatu lotura beste nabigatzaile batean irekitzeko
 noStreamsOptionFirefox = Probatu gure nabigatzaile gogokoena
 noStreamsOptionDownload = Jarraitu nabigatzaile honekin
-downloadFirefoxPromo = Erabat berritutako { -firefox }(e)k eskaintzen dizu { -send-short-brand }
 # the next line after the colon contains a file name
 shareLinkDescription = Partekatu zure fitxategirako lotura:
 shareLinkButton = Partekatu lotura
 # $name is the name of the file
 shareMessage = Deskargatu "{ $name }" { -send-brand } erabiliz: fitxategi-partekatze sinple eta segurua
 trailheadPromo = Badago zure pribatutasuna babesteko modua. Egizu bat Firefoxekin.
-learnMore = Argibide gehiago.

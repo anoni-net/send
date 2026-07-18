@@ -37,7 +37,6 @@ expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Keniuj ueyak ichtakatajtol, maj amo pano: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Nejin ichtakatajtol amo uel kiixtaliani
 
 ## Send version 2 strings
 
@@ -57,10 +56,6 @@ timespanMinutes =
 timespanDays =
     { $num ->
        *[undefined] 1 tonal / { $num } tonalmej
-    }
-timespanWeeks =
-    { $num ->
-       *[undefined] 1 semana / { $num } semana
     }
 fileCount =
     { $num ->
@@ -97,8 +92,6 @@ tooManyArchives =
 expiredTitle = Nejin tein tikpatskilij amo tekititos ok.
 notSupportedDescription = { -send-brand } amo tekiti ika nejin navegador. { -send-short-brand } okachi kuali tekiti tein ika okachi yankuik { -firefox }, uan no tekitis tein ika okachi yankuikej tel miak navegadores.
 downloadFirefox = Xiktemoui { -firefox }
-legalTitle = { -send-short-brand } tanauatia ika yekpialis tein moaxka itech tepos
-legalDateStamp = Versión 1.0 tein kikixtijkej 12 tonal metsti marzo 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }t { $hours }h { $minutes }m
 addFilesButton = Xikinixpejpena tajkuilolmej archivos tein  tikintejkoltis
@@ -109,32 +102,17 @@ dragAndDropFiles = Xikintilana uan xikinkajkaua tajkuilolmej archivos
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = oso xikpatskili uan tiktitanis, sayoj tein amo panoua  { $size }
 addPassword = Xikyekpia ika se ichtakatajtol
-emailPlaceholder = Xikijkuilo mocorreo itech tepos
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Xikalakteua uan uelis tiktitanis tein amo panos { $size }
-signInOnlyButton = Kampa se kalakteua
-accountBenefitTitle = Ximochiuili se cuenta itech { -firefox } oso xikalakteua
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Xikintitani tajkuilolmej archivos tein amo panouaj  { $size }
-accountBenefitDownloadCount = Xikintitanili tajkuilolmej archivos oksekin
-accountBenefitTimeLimit =
-    { $count ->
-       *[undefined] Kampa se kipatskilis maj kisentokakan kualtiakan se tonal ok / { $count } tonalmej ok
-    }
-accountBenefitSync = Itech tein yeski tepos xikixyekana motajkuiloluan archivos tein tikinpanoltilij oksekin
-accountBenefitMoz = Okachi tikmatis okseki tapaleuilmej tein kitemaka { -mozilla }
-signOut = Kampa se kisa
 okButton = Kuali yetok
 downloadingTitle = Kitemouijtok
 noStreamsWarning = Xa navegador amo uelis kitalij nejin tajkuilol archivo tein tel ueyi kemej se uelis kiyekixtajtoltis ya.
 noStreamsOptionCopy = Xikixkopina tein se kipatskilis uan ijkon se uelis kitatapos itech okse navegador
 noStreamsOptionFirefox = Xikejeko navegador tein semi techuelita
 noStreamsOptionDownload = Maj niksentoka niktatekiujti nejin navegador
-downloadFirefoxPromo = Yankuik { -firefox } mitsixpantilia { -send-short-brand }.
 # the next line after the colon contains a file name
 shareLinkDescription = Xikinpanoltili oksekin tein se kipatskilis uan teuika motajkuilol archivo:
 shareLinkButton = Kampa se kipatskilis tein uelis tikinpanoltilis oksekin
 # $name is the name of the file
 shareMessage = Xiktemoui “{ $name }” ika { -send-brand }: amo ouij uelis tikinpanoltilis oksekin motajkuiloluan archivos uan tikyekmatis ke amo tej kipanos
 trailheadPromo = Kemaj, uelis tikyekpias tein moaxka itech tepos. Xipoui Firefox.
-learnMore = Xiktemoui tajkuilolmej archivos.

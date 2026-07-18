@@ -37,7 +37,6 @@ expiresMinutes = { $minutes } phút
 # A short status message shown when the user enters a long password
 maxPasswordLength = Độ dài mật khẩu tối đa: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Không thể đặt mật khẩu này
 
 ## Send version 2 strings
 
@@ -57,10 +56,6 @@ timespanMinutes =
 timespanDays =
     { $num ->
        *[other] { $num } ngày
-    }
-timespanWeeks =
-    { $num ->
-       *[other] { $num } tuần
     }
 fileCount =
     { $num ->
@@ -97,8 +92,6 @@ tooManyArchives =
 expiredTitle = Liên kết này đã hết hạn.
 notSupportedDescription = { -send-brand } sẽ không hoạt động với trình duyệt này. { -send-short-brand } hoạt động tốt nhất với phiên bản { -firefox } mới nhất và sẽ hoạt động với phiên bản hiện tại của hầu hết các trình duyệt.
 downloadFirefox = Tải xuống { -firefox }
-legalTitle = Thông báo bảo mật { -send-short-brand }
-legalDateStamp = Phiên bản 1.0, ngày 12 tháng 3 năm 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } ngày { $hours } giờ { $minutes } phút
 addFilesButton = Chọn tập tin để tải lên
@@ -109,32 +102,17 @@ dragAndDropFiles = Kéo và thả tập tin
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = hoặc nhấp để gửi tối đa { $size }
 addPassword = Bảo vệ bằng mật khẩu
-emailPlaceholder = Nhập email của bạn
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Đăng nhập để gửi tối đa { $size }
-signInOnlyButton = Đăng nhập
-accountBenefitTitle = Tạo tài khoản { -firefox } hoặc đăng nhập
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Chia sẻ tập tin lên tới { $size }
-accountBenefitDownloadCount = Chia sẻ tập tin với nhiều người hơn
-accountBenefitTimeLimit =
-    { $count ->
-       *[other] Giữ liên kết hoạt động tối đa { $count } ngày
-    }
-accountBenefitSync = Quản lý tập tin được chia sẻ từ mọi thiết bị
-accountBenefitMoz = Tìm hiểu về các dịch vụ khác của { -mozilla }
-signOut = Đăng xuất
 okButton = OK
 downloadingTitle = Đang tải xuống
 noStreamsWarning = Trình duyệt này có khả năng không thể giải mã một tập tin lớn này.
 noStreamsOptionCopy = Sao chép liên kết để mở trong một trình duyệt khác
 noStreamsOptionFirefox = Hãy dùng thử trình duyệt yêu thích của chúng tôi
 noStreamsOptionDownload = Tiếp tục với trình duyệt này
-downloadFirefoxPromo = { -send-short-brand } được mang đến cho bạn bởi { -firefox } hoàn toàn mới.
 # the next line after the colon contains a file name
 shareLinkDescription = Chia sẻ liên kết đến tập tin của bạn:
 shareLinkButton = Chia sẻ liên kết
 # $name is the name of the file
 shareMessage = Tải xuống “{ $name }“ với { -send-brand }: chia sẻ tập tin đơn giản, an toàn
 trailheadPromo = Đây là một cách để bảo vệ sự riêng tư của bạn. Tham gia Firefox.
-learnMore = Tìm hiểu thêm.

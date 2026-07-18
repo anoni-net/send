@@ -39,7 +39,6 @@ expiresMinutes = { $minutes }ch
 # A short status message shown when the user enters a long password
 maxPasswordLength = Nïm raqän ewan tzij: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Man tikirel ta ninuk' re ewan tzij re'
 
 ## Send version 2 strings
 
@@ -61,11 +60,6 @@ timespanDays =
     { $num ->
         [one] 1 q'ij
        *[other] { $num } taq q'ij
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 wuqq'ij
-       *[other] { $num } taq wuqq'ij
     }
 fileCount =
     { $num ->
@@ -105,8 +99,6 @@ tooManyArchives =
 expiredTitle = Xk'is yan ruq'ij re ximonel re'.
 notSupportedDescription = Man xtisamäj ta ri { -send-brand } rik'in re okik'amaya'l re'. Nisamäj ütz ri { -send-short-brand } rik'in ri ruk'isib'äl ruwäch { -firefox }, chuqa' xtisamäj rik'in ri ruwäch k'o wakami pa ronojel okik'amaya'l.
 downloadFirefox = Tiqasäx { -firefox }
-legalTitle = Rutzijol Richinanem { -send-short-brand }
-legalDateStamp = Ruwäch 1.0, ruq'ijul marso 12, 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }q { $hours }r { $minutes }ch'
 addFilesButton = Kecha' taq yakb'äl richin yejotob'äx
@@ -117,33 +109,17 @@ dragAndDropFiles = Keqirirëx chuqa' ke'osq'opïx taq yakb'äl
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = o tapitz'a' richin natäq k'a { $size }
 addPassword = Tichajïx rik'in ewan tzij
-emailPlaceholder = Tatz'ib'aj ataqoya'l
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Tatikirisaj molojri'ïl richin natäq k'a { $size }
-signInOnlyButton = Titikirisäx molojri'ïl
-accountBenefitTitle = Tatz'uku' jun { -firefox } Rub'i' Ataqoy'al o Tatikirisaj molojri'ïl
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Ke'akomonij taq yakb'äl k'a { $size }
-accountBenefitDownloadCount = Ke'akomonij taq yakb'äl kik'in ch'aqa' chik winaqi'
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Ke' atzija' ri taq ximonel chi 1 q'ij
-       *[other] Ke'atzija' ri taq ximonel chi { $count } taq q'ij
-    }
-accountBenefitSync = Ke'anuk'samajij komonin taq yakb'äl pa xab'achike okisab'äl
-accountBenefitMoz = Tawetamaj chij ch'aqa' chik { -mozilla } taq samaj
-signOut = Titz'apïx molojri'ïl
 okButton = ÜTZ
 downloadingTitle = Niqasäx
 noStreamsWarning = Rik'in jub'a' re okik'amaya'l re' man nitikïr ta nretamaj rusik'ixik nima'q taq yakb'äl.
 noStreamsOptionCopy = Tiwachib'ëx ri ximonel richin nijaq pa jun chik okik'amaya'l
 noStreamsOptionFirefox = Tatojtob'ej ri jeb'ël qokik'amaya'l
 noStreamsOptionDownload = Kisamäj na rik'in re okik'amaya'l re'
-downloadFirefoxPromo = Ja ri k'ak'a' { -firefox } nusüj ri { -send-short-brand } chawe.
 # the next line after the colon contains a file name
 shareLinkDescription = Nakomonij ri ximonel rik'in ri awokisab'al:
 shareLinkButton = Tikomonïx ximonel
 # $name is the name of the file
 shareMessage = Tiqasäx "{ $name }" rik'in { -send-brand }: man k'ayew ta chuqa' ütz kikomonik ri yakb'äl
 trailheadPromo = K'o jun rub'anikil richin nachajij ri awichinanem. Tatunu' awi' rik'in ri Firefox.
-learnMore = Tetamäx ch'aqa' chik.

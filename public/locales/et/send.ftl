@@ -39,7 +39,6 @@ expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maksimaalne parooli pikkus: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Parooli muutmine ebaõnnestus
 
 ## Send version 2 strings
 
@@ -61,11 +60,6 @@ timespanDays =
     { $num ->
         [one] 1 päeva
        *[other] { $num } päeva
-    }
-timespanWeeks =
-    { $num ->
-        [one] 1 nädala
-       *[other] { $num } nädala
     }
 fileCount =
     { $num ->
@@ -105,8 +99,6 @@ tooManyArchives =
 expiredTitle = Link on aegunud.
 notSupportedDescription = { -send-brand } ei tööta selle veebilehitsejaga. Kõige paremini töötab { -send-short-brand } uusima { -firefox }iga ja töötab ka enamikes teistes uuendatud brauserites.
 downloadFirefox = Laadi { -firefox } alla
-legalTitle = { -send-short-brand } privaatsusteade
-legalDateStamp = Versioon 1.0, alates 12. märts 2019
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }p { $hours }t { $minutes }m
 addFilesButton = Vali failid üleslaadimiseks
@@ -117,33 +109,17 @@ dragAndDropFiles = Lohista failid siia
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = või klõpsa kuni { $size } suuruste failide saatmiseks
 addPassword = Kaitse parooliga
-emailPlaceholder = Sisesta e-posti aadress
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-signInSizeBump = Logi sisse ning saad saata kuni { $size } suuruseid faile
-signInOnlyButton = Logi sisse
-accountBenefitTitle = Loo { -firefox }i konto või logi sisse
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-accountBenefitLargeFiles = Jaga kuni { $size } suuruseid faile
-accountBenefitDownloadCount = Jaga faile enamate inimestega
-accountBenefitTimeLimit =
-    { $count ->
-        [one] Hoia linke aktiivsena 1 päev
-       *[other] Hoia linke aktiivsena kuni { $count } päeva
-    }
-accountBenefitSync = Jagatud faile saad hallata mis tahes seadmes
-accountBenefitMoz = Rohkem teavet teistest { -mozilla } teenustest
-signOut = Logi välja
 okButton = Olgu
 downloadingTitle = Allalaadimine
 noStreamsWarning = Sinu veebilehitseja ei pruugi suuta nii suurt faili dekrüptida.
 noStreamsOptionCopy = Kopeeri link teises brauseris avamiseks
 noStreamsOptionFirefox = Proovi meie lemmikbrauserit
 noStreamsOptionDownload = Jätka selle brauseriga
-downloadFirefoxPromo = { -send-short-brand } toob sinuni uhiuus { -firefox }.
 # the next line after the colon contains a file name
 shareLinkDescription = Jaga linki failile:
 shareLinkButton = Jaga linki
 # $name is the name of the file
 shareMessage = Laadi “{ $name }” alla teenusega { -send-brand }, mis pakub lihtsat ja turvalist failijagamist
 trailheadPromo = Oma privaatsust on võimalik kaitsta. Liitu Firefoxiga.
-learnMore = Rohkem teavet.

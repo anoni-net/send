@@ -39,7 +39,6 @@ expiresMinutes = { $minutes } dəq
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maksimum parol uzunluğu: { $length }
 # A short status message shown when there was an error setting the password
-passwordSetError = Parol qurula bilmədi
 
 ## Send version 2 strings
 
@@ -59,8 +58,6 @@ gb = GB
 fileSize = { $num }{ $units }
 copyLinkButton = Keçidi köçür
 uploadButton = Yüklə
-signInOnlyButton = Daxil ol
-signOut = Çıx
 okButton = Tamam
 downloadingTitle = Endirilir
 shareLinkButton = Keçidi paylaş
