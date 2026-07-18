@@ -79,6 +79,20 @@ cosign verify ghcr.io/anoni-net/send:4.0.0 \
 
 Pin by digest (`@sha256:...`) in production so the tag cannot move under you.
 
+## Verifying what you are running
+
+Send encrypts in the browser, so its protection rests on the JavaScript your
+browser received being the JavaScript we published. That is checkable, and
+[VERIFYING.md](VERIFYING.md) is the step-by-step:
+
+- compare the bytes an instance served you against the `SHA256SUMS.txt` attached
+  to the matching [release](https://github.com/anoni-net/send/releases), which
+  comes from GitHub rather than from the server being checked,
+- verify the image signature, SBOM and provenance with `cosign`,
+- or rebuild from source and compare. Our builds are reproducible: the same
+  commit produces byte-identical output across operating systems and Node
+  versions.
+
 ## Upstream documentation
 
 The original project README is preserved verbatim as
