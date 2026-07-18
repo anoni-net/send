@@ -4,7 +4,6 @@ const CopyPlugin = require('copy-webpack-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const VersionPlugin = require('./build/version_plugin');
-const AndroidIndexPlugin = require('./build/android_index_plugin');
 
 const webJsOptions = {
   babelrc: false,
@@ -121,8 +120,6 @@ const web = {
   target: 'web',
   entry: {
     app: ['./app/main.js']
-    // android: ['./android/android.js'],
-    // ios: ['./ios/ios.js']
   },
   output: {
     chunkFilename: '[name].[contenthash:8].js',
@@ -259,7 +256,6 @@ const web = {
       filename: '[name].[contenthash:8].css'
     }),
     new VersionPlugin(), // used for the /__version__ route
-    new AndroidIndexPlugin(),
     new WebpackManifestPlugin() // used by server side to resolve hashed assets
   ],
   devtool: 'source-map',

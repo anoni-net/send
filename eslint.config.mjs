@@ -27,16 +27,7 @@ export default [
       'android/app/build/',
       'app/locale.js',
       'app/capabilities.js',
-      'app/qrcode.js',
-
-      // Dead webdriverio integration harness inherited from upstream, where it
-      // was already stubbed out ("webdriverio tests need to be updated to node
-      // 12"). It requires packages we no longer install, and Playwright
-      // replaced it. Left in place rather than deleted; see issue backlog.
-      'test/testServer.js',
-      'test/wdio.*.conf.js',
-      'test/wdio.*.config.js',
-      'test/integration/'
+      'app/qrcode.js'
     ]
   },
 
