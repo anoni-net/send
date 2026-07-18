@@ -321,7 +321,10 @@ async function tryDownloadStream(id, keychain, signal, tries = 2) {
     if (e.message === '401' && --tries > 0) {
       return tryDownloadStream(id, keychain, signal, tries);
     }
-    if (e.name === 'AbortError') {
+    // Treat an aborted signal as a cancellation however the failure surfaces:
+    // fetch instrumentation (e.g. Sentry's breadcrumbs in v7) can replace the
+    // AbortError with a generic TypeError('Failed to fetch').
+    if (e.name === 'AbortError' || (signal && signal.aborted)) {
       throw new Error('0');
     }
     throw e;
