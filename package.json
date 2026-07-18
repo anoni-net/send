@@ -117,7 +117,7 @@
     "stylelint": "^14.9.1",
     "stylelint-config-standard": "^26.0.0",
     "stylelint-no-unsupported-browser-features": "^5.0.3",
-    "svgo": "^2.8.0",
+    "svgo": "^2.8.3",
     "svgo-loader": "^3.0.1",
     "tailwindcss": "^2",
     "val-loader": "^5.0.0",
