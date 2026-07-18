@@ -141,6 +141,30 @@ jobs:
           sbom: true
           provenance: mode=max
 
+      # Checksums of everything the server will serve to a browser. Published so
+      # anyone can rebuild from source and confirm the bytes they were served
+      # match, without having to trust us. See VERIFYING.md.
+      #
+      # amd64 only: dist/ is JavaScript and assets, and both architectures were
+      # verified to produce byte-identical output, so one list covers both.
+      - name: Generate asset checksums
+        if: matrix.arch == 'amd64'
+        run: |
+          set -euo pipefail
+          docker run --rm --entrypoint sh send:ci \
+            -c "cd /app/dist && find . -type f | sort | xargs sha256sum | sed 's|\./||'" \
+            > SHA256SUMS.txt
+          echo "$(wc -l < SHA256SUMS.txt) files"
+          head -5 SHA256SUMS.txt
+
+      - name: Upload asset checksums
+        if: matrix.arch == 'amd64'
+        uses: actions/upload-artifact@v4
+        with:
+          name: SHA256SUMS
+          path: SHA256SUMS.txt
+          if-no-files-found: error
+
       - name: Export digest
         run: |
           mkdir -p "${{ runner.temp }}/digests"
@@ -165,6 +189,10 @@ jobs:
     name: Merge manifest + sign
     runs-on: ubuntu-latest
     needs: build
+    permissions:
+      contents: write   # attach SHA256SUMS.txt to the release (tags only)
+      packages: write
+      id-token: write
     steps:
       - name: Download digests
         uses: actions/download-artifact@v4
@@ -222,6 +250,40 @@ jobs:
         env:
           DIGEST: ${{ steps.manifest.outputs.digest }}
         run: cosign sign --yes "${IMAGE}@${DIGEST}"
+
+      # 5) Publish the asset checksums where they do NOT come from the server
+      #    being checked. A manifest served by send.anoni.net would prove
+      #    nothing: a tampered server would serve a matching tampered list. The
+      #    GitHub release is the independent copy.
+      - name: Download asset checksums
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: actions/download-artifact@v4
+        with:
+          name: SHA256SUMS
+
+      - name: Attach checksums to the release
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DIGEST: ${{ steps.manifest.outputs.digest }}
+        run: |
+          set -euo pipefail
+          {
+            echo "# Send ${GITHUB_REF_NAME} — served asset checksums"
+            echo "#"
+            echo "# sha256 of every file under /app/dist, which is what the"
+            echo "# server serves to a browser. Identical on linux/amd64 and"
+            echo "# linux/arm64. Image: ${IMAGE}@${DIGEST}"
+            echo "#"
+            echo "# To check what you were served, see VERIFYING.md in the repo."
+            cat SHA256SUMS.txt
+          } > SHA256SUMS-annotated.txt
+          mv SHA256SUMS-annotated.txt SHA256SUMS.txt
+          # The release may not exist yet if the tag was pushed first; create it
+          # empty in that case rather than failing the publish.
+          gh release view "${GITHUB_REF_NAME}" >/dev/null 2>&1 \
+            || gh release create "${GITHUB_REF_NAME}" --title "${GITHUB_REF_NAME}" --notes "Release notes to follow."
+          gh release upload "${GITHUB_REF_NAME}" SHA256SUMS.txt --clobber
 
       - name: Summary
         if: always()
