@@ -44,13 +44,16 @@ async function checkCrypto() {
     );
     return true;
   } catch (err) {
-    try {
-      window.asmCrypto = await import('asmcrypto.js');
-      await import('@dannycoates/webcrypto-liner/build/shim');
-      return true;
-    } catch (e) {
-      return false;
-    }
+    // No fallback on purpose. This used to load asmcrypto.js plus a WebCrypto
+    // shim so that browsers without native WebCrypto could still encrypt. That
+    // meant some visitors had their files encrypted by a JavaScript
+    // reimplementation of the primitives, which cannot offer the side-channel
+    // properties of a native one, and no visitor could tell which they got.
+    //
+    // Every browser this app targets has had WebCrypto for years. A browser
+    // without it now goes to /unsupported/crypto instead, so encryption here is
+    // always the browser's own.
+    return false;
   }
 }
 
