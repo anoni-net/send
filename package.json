@@ -113,7 +113,7 @@
     "convict-format-with-validator": "^6.2.0",
     "express": "^4.17.3",
     "express-ws": "^5.0.2",
-    "helmet": "^3.23.3",
+    "helmet": "^8.3.0",
     "mozlog": "^3.0.1",
     "redis": "^6.0.0",
     "ua-parser-js": "^0.7.31"
