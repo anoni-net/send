@@ -1,25 +1,42 @@
 ## Docker Quickstart
 
-Use `registry.gitlab.com/timvisee/send:latest` from [`timvisee/send`'s Gitlab image registry](https://gitlab.com/timvisee/send/container_registry) for the latest Docker image.
+This repository publishes its own image to `ghcr.io/anoni-net/send`. Every
+published image is signed by our CI with cosign, and carries an SBOM and SLSA
+provenance. [VERIFYING.md](../VERIFYING.md) shows how to check all of that, and
+how to confirm the JavaScript a running instance serves matches this source.
 
 ```bash
-docker pull registry.gitlab.com/timvisee/send:latest
+docker pull ghcr.io/anoni-net/send:latest
 
 # example quickstart (point REDIS_HOST to an already-running redis server)
 docker run -v $PWD/uploads:/uploads -p 1443:1443 \
     -e 'DETECT_BASE_URL=true' \
     -e 'REDIS_HOST=localhost' \
     -e 'FILE_DIR=/uploads' \
-    registry.gitlab.com/timvisee/send:latest
+    ghcr.io/anoni-net/send:latest
 ```
 
-Or clone this repo and run `docker build -t send:latest .` to build an image locally.
+Verify the signature before running it, and pin by digest (`@sha256:...`) in
+production so the tag cannot move under you:
 
-*Note: for Docker Compose, see: https://github.com/timvisee/send-docker-compose*
+```bash
+cosign verify ghcr.io/anoni-net/send:latest \
+  --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+  --certificate-identity-regexp '^https://github.com/anoni-net/send/.github/workflows/publish.yml@.*$'
+```
+
+Or clone this repo and run `docker build -t send:latest .` to build an image
+locally. The build is reproducible, so a local build and the published image
+produce identical `dist/` output.
+
+*Upstream ([timvisee/send](https://gitlab.com/timvisee/send)) publishes its own
+image at `registry.gitlab.com/timvisee/send`. It is a different build from a
+different source tree, so nothing in this repository, including the signatures
+and checksums above, says anything about it.*
 
 ## Environment Variables
 
-All the available config options and their defaults can be found here: https://github.com/timvisee/send/blob/master/server/config.js
+All the available config options and their defaults can be found here: https://github.com/anoni-net/send/blob/main/server/config.js
 
 Config options should be set as unquoted environment variables. Boolean options should be `true`/`false`, time/duration should be integers (seconds), and filesize values should be integers (bytes).
 
@@ -29,13 +46,13 @@ Config options expecting array values (e.g. `EXPIRE_TIMES_SECONDS`, `DOWNLOAD_CO
 
 | Name     | Description |
 |------------------|-------------|
-| `BASE_URL`       | The HTTPS URL where traffic will be served (e.g. `https://send.firefox.com`)
+| `BASE_URL`       | The HTTPS URL where traffic will be served (e.g. `https://send.example.com`)
 | `DETECT_BASE_URL` | Autodetect the base URL using browser if `BASE_URL` is unset (defaults to `false`)
 | `PORT`           | Port the server will listen on (defaults to `1443`)
 | `NODE_ENV`       | Run in `development` mode (unsafe) or `production` mode (the default)
 | `SEND_FOOTER_DMCA_URL` | A URL to a contact page for DMCA requests (empty / not shown by default)
 
-*Note: more options can be found here: https://github.com/timvisee/send/blob/master/server/config.js*
+*Note: more options can be found here: https://github.com/anoni-net/send/blob/main/server/config.js*
 
 #### Upload and Download Limits
 
@@ -43,7 +60,7 @@ Configure the limits for uploads and downloads. Long expiration times are risky 
 
 | Name    | Description |
 |------------------|-------------|
-| `MAX_FILE_SIZE` | Maximum upload file size in bytes (defaults to `2147483648` aka 2GB)
+| `MAX_FILE_SIZE` | Maximum upload file size in bytes (defaults to `2684354560` aka 2.5GB)
 | `MAX_FILES_PER_ARCHIVE` | Maximum number of files per archive (defaults to `64`)
 | `MAX_EXPIRE_SECONDS` | Maximum upload expiry time in seconds (defaults to `604800` aka 7 days)
 | `MAX_DOWNLOADS` | Maximum number of downloads (defaults to `100`)
@@ -52,7 +69,7 @@ Configure the limits for uploads and downloads. Long expiration times are risky 
 | `DEFAULT_DOWNLOADS` | Default download limit in UI (defaults to `1`)
 | `DEFAULT_EXPIRE_SECONDS` | Default expire time in UI (defaults to `86400`)
 
-*Note: more options can be found here: https://github.com/timvisee/send/blob/master/server/config.js*
+*Note: more options can be found here: https://github.com/anoni-net/send/blob/main/server/config.js*
 
 #### Storage Backend Options
 
@@ -96,7 +113,7 @@ with a message naming the package to install.
 | `AWS_SECRET_ACCESS_KEY` | S3 secret access key ID (only set if using S3 for storage)
 | `GCS_BUCKET` | Google Cloud Storage bucket (only set if using GCP for storage)
 
-*Note: more options can be found here: https://github.com/timvisee/send/blob/master/server/config.js*
+*Note: more options can be found here: https://github.com/anoni-net/send/blob/main/server/config.js*
 
 ## Branding
 
@@ -142,18 +159,18 @@ $ docker run -p 1443:1443 \
 
 ```bash
 # create a network for the send backend and redis containers to talk to each other
-$ docker network create timviseesend
+$ docker network create sendnet
 
 # start the redis container
-$ docker run --net=timviseesend -v $PWD/redis:/data redis-server --appendonly yes
+$ docker run --net=sendnet -v $PWD/redis:/data redis-server --appendonly yes
 
 # start the send backend container
-$ docker run --net=timviseesend -v $PWD/uploads:/uploads -p 1443:1443 \
+$ docker run --net=sendnet -v $PWD/uploads:/uploads -p 1443:1443 \
     -e 'BASE_URL=http://localhost:1443' \
     -e 'MAX_FILE_SIZE=5368709120' \
     -e 'MAX_EXPIRE_SECONDS=2592000' \
     -e 'SEND_FOOTER_DMCA_URL=https://example.com/dmca-contact-info' \
-    registry.gitlab.com/timvisee/send:latest
+    ghcr.io/anoni-net/send:latest
 ```
 Then open http://localhost:1443 to view the UI. (change the `localhost` to your IP or hostname above to serve the UI to others)
 
@@ -168,11 +185,13 @@ $ docker run -p 1443:1443 \
     -e 'UI_COLOR_PRIMARY=#f00' \
     -e 'UI_COLOR_ACCENT=#a00' \
     -e 'UI_CUSTOM_ASSETS_ICON=custom_assets/logo.svg' \
-    registry.gitlab.com/timvisee/send:latest
+    ghcr.io/anoni-net/send:latest
 ```
 
 ## Docker Compose
 
-For a Docker compose configuration example, see:
-
-https://github.com/timvisee/send-docker-compose
+For a Docker compose configuration example, see
+[timvisee/send-docker-compose](https://github.com/timvisee/send-docker-compose).
+It is written for upstream's image, so change the `image:` line to
+`ghcr.io/anoni-net/send:latest` if you want the build this repository
+publishes.
