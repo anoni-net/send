@@ -1,4 +1,4 @@
-const html = require('choo/html');
+const html = require('nanohtml');
 const Component = require('choo/component');
 
 class Footer extends Component {

@@ -1,7 +1,7 @@
 /* global Android */
 let html;
 try {
-  html = require('choo/html');
+  html = require('nanohtml');
 } catch (e) {
   // running in the service worker
 }

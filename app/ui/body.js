@@ -1,4 +1,4 @@
-const html = require('choo/html');
+const html = require('nanohtml');
 const Header = require('./header');
 const Footer = require('./footer');
 

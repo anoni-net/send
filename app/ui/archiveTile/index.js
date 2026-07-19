@@ -2,7 +2,7 @@
 
 // Split from a single 629-line file. Callers still do require('./archiveTile')
 // and reach the screens as named properties, so no call site changed.
-const html = require('choo/html');
+const html = require('nanohtml');
 const assets = require('../../../common/assets');
 const { copyToClipboard, platform } = require('../../utils');
 const { expiryInfo, archiveInfo, archiveDetails } = require('./shared');
