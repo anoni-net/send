@@ -121,7 +121,6 @@ module.exports = function(app) {
   );
   app.get('/api/exists/:id', validId, require('./exists'));
   app.get('/api/metadata/:id', validId, auth.hmac, require('./metadata'));
-  app.post('/api/upload', require('./upload'));
   app.post('/api/delete/:id', validId, auth.owner, require('./delete'));
   app.post('/api/password/:id', validId, auth.owner, require('./password'));
   app.post('/api/params/:id', validId, auth.owner, require('./params'));
