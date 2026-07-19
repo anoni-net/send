@@ -22,7 +22,7 @@ const version = JSON.stringify({
   source: pkg.homepage,
   version: API_VERSION,
   // Our own release, from package.json. Use this for anything that identifies
-  // the build rather than the protocol (Sentry releases, support questions).
+  // the build rather than the protocol, such as support questions.
   release: process.env.CIRCLE_TAG || `v${pkg.version}`
 });
 

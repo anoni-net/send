@@ -1,4 +1,4 @@
-import { arrayToB64, isFile } from './utils';
+import { isFile } from './utils';
 import OwnedFile from './ownedFile';
 
 class Mem {
@@ -58,55 +58,10 @@ class Storage {
     return fs;
   }
 
-  get id() {
-    let id = this.engine.getItem('device_id');
-    if (!id) {
-      id = arrayToB64(crypto.getRandomValues(new Uint8Array(16)));
-      this.engine.setItem('device_id', id);
-    }
-    return id;
-  }
-
-  get totalDownloads() {
-    return Number(this.engine.getItem('totalDownloads'));
-  }
-  set totalDownloads(n) {
-    this.engine.setItem('totalDownloads', n);
-  }
-  get totalUploads() {
-    return Number(this.engine.getItem('totalUploads'));
-  }
-  set totalUploads(n) {
-    this.engine.setItem('totalUploads', n);
-  }
-  get referrer() {
-    return this.engine.getItem('referrer');
-  }
-  set referrer(str) {
-    this.engine.setItem('referrer', str);
-  }
-  get enrolled() {
-    return JSON.parse(this.engine.getItem('ab_experiments') || '{}');
-  }
-
-  enroll(id, variant) {
-    const enrolled = {};
-    enrolled[id] = variant;
-    this.engine.setItem('ab_experiments', JSON.stringify(enrolled));
-  }
-
   get files() {
     return Array.from(this._files.values()).sort(
       (a, b) => a.createdAt - b.createdAt
     );
-  }
-
-  get surveyed() {
-    return this.engine.getItem('surveyed') === 'true';
-  }
-
-  set surveyed(yes) {
-    this.engine.setItem('surveyed', yes);
   }
 
   getFileById(id) {

@@ -21,7 +21,6 @@ module.exports = function(state) {
   var LIMITS = ${JSON.stringify(clientConstants.LIMITS)};
   var WEB_UI = ${JSON.stringify(clientConstants.WEB_UI)};
   var DEFAULTS = ${JSON.stringify(clientConstants.DEFAULTS)};
-  var PREFS = ${JSON.stringify(state.prefs)};
   var downloadMetadata = ${
     state.downloadMetadata ? raw(JSON.stringify(state.downloadMetadata)) : '{}'
   };
