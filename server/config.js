@@ -127,6 +127,37 @@ const conf = convict({
     default: '0.0.0.0',
     env: 'IP_ADDRESS'
   },
+  // Number of reverse proxies in front of Send, passed to express's
+  // `trust proxy`. req.ip (the rate-limit key) is only correct when this matches
+  // the deployment: too high lets a client spoof its IP via X-Forwarded-For, too
+  // low makes everyone behind the proxy share one IP. `0`/`false` = no proxy;
+  // `1` = one reverse proxy (the setup in docs/deployment.md); `2` = e.g.
+  // Cloudflare in front of a local proxy. A comma-separated list of trusted IPs
+  // or subnets also works. Parsed in server/routes/index.js.
+  trust_proxy: {
+    format: String,
+    default: '1',
+    env: 'TRUST_PROXY'
+  },
+  // Per-IP rate limits (fixed window). The general limit covers the HTTP API
+  // (download, metadata, exists, delete, ...); the upload limit covers the
+  // WebSocket upload, which is the expensive disk-writing path. Set a max to 0
+  // to disable that limiter.
+  rate_limit_window_seconds: {
+    format: Number,
+    default: 60,
+    env: 'RATE_LIMIT_WINDOW_SECONDS'
+  },
+  rate_limit_max: {
+    format: Number,
+    default: 100,
+    env: 'RATE_LIMIT_MAX'
+  },
+  upload_rate_limit_max: {
+    format: Number,
+    default: 10,
+    env: 'UPLOAD_RATE_LIMIT_MAX'
+  },
   listen_port: {
     format: 'port',
     default: 1443,

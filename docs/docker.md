@@ -51,8 +51,34 @@ Config options expecting array values (e.g. `EXPIRE_TIMES_SECONDS`, `DOWNLOAD_CO
 | `PORT`           | Port the server will listen on (defaults to `1443`)
 | `NODE_ENV`       | Run in `development` mode (unsafe) or `production` mode (the default)
 | `SEND_FOOTER_DMCA_URL` | A URL to a contact page for DMCA requests (empty / not shown by default)
+| `TRUST_PROXY`    | Number of reverse proxies in front of Send (defaults to `1`). See below.
 
 *Note: more options can be found here: https://github.com/anoni-net/send/blob/main/server/config.js*
+
+#### Rate limiting and `TRUST_PROXY`
+
+Send applies a per-IP rate limit to its API and a tighter one to uploads. Both
+are on by default. The limit keys on the client IP, so it is only correct when
+`TRUST_PROXY` matches how many proxies actually sit in front of Send: set it too
+high and a client can forge its address with an `X-Forwarded-For` header and
+slip the limit; set it too low and everyone behind the proxy is counted as one
+address and gets blocked together.
+
+- No proxy (Send exposed directly): `TRUST_PROXY=0`
+- One reverse proxy, e.g. the Apache setup in `deployment.md`: `TRUST_PROXY=1` (the default)
+- Two hops, e.g. Cloudflare in front of a local reverse proxy: `TRUST_PROXY=2`
+
+A comma-separated list of trusted IPs or subnets also works instead of a count.
+
+| Name  | Description |
+|------------------|-------------|
+| `RATE_LIMIT_MAX` | API requests allowed per IP per window (defaults to `100`). `0` disables it.
+| `UPLOAD_RATE_LIMIT_MAX` | Uploads allowed per IP per window (defaults to `10`). `0` disables it.
+| `RATE_LIMIT_WINDOW_SECONDS` | Length of the rate-limit window in seconds (defaults to `60`).
+
+The counters are per-process and in memory, which is what a single-instance
+deployment needs. If you run several instances behind a load balancer, rate-limit
+at the load balancer or CDN instead, since each instance only sees its own share.
 
 #### Upload and Download Limits
 

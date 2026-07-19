@@ -3,11 +3,23 @@ const storage = require('../storage');
 const config = require('../config');
 const createLogger = require('../log');
 const Limiter = require('../limiter');
+const RateLimiter = require('../ratelimit');
 const { encryptedSize } = require('../../app/utils');
 
 const { Transform } = require('stream');
 
 const log = createLogger('send.upload');
+
+// Per-IP limit on uploads, the expensive disk-writing path. express middleware
+// does not see a WebSocket, so the limit is checked here when the upload starts.
+const uploadLimiter = new RateLimiter({
+  windowMs: config.rate_limit_window_seconds * 1000,
+  max: config.upload_rate_limit_max
+});
+
+function clientIp(req) {
+  return (req && (req.ip || (req.socket && req.socket.remoteAddress))) || '';
+}
 
 module.exports = function(ws, req) {
   let fileStream;
@@ -34,6 +46,11 @@ module.exports = function(ws, req) {
 
   ws.once('message', async function(message) {
     try {
+      if (!uploadLimiter.check(clientIp(req))) {
+        ws.send(JSON.stringify({ error: 429 }));
+        return ws.close();
+      }
+
       const newId = crypto.randomBytes(8).toString('hex');
       const owner = crypto.randomBytes(10).toString('hex');
 

@@ -7,6 +7,23 @@ const auth = require('../middleware/auth');
 const language = require('../middleware/language');
 const pages = require('./pages');
 const clientConstants = require('../clientConstants');
+const RateLimiter = require('../ratelimit');
+
+// express's `trust proxy` accepts a boolean, a hop count, or a list of trusted
+// addresses. TRUST_PROXY arrives as a string, so map the boolean and numeric
+// forms; anything else (an IP/subnet list, or a preset like 'loopback') is
+// passed through unchanged.
+function parseTrustProxy(value) {
+  if (value === 'true') return true;
+  if (value === 'false') return false;
+  if (/^\d+$/.test(value)) return Number(value);
+  return value;
+}
+
+const apiLimiter = new RateLimiter({
+  windowMs: config.rate_limit_window_seconds * 1000,
+  max: config.rate_limit_max
+});
 
 const IS_DEV = config.env === 'development';
 // express 5 uses path-to-regexp v8, which dropped inline regex in route
@@ -26,7 +43,11 @@ function validId(req, res, next) {
 }
 
 module.exports = function(app) {
-  app.set('trust proxy', true);
+  // Was `true` (trust every hop), which lets any client set its own req.ip via
+  // X-Forwarded-For. That was harmless while nothing read req.ip, but the rate
+  // limiter now does, so it must reflect the real proxy depth. Configurable
+  // because the right value is deployment-specific.
+  app.set('trust proxy', parseTrustProxy(config.trust_proxy));
   // helmet's default bundle now carries its own CSP, which would be sent
   // alongside the nonced policy below. Two policies are intersected by the
   // browser, not replaced, so the result would be whichever is stricter per
@@ -104,6 +125,10 @@ module.exports = function(app) {
   });
   app.use(express.json());
   app.use(express.text());
+  // Per-IP limit on the HTTP API. Scoped to /api so it never touches the health
+  // endpoints a load balancer polls, the static assets, or the pages. The
+  // WebSocket upload has its own limiter in routes/ws.js.
+  app.use('/api', apiLimiter.middleware());
   app.get('/', language, pages.index);
   app.get('/config', function(req, res) {
     res.json(clientConstants);
