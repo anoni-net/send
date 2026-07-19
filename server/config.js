@@ -156,6 +156,25 @@ const conf = convict({
     default: 1024 * 1024 * 1024 * 2.5,
     env: 'MAX_FILE_SIZE'
   },
+  // redis holds the only expiry TTL. When it fires the metadata hash vanishes,
+  // but nothing in the download or delete paths removes the file it pointed at,
+  // so an uploaded-but-never-downloaded file would sit on disk forever. A
+  // periodic sweep (filesystem backend only) deletes files whose redis record
+  // is gone. Set the interval to 0 to disable it, e.g. when an external
+  // mechanism handles cleanup. S3/GCS deployments use bucket lifecycle rules.
+  reap_interval_seconds: {
+    format: Number,
+    default: 900,
+    env: 'REAP_INTERVAL_SECONDS'
+  },
+  // A file is written before its redis key, so a just-finished upload can
+  // momentarily have no key. Only files older than this grace window are
+  // considered orphaned, which keeps the sweep from deleting a live upload.
+  reap_grace_seconds: {
+    format: Number,
+    default: 900,
+    env: 'REAP_GRACE_SECONDS'
+  },
   l10n_dev: {
     format: Boolean,
     default: false,

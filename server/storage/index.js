@@ -144,6 +144,49 @@ class DB {
       ? new Metadata(result)
       : null;
   }
+
+  // Delete files whose redis record has expired. redis holds the only expiry
+  // TTL; when it fires the metadata hash vanishes, but neither the download nor
+  // the delete path removes the file it pointed at, so an uploaded-but-never-
+  // downloaded file would otherwise stay on disk (and readable) forever. Only
+  // the filesystem backend exposes list(); S3/GCS return early and use bucket
+  // lifecycle rules instead.
+  async reap(
+    graceMs = config.reap_grace_seconds * 1000,
+    now = Date.now()
+  ) {
+    if (typeof this.storage.list !== 'function') {
+      return 0;
+    }
+    // `${prefix}-${id}`: prefix is the day bucket, id is 10-16 hex chars.
+    const FILE = /^\d+-[0-9a-fA-F]{10,16}$/;
+    let reaped = 0;
+    const files = await this.storage.list();
+    for (const { name, mtimeMs } of files) {
+      // Ignore anything that isn't a Send upload, and anything written within
+      // the grace window: storage.set() writes the file before its redis key,
+      // so a just-finished upload can briefly have no key. Skipping recent
+      // files keeps the sweep from racing that gap and deleting a live upload.
+      if (!FILE.test(name) || now - mtimeMs < graceMs) {
+        continue;
+      }
+      const id = name.slice(name.indexOf('-') + 1);
+      try {
+        if ((await this.redis.exists(id)) === 0) {
+          await this.storage.del(name);
+          reaped += 1;
+        }
+      } catch (e) {
+        // Redis unreachable, or the delete failed: never remove a file we could
+        // not confirm is orphaned. Skip it and try again on the next sweep.
+        this.log.warn('reap', e);
+      }
+    }
+    if (reaped > 0) {
+      this.log.info('reaped', { count: reaped });
+    }
+    return reaped;
+  }
 }
 
 module.exports = new DB(config);
