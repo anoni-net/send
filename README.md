@@ -46,8 +46,9 @@ Everything below was done on top of upstream v3.4.27. See
 [CHANGELOG.md](CHANGELOG.md) for the detailed list.
 
 - **Runtime and build stack modernized** — Node 16 to 22, webpack 4 to 5,
-  node-redis 3 to 6, aws-sdk v2 to v3, `@google-cloud/storage` 6 to 7,
-  `@sentry/browser` 6 to 7.
+  node-redis 3 to 6, aws-sdk v2 to v3, `@google-cloud/storage` 6 to 7.
+- **No third-party error reporting.** Sentry is gone from both the browser and
+  the server, so nothing this service runs reports to anyone else.
 - **Supply chain** — we build and publish our own multi-arch image to
   `ghcr.io/anoni-net/send`, signed with cosign (keyless, Sigstore), with an SBOM
   and SLSA provenance attached, and scanned with Trivy.

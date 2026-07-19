@@ -18,10 +18,6 @@ module.exports = async function(req) {
   if (req.route && req.route.path === '/') {
     robots = 'all';
   }
-  const prefs = {};
-  if (config.survey_url) {
-    prefs.surveyUrl = config.survey_url;
-  }
   const baseUrl = config.deriveBaseUrl(req);
   const uiAssets = {
     android_chrome_192px: assets.get('android-chrome-192x192.png'),
@@ -63,7 +59,6 @@ module.exports = async function(req) {
     fileInfo: {},
     cspNonce: req.cspNonce,
     robots,
-    prefs,
     layout
   };
 };

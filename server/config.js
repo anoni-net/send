@@ -138,13 +138,6 @@ const conf = convict({
     arg: 'port',
     env: 'PORT'
   },
-  // Server-side error reporting only. There is deliberately no browser
-  // equivalent: see the v5 notes on why the browser SDK was removed.
-  sentry_dsn: {
-    format: String,
-    default: '',
-    env: 'SENTRY_DSN'
-  },
   env: {
     format: ['production', 'development', 'test'],
     default: 'development',
@@ -185,16 +178,6 @@ const conf = convict({
     format: 'String',
     default: `${tmpdir()}${path.sep}send-${randomBytes(4).toString('hex')}`,
     env: 'FILE_DIR'
-  },
-  survey_url: {
-    format: String,
-    default: '',
-    env: 'SURVEY_URL'
-  },
-  ip_db: {
-    format: String,
-    default: '',
-    env: 'IP_DB'
   },
   footer_donate_url: {
     format: String,

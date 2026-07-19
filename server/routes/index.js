@@ -1,7 +1,6 @@
 const crypto = require('crypto');
 const express = require('express');
 const helmet = require('helmet');
-const uaparser = require('ua-parser-js');
 const storage = require('../storage');
 const config = require('../config');
 const auth = require('../middleware/auth');
@@ -38,10 +37,6 @@ module.exports = function(app) {
   // front may override it: send.anoni.net receives 180 days plus preload from
   // Cloudflare rather than what this sends.
   app.use(helmet({ contentSecurityPolicy: false }));
-  app.use(function(req, res, next) {
-    req.ua = uaparser(req.header('user-agent'));
-    next();
-  });
   app.use(function(req, res, next) {
     req.cspNonce = crypto.randomBytes(16).toString('hex');
     next();
@@ -105,19 +100,6 @@ module.exports = function(app) {
       'Cache-Control',
       'private, no-cache, no-store, must-revalidate, max-age=0'
     );
-    next();
-  });
-  app.use(function(req, res, next) {
-    try {
-      // set by the load balancer
-      const [country, state] = req.header('X-Client-Geo-Location').split(',');
-      req.geo = {
-        country,
-        state
-      };
-    } catch (e) {
-      req.geo = {};
-    }
     next();
   });
   app.use(express.json());

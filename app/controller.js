@@ -4,8 +4,7 @@ import copyDialog from './ui/copyDialog';
 import faviconProgressbar from './ui/faviconProgressbar';
 import okDialog from './ui/okDialog';
 import shareDialog from './ui/shareDialog';
-import surveyDialog from './ui/surveyDialog';
-import { bytes, locale } from './utils';
+import { bytes } from './utils';
 import { copyToClipboard, delay, openLinksInNewTab, percent } from './utils';
 
 export default function(state, emitter) {
@@ -114,7 +113,6 @@ export default function(state, emitter) {
     await delay(200);
     try {
       const ownedFile = await sender.upload(archive);
-      state.storage.totalUploads += 1;
       faviconProgressbar.updateFavicon(0);
 
       state.storage.addFile(ownedFile);
@@ -214,7 +212,6 @@ export default function(state, emitter) {
       });
       render();
       await dl;
-      state.storage.totalDownloads += 1;
       faviconProgressbar.updateFavicon(0);
     } catch (err) {
       if (err.message === '0') {
@@ -222,6 +219,10 @@ export default function(state, emitter) {
         state.transfer.reset();
         render();
       } else {
+        /* eslint-disable-next-line require-atomic-updates --
+           same shared state.transfer as the upload path above. This branch is
+           already navigating away to /error or /404, so a concurrent flow
+           losing its receiver here changes nothing it was going to render. */
         state.transfer = null;
         const location = err.message === '404' ? '/404' : '/error';
         if (location === '/error') {
@@ -244,18 +245,7 @@ export default function(state, emitter) {
   });
 
   emitter.on('closeModal', () => {
-    if (
-      state.PREFS.surveyUrl &&
-      ['copy', 'share'].includes(state.modal.type) &&
-      locale().startsWith('en') &&
-      (state.storage.totalUploads > 1 || state.storage.totalDownloads > 0) &&
-      !state.storage.surveyed
-    ) {
-      state.storage.surveyed = true;
-      state.modal = surveyDialog();
-    } else {
-      state.modal = null;
-    }
+    state.modal = null;
     render();
   });
 

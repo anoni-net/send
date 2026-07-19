@@ -1,4 +1,4 @@
-/* global DEFAULTS LIMITS WEB_UI PREFS */
+/* global DEFAULTS LIMITS WEB_UI */
 import 'core-js';
 import createApp from './framework';
 import routes from './routes';
@@ -39,7 +39,6 @@ import { setTranslate, locale } from './utils';
     LIMITS,
     DEFAULTS,
     WEB_UI,
-    PREFS,
     archive: new Archive([], DEFAULTS.EXPIRE_SECONDS, DEFAULTS.DOWNLOADS),
     capabilities,
     translate,
