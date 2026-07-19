@@ -58,7 +58,8 @@ Config options expecting array values (e.g. `EXPIRE_TIMES_SECONDS`, `DOWNLOAD_CO
 #### Rate limiting and `TRUST_PROXY`
 
 Send applies a per-IP rate limit to its API and a tighter one to uploads. Both
-are on by default. The limit keys on the client IP, so it is only correct when
+are on by default in production (and off in development). The limit keys on the
+client IP, so it is only correct when
 `TRUST_PROXY` matches how many proxies actually sit in front of Send: set it too
 high and a client can forge its address with an `X-Forwarded-For` header and
 slip the limit; set it too low and everyone behind the proxy is counted as one
@@ -73,7 +74,7 @@ A comma-separated list of trusted IPs or subnets also works instead of a count.
 | Name  | Description |
 |------------------|-------------|
 | `RATE_LIMIT_MAX` | API requests allowed per IP per window (defaults to `100`). `0` disables it.
-| `UPLOAD_RATE_LIMIT_MAX` | Uploads allowed per IP per window (defaults to `10`). `0` disables it.
+| `UPLOAD_RATE_LIMIT_MAX` | Uploads allowed per IP per window (defaults to `20`). `0` disables it.
 | `RATE_LIMIT_WINDOW_SECONDS` | Length of the rate-limit window in seconds (defaults to `60`).
 
 The counters are per-process and in memory, which is what a single-instance

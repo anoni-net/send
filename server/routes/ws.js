@@ -10,6 +10,10 @@ const { Transform } = require('stream');
 
 const log = createLogger('send.upload');
 
+// Off in development, matching the HTTP limiter in routes/index.js: the frontend
+// test suite bursts uploads from one address.
+const IS_DEV = config.env === 'development';
+
 // Per-IP limit on uploads, the expensive disk-writing path. express middleware
 // does not see a WebSocket, so the limit is checked here when the upload starts.
 const uploadLimiter = new RateLimiter({
@@ -46,7 +50,7 @@ module.exports = function(ws, req) {
 
   ws.once('message', async function(message) {
     try {
-      if (!uploadLimiter.check(clientIp(req))) {
+      if (!IS_DEV && !uploadLimiter.check(clientIp(req))) {
         ws.send(JSON.stringify({ error: 429 }));
         return ws.close();
       }

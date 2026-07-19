@@ -126,9 +126,12 @@ module.exports = function(app) {
   app.use(express.json());
   app.use(express.text());
   // Per-IP limit on the HTTP API. Scoped to /api so it never touches the health
-  // endpoints a load balancer polls, the static assets, or the pages. The
-  // WebSocket upload has its own limiter in routes/ws.js.
-  app.use('/api', apiLimiter.middleware());
+  // endpoints a load balancer polls, the static assets, or the pages. Off in
+  // development, like the CSP above: local runs and the frontend test suite
+  // legitimately burst requests. The WebSocket upload is limited in routes/ws.js.
+  if (!IS_DEV) {
+    app.use('/api', apiLimiter.middleware());
+  }
   app.get('/', language, pages.index);
   app.get('/config', function(req, res) {
     res.json(clientConstants);

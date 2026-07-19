@@ -155,7 +155,7 @@ const conf = convict({
   },
   upload_rate_limit_max: {
     format: Number,
-    default: 10,
+    default: 20,
     env: 'UPLOAD_RATE_LIMIT_MAX'
   },
   listen_port: {
