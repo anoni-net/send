@@ -7,6 +7,16 @@ function getPrefix(seconds) {
   return Math.max(Math.floor(seconds / 86400), 1);
 }
 
+// One atomic step for both reserving and releasing a download slot. EXISTS and
+// HINCRBY run together under redis's single-threaded execution, so the count is
+// only ever adjusted for a record that is still present: a reserve or release
+// that races behind storage.del() returns -1 and touches nothing, rather than
+// letting HINCRBY recreate a spent id as a TTL-less ghost hash. Returns the new
+// counter value, or -1 when the record no longer exists.
+const ADJUST_DOWNLOAD = `
+if redis.call('EXISTS', KEYS[1]) == 0 then return -1 end
+return redis.call('HINCRBY', KEYS[1], ARGV[1], ARGV[2])`;
+
 // The S3 and GCS SDKs are not installed in the published image. Together they
 // pull in over half of the production dependency tree for backends that a
 // filesystem deployment never loads, so they moved to devDependencies: the
@@ -95,8 +105,26 @@ class DB {
     return p;
   }
 
-  incrementField(id, key, increment = 1) {
-    return this.redis.hIncrBy(id, key, increment);
+  // Atomically claim one download slot before a byte is streamed. Returns the
+  // new download count, or -1 if the record is already gone (spent or expired)
+  // so the caller can 404 without recreating its key. The check-and-increment
+  // is one atomic step, which is what stops concurrent requests for a
+  // one-download file from all reading the same pre-increment count.
+  reserveDownload(id) {
+    return this.redis.eval(ADJUST_DOWNLOAD, {
+      keys: [id],
+      arguments: ['dl', '1']
+    });
+  }
+
+  // Hand a reserved slot back (over the limit, or a download that failed before
+  // completing). A no-op returning -1 if the record is already gone, so a
+  // release racing behind a delete can never resurrect a spent file.
+  releaseDownload(id) {
+    return this.redis.eval(ADJUST_DOWNLOAD, {
+      keys: [id],
+      arguments: ['dl', '-1']
+    });
   }
 
   async del(id) {

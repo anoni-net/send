@@ -63,6 +63,18 @@ function createFakeRedis() {
       m.set(field, String(next));
       return next;
     },
+    // Mirrors the ADJUST_DOWNLOAD Lua script: guard the increment on the key
+    // still existing, and never create it. arguments are [field, delta] as
+    // strings, exactly as server/storage/index.js passes them.
+    async eval(_script, opts) {
+      const key = opts.keys[0];
+      const [field, delta] = opts.arguments;
+      const m = hashes.get(key);
+      if (!m || m.size === 0) return -1;
+      const next = Number(m.get(field) || 0) + Number(delta);
+      m.set(field, String(next));
+      return next;
+    },
     async expire(key, seconds) {
       ttls.set(key, seconds);
       return true;
@@ -165,6 +177,33 @@ describe('Storage', function() {
       await storage.del('x');
       const meta = await storage.metadata('x');
       assert.equal(meta, null);
+    });
+  });
+
+  describe('download slots', function() {
+    it('reserveDownload increments and returns the new count', async function() {
+      await storage.set('d', null, { dl: 0 });
+      assert.equal(await storage.reserveDownload('d'), 1);
+      assert.equal(await storage.reserveDownload('d'), 2);
+      await storage.del('d');
+    });
+
+    it('reserveDownload returns -1 for a missing record and does not create it', async function() {
+      assert.equal(await storage.reserveDownload('gone'), -1);
+      assert.equal(await storage.metadata('gone'), null);
+    });
+
+    it('releaseDownload decrements', async function() {
+      await storage.set('d', null, { dl: 2 });
+      assert.equal(await storage.releaseDownload('d'), 1);
+      await storage.del('d');
+    });
+
+    it('releaseDownload after delete does not resurrect the record', async function() {
+      await storage.set('d', null, { dl: 1 });
+      await storage.del('d');
+      assert.equal(await storage.releaseDownload('d'), -1);
+      assert.equal(await storage.metadata('d'), null);
     });
   });
 
