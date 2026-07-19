@@ -35,8 +35,9 @@ Send reads its configuration from environment variables. Two of them matter for
 any deployment behind a reverse proxy:
 
 * `NODE_ENV=production`. The default is `development`, which switches off both
-  the Content-Security-Policy headers and the per-IP rate limits. Neither
-  `npm run prod` nor the published image sets it for you.
+  the Content-Security-Policy headers and the per-IP rate limits. `npm run prod`
+  does not set it for you. (The published Docker image does, but this document
+  runs the server directly.)
 * `TRUST_PROXY=1`, which is already the default and matches the single Apache
   proxy set up below. It tells Send how many proxies sit in front of it, so the
   rate limiter reads the visitor's address instead of `127.0.0.1`. Add a hop for
