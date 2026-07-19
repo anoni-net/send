@@ -19,7 +19,7 @@ This document describes how to do a deployment of Send in AWS
 
 * An S3 bucket (block all public access)
 
-* A private EC2 instance running Ubuntu `20.04` (you can use the [Amazon EC2 AMI Locator](https://cloud-images.ubuntu.com/locator/ec2/) to find the latest)
+* A private EC2 instance running a current Ubuntu LTS (you can use the [Amazon EC2 AMI Locator](https://cloud-images.ubuntu.com/locator/ec2/) to find one)
 
   Attach an IAM role to the instance with the following inline policy:
 
@@ -77,42 +77,24 @@ This document describes how to do a deployment of Send in AWS
 ## Software requirements
 
 * Git
-* NodeJS `15.x` LTS
+* NodeJS 22 or newer (see `engines` in [package.json](../package.json))
 * Local Redis server
-
-### Prerequisite packages
-
-```bash
-sudo apt update
-sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
-```
-
-### Add repositories
-
-* NodeJS `15.x` LTS (checkout [package.json](../package.json)):
-
-```bash
-curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
-echo 'deb [arch=amd64] https://deb.nodesource.com/node_15.x focal main' | sudo tee /etc/apt/sources.list.d/nodejs.list
-```
-
-* Git (latest)
-
-```bash
-sudo add-apt-repository ppa:git-core/ppa
-```
-
-* Redis (latest)
-
-```bash
-sudo add-apt-repository ppa:redislabs/redis
-```
 
 ### Install required packages
 
 ```bash
 sudo apt update
-sudo apt install git nodejs redis-server telnet
+sudo apt install -y ca-certificates curl git redis-server telnet
+```
+
+Check the `nodejs` version your Ubuntu release ships. If it is older than 22,
+install a current one following the
+[NodeSource instructions](https://github.com/nodesource/distributions), which
+are kept up to date for each release and use a signed keyring rather than the
+removed `apt-key`.
+
+```bash
+node --version   # must be >= 22
 ```
 
 ### Redis server
@@ -150,7 +132,7 @@ Setup a directory for the data
 ```
 sudo mkdir -pv /var/www/send
 sudo chown www-data:www-data /var/www/send
-sudo 750 /var/www/send
+sudo chmod 750 /var/www/send
 ```
 
 ### NodeJS
@@ -174,10 +156,16 @@ Clone repository, install JavaScript packages and compiles the assets:
 sudo su -l www-data -s /bin/bash
 cd /var/www/send
 git clone https://github.com/anoni-net/send.git .
-npm install
+npm ci
 npm run build
+# the S3 backend's SDK is not a production dependency, so install it alongside
+npm install --no-save @aws-sdk/client-s3 @aws-sdk/lib-storage
 exit
 ```
+
+Without that last line, starting with `S3_BUCKET` set fails immediately with a
+message naming the packages to install. The SDK is kept out of the default
+install because it is large and a filesystem deployment never loads it.
 
 Create the file `/var/www/send/.env` used by Systemd with your environment variables
 (checkout [config.js](../server/config.js) for more configuration environment variables):
@@ -186,9 +174,19 @@ Create the file `/var/www/send/.env` used by Systemd with your environment varia
 BASE_URL='https://send.mydomain.com'
 NODE_ENV='production'
 PORT='8080'
+TRUST_PROXY='1'
 REDIS_PASSWORD='<redis_password>'
 S3_BUCKET='<s3_bucket_name>'
 ```
+
+`NODE_ENV=production` is what enables the Content-Security-Policy headers and the
+per-IP rate limits, and `TRUST_PROXY=1` accounts for the ALB, so the rate limiter
+keys on the visitor's address rather than on the load balancer. Add a hop if you
+put a CDN in front of the ALB.
+
+The sweep that removes expired files runs on the filesystem backend only. On S3,
+set a bucket lifecycle rule to expire objects after at least `MAX_EXPIRE_SECONDS`
+instead, otherwise expired ciphertext accumulates in the bucket.
 
 Lower files and folders permissions to user and group `www-data`:
 

@@ -2,7 +2,9 @@
 
 This document describes how to do a full deployment of Send on your own Linux server. You will need:
 
-* A working (and ideally somewhat recent) installation of NodeJS and npm
+* NodeJS 22 or newer, and npm
+* A redis server. Send keeps all file metadata and every expiry TTL in redis and
+  will not start without one
 * Git
 * Apache webserver
 * Optionally telnet, to be able to quickly check your installation
@@ -10,8 +12,13 @@ This document describes how to do a full deployment of Send on your own Linux se
 For example in Debian/Ubuntu systems:
 
 ```bash
-sudo apt install git apache2 nodejs npm telnet
+sudo apt install git apache2 redis-server telnet
 ```
+
+Check what `nodejs` your distribution ships before installing it from the
+archive: several stable releases still carry a version older than 22. If it is
+too old, install a current one from [NodeSource](https://github.com/nodesource/distributions)
+or [nvm](https://github.com/nvm-sh/nvm) instead.
 
 ## Building
 
@@ -19,8 +26,25 @@ sudo apt install git apache2 nodejs npm telnet
 * First, remove that htdocs folder - we will replace it with Send's version now
 * git clone https://github.com/anoni-net/send.git htdocs
 * Make now sure you are NOT root but rather the user your webserver is serving files under (e.g. "su www-data" or whoever the owner of your htdocs folder is)
-* npm install
+* npm ci
 * npm run build
+
+## Configuration
+
+Send reads its configuration from environment variables. Two of them matter for
+any deployment behind a reverse proxy:
+
+* `NODE_ENV=production`. The default is `development`, which switches off both
+  the Content-Security-Policy headers and the per-IP rate limits. Neither
+  `npm run prod` nor the published image sets it for you.
+* `TRUST_PROXY=1`, which is already the default and matches the single Apache
+  proxy set up below. It tells Send how many proxies sit in front of it, so the
+  rate limiter reads the visitor's address instead of `127.0.0.1`. Add a hop for
+  each additional proxy or CDN.
+
+`BASE_URL` should be the public HTTPS address, for example
+`https://send.example.com`. See [server/config.js](../server/config.js) for the
+rest.
 
 ## Running
 
@@ -30,7 +54,8 @@ To have a permanently running version of Send as a background process:
 
 ```bash
 #!/bin/bash
-nohup su www-data -c "npm run prod" 2>/dev/null &
+# set the variables inside the command: su does not carry all of them across
+nohup su www-data -c "NODE_ENV=production BASE_URL=https://send.example.com npm run prod" 2>/dev/null &
 ```
 
 * Execute the script:
@@ -94,3 +119,18 @@ ProxyPassReverse  "/" "http://127.0.0.1:1443"
 sudo apache2ctl configtest
 sudo systemctl restart apache2
 ```
+
+## Checking the result
+
+`mod_proxy` adds the `X-Forwarded-For` header Send needs, and the `RequestHeader`
+line above supplies `X-Forwarded-Proto`, so with `TRUST_PROXY=1` the rate limiter
+sees real client addresses.
+
+Confirm the site came up in production mode:
+
+```bash
+curl -sI https://send.example.com/ | grep -i content-security-policy
+```
+
+An empty result means `NODE_ENV` did not reach the process, and the instance is
+running without CSP or rate limiting.

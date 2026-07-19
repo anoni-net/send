@@ -38,6 +38,14 @@ A password may optionally be set to authenticate the download request. When a pa
 3. The new key is sent to the server, authenticated by the owner token
 4. The server stores the new key and marks the record as needing a password
 
+The PBKDF2 derivation uses SHA-256 with 100 iterations, which is far below what
+you would choose for a password stored on a server. The password protects the
+download *authorization* only: the file's encryption key comes from the url
+fragment, and the salt is the full share url, so anyone in a position to run this
+derivation already holds the secret that decrypts the file. Raising the iteration
+count would change what existing links compute and is deliberately left alone for
+now.
+
 #### Downloader
 
 1. The browser loads the share url page, which includes an authentication nonce and indicator that the file requires a password

@@ -1,16 +1,34 @@
 # Localization
 
-Send is localized in over 50 languages. We use the [fluent](http://projectfluent.org/) library and store our translations in [FTL](http://projectfluent.org/fluent/guide/) files in `public/locales/`. `en-US` is our base language.
+Send carries translations for more than 80 languages, inherited from the years it
+was run by Mozilla. We use the [fluent](https://projectfluent.org/) library and
+store the translations in [FTL](https://projectfluent.org/fluent/guide/) files
+under `public/locales/`. `en-US` is the base language.
 
 ## Process
 
-Strings are added or removed from [public/locales/en-US/send.ftl] as needed. Strings **MUST NOT** be *changed* after they've been commited and pushed to master. Changing a string requires creating a new ID with a new name (preferably descriptive instead of incremented) and deletion of the obsolete ID. It's often useful to add a comment above the string with info about how and where the string is used.
+Strings are added to or removed from `public/locales/en-US/send.ftl` as needed. A
+string **MUST NOT** be *changed* once it has been committed. Changing what a
+string means requires a new ID with a new name, descriptive rather than
+incremented, plus deletion of the obsolete ID. Translators have already
+translated the old ID, and editing it in place would leave every other language
+saying something the English no longer says. A comment above the string
+explaining where it is used is usually worth writing.
 
-Once new strings are commited to master they are available for translators in Pontoon. All languages other than `en-US` should be edited via Pontoon. Translations get automatically commited to the github master branch.
+The translations were originally maintained in Mozilla's Pontoon instance, which
+no longer feeds this repository. Corrections and new languages now arrive as pull
+requests against `public/locales/` like any other change.
 
 ### Activation
 
-The development environment includes all locales in `public/locales` via the `L10N_DEV` environment variable. Production uses `package.json` as the list of locales to use. Once a locale has enough string coverage it should be added to `package.json`.
+The development environment includes every locale in `public/locales` via the
+`L10N_DEV` environment variable. Production serves the list in `package.json`
+instead, so a locale becomes visible to visitors once it has enough string
+coverage and is added there. Two scripts help with that: `npm run lint-locales`
+reports missing strings and errors, and `npm run get-prod-locales` lists the
+locales complete enough to promote. Both shell out to Mozilla's
+[compare-locales](https://pypi.org/project/compare-locales/), so install it
+first.
 
 ## Code
 
