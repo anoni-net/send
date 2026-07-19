@@ -7,10 +7,12 @@ const expressWs = require('express-ws');
 const morgan = require('morgan');
 const config = require('../config');
 
-
 module.exports = function(app, devServer) {
   const wsapp = express();
-  expressWs(wsapp, null, { perMessageDeflate: false });
+  // see the note in prod.js
+  expressWs(wsapp, null, {
+    wsOptions: { perMessageDeflate: false, maxPayload: 1024 * 1024 }
+  });
   routes(wsapp);
   wsapp.ws('/api/ws', require('../routes/ws'));
   wsapp.listen(8081, config.listen_address);

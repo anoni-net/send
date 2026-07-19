@@ -12,6 +12,20 @@ const log = createLogger('send.upload');
 module.exports = function(ws, req) {
   let fileStream;
 
+  // A WebSocket is an EventEmitter, so an 'error' with no listener is rethrown
+  // and takes the process down. ws emits one for anything malformed on the
+  // wire: an invalid UTF-8 text frame, a reserved bit set, a frame over
+  // maxPayload. None of that needs authentication, so without this handler a
+  // single crafted frame stops the server for everyone. Verified against the
+  // unpatched build: one frame with an invalid UTF-8 sequence exits the
+  // process with WS_ERR_INVALID_UTF8.
+  ws.on('error', e => {
+    log.info('wsError', { code: e.code, message: e.message });
+    if (fileStream !== undefined) {
+      fileStream.destroy();
+    }
+  });
+
   ws.on('close', e => {
     if (e !== 1000 && fileStream !== undefined) {
       fileStream.destroy();
@@ -35,6 +49,7 @@ module.exports = function(ws, req) {
       if (
         !metadata ||
         !auth ||
+        metadata.length > config.max_metadata_size ||
         timeLimit <= 0 ||
         timeLimit > maxExpireSeconds ||
         dlimit > maxDownloads
