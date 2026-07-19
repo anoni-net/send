@@ -1,5 +1,5 @@
 const nanomorph = require('nanomorph');
-const Nanobus = require('nanobus');
+const Emitter = require('./emitter');
 
 /*
  * Replaces choo, which brought 13 further packages into the bundle for a
@@ -111,7 +111,7 @@ class App {
   constructor() {
     this.routes = [];
     this.stores = [];
-    this.emitter = new Nanobus('app.emit');
+    this.emitter = new Emitter();
     this.emit = this.emitter.emit.bind(this.emitter);
     this._tree = null;
 
