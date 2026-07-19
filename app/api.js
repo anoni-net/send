@@ -1,16 +1,6 @@
 import { arrayToB64, b64ToArray, delay } from './utils';
 import { ECE_RECORD_SIZE } from './ece';
 
-let fileProtocolWssUrl = null;
-try {
-  fileProtocolWssUrl = localStorage.getItem('wssURL');
-} catch (e) {
-  // NOOP
-}
-if (!fileProtocolWssUrl) {
-  fileProtocolWssUrl = 'wss://send.firefox.com/api/ws';
-}
-
 export class ConnectionError extends Error {
   constructor(cancelled, duration, size) {
     super(cancelled ? '0' : 'connection closed');
@@ -18,15 +8,6 @@ export class ConnectionError extends Error {
     this.duration = duration;
     this.size = size;
   }
-}
-
-export function setFileProtocolWssUrl(url) {
-  localStorage && localStorage.setItem('wssURL', url);
-  fileProtocolWssUrl = url;
-}
-
-export function getFileProtocolWssUrl() {
-  return fileProtocolWssUrl;
 }
 
 let apiUrlPrefix = '';
@@ -210,11 +191,20 @@ async function upload(
   const start = Date.now();
   const host = window.location.hostname;
   const port = window.location.port;
+  // A page opened from disk has no origin to derive an upload endpoint from.
+  // This used to fall back to a hardcoded wss://send.firefox.com/api/ws, set at
+  // a time when Mozilla ran that service; it has been shut down for years, so
+  // the fallback pointed encrypted uploads at a host this project does not
+  // control and could not reach. The only caller was the Android WebView, whose
+  // build target no longer exists. Refusing is the honest answer: an upload from
+  // file:// cannot work without a server either way.
+  if (window.location.protocol === 'file:') {
+    throw new Error(
+      'Send cannot upload from a page opened directly from disk. Serve it over http(s).'
+    );
+  }
   const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-  const endpoint =
-    window.location.protocol === 'file:'
-      ? fileProtocolWssUrl
-      : `${protocol}//${host}${port ? ':' : ''}${port}/api/ws`;
+  const endpoint = `${protocol}//${host}${port ? ':' : ''}${port}/api/ws`;
 
   const ws = await asyncInitWebSocket(endpoint);
 
