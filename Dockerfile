@@ -90,6 +90,20 @@ RUN ln -s dist/version.json version.json
 
 ENV PORT=1443
 
+# Two protections are gated on this: the Content-Security-Policy headers, and
+# the per-IP rate limits. server/config.js defaults to `development` because
+# that is the right default for `npm start` and for the frontend test suite,
+# which legitimately bursts uploads from one address and would otherwise be
+# rate-limited by its own server.
+#
+# An image is not that. Every container built from this file is somebody's
+# deployment, and inheriting the development default meant a Send instance
+# served no CSP and applied no rate limit unless its operator knew to pass
+# NODE_ENV themselves. Set here rather than in the builder stage above, so it
+# cannot influence the webpack build and the reproducibility guarantee in
+# VERIFYING.md still compares like with like.
+ENV NODE_ENV=production
+
 EXPOSE ${PORT}
 
 CMD ["node", "server/bin/prod.js"]

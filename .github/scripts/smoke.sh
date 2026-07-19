@@ -54,6 +54,24 @@ esac
 printf '%s' "$ver_json" | grep -q '"release":' || {
   echo "  __version__ is missing the 'release' field"; docker logs send; exit 1; }
 
+# The image sets NODE_ENV=production, and that single variable is what switches
+# on both the CSP headers and the per-IP rate limits. Losing it fails silently:
+# the page renders, the round-trip passes, and nothing else in this script
+# notices. Assert the header a browser would actually enforce.
+echo "Production hardening ..."
+csp=$(curl -fsS -D - -o /dev/null "http://localhost:${PORT}/" \
+  | tr -d '\r' | sed -n 's/^[Cc]ontent-[Ss]ecurity-[Pp]olicy: //p')
+[ -n "$csp" ] || {
+  echo "  no Content-Security-Policy header: the container is running in development mode"
+  docker logs send; exit 1; }
+for d in "default-src 'self'" "base-uri 'self'" "frame-ancestors 'none'" "object-src 'none'"; do
+  case "$csp" in
+    *"$d"*) ;;
+    *) echo "  CSP is missing ${d}"; echo "  got: ${csp}"; exit 1 ;;
+  esac
+done
+echo "  CSP present and carries its key directives"
+
 # Render the home page and confirm hashed assets resolve. This is the only check
 # that exercises the webpack asset map (server -> common/assets.js -> manifest);
 # a broken map injects [object Object] or /undefined instead of a hashed URL.
@@ -129,6 +147,20 @@ if [ -f .github/scripts/browser-check.mjs ] && node -e "require.resolve('playwri
 else
   echo "(playwright not installed; skipping headless browser render check)"
 fi
+
+# Rate limiting, checked last because it deliberately exhausts the window and
+# every later /api call would be answered 429. RATE_LIMIT_MAX is 100 per 60s, so
+# 250 requests issued in well under a minute must overflow whichever window they
+# land in. Stops at the first 429 rather than sending all of them.
+echo "Rate limiting ..."
+limited=""
+for i in $(seq 1 250); do
+  code=$(curl -s -o /dev/null -w '%{http_code}' "http://localhost:${PORT}/api/exists/deadbeefdead")
+  if [ "$code" = "429" ]; then limited=1; echo "  429 after ${i} requests"; break; fi
+done
+[ -n "$limited" ] || {
+  echo "  250 API requests from one address were never rate-limited"
+  docker logs send; exit 1; }
 
 docker rm -f send redis >/dev/null 2>&1 || true
 docker network rm sendci >/dev/null 2>&1 || true
