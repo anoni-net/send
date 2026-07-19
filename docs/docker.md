@@ -10,7 +10,6 @@ docker pull ghcr.io/anoni-net/send:latest
 
 # example quickstart (point REDIS_HOST to an already-running redis server)
 docker run -v $PWD/uploads:/uploads -p 1443:1443 \
-    -e 'NODE_ENV=production' \
     -e 'DETECT_BASE_URL=true' \
     -e 'REDIS_HOST=localhost' \
     -e 'FILE_DIR=/uploads' \
@@ -50,13 +49,13 @@ Config options expecting array values (e.g. `EXPIRE_TIMES_SECONDS`, `DOWNLOAD_CO
 | `BASE_URL`       | The HTTPS URL where traffic will be served (e.g. `https://send.example.com`)
 | `DETECT_BASE_URL` | Autodetect the base URL using browser if `BASE_URL` is unset (defaults to `false`)
 | `PORT`           | Port the server will listen on (defaults to `1443`)
-| `NODE_ENV`       | `production` or `development` (defaults to `development`). **Set this to `production`.** See below.
+| `NODE_ENV`       | `production` or `development`. The image sets `production`; leave it alone unless you want a development container. See below.
 | `SEND_FOOTER_DMCA_URL` | A URL to a contact page for DMCA requests (empty / not shown by default)
 | `TRUST_PROXY`    | Number of reverse proxies in front of Send (defaults to `1`). See below.
 
 *Note: more options can be found here: https://github.com/anoni-net/send/blob/main/server/config.js*
 
-#### `NODE_ENV=production` is required, and is not the default
+#### What `NODE_ENV` controls
 
 Two protections are switched off in `development` mode, because local runs and
 the frontend test suite need them off:
@@ -65,18 +64,19 @@ the frontend test suite need them off:
   running on the download page where the decryption key is held
 - the per-IP rate limits described below
 
-Neither the image nor `npm run prod` sets `NODE_ENV`, and the default in
-`server/config.js` is `development`. An instance started without it serves no CSP
-and applies no rate limit. Every example on this page sets it, and so should
-yours.
+The image sets `NODE_ENV=production`, so a container gets both without you doing
+anything. The default in `server/config.js` is `development`, which is what
+`npm start` and `npm run prod` see, so a deployment that runs the server directly
+rather than from the image has to set it. See [deployment.md](deployment.md).
 
-To check a running instance, look for the header:
+To check any running instance, look for the header:
 
 ```bash
 curl -sI https://send.example.com/ | grep -i content-security-policy
 ```
 
-No output means the instance is running in development mode.
+No output means it is running in development mode, without CSP or rate limiting.
+The smoke test asserts the same thing against every image build.
 
 #### Rate limiting and `TRUST_PROXY`
 
@@ -217,7 +217,6 @@ below is the image built from that snippet.
 
 ```bash
 $ docker run -p 1443:1443 \
-  -e 'NODE_ENV=production' \
   -e 'S3_BUCKET=my-send-bucket' \
   -e 'REDIS_HOST=my-cache.abcdef.0001.usw2.cache.amazonaws.com' \
   -e 'BASE_URL=https://send.example.com' \
@@ -240,7 +239,6 @@ $ docker run -d --net=sendnet --name=redis -v $PWD/redis:/data \
 
 # start the send backend container
 $ docker run --net=sendnet -v $PWD/uploads:/uploads -p 1443:1443 \
-    -e 'NODE_ENV=production' \
     -e 'REDIS_HOST=redis' \
     -e 'FILE_DIR=/uploads' \
     -e 'BASE_URL=http://localhost:1443' \
@@ -266,7 +264,6 @@ below for an example setup.
 ```bash
 $ docker run -p 1443:1443 \
     -v $PWD/custom_assets:/app/dist/custom_assets \
-    -e 'NODE_ENV=production' \
     -e 'UI_COLOR_PRIMARY=#f00' \
     -e 'UI_COLOR_ACCENT=#a00' \
     -e 'UI_CUSTOM_ASSETS_ICON=custom_assets/logo.svg' \
