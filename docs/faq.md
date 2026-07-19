@@ -1,42 +1,48 @@
 ## How big of a file can I transfer with Send?
 
-There is a 2GB file size limit built in to Send, but this may be changed by the
-hoster. Send encrypts and decrypts the files in the browser which is great for
-security but will tax your system resources.  In particular you can expect to
-see your memory usage go up by at least the size of the file when the transfer
-is processing.  You can see [the results of some
-testing](https://github.com/mozilla/send/issues/170#issuecomment-314107793). For
-the most reliable operation on common computers, it’s probably best to stay
-under a few hundred megabytes.
+This instance accepts files up to 2.5 GB, and an operator running their own can
+change that. Send encrypts and decrypts files in the browser, which is what
+keeps the server from ever seeing them, but it means the work happens on your
+machine: expect memory use to rise by at least the size of the file while a
+transfer is in progress. On an ordinary laptop, transfers of a few hundred
+megabytes are the most reliable.
 
 ## Why is my browser not supported?
 
-We’re using the [Web Cryptography JavaScript API with the AES-GCM
-algorithm](https://www.w3.org/TR/WebCryptoAPI/#aes-gcm) for our encryption.
-Many browsers support this standard and should work fine, but some have not
-implemented it yet (mobile browsers lag behind on this, in
-particular).
+Send encrypts with the [Web Cryptography API using
+AES-GCM](https://www.w3.org/TR/WebCryptoAPI/#aes-gcm). Most current browsers
+implement it. Some, mobile browsers in particular, still do not, and Send has no
+fallback: doing the same encryption in ordinary JavaScript would be slower and
+weaker, so we would rather tell you your browser cannot do it than quietly give
+you something less.
 
 ## Why does Send require JavaScript?
 
 Send uses JavaScript to:
 
-- Encrypt and decrypt files locally on the client instead of the server.
+- Encrypt and decrypt files on your device rather than on the server.
 - Render the user interface.
-- Manage translations on the website into [various different languages](https://github.com/timvisee/send#localization).
-- Collect data to help us improve Send in accordance with our [Terms & Privacy](https://send.firefox.com/legal).
+- Show the interface in [various different
+  languages](https://github.com/anoni-net/send#localization).
 
-Since Send is an open source project, you can see all of the cool ways we use JavaScript by [examining our code](https://github.com/timvisee/send/).
+The first point is the whole design. The server stores ciphertext it cannot
+read, and the key never reaches it: the key lives in the part of the share link
+after the `#`, which browsers do not send to servers.
+
+Send collects no analytics and reports nothing to any third party. The code that
+runs in your browser is [public](https://github.com/anoni-net/send/), and
+[VERIFYING.md](../VERIFYING.md) sets out how to check that the JavaScript this
+site serves you was built from it.
 
 ## How long are files available for?
 
-Files are available to be downloaded for 24 hours, after which they are removed
-from the server.  They are also removed immediately once the download limit is reached.
+You choose when you upload: from five minutes up to seven days, with 24 hours as
+the default. A file is also removed as soon as it reaches the download limit you
+set, which can be anywhere from one download to a hundred. Whichever comes
+first, the file is deleted from the server.
+
+An operator running their own instance can set different maximums.
 
 ## Can a file be downloaded more than once?
 
-Yes, once a file is submitted to Send you can select the download limit.
-
-
-*Disclaimer: Send is an experiment and under active development.  The answers
-here may change as we get feedback from you and the project matures.*
+Yes. The limit defaults to one download and you can raise it when you upload.

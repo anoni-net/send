@@ -12,13 +12,13 @@ module.exports = function(state, emit) {
     why = html`
       <a
         class="text-primary"
-        href="https://github.com/timvisee/send/blob/master/docs/faq.md#why-is-my-browser-not-supported"
+        href="https://github.com/anoni-net/send/blob/main/docs/faq.md#why-is-my-browser-not-supported"
       >
         ${state.translate('notSupportedLink')}
       </a>
     `;
     url =
-      'https://www.mozilla.org/firefox/new/?utm_campaign=send-acquisition&utm_medium=referral&utm_source=send.firefox.com';
+      'https://www.mozilla.org/firefox/new/';
   } else {
     strings = outdatedStrings(state);
     url = 'https://support.mozilla.org/kb/update-firefox-latest-version';
