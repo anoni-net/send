@@ -14,13 +14,16 @@ const ID_REGEX = '([0-9a-fA-F]{10,16})';
 
 module.exports = function(app) {
   app.set('trust proxy', true);
-  app.use(helmet());
-  app.use(
-    helmet.hsts({
-      maxAge: 31536000,
-      force: !IS_DEV
-    })
-  );
+  // helmet's default bundle now carries its own CSP, which would be sent
+  // alongside the nonced policy below. Two policies are intersected by the
+  // browser, not replaced, so the result would be whichever is stricter per
+  // directive. Ours is applied on its own further down.
+  //
+  // HSTS is left at helmet's default of one year with includeSubDomains, which
+  // is what the previous explicit hsts() call asked for. Note that a CDN in
+  // front may override it: send.anoni.net receives 180 days plus preload from
+  // Cloudflare rather than what this sends.
+  app.use(helmet({ contentSecurityPolicy: false }));
   app.use(function(req, res, next) {
     req.ua = uaparser(req.header('user-agent'));
     next();
@@ -30,35 +33,52 @@ module.exports = function(app) {
     next();
   });
   if (!IS_DEV) {
-    let csp = {
+    // Written out in full rather than merged with helmet's defaults. For a
+    // service whose security rests on the served JavaScript being the published
+    // JavaScript, the policy that enforces it should be readable in one place,
+    // not "this list, plus whatever this version of helmet adds".
+    const csp = {
+      useDefaults: false,
       directives: {
         defaultSrc: ["'self'"],
+        // Without base-uri an injected <base> tag can repoint every relative
+        // URL on the page, including the script tags.
+        baseUri: ["'self'"],
         connectSrc: [
           "'self'",
           function(req) {
             const baseUrl = config.deriveBaseUrl(req);
-            const r = baseUrl.replace(/^http(s?):\/\//, 'ws$1://');
-            console.log([baseUrl, r]);
-            return r;
+            return baseUrl.replace(/^http(s?):\/\//, 'ws$1://');
           }
         ],
         imgSrc: ["'self'", 'data:'],
+        fontSrc: ["'self'"],
         scriptSrc: [
           "'self'",
           function(req) {
             return `'nonce-${req.cspNonce}'`;
           }
         ],
+        // Inline event handler attributes. Safe to forbid: the nanohtml babel
+        // transform emits `element.onclick = fn` property assignments, never
+        // setAttribute('onclick', ...), so nothing in the app relies on them.
+        scriptSrcAttr: ["'none'"],
         styleSrc: [
           "'self'",
           function(req) {
             return `'nonce-${req.cspNonce}'`;
           }
         ],
+        // The download path decrypts inside a service worker.
+        workerSrc: ["'self'"],
         formAction: ["'none'"],
         frameAncestors: ["'none'"],
         objectSrc: ["'none'"],
-        reportUri: '/__cspreport__'
+        upgradeInsecureRequests: []
+        // No report-uri. The old one pointed at /__cspreport__, which has no
+        // handler here and returns 404 in production, so violation reports have
+        // always been discarded. Collecting them properly means an
+        // unauthenticated public POST endpoint, which is its own decision.
       }
     };
 
