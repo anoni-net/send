@@ -1,11 +1,17 @@
 // Headless browser regression check for the built Send image.
 //
-// Loads the home page in real chromium, waits for the client (choo) app to
-// render, and asserts there are no broken or unresolved assets. This catches
-// client-side regressions the curl-based smoke test cannot see, because the
-// server-rendered HTML can be correct while the hydrated app is broken:
+// Loads the home page in real chromium, waits for the client app to render, and
+// asserts there are no broken or unresolved assets and that the page is actually
+// styled. This catches client-side regressions the curl-based smoke test cannot
+// see, because the server-rendered HTML can be correct while the hydrated app is
+// broken or unstyled:
 //   - webpack 5 publicPath:'auto' -> /auto/app.<hash>.js 404 -> blank page
 //   - asset-map interop bug        -> <img src="undefined"> (missing logo)
+//   - purgecss content globs too shallow -> Tailwind classes stripped -> the
+//     stylesheet still returns 200 and every test passes, but the page renders
+//     with no styling at all. That happened when app/ui/archiveTile/ was split
+//     into a subdirectory the globs did not cover, and nothing except looking
+//     at the page caught it.
 //
 // Usage: node browser-check.mjs [url]   (default http://localhost:1443/)
 
@@ -84,15 +90,83 @@ const domProblems = renderError
       return out;
     });
 
+// Styling. Each assertion names a computed value that only exists because a
+// Tailwind utility resolved, so a stripped stylesheet fails here rather than
+// shipping. The dropzone is checked deliberately: it is rendered from
+// app/ui/archiveTile/, the directory the purgecss globs used to miss.
+const styleProblems = renderError
+  ? []
+  : await page.evaluate(() => {
+      const out = [];
+      const body = getComputedStyle(document.body);
+      // body carries "flex flex-col items-center font-sans"
+      if (body.display !== 'flex') {
+        out.push(`body display is "${body.display}", expected "flex"`);
+      }
+      if (body.flexDirection !== 'column') {
+        out.push(`body flex-direction is "${body.flexDirection}"`);
+      }
+      if (!/Inter/.test(body.fontFamily)) {
+        out.push(`body font-family is "${body.fontFamily}", expected Inter`);
+      }
+
+      const dropzone = document.querySelector('.border-dashed');
+      if (!dropzone) {
+        out.push('no .border-dashed element (upload dropzone) on the page');
+      } else {
+        const dz = getComputedStyle(dropzone);
+        if (dz.borderStyle !== 'dashed') {
+          out.push(`dropzone border-style is "${dz.borderStyle}"`);
+        }
+        if (parseFloat(dz.borderWidth) < 1) {
+          out.push(`dropzone border-width is "${dz.borderWidth}"`);
+        }
+      }
+
+      const btn = document.querySelector('.btn');
+      if (!btn) {
+        out.push('no .btn element on the page');
+      } else {
+        const bg = getComputedStyle(btn).backgroundColor;
+        // an unstyled button is transparent or the UA default grey
+        if (!bg || bg === 'transparent' || bg === 'rgba(0, 0, 0, 0)') {
+          out.push(`primary button background is "${bg}"`);
+        }
+      }
+
+      // A wholesale purge leaves a stylesheet that still loads but is nearly
+      // empty. The healthy build has ~245 rules; the floor only needs to be
+      // clear of that failure mode, not track the real number.
+      let rules = 0;
+      for (const sheet of document.styleSheets) {
+        try {
+          rules += sheet.cssRules.length;
+        } catch (e) {
+          // cross-origin sheet, not ours
+        }
+      }
+      if (rules < 50) {
+        out.push(`only ${rules} CSS rules loaded, expected the app stylesheet`);
+      }
+      return out;
+    });
+
 await browser.close();
 
-const failed = renderError || domProblems.length || sameOrigin4xx.length;
+const failed =
+  renderError ||
+  domProblems.length ||
+  sameOrigin4xx.length ||
+  styleProblems.length;
 if (failed) {
   console.error('Browser check FAILED:');
   if (renderError) console.error(`  app did not render: ${renderError}`);
   for (const p of domProblems) console.error(`  DOM: ${p}`);
   for (const u of sameOrigin4xx) console.error(`  same-origin 4xx: ${u}`);
+  for (const s of styleProblems) console.error(`  style: ${s}`);
   process.exit(1);
 }
 
-console.log('Browser check passed: app rendered; no undefined/auto/broken assets; no same-origin 4xx.');
+console.log(
+  'Browser check passed: app rendered and styled; no undefined/auto/broken assets; no same-origin 4xx.'
+);
