@@ -1,7 +1,6 @@
 /* global DEFAULTS LIMITS WEB_UI PREFS */
 import 'core-js';
-import choo from 'choo';
-import nanotiming from 'nanotiming';
+import createApp from './framework';
 import routes from './routes';
 import getCapabilities from './capabilities';
 import controller from './controller';
@@ -12,10 +11,6 @@ import './main.css';
 import { getTranslator } from './locale';
 import Archive from './archive';
 import { setTranslate, locale } from './utils';
-
-if (process.env.NODE_ENV === 'production') {
-  nanotiming.disabled = true;
-}
 
 (async function start() {
   const capabilities = await getCapabilities();
@@ -54,7 +49,7 @@ if (process.env.NODE_ENV === 'production') {
     locale: locale()
   };
 
-  const app = routes(choo({ hash: true }));
+  const app = routes(createApp());
 
   /* eslint-disable-next-line require-atomic-updates --
      same bootstrap, single pass, no concurrent writer. */
