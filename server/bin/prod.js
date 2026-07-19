@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const config = require('../config');
+const storage = require('../storage');
 const routes = require('../routes');
 const pages = require('../routes/pages');
 const expressWs = require('express-ws');
@@ -37,5 +38,15 @@ app.use(
 );
 
 app.use(pages.notfound);
+
+// Sweep files whose redis record has expired. Started here (not in dev/test)
+// because it should run once per deployed process. unref() so it never keeps a
+// shutting-down process alive; app.listen holds the process open otherwise.
+if (config.reap_interval_seconds > 0) {
+  const timer = setInterval(() => {
+    storage.reap().catch(() => {});
+  }, config.reap_interval_seconds * 1000);
+  timer.unref();
+}
 
 app.listen(config.listen_port, config.listen_address);

@@ -3,6 +3,11 @@ const proxyquire = require('proxyquire').noCallThru();
 
 const stream = {};
 class MockStorage {
+  constructor() {
+    // Set by the reap tests; recorded by del() so they can assert what was swept.
+    this.files = [];
+    this.deleted = [];
+  }
   length() {
     return Promise.resolve(12);
   }
@@ -12,8 +17,12 @@ class MockStorage {
   set() {
     return Promise.resolve();
   }
-  del() {
+  del(id) {
+    this.deleted.push(id);
     return Promise.resolve();
+  }
+  list() {
+    return Promise.resolve(this.files);
   }
   ping() {
     return Promise.resolve();
@@ -24,6 +33,7 @@ const config = {
   s3_bucket: 'foo',
   default_expire_seconds: 20,
   expire_times_seconds: [10, 20, 30],
+  reap_grace_seconds: 900,
   env: 'development',
   redis_host: 'localhost'
 };
@@ -87,6 +97,10 @@ function createFakeRedis() {
       ttls.delete(key);
       return 1;
     },
+    async exists(key) {
+      const m = hashes.get(key);
+      return m && m.size > 0 ? 1 : 0;
+    },
     async ping() {
       return 'PONG';
     }
@@ -95,7 +109,7 @@ function createFakeRedis() {
 
 const storage = proxyquire('../../server/storage', {
   '../config': config,
-  '../log': () => {},
+  '../log': () => ({ info() {}, warn() {}, error() {} }),
   './s3': MockStorage,
   './redis': () => createFakeRedis()
 });
@@ -204,6 +218,42 @@ describe('Storage', function() {
       await storage.del('d');
       assert.equal(await storage.releaseDownload('d'), -1);
       assert.equal(await storage.metadata('d'), null);
+    });
+  });
+
+  describe('reap', function() {
+    const LIVE = 'aaaaaaaaaaaaaaaa';
+    const ORPHAN = 'bbbbbbbbbbbbbbbb';
+    const FRESH = 'cccccccccccccccc';
+
+    it('deletes files whose redis record has expired, keeps the rest', async function() {
+      const now = 10000000;
+      const old = now - 3600000; // an hour old, well past the grace window
+      storage.storage.files = [
+        { name: `1-${LIVE}`, mtimeMs: old }, // record present -> keep
+        { name: `1-${ORPHAN}`, mtimeMs: old }, // record gone -> reap
+        { name: `1-${FRESH}`, mtimeMs: now - 1000 } // within grace -> keep
+      ];
+      storage.storage.deleted = [];
+      await storage.set(LIVE, null, { dl: 0 }); // creates the redis key for LIVE
+
+      const reaped = await storage.reap(60000, now); // 60s grace
+      assert.equal(reaped, 1);
+      assert.deepEqual(storage.storage.deleted, [`1-${ORPHAN}`]);
+
+      await storage.del(LIVE);
+    });
+
+    it('ignores files that are not Send uploads', async function() {
+      storage.storage.files = [
+        { name: 'README', mtimeMs: 0 },
+        { name: 'not-a-send-file.txt', mtimeMs: 0 },
+        { name: `1-${ORPHAN}.tmp`, mtimeMs: 0 }
+      ];
+      storage.storage.deleted = [];
+      const reaped = await storage.reap(0, 100);
+      assert.equal(reaped, 0);
+      assert.deepEqual(storage.storage.deleted, []);
     });
   });
 

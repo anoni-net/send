@@ -3,6 +3,7 @@ const path = require('path');
 const promisify = require('util').promisify;
 
 const stat = promisify(fs.stat);
+const readdir = promisify(fs.readdir);
 
 class FSStorage {
   constructor(config, log) {
@@ -40,6 +41,26 @@ class FSStorage {
 
   del(id) {
     return Promise.resolve(fs.unlinkSync(path.join(this.dir, id)));
+  }
+
+  // Names and mtimes of the stored files, so the reaper can find ones whose
+  // redis record has expired. Its presence is what marks a backend as
+  // cheaply sweepable; S3/GCS omit it and rely on bucket lifecycle rules.
+  async list() {
+    const names = await readdir(this.dir);
+    const entries = [];
+    for (const name of names) {
+      try {
+        const s = await stat(path.join(this.dir, name));
+        if (s.isFile()) {
+          entries.push({ name, mtimeMs: s.mtimeMs });
+        }
+      } catch (e) {
+        // Vanished between readdir and stat (e.g. a concurrent download hit its
+        // limit and deleted it): nothing to reap, skip it.
+      }
+    }
+    return entries;
   }
 
   ping() {

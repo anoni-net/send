@@ -81,6 +81,23 @@ Pick how you want to store uploaded files and set these config options according
 
 Redis is used as the metadata database for the backend and is required no matter which storage method you use.
 
+#### Expired file cleanup
+
+Redis holds the only expiry TTL. When it fires, a file's metadata is gone, but
+the file itself is removed only when a download reaches its limit or an owner
+deletes it. A file that is uploaded and never downloaded would otherwise sit on
+disk after it expires. On the **filesystem backend** a periodic sweep deletes
+these orphaned files. It is on by default and needs no configuration.
+
+For **S3 and GCS** the sweep does not run (listing an object store is not free).
+Use a bucket lifecycle rule to expire objects instead, set to at least your
+`MAX_EXPIRE_SECONDS` so it never removes a file that is still live.
+
+| Name  | Description |
+|------------------|-------------|
+| `REAP_INTERVAL_SECONDS` | How often the filesystem sweep runs, in seconds (defaults to `900`). Set to `0` to disable it.
+| `REAP_GRACE_SECONDS` | A file must be at least this old to be swept, so an in-flight upload is never mistaken for an orphan (defaults to `900`).
+
 #### S3 and GCS need their SDK installed
 
 The published image ships with the filesystem backend only. The AWS and Google
