@@ -11,7 +11,7 @@ module.exports = async function(req, res) {
   const newId = crypto.randomBytes(8).toString('hex');
   const metadata = req.header('X-File-Metadata');
   const auth = req.header('Authorization');
-  if (!metadata || !auth) {
+  if (!metadata || !auth || metadata.length > config.max_metadata_size) {
     return res.sendStatus(400);
   }
   const owner = crypto.randomBytes(10).toString('hex');

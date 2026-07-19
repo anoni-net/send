@@ -138,6 +138,19 @@ const conf = convict({
     default: 'development',
     env: 'NODE_ENV'
   },
+  // The encrypted file metadata (name, type, size, and the manifest for a
+  // multi-file archive) is stored in redis as-is. It was previously unbounded:
+  // ws only caps a message at its 100 MiB default, so one request could write
+  // 100 MiB into redis, and nothing rate-limits how often.
+  //
+  // Measured worst legitimate case: 64 files (MAX_FILES_PER_ARCHIVE) with
+  // 255-character names comes to roughly 27 KB, extrapolated from 550 bytes for
+  // 2 files and 1799 bytes for 8. 64 KiB leaves that 2.4x of headroom.
+  max_metadata_size: {
+    format: Number,
+    default: 64 * 1024,
+    env: 'MAX_METADATA_SIZE'
+  },
   max_file_size: {
     format: Number,
     default: 1024 * 1024 * 1024 * 2.5,

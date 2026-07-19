@@ -6,7 +6,10 @@ const expressWs = require('express-ws');
 
 module.exports = function(app, devServer) {
   assets.setMiddleware(devServer.middleware);
-  expressWs(app, null, { perMessageDeflate: false });
+  // see the note in prod.js
+  expressWs(app, null, {
+    wsOptions: { perMessageDeflate: false, maxPayload: 1024 * 1024 }
+  });
   routes(app);
   app.ws('/api/ws', require('../routes/ws'));
   tests(app);
