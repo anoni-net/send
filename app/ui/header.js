@@ -1,4 +1,4 @@
-const html = require('choo/html');
+const html = require('nanohtml');
 const Component = require('choo/component');
 const assets = require('../../common/assets');
 const { platform } = require('../utils');

@@ -1,4 +1,4 @@
-const html = require('choo/html');
+const html = require('nanohtml');
 const version = require('../../package.json').version;
 const { browserName } = require('../utils');
 

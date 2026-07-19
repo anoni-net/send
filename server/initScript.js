@@ -1,5 +1,5 @@
-const html = require('choo/html');
-const raw = require('choo/html/raw');
+const html = require('nanohtml');
+const raw = require('nanohtml/raw');
 const clientConstants = require('./clientConstants');
 
 module.exports = function(state) {

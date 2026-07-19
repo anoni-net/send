@@ -1,6 +1,6 @@
 // The staging screen: files chosen, not yet uploaded. The password field lives
 // here because this is the only screen that renders it.
-const html = require('choo/html');
+const html = require('nanohtml');
 const assets = require('../../../common/assets');
 const { bytes, list } = require('../../utils');
 const expiryOptions = require('../expiryOptions');

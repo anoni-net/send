@@ -1,6 +1,6 @@
-const html = require('choo/html');
+const html = require('nanohtml');
 const assets = require('../../../common/assets');
-const raw = require('choo/html/raw');
+const raw = require('nanohtml/raw');
 const { percent } = require('../../utils');
 const { archiveInfo, archiveDetails } = require('./shared');
 

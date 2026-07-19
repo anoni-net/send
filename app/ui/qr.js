@@ -1,4 +1,4 @@
-const raw = require('choo/html/raw');
+const raw = require('nanohtml/raw');
 const qrcode = require('../qrcode');
 
 module.exports = function(url) {

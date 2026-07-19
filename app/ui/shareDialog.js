@@ -1,4 +1,4 @@
-const html = require('choo/html');
+const html = require('nanohtml');
 
 module.exports = function(name, url) {
   const dialog = function(state, emit, close) {

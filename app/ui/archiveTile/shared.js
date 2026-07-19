@@ -1,7 +1,7 @@
 // Pieces shared by more than one of the archive screens. Split out of a single
 // 629-line archiveTile.js; the code is unchanged.
-const html = require('choo/html');
-const raw = require('choo/html/raw');
+const html = require('nanohtml');
+const raw = require('nanohtml/raw');
 const assets = require('../../../common/assets');
 const { bytes, list, timeLeft } = require('../../utils');
 
