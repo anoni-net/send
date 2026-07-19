@@ -1,6 +1,6 @@
 const html = require('nanohtml');
-const Header = require('./header');
-const Footer = require('./footer');
+const header = require('./header');
+const footer = require('./footer');
 
 module.exports = function body(main) {
   return function(state, emit) {
@@ -8,8 +8,7 @@ module.exports = function body(main) {
       <body
         class="flex flex-col items-center font-sans md:h-screen md:bg-grey-10 dark:bg-black"
       >
-        ${state.cache(Header, 'header').render()} ${main(state, emit)}
-        ${state.cache(Footer, 'footer').render()}
+        ${header(state)} ${main(state, emit)} ${footer(state)}
       </body>
     `;
     if (state.layout) {

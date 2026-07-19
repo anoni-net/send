@@ -1,8 +1,8 @@
-const choo = require('choo');
+const createApp = require('./framework');
 const download = require('./ui/download');
 const body = require('./ui/body');
 
-module.exports = function(app = choo({ hash: true })) {
+module.exports = function(app = createApp()) {
   app.route('/', body(require('./ui/home')));
   app.route('/download/:id', body(download));
   app.route('/download/:id/:key', body(download));
