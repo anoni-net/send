@@ -10,6 +10,7 @@ docker pull ghcr.io/anoni-net/send:latest
 
 # example quickstart (point REDIS_HOST to an already-running redis server)
 docker run -v $PWD/uploads:/uploads -p 1443:1443 \
+    -e 'NODE_ENV=production' \
     -e 'DETECT_BASE_URL=true' \
     -e 'REDIS_HOST=localhost' \
     -e 'FILE_DIR=/uploads' \
@@ -49,11 +50,33 @@ Config options expecting array values (e.g. `EXPIRE_TIMES_SECONDS`, `DOWNLOAD_CO
 | `BASE_URL`       | The HTTPS URL where traffic will be served (e.g. `https://send.example.com`)
 | `DETECT_BASE_URL` | Autodetect the base URL using browser if `BASE_URL` is unset (defaults to `false`)
 | `PORT`           | Port the server will listen on (defaults to `1443`)
-| `NODE_ENV`       | Run in `development` mode (unsafe) or `production` mode (the default)
+| `NODE_ENV`       | `production` or `development` (defaults to `development`). **Set this to `production`.** See below.
 | `SEND_FOOTER_DMCA_URL` | A URL to a contact page for DMCA requests (empty / not shown by default)
 | `TRUST_PROXY`    | Number of reverse proxies in front of Send (defaults to `1`). See below.
 
 *Note: more options can be found here: https://github.com/anoni-net/send/blob/main/server/config.js*
+
+#### `NODE_ENV=production` is required, and is not the default
+
+Two protections are switched off in `development` mode, because local runs and
+the frontend test suite need them off:
+
+- the Content-Security-Policy headers, which are what stops injected script from
+  running on the download page where the decryption key is held
+- the per-IP rate limits described below
+
+Neither the image nor `npm run prod` sets `NODE_ENV`, and the default in
+`server/config.js` is `development`. An instance started without it serves no CSP
+and applies no rate limit. Every example on this page sets it, and so should
+yours.
+
+To check a running instance, look for the header:
+
+```bash
+curl -sI https://send.example.com/ | grep -i content-security-policy
+```
+
+No output means the instance is running in development mode.
 
 #### Rate limiting and `TRUST_PROXY`
 
@@ -95,6 +118,7 @@ Configure the limits for uploads and downloads. Long expiration times are risky 
 | `EXPIRE_TIMES_SECONDS` | Expire time options to show in UI dropdown, e.g. `3600,86400,604800,2592000,31536000`
 | `DEFAULT_DOWNLOADS` | Default download limit in UI (defaults to `1`)
 | `DEFAULT_EXPIRE_SECONDS` | Default expire time in UI (defaults to `86400`)
+| `MAX_METADATA_SIZE` | Maximum size in bytes of the encrypted file metadata stored in redis (defaults to `65536`). The worst legitimate case, 64 files with 255-character names, measures around 27 KB. Raise it only if you also raised `MAX_FILES_PER_ARCHIVE`.
 
 *Note: more options can be found here: https://github.com/anoni-net/send/blob/main/server/config.js*
 
@@ -102,11 +126,22 @@ Configure the limits for uploads and downloads. Long expiration times are risky 
 
 Pick how you want to store uploaded files and set these config options accordingly:
 
-- Local filesystem (the default): set `FILE_DIR` to the local path used inside the container for storage (or leave the default)
+- Local filesystem (the default): set `FILE_DIR` to the path inside the container you mounted a volume at
 - S3-compatible object store: set `S3_BUCKET`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` (and `S3_ENDPOINT` if using something other than AWS)
 - Google Cloud Storage: set `GCS_BUCKET` to the name of a GCS bucket (auth should be set up using [Application Default Credentials](https://cloud.google.com/docs/authentication/production#auth-cloud-implicit-nodejs))
 
 Redis is used as the metadata database for the backend and is required no matter which storage method you use.
+
+| Name  | Description |
+|------------------|-------------|
+| `REDIS_HOST`, `REDIS_PORT`, `REDIS_USER`, `REDIS_PASSWORD`, `REDIS_DB` | Host name, port, and pass of the Redis server (defaults to `localhost`, `6379`, and no password)
+| `FILE_DIR`       | Directory the filesystem backend stores uploads in. Defaults to a random directory under the system temp dir, so set it to the path you mounted a volume at (`/uploads` in the examples here) or uploads will not survive a restart.
+| `S3_BUCKET`  | The S3 bucket name to use (only set if using S3 for storage)
+| `S3_ENDPOINT` | An optional custom endpoint to use for S3 (defaults to AWS)
+| `S3_USE_PATH_STYLE_ENDPOINT`| Whether to force [path style URLs](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Config.html#s3ForcePathStyle-property) for S3 objects (defaults to `false`)
+| `AWS_ACCESS_KEY_ID` | S3 access key ID (only set if using S3 for storage)
+| `AWS_SECRET_ACCESS_KEY` | S3 secret access key ID (only set if using S3 for storage)
+| `GCS_BUCKET` | Google Cloud Storage bucket (only set if using GCP for storage)
 
 #### Expired file cleanup
 
@@ -146,17 +181,6 @@ USER app
 Setting `S3_BUCKET` or `GCS_BUCKET` without the matching SDK fails at startup
 with a message naming the package to install.
 
-| Name  | Description |
-|------------------|-------------|
-| `REDIS_HOST`, `REDIS_PORT`, `REDIS_USER`, `REDIS_PASSWORD`, `REDIS_DB` | Host name, port, and pass of the Redis server (defaults to `localhost`, `6379`, and no password)
-| `FILE_DIR`       | Directory for storage inside the Docker container (defaults to `/uploads`)
-| `S3_BUCKET`  | The S3 bucket name to use (only set if using S3 for storage)
-| `S3_ENDPOINT` | An optional custom endpoint to use for S3 (defaults to AWS)
-| `S3_USE_PATH_STYLE_ENDPOINT`| Whether to force [path style URLs](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Config.html#s3ForcePathStyle-property) for S3 objects (defaults to `false`)
-| `AWS_ACCESS_KEY_ID` | S3 access key ID (only set if using S3 for storage)
-| `AWS_SECRET_ACCESS_KEY` | S3 secret access key ID (only set if using S3 for storage)
-| `GCS_BUCKET` | Google Cloud Storage bucket (only set if using GCP for storage)
-
 *Note: more options can be found here: https://github.com/anoni-net/send/blob/main/server/config.js*
 
 ## Branding
@@ -186,31 +210,41 @@ Side note: If you define a custom URL and a custom footer, only the footer text 
 
 ## Examples
 
-**Run using an Amazon Elasticache for the Redis DB and Amazon S3 for the storage backend.**
+**Run using Amazon ElastiCache for redis and Amazon S3 for the storage backend.**
+
+This needs an image with the S3 SDK added, as described above. `send-with-s3`
+below is the image built from that snippet.
 
 ```bash
 $ docker run -p 1443:1443 \
-  -e 'S3_BUCKET=testpilot-p2p-dev' \
-  -e 'REDIS_HOST=dyf9s2r4vo3.bolxr4.0001.usw2.cache.amazonaws.com' \
+  -e 'NODE_ENV=production' \
+  -e 'S3_BUCKET=my-send-bucket' \
+  -e 'REDIS_HOST=my-cache.abcdef.0001.usw2.cache.amazonaws.com' \
   -e 'BASE_URL=https://send.example.com' \
-  ghcr.io/anoni-net/send:latest
+  -e 'TRUST_PROXY=1' \
+  send-with-s3
 ```
 
 *Note: make sure to replace the example values above with your real values before running.*
 
 
-**Run totally self-hosted using the current filesystem directry (`$PWD`) to store the Redis data and file uploads, with a `5GB` upload limit, 1 month expiry, and contact URL set.**
+**Run totally self-hosted, storing the redis data and the uploads under the current directory (`$PWD`), with a 5 GB upload limit, one month expiry, and a contact URL set.**
 
 ```bash
 # create a network for the send backend and redis containers to talk to each other
 $ docker network create sendnet
 
 # start the redis container
-$ docker run --net=sendnet -v $PWD/redis:/data redis-server --appendonly yes
+$ docker run -d --net=sendnet --name=redis -v $PWD/redis:/data \
+    redis redis-server --appendonly yes
 
 # start the send backend container
 $ docker run --net=sendnet -v $PWD/uploads:/uploads -p 1443:1443 \
+    -e 'NODE_ENV=production' \
+    -e 'REDIS_HOST=redis' \
+    -e 'FILE_DIR=/uploads' \
     -e 'BASE_URL=http://localhost:1443' \
+    -e 'TRUST_PROXY=0' \
     -e 'MAX_FILE_SIZE=5368709120' \
     -e 'MAX_EXPIRE_SECONDS=2592000' \
     -e 'SEND_FOOTER_DMCA_URL=https://example.com/dmca-contact-info' \
@@ -218,7 +252,13 @@ $ docker run --net=sendnet -v $PWD/uploads:/uploads -p 1443:1443 \
 ```
 Then open http://localhost:1443 to view the UI. (change the `localhost` to your IP or hostname above to serve the UI to others)
 
-To run with HTTPS, you will need to set up a reverse proxy with SSL termination in front of the backend. See Docker Compose below for an example setup.
+`REDIS_HOST` is the container name on the shared network, and `FILE_DIR` has to
+match the volume mount or the uploads land somewhere the volume does not cover.
+
+To run with HTTPS, you will need to set up a reverse proxy with SSL termination
+in front of the backend. Raise `TRUST_PROXY` to `1` when you do, so the rate
+limits key on the visitor's address rather than the proxy's. See Docker Compose
+below for an example setup.
 
 
 **Run with custom branding.**
@@ -226,6 +266,7 @@ To run with HTTPS, you will need to set up a reverse proxy with SSL termination 
 ```bash
 $ docker run -p 1443:1443 \
     -v $PWD/custom_assets:/app/dist/custom_assets \
+    -e 'NODE_ENV=production' \
     -e 'UI_COLOR_PRIMARY=#f00' \
     -e 'UI_COLOR_ACCENT=#a00' \
     -e 'UI_CUSTOM_ASSETS_ICON=custom_assets/logo.svg' \
