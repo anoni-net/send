@@ -114,7 +114,7 @@ export default class FileReceiver extends Nanobus {
     } catch (e) {
       this.downloadRequest = null;
       if (this.cancelled) {
-        throw new Error(0);
+        throw new Error(0, { cause: e });
       }
       throw e;
     }
@@ -208,7 +208,7 @@ export default class FileReceiver extends Nanobus {
     } catch (e) {
       this.downloadRequest = null;
       if (this.cancelled || e === 'cancelled' || e.message === '400') {
-        throw new Error(0);
+        throw new Error(0, { cause: e });
       }
       throw e;
     }

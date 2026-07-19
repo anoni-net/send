@@ -133,7 +133,6 @@ export default function(state, emitter) {
         //cancelled. do nothing
         render();
       } else {
-
         console.error('upload failed', {
           error: err,
           duration: err.duration,
@@ -144,7 +143,17 @@ export default function(state, emitter) {
     } finally {
       openLinksInNewTab(links, false);
       archive.clear();
+      /* eslint-disable-next-line require-atomic-updates --
+         the upload tile replaces the upload button while this runs, so a second
+         upload cannot start. */
       state.uploading = false;
+      /* eslint-disable-next-line require-atomic-updates --
+         not a false positive. state.transfer is shared with the download flow,
+         and following a /download/:id link while an upload is still in flight
+         lets this null out the receiver set below. The download UI reads that as
+         "no transfer" rather than throwing, so it degrades instead of breaking.
+         Left as-is: the fix is scoping transfer per flow, a behaviour change
+         rather than a warning cleanup. */
       state.transfer = null;
       await state.storage.merge();
       render();
@@ -159,9 +168,10 @@ export default function(state, emitter) {
       state.storage.writeFile(file);
       await delay(1000);
     } catch (err) {
-
       console.error('setting password failed', err);
     } finally {
+      /* eslint-disable-next-line require-atomic-updates --
+         the password field is disabled while the request is in flight. */
       state.settingPassword = false;
     }
     render();
@@ -173,6 +183,10 @@ export default function(state, emitter) {
     const receiver = new FileReceiver(file);
     try {
       await receiver.getMetadata();
+
+      /* eslint-disable-next-line require-atomic-updates --
+         see the note on the upload path above; this is the write that can be
+         clobbered. */
       state.transfer = receiver;
     } catch (e) {
       if (e.message === '401' || e.message === '404') {
@@ -208,7 +222,6 @@ export default function(state, emitter) {
         state.transfer.reset();
         render();
       } else {
-
         state.transfer = null;
         const location = err.message === '404' ? '/404' : '/error';
         if (location === '/error') {

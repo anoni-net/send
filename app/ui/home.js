@@ -10,7 +10,7 @@ module.exports = function(state, emit) {
   const archives = state.storage.files
     .filter(archive => !archive.expired)
     .map(archive => archiveTile(state, emit, archive));
-  let left = '';
+  let left;
   if (state.uploading) {
     left = archiveTile.uploading(state, emit);
   } else if (state.archive.numFiles > 0) {

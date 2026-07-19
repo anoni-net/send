@@ -15,7 +15,7 @@ class Header extends Component {
   }
 
   createElement() {
-    let assetMap = {};
+    let assetMap;
     if (this.state.ui !== undefined) assetMap = this.state.ui.assets;
     else
       assetMap = {

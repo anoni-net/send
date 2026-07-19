@@ -61,6 +61,10 @@ async function fetchWithAuth(url, params, keychain) {
   const result = {};
   params = params || {};
   const h = await keychain.authHeader();
+
+  // literal from the caller, not shared with anything else.
+  /* eslint-disable-next-line require-atomic-updates --
+     `params` is an object literal from the caller, not shared with anything. */
   params.headers = new Headers({
     Authorization: h,
     'Content-Type': 'application/json'
@@ -70,6 +74,14 @@ async function fetchWithAuth(url, params, keychain) {
   result.ok = response.ok;
   const nonce = parseNonce(response.headers.get('WWW-Authenticate'));
   result.shouldRetry = response.status === 401 && nonce !== keychain.nonce;
+
+  // requests sharing a keychain can both read nonce N and both write back. The
+  // consequence is a 401, which is exactly what shouldRetry above handles, and
+  // fetchWithAuthAndRetry exists for it. Locking the keychain would buy nothing.
+  /* eslint-disable-next-line require-atomic-updates --
+     this one is real: two requests sharing a keychain can both read nonce N and
+     both write back. The consequence is a 401, which is exactly what shouldRetry
+     above handles and what fetchWithAuthAndRetry exists for. */
   keychain.nonce = nonce;
   return result;
 }
@@ -303,6 +315,8 @@ async function downloadS(id, keychain, signal) {
 
   const authHeader = response.headers.get('WWW-Authenticate');
   if (authHeader) {
+    /* eslint-disable-next-line require-atomic-updates --
+       as above: a stale nonce costs a retry, not access. */
     keychain.nonce = parseNonce(authHeader);
   }
 
@@ -322,7 +336,7 @@ async function tryDownloadStream(id, keychain, signal, tries = 2) {
       return tryDownloadStream(id, keychain, signal, tries);
     }
     if (e.name === 'AbortError') {
-      throw new Error('0');
+      throw new Error('0', { cause: e });
     }
     throw e;
   }
