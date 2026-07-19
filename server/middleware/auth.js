@@ -1,3 +1,8 @@
+/* eslint-disable require-atomic-updates --
+   Every warning in this file is `req.*` assigned after `await storage.metadata()`.
+   Express gives each request its own `req` and runs that request's middleware
+   chain sequentially, so there is no second writer to race with. The rule cannot
+   see that and flags any property write that follows an await. */
 const assert = require('assert');
 const crypto = require('crypto');
 const storage = require('../storage');

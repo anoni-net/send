@@ -38,6 +38,9 @@ if (process.env.NODE_ENV === 'production') {
   const translate = await getTranslator(locale());
   setTranslate(translate);
 
+  // once before anything else can touch window.
+  /* eslint-disable-next-line require-atomic-updates --
+     module bootstrap, runs once before anything else can touch window. */
   window.initialState = {
     LIMITS,
     DEFAULTS,
@@ -54,6 +57,9 @@ if (process.env.NODE_ENV === 'production') {
 
   const app = routes(choo({ hash: true }));
 
+  // pass, no concurrent writer.
+  /* eslint-disable-next-line require-atomic-updates --
+     same bootstrap, single pass, no concurrent writer. */
   window.app = app;
   app.use(controller);
   app.use(dragManager);

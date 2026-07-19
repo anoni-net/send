@@ -3,7 +3,6 @@ const raw = require('choo/html/raw');
 const clientConstants = require('./clientConstants');
 
 module.exports = function(state) {
-
   /* eslint-disable no-useless-escape */
   const jsconfig = `
   var isIE = /trident\\\/7\.|msie/i.test(navigator.userAgent);
