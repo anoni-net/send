@@ -1,13 +1,13 @@
-import Nanobus from 'nanobus';
+import Emitter from './emitter';
 import Keychain from './keychain';
 import { delay, bytes, streamToArrayBuffer } from './utils';
 import { downloadFile, metadata, getApiUrl } from './api';
 import { blobStream } from './streams';
 import Zip from './zip';
 
-export default class FileReceiver extends Nanobus {
+export default class FileReceiver extends Emitter {
   constructor(fileInfo) {
-    super('FileReceiver');
+    super();
     this.keychain = new Keychain(fileInfo.secretKey, fileInfo.nonce);
     if (fileInfo.requiresPassword) {
       this.keychain.setPassword(fileInfo.password, fileInfo.url);

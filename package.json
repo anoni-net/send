@@ -110,7 +110,6 @@
     "express": "^5.2.1",
     "express-ws": "^5.0.2",
     "helmet": "^8.3.0",
-    "nanobus": "^4.5.0",
     "nanohtml": "^1.10.0",
     "nanomorph": "^5.4.3",
     "redis": "^6.0.0",
