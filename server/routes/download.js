@@ -1,6 +1,6 @@
 const storage = require('../storage');
-const mozlog = require('../log');
-const log = mozlog('send.download');
+const createLogger = require('../log');
+const log = createLogger('send.download');
 
 module.exports = async function(req, res) {
   const id = req.params.id;
