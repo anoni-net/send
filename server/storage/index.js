@@ -1,23 +1,51 @@
 const config = require('../config');
 const Metadata = require('../metadata');
-const mozlog = require('../log');
+const createLogger = require('../log');
 const createRedisClient = require('./redis');
 
 function getPrefix(seconds) {
   return Math.max(Math.floor(seconds / 86400), 1);
 }
 
+// The S3 and GCS SDKs are not installed in the published image. Together they
+// pull in over half of the production dependency tree for backends that a
+// filesystem deployment never loads, so they moved to devDependencies: the
+// tests still exercise both, and anyone deploying against S3 or GCS installs
+// them alongside Send.
+//
+// Without this, that mistake surfaces as a bare MODULE_NOT_FOUND from a require
+// three directories down, which says nothing about what to do next.
+// `load` is a thunk rather than a backend name so the require stays literal:
+// a computed require would defeat static analysis for no benefit here.
+function loadStorage(load, name, packages) {
+  try {
+    return load();
+  } catch (e) {
+    if (e.code !== 'MODULE_NOT_FOUND') throw e;
+    throw new Error(
+      `The ${name} storage backend is configured but its SDK is not installed. ` +
+        `Run: npm install ${packages.join(' ')}`,
+      { cause: e }
+    );
+  }
+}
+
 class DB {
   constructor(config) {
     let Storage;
     if (config.s3_bucket) {
-      Storage = require('./s3');
+      Storage = loadStorage(() => require('./s3'), 'S3', [
+        '@aws-sdk/client-s3',
+        '@aws-sdk/lib-storage'
+      ]);
     } else if (config.gcs_bucket) {
-      Storage = require('./gcs');
+      Storage = loadStorage(() => require('./gcs'), 'GCS', [
+        '@google-cloud/storage'
+      ]);
     } else {
       Storage = require('./fs');
     }
-    this.log = mozlog('send.storage');
+    this.log = createLogger('send.storage');
 
     this.storage = new Storage(config, this.log);
 

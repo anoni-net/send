@@ -64,6 +64,27 @@ Pick how you want to store uploaded files and set these config options according
 
 Redis is used as the metadata database for the backend and is required no matter which storage method you use.
 
+#### S3 and GCS need their SDK installed
+
+The published image ships with the filesystem backend only. The AWS and Google
+SDKs are large: together they are more than half of the dependencies a
+filesystem deployment would otherwise carry, for code it never loads. They are
+therefore not installed by default.
+
+To use either backend, build an image with the SDK added:
+
+```dockerfile
+FROM ghcr.io/anoni-net/send:latest
+USER root
+RUN npm install --no-save @aws-sdk/client-s3 @aws-sdk/lib-storage
+# ...or, for Google Cloud Storage:
+# RUN npm install --no-save @google-cloud/storage
+USER app
+```
+
+Setting `S3_BUCKET` or `GCS_BUCKET` without the matching SDK fails at startup
+with a message naming the package to install.
+
 | Name  | Description |
 |------------------|-------------|
 | `REDIS_HOST`, `REDIS_PORT`, `REDIS_USER`, `REDIS_PASSWORD`, `REDIS_DB` | Host name, port, and pass of the Redis server (defaults to `localhost`, `6379`, and no password)

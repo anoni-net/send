@@ -1,11 +1,11 @@
 const crypto = require('crypto');
 const storage = require('../storage');
 const config = require('../config');
-const mozlog = require('../log');
+const createLogger = require('../log');
 const Limiter = require('../limiter');
 const { encryptedSize } = require('../../app/utils');
 
-const log = mozlog('send.upload');
+const log = createLogger('send.upload');
 
 module.exports = async function(req, res) {
   const newId = crypto.randomBytes(8).toString('hex');
