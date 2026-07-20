@@ -44,8 +44,16 @@ env:
   IMAGE: ghcr.io/anoni-net/send
 
 jobs:
+  # Nothing gets built, signed or attested until lint and both test suites pass.
+  # These used to live only in ci-build.yml, whose trigger matches neither tag
+  # pushes nor main, so the released artifact was the one artifact they never
+  # ran against.
+  tests:
+    uses: ./.github/workflows/tests.yml
+
   build:
     name: Build ${{ matrix.arch }}
+    needs: tests
     runs-on: ${{ matrix.runner }}
     strategy:
       fail-fast: true

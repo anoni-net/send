@@ -26,82 +26,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # Lint was absent from CI until v4.0.0, which is how `npm run lint` stayed
-  # broken for months after a dependency bump moved ESLint past the config
-  # format it was using. Nobody noticed because nothing ran it.
-  #
-  # `lint:js` carries a --max-warnings ceiling so the current backlog cannot
-  # grow: new warnings fail the job, and the ceiling drops as the backlog is
-  # cleared. Errors always fail.
-  lint:
-    name: Lint
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: Install dependencies
-        run: npm ci
-        env:
-          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: 'true'
-
-      - name: ESLint + stylelint
-        run: npm run lint
-
-  backend-tests:
-    name: Backend unit tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: Install dependencies
-        run: npm ci
-        env:
-          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: 'true'
-
-      - name: Backend unit tests
-        run: npm run test:backend
-
-  frontend-tests:
-    name: Frontend tests (browser)
-    runs-on: ubuntu-latest
-    # The workflow tests (fileSender/workflow) do a real upload through the test
-    # server, which needs a redis backend.
-    services:
-      redis:
-        image: redis:alpine
-        ports:
-          - 6379:6379
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: Install dependencies
-        run: npm ci
-        env:
-          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
-
-      - name: Install Playwright chromium
-        run: npx playwright install --with-deps chromium
-
-      - name: Frontend tests (mocha in chromium)
-        run: npm run test:frontend
+  # Lint, backend and frontend suites live in tests.yml so publish.yml can
+  # require the same jobs before it signs anything.
+  tests:
+    uses: ./.github/workflows/tests.yml
 
   build-and-smoke:
     name: Build image + smoke test

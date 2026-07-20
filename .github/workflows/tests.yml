@@ -1,0 +1,97 @@
+##
+# Lint and the unit / browser test suites, as a reusable workflow.
+#
+# Extracted from ci-build.yml so publish.yml can require them too. Before this,
+# ci-build.yml triggered on `push: branches-ignore: [main]` plus `pull_request`.
+# A push trigger carrying only a branch filter does not match tag pushes at all,
+# and main was excluded on purpose, so on `git push origin v5.0.0` none of these
+# jobs ran. publish.yml did build, smoke-test and scan the image, but the
+# artifact that ends up cosign-signed and SLSA-attested was the one artifact the
+# test suite never saw. The PR path did run them, which made the gap easy to
+# miss: every PR was green, and the release was the exception.
+##
+name: tests
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  # Lint was absent from CI until v4.0.0, which is how `npm run lint` stayed
+  # broken for months after a dependency bump moved ESLint past the config
+  # format it was using. Nobody noticed because nothing ran it.
+  #
+  # `lint:js` carries a --max-warnings ceiling so the current backlog cannot
+  # grow: new warnings fail the job, and the ceiling drops as the backlog is
+  # cleared. Errors always fail.
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm ci
+        env:
+          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: 'true'
+
+      - name: ESLint + stylelint
+        run: npm run lint
+
+  backend-tests:
+    name: Backend unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm ci
+        env:
+          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: 'true'
+
+      - name: Backend unit tests
+        run: npm run test:backend
+
+  frontend-tests:
+    name: Frontend tests (browser)
+    runs-on: ubuntu-latest
+    # The workflow tests (fileSender/workflow) do a real upload through the test
+    # server, which needs a redis backend.
+    services:
+      redis:
+        image: redis:alpine
+        ports:
+          - 6379:6379
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm ci
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+
+      - name: Install Playwright chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Frontend tests (mocha in chromium)
+        run: npm run test:frontend
