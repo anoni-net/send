@@ -121,3 +121,6 @@ shareLinkDescription = 您的檔案鏈結:
 shareLinkButton = 分享鏈結
 # $name is the name of the file
 shareMessage = 使用 { -send-brand } 下載「{ $name }」: 簡單安全的檔案分享機制
+# Shown when the upload connection could not be opened at all, which usually
+# means something between the user and the server is blocking it.
+connectFailed = 無法建立上傳連線。你的網路可能擋住了它。請檢查連線後再試一次。
