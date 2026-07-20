@@ -37,12 +37,6 @@ module.exports = function(state, emit) {
               'noStreamsOptionCopy'
             )}</label>
           </div>
-          <div class="my-3">
-            <input class="mx-2" type="radio" name="gus" id="firefox" value="firefox">
-            <label class="" for="firefox">${state.translate(
-              'noStreamsOptionFirefox'
-            )}</label>
-          </div>
           <div class="mt-3">
             <input class="mx-2" type="radio" name="gus" id="download" value="download">
             <label class="" for="download">${state.translate(
@@ -58,7 +52,7 @@ module.exports = function(state, emit) {
             <p
           class="text-grey-80 leading-normal dark:text-grey-40 font-semibold text-center md:my-8 md:text-left"
         >
-          ${state.translate('downloadConfirmDescription')}
+          ${state.translate('noStreamsChooseDescription')}
         </p>
       </form>
     </div>
@@ -69,13 +63,9 @@ module.exports = function(state, emit) {
     const choice = event.target.value;
     const button = event.currentTarget.nextElementSibling;
     let title = button.title;
-    console.error(choice, title);
     switch (choice) {
       case 'copy':
         title = state.translate('copyLinkButton');
-        break;
-      case 'firefox':
-        title = state.translate('downloadFirefox');
         break;
       case 'download':
         title = state.translate('downloadButtonLabel');
@@ -92,11 +82,6 @@ module.exports = function(state, emit) {
         emit('copy', { url: window.location.href });
         document.querySelector('input[type="submit"]').value = state.translate(
           'copiedUrl'
-        );
-        break;
-      case 'firefox':
-        window.open(
-          'https://www.mozilla.org/firefox/new/'
         );
         break;
       case 'download':
