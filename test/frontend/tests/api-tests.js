@@ -12,6 +12,35 @@ const metadata = {
 };
 
 describe('API', function() {
+  describe('statusError', function() {
+    // The server answers 429 with Retry-After and nothing read it, so the only
+    // thing the UI could say was "later".
+    it('carries Retry-After when the server sent one', function() {
+      const err = api.statusError(429, new Headers({ 'Retry-After': '60' }));
+      assert.equal(err.message, '429');
+      assert.equal(err.retryAfter, 60);
+    });
+
+    it('omits it when absent or not a positive integer', function() {
+      for (const headers of [
+        new Headers(),
+        new Headers({ 'Retry-After': '0' }),
+        new Headers({ 'Retry-After': '-5' }),
+        // A Retry-After may also be an HTTP-date, which is not a wait in
+        // seconds. Rather than guess, say nothing.
+        new Headers({ 'Retry-After': 'Wed, 21 Oct 2026 07:28:00 GMT' })
+      ]) {
+        const err = api.statusError(429, headers);
+        assert.equal(err.message, '429');
+        assert.equal(err.retryAfter, undefined);
+      }
+    });
+
+    it('works without headers at all', function() {
+      assert.equal(api.statusError(404).message, '404');
+    });
+  });
+
   describe('websocket upload', function() {
     // The connect used to listen for 'open' and nothing else. A refused or
     // filtered connection fires 'error' then 'close', neither of which settled

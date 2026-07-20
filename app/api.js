@@ -21,6 +21,19 @@ export class ConnectFailedError extends Error {
   }
 }
 
+// Every failing request is reported to the UI as an Error whose message is the
+// status, which is what the callers switch on. A 429 also carries Retry-After,
+// and nothing read it, so the only thing the interface could say was "later".
+// Carrying it here lets the message say how long instead.
+export function statusError(status, headers) {
+  const err = new Error(status);
+  const value = headers && headers.get && Number(headers.get('Retry-After'));
+  if (Number.isInteger(value) && value > 0) {
+    err.retryAfter = value;
+  }
+  return err;
+}
+
 let apiUrlPrefix = '';
 export function getApiUrl(path) {
   return apiUrlPrefix + path;
@@ -140,7 +153,7 @@ export async function metadata(id, keychain) {
       manifest: meta.manifest
     };
   }
-  throw new Error(result.response.status);
+  throw statusError(result.response.status, result.response.headers);
 }
 
 export async function setPassword(id, owner_token, keychain) {
@@ -390,7 +403,7 @@ async function downloadS(id, keychain, signal) {
   }
 
   if (response.status !== 200) {
-    throw new Error(response.status);
+    throw statusError(response.status, response.headers);
   }
 
   return response.body;
@@ -438,7 +451,11 @@ async function download(id, keychain, onprogress, canceller) {
         keychain.nonce = parseNonce(authHeader);
       }
       if (xhr.status !== 200) {
-        return reject(new Error(xhr.status));
+        return reject(
+          statusError(xhr.status, {
+            get: name => xhr.getResponseHeader(name)
+          })
+        );
       }
 
       const blob = new Blob([xhr.response]);
