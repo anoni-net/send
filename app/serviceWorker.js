@@ -86,17 +86,38 @@ async function decryptStream(id) {
     };
     return new Response(responseStream, { headers });
   } catch (e) {
+    // Record why, so the client's progress poll can report it. The response is
+    // a poor channel here: this request was started by a top-level navigation,
+    // so anything with a body, an error status, or a redirect takes the user
+    // off the page and destroys the very state that was tracking the download.
+    file.error = errorStatus(e);
+    file.retryAfter = e && e.retryAfter;
+
     if (noSave) {
-      return new Response(null, { status: e.message });
+      return new Response(null, { status: file.error });
     }
 
-    return new Response(null, {
-      status: 302,
-      headers: {
-        Location: `/download/${id}/#${file.key}`
-      }
-    });
+    // 204 keeps the browser exactly where it is: no navigation, no reload, no
+    // browser error page. The download page stays mounted and its polling loop
+    // picks up file.error on the next tick.
+    //
+    // This used to be a 302 back to the download page, which reloaded it. So a
+    // rate-limited or expired download looked like the Download button simply
+    // did nothing, and it masked 404s on the streaming path too.
+    return new Response(null, { status: 204 });
   }
+}
+
+// e.message is a status only when the failure came from the download request
+// itself. A crypto failure carries text like 'no delimiter found', and
+// `new Response(null, { status: text })` throws RangeError, so the integrity
+// failure that the ECE delimiter check exists to catch was the case reported
+// worst of all.
+function errorStatus(e) {
+  const status = Number(e && e.message);
+  return Number.isInteger(status) && status >= 200 && status <= 599
+    ? status
+    : 500;
 }
 
 async function precache() {
@@ -171,6 +192,15 @@ self.onmessage = event => {
     const file = map.get(event.data.id);
     if (!file) {
       event.ports[0].postMessage({ error: 'cancelled' });
+    } else if (file.error !== undefined) {
+      // The fetch failed. Report it once and drop the entry, so the client
+      // raises the real status instead of waiting out a progress counter that
+      // will never move.
+      map.delete(event.data.id);
+      event.ports[0].postMessage({
+        error: String(file.error),
+        retryAfter: file.retryAfter
+      });
     } else {
       if (file.progress === file.size) {
         map.delete(event.data.id);

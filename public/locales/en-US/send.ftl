@@ -128,3 +128,9 @@ sponsoredByThunderbird = Sponsored by Thunderbird
 # Shown when the upload connection could not be opened at all, which usually
 # means something between the user and the server is blocking it.
 connectFailed = Could not open a connection to upload. Your network may be blocking it. Check your connection and try again.
+
+# Shown when the server refuses a request because this connection has made too
+# many in a short time.
+rateLimited = Too many requests from your connection. Wait a moment, then try again.
+# $seconds is how long the server asked us to wait
+rateLimitedRetry = Too many requests from your connection. Try again in { $seconds } seconds.

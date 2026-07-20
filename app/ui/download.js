@@ -64,7 +64,16 @@ module.exports = function(state, emit) {
     }
   }
 
-  if (!state.transfer && !state.fileInfo.requiresPassword) {
+  // This fires on every render, and a failed request re-renders, so anything
+  // that leaves state.transfer unset without navigating away spins here. That
+  // was invisible while every failure went to /error, and it is why a rate
+  // limit measured 120 requests a second the moment the visitor was allowed to
+  // stay on the page. metadataFailed is the brake.
+  if (
+    !state.transfer &&
+    !state.fileInfo.requiresPassword &&
+    !state.metadataFailed
+  ) {
     emit('getMetadata');
   }
 

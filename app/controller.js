@@ -7,6 +7,17 @@ import shareDialog from './ui/shareDialog';
 import { bytes } from './utils';
 import { copyToClipboard, delay, openLinksInNewTab, percent } from './utils';
 
+// A 429 reaches the UI from three places: the WebSocket upload, the metadata
+// request, and the download. All three used to land on the generic error page,
+// whose only affordance invites an immediate retry that burns another slot.
+// Says how long when the server told us, and stays vague when it did not,
+// rather than inventing a number from the default window.
+function rateLimitMessage(state, err) {
+  return err.retryAfter
+    ? state.translate('rateLimitedRetry', { seconds: err.retryAfter })
+    : state.translate('rateLimited');
+}
+
 export default function(state, emitter) {
   let lastRender = 0;
   let updateTitle = false;
@@ -130,6 +141,8 @@ export default function(state, emitter) {
       if (err.message === '0') {
         //cancelled. do nothing
         render();
+      } else if (err.message === '429') {
+        state.modal = okDialog(rateLimitMessage(state, err));
       } else if (err.message === 'connect-failed') {
         // The upload never started, so the archive is still selected and the
         // page is still usable. A dialog keeps the user where they are instead
@@ -198,6 +211,20 @@ export default function(state, emitter) {
         if (!file.requiresPassword) {
           return emitter.emit('pushState', '/404');
         }
+      } else if (e.message === '429') {
+        // The link is fine and the file is still there, so explain the wait
+        // rather than sending the visitor to a page that says something went
+        // wrong. Stop the render loop from re-requesting, and reload on dismiss
+        // so the OK button is the retry: by then the window has usually passed.
+        /* eslint-disable-next-line require-atomic-updates --
+           written after an await, but the only value ever written is `true`,
+           and the only reader is the guard in ui/download.js that stops the
+           re-request. Concurrent handlers racing here all set the same flag, so
+           the outcome does not depend on which one wins. */
+        state.metadataFailed = true;
+        state.modal = okDialog(rateLimitMessage(state, e), () =>
+          location.reload()
+        );
       } else {
         console.error(e);
         return emitter.emit('pushState', '/error');
@@ -223,6 +250,10 @@ export default function(state, emitter) {
       if (err.message === '0') {
         // download cancelled
         state.transfer.reset();
+        render();
+      } else if (err.message === '429') {
+        state.transfer.reset();
+        state.modal = okDialog(rateLimitMessage(state, err));
         render();
       } else {
         /* eslint-disable-next-line require-atomic-updates --

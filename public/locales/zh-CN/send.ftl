@@ -127,3 +127,8 @@ shareMessage = 使用 { -send-brand } 下载“{ $name }”：简单、安全的
 # Shown when the upload connection could not be opened at all, which usually
 # means something between the user and the server is blocking it.
 connectFailed = 无法建立上传连接。你的网络可能拦截了它。请检查连接后重试。
+# Shown when the server refuses a request because this connection has made too
+# many in a short time.
+rateLimited = 这个连接在短时间内发送了太多请求。请稍候再试。
+# $seconds is how long the server asked us to wait
+rateLimitedRetry = 这个连接在短时间内发送了太多请求。请在 { $seconds } 秒后重试。

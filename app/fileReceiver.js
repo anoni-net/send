@@ -64,9 +64,16 @@ export default class FileReceiver extends Emitter {
 
       channel.port1.onmessage = function(event) {
         if (event.data === undefined) {
-          reject('bad response from serviceWorker');
+          reject(new Error('bad response from serviceWorker'));
         } else if (event.data.error !== undefined) {
-          reject(event.data.error);
+          // An Error rather than the bare string this used to reject with, so
+          // callers can read .message like they do for every other download
+          // path, and so the server's retry hint survives the message channel.
+          const err = new Error(event.data.error);
+          if (event.data.retryAfter) {
+            err.retryAfter = event.data.retryAfter;
+          }
+          reject(err);
         } else {
           resolve(event.data);
         }
@@ -207,7 +214,12 @@ export default class FileReceiver extends Emitter {
       this.state = 'complete';
     } catch (e) {
       this.downloadRequest = null;
-      if (this.cancelled || e === 'cancelled' || e.message === '400') {
+      if (
+        this.cancelled ||
+        e === 'cancelled' ||
+        e.message === 'cancelled' ||
+        e.message === '400'
+      ) {
         throw new Error(0, { cause: e });
       }
       throw e;
