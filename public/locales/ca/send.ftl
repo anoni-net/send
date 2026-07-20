@@ -24,8 +24,6 @@ fileTooBig = Aquest fitxer és massa gros per pujar-lo. Ha de tenir menys de { $
 linkExpiredAlt = L'enllaç ha caducat
 notSupportedHeader = El vostre navegador no és compatible.
 notSupportedLink = Per què el meu navegador no és compatible?
-notSupportedOutdatedDetail = Aquesta versió del Firefox no admet la tecnologia web amb què funciona el Send. Haureu d'actualitzar el navegador.
-updateFirefox = Actualitza el Firefox
 deletePopupCancel = Cancel·la
 deleteButtonHover = Suprimeix
 passwordTryAgain = La contrasenya és incorrecta. Torneu-ho a provar.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours } h { $minutes } min
 expiresMinutes = { $minutes } min
 # A short status message shown when the user enters a long password
 maxPasswordLength = Longitud màxima de la contrasenya: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] Només es permet 1 fitxer.
        *[other] Només es permeten { $count } fitxers.
     }
-expiredTitle = Aquest enllaç ha caducat.
-notSupportedDescription = El { -send-brand } no funcionarà amb aquest navegador. El { -send-short-brand } funciona millor amb l'última versió del { -firefox } i funcionarà amb la versió més recent de la majoria de navegadors.
-downloadFirefox = Baixa el { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } d { $hours } h { $minutes } min
 addFilesButton = Seleccioneu els fitxers que voleu pujar
@@ -110,12 +103,10 @@ dragAndDropFiles = Arrossegueu i deixeu anar els fitxers
 orClickWithSize = o feu clic aquí per enviar fins a { $size }
 addPassword = Protegeix amb contrasenya
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = D'acord
 downloadingTitle = S'està baixant
 noStreamsWarning = Pot ser que aquest navegador no pugui desxifrar un fitxer tan gran.
 noStreamsOptionCopy = Copieu l'enllaç per obrir-lo en un altre navegador
-noStreamsOptionFirefox = Proveu el nostre navegador preferit
 noStreamsOptionDownload = Segueix amb aquest navegador
 # the next line after the colon contains a file name
 shareLinkDescription = Compartiu l'enllaç al vostre fitxer:

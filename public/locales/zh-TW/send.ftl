@@ -22,8 +22,6 @@ fileTooBig = 檔案太大無法上傳。檔案大小限制為 { $size }。
 linkExpiredAlt = 鏈結已過期
 notSupportedHeader = 不支援您的瀏覽器。
 notSupportedLink = 為什麼我的瀏覽器不支援？
-notSupportedOutdatedDetail = 很可惜，此版本的 Firefox 不支援 Send 所需的 Web 技術。請更新瀏覽器後再使用。
-updateFirefox = 更新 Firefox
 deletePopupCancel = 取消
 deleteButtonHover = 刪除
 footerText = 不隸屬於 Mozilla 或 Firefox。
@@ -41,9 +39,7 @@ expiresHoursMinutes = { $hours } 時 { $minutes } 分
 expiresMinutes = { $minutes } 分鐘
 # A short status message shown when the user enters a long password
 maxPasswordLength = 最大密碼長度: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -95,9 +91,6 @@ tooManyArchives = { $count ->
      [one] 僅允許 1 個壓縮檔。
     *[other] 僅允許 { $count } 個壓縮檔。
 }
-expiredTitle = 此鏈結已經失效。
-notSupportedDescription = 無法於此瀏覽器使用 { -send-brand }。在最新版的 { -firefox } 中使用 { -send-short-brand } 會有最佳效果，也可在大部分瀏覽器的最新版本當中使用。
-downloadFirefox = 下載 { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } 天 { $hours } 小時 { $minutes } 分鐘
 addFilesButton = 選擇要上傳的檔案
@@ -109,12 +102,10 @@ dragAndDropFiles = 拖放檔案到此處
 orClickWithSize = 或點擊即可傳送最大 { $size } 的檔案
 addPassword = 使用密碼保護
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = 確定
 downloadingTitle = 下載中
 noStreamsWarning = 此瀏覽器無法解密這麼大的檔案。
 noStreamsOptionCopy = 複製鏈結，用其他瀏覽器開啟
-noStreamsOptionFirefox = 試試我們最愛的瀏覽器
 noStreamsOptionDownload = 繼續使用目前的瀏覽器
 # the next line after the colon contains a file name
 shareLinkDescription = 您的檔案鏈結:

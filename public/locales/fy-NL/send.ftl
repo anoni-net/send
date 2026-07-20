@@ -24,8 +24,6 @@ fileTooBig = It bestân is te grut om op te laden. It moat lytser wêze as { $si
 linkExpiredAlt = Keppeling ferrûn
 notSupportedHeader = Jo browser wurdt net stipe.
 notSupportedLink = Wêrom wurdt myn browser net stipe?
-notSupportedOutdatedDetail = Spitigernôch stipet dizze ferzje fan Firefox de webtechnology dy't Send mooflik makket net. Jo moatte jo browser fernije.
-updateFirefox = Firefox fernije
 deletePopupCancel = Annulearje
 deleteButtonHover = Fuortsmite
 passwordTryAgain = Net krekt wachtwurd. Probearje it opnij.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours }o { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maksimale wachtwurdlingte: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] Der is mar ien argyf tastien.
        *[other] Der binne mar { $count } argiven tastien.
     }
-expiredTitle = Dizze keppeling is ferrûn.
-notSupportedDescription = { -send-brand } funksjonearret net mei dizze browser. { -send-short-brand } funksjonearret it bêste mei de nijste ferzje fan { -firefox } en funksjonearret mei de aktuele ferzje fan de measte browsers.
-downloadFirefox = { -firefox } downloade
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }o { $minutes }m
 addFilesButton = Bestannen selektearje om op te laden
@@ -110,12 +103,10 @@ dragAndDropFiles = Sleep en pleats bestannen
 orClickWithSize = of stjoer oant { $size } troch te klikken
 addPassword = Mei wachtwurd beskermje
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = OK
 downloadingTitle = Downloade
 noStreamsWarning = Dizze browser kin in sa'n grut bestân mooglik net fersiferje.
 noStreamsOptionCopy = Kopiearje de koppeling om yn in oare browser te iepenjen
-noStreamsOptionFirefox = Probearje ús favorite browser
 noStreamsOptionDownload = Trochgean mei dizze browser
 # the next line after the colon contains a file name
 shareLinkDescription = Diel de keppeling nei jo bestân:

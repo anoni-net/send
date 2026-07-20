@@ -24,8 +24,6 @@ fileTooBig = Αυτό το αρχείο είναι πολύ μεγάλο για 
 linkExpiredAlt = Ο σύνδεσμος έληξε
 notSupportedHeader = Το πρόγραμμα περιήγησής σας δεν υποστηρίζεται.
 notSupportedLink = Γιατί δεν υποστηρίζεται το πρόγραμμα περιήγησής μου;
-notSupportedOutdatedDetail = Δυστυχώς, αυτή η έκδοση του Firefox δεν υποστηρίζει την τεχνολογία ιστού στην οποία βασίζεται το Send. Πρέπει να ενημερώσετε το πρόγραμμα περιήγησής σας.
-updateFirefox = Ενημέρωση Firefox
 deletePopupCancel = Ακύρωση
 deleteButtonHover = Διαγραφή
 passwordTryAgain = Λάθος κωδικός πρόσβασης. Δοκιμάστε ξανά.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours }ώ { $minutes }λ
 expiresMinutes = { $minutes }λ
 # A short status message shown when the user enters a long password
 maxPasswordLength = Μέγιστο μήκος κωδικού: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] Μόνο 1 αρχείο επιτρέπεται.
        *[other] Μόνο { $count } αρχεία επιτρέπονται.
     }
-expiredTitle = Αυτός ο σύνδεσμος έχει λήξει.
-notSupportedDescription = Το { -send-brand } δεν θα λειτουργήσει με αυτό το πρόγραμμα περιήγησης. Το { -send-short-brand } λειτουργεί καλύτερα με την πιο πρόσφατη έκδοση του { -firefox }, καθώς και με την τρέχουσα έκδοση των περισσότερων προγραμμάτων περιήγησης.
-downloadFirefox = Λήψη του { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }η { $hours }ώ { $minutes }λ
 addFilesButton = Επιλέξτε αρχεία για μεταφόρτωση
@@ -110,12 +103,10 @@ dragAndDropFiles = Σύρετε και εναποθέστε αρχεία
 orClickWithSize = ή κάντε κλικ για να στείλετε μέχρι { $size }
 addPassword = Προστασία με κωδικό πρόσβασης
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = OK
 downloadingTitle = Γίνεται λήψη
 noStreamsWarning = Αυτό το πρόγραμμα περιήγησης ενδέχεται να μην μπορέσει να αποκρυπτογραφήσει αρχεία αυτού του μεγέθους.
 noStreamsOptionCopy = Αντιγράψτε το σύνδεσμο για άνοιγμα σε άλλο πρόγραμμα περιήγησης
-noStreamsOptionFirefox = Δοκιμάστε το αγαπημένο μας πρόγραμμα περιήγησης
 noStreamsOptionDownload = Συνέχεια με αυτό το πρόγραμμα περιήγησης
 # the next line after the colon contains a file name
 shareLinkDescription = Μοιραστείτε το σύνδεσμο του αρχείου σας:

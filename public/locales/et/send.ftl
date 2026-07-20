@@ -24,8 +24,6 @@ fileTooBig = Fail on üleslaadimiseks liiga suur. See peaks olema väiksem kui {
 linkExpiredAlt = Link on aegunud
 notSupportedHeader = Sinu brauser pole toetatud.
 notSupportedLink = Miks mu brauser toetatud pole?
-notSupportedOutdatedDetail = Kahjuks ei toeta see Firefoxi versioon veebitehnoloogiaid, mis teevad Sendi toimimise võimalikuks. Sa pead oma brauserit uuendama.
-updateFirefox = Uuenda Firefox
 deletePopupCancel = Loobu
 deleteButtonHover = Kustuta
 passwordTryAgain = Vale parool. Palun proovi uuesti.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours }t { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maksimaalne parooli pikkus: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] Vaid 1 arhiveerimine on lubatud.
        *[other] Vaid { $count } arhiveerimist on lubatud.
     }
-expiredTitle = Link on aegunud.
-notSupportedDescription = { -send-brand } ei tööta selle veebilehitsejaga. Kõige paremini töötab { -send-short-brand } uusima { -firefox }iga ja töötab ka enamikes teistes uuendatud brauserites.
-downloadFirefox = Laadi { -firefox } alla
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }p { $hours }t { $minutes }m
 addFilesButton = Vali failid üleslaadimiseks
@@ -110,12 +103,10 @@ dragAndDropFiles = Lohista failid siia
 orClickWithSize = või klõpsa kuni { $size } suuruste failide saatmiseks
 addPassword = Kaitse parooliga
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = Olgu
 downloadingTitle = Allalaadimine
 noStreamsWarning = Sinu veebilehitseja ei pruugi suuta nii suurt faili dekrüptida.
 noStreamsOptionCopy = Kopeeri link teises brauseris avamiseks
-noStreamsOptionFirefox = Proovi meie lemmikbrauserit
 noStreamsOptionDownload = Jätka selle brauseriga
 # the next line after the colon contains a file name
 shareLinkDescription = Jaga linki failile:

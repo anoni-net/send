@@ -24,8 +24,6 @@ fileTooBig = Ini tajkwilul sujsul etek pal tiktejkultia. Ma nemi san { $size }.
 linkExpiredAlt = Ne ilpika pulijtuk
 notSupportedHeader = Te tikishmatit ne mutachialuni.
 notSupportedLink = Taika te ankishmatit nutachialuni?
-notSupportedOutdatedDetail = Ini tamakalis ipal Firefox tesu kimati ne tzawaltekitilis ne kiyulitia Send. Nemi pal tikyankwilia ne mutachialuni.
-updateFirefox = Shikyankwili Firefox
 deletePopupCancel = Shikilwi tesu
 deleteButtonHover = Shikpulu
 passwordTryAgain = Ne ichtakatajkwilul tesu yek. Shikejeku uksenpa.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours }h { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Ne iweyaka ne ichtakatajkwilul muneki: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Shiktitani
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] Semaya se amapial weli mutitania.
        *[other] Semaya { $count } amapial weli mutitania.
     }
-expiredTitle = Ne ilpika puliwik.
-notSupportedDescription = { -send-brand } tesu yawi tekiti iwan ini tachialuni. { -send-short-brand } tekiti sujsul yek iwan ne tipan tamakalis ipal { -firefox }, wan nusan iwan ne tipan tamakalis ipal miak tachialuni.
-downloadFirefox = Shiktemulti { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } t { $hours } h { $minutes } m
 addFilesButton = Shikpejpena ne tajkwilul pal tiktejkultia
@@ -110,12 +103,10 @@ dragAndDropFiles = Shiktilana wan shikmayawi ne tajkwilul
 orClickWithSize = u shikpachu pal tiktitania { $size }
 addPassword = Shiktajpia iwan ichtakatajkwilul
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = Yek
 downloadingTitle = Kitemultia nemi
 noStreamsWarning = Ini tachialuni anka te weli kichtakapua ini tajkwilul wey.
 noStreamsOptionCopy = Shikishkupina ne ilpika pal tiktapua tik ukse tachialuni
-noStreamsOptionFirefox = Shikejeku ne tachialuni tikishwelitat
 noStreamsOptionDownload = Ma ninemi senpa iwan ini tachialuni
 # the next line after the colon contains a file name
 shareLinkDescription = Shiktakuli ne ilpika ipal mutajkwilul:

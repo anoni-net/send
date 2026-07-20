@@ -19,8 +19,6 @@ fileTooBig = Ang file na iyon ay masyadong malaki upang mag-upload. Dapat itong 
 linkExpiredAlt = Nag-expire na ang link
 notSupportedHeader = Ang iyong browser ay hindi suportado.
 notSupportedLink = Bakit hindi suportado ang aking browser?
-notSupportedOutdatedDetail = Sa kasamaang palad ang bersyon na ito ng Firefox ay hindi sumusuporta sa teknolohiya ng web na nagpapagana ng Send. Kailangan mong i-update ang iyong browser.
-updateFirefox = I-update ang Firefox
 deletePopupCancel = Kanselahin
 deleteButtonHover = I-delete
 passwordTryAgain = Maling password. Subukan muli.
@@ -33,9 +31,7 @@ expiresHoursMinutes = { $hours }h { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Pinakamataas na haba ng password: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = I-send
@@ -76,8 +72,6 @@ totalSize = Kabuuang sukat: { $size }
 copyLinkDescription = Kopyahin ang link upang ibahagi ang iyong file:
 copyLinkButton = Kopyahin ang link
 downloadTitle = I-download ang mga file
-expiredTitle = Ang link na ito ay nag-expire.
-downloadFirefox = I-download { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }h { $minutes }m
 addFilesButton = Piliin ang mga file na mai-upload
@@ -86,11 +80,9 @@ uploadButton = I-upload
 dragAndDropFiles = I-drag at i-drop ang mga file
 addPassword = Protektahan gamit ang password
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = OK
 downloadingTitle = Pag-download
 noStreamsWarning = Maaaring hindi mai-decrypt ng browser na ito ang isang file na malaki.
 noStreamsOptionCopy = Kopyahin ang link upang buksan sa isa pang browser
-noStreamsOptionFirefox = Subukan ang aming paboritong browser
 noStreamsOptionDownload = Magpatuloy sa browser na ito
 shareLinkButton = Ibahagi ang link

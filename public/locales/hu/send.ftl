@@ -24,8 +24,6 @@ fileTooBig = Ez a fájl túl nagy a feltöltéshez. Kevesebb mint { $size } kell
 linkExpiredAlt = A hivatkozás lejárt
 notSupportedHeader = A böngésző nem támogatott.
 notSupportedLink = Miért nem támogatott a böngészőm?
-notSupportedOutdatedDetail = Sajnos a Firefox ezen verziója nem támogatja a Send alapját képező technológiát. Frissítenie kell a böngészőjét.
-updateFirefox = Firefox frissítése
 deletePopupCancel = Mégse
 deleteButtonHover = Törlés
 passwordTryAgain = Helytelen jelszó. Próbálja meg újra.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours }ó { $minutes }p
 expiresMinutes = { $minutes }p
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maximális jelszóhossz: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] Csak 1 archívum engedélyezett.
        *[other] Csak { $count } archívum engedélyezett.
     }
-expiredTitle = Ez a hivatkozás elévült.
-notSupportedDescription = A { -send-brand } nem működik ebben a böngészőben. A { -send-short-brand } a { -firefox } legfrissebb verziójával működik a legjobban, de működik a legtöbb böngésző aktuális verziójával is.
-downloadFirefox = A { -firefox } letöltése
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }n { $hours }ó { $minutes }p
 addFilesButton = Válassza ki a feltöltendő fájlokat
@@ -110,12 +103,10 @@ dragAndDropFiles = Húzza ide a fájlokat
 orClickWithSize = vagy jelentkezzen be, és küldjön legfeljebb { $size }-ot
 addPassword = Jelszavas védelem
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = OK
 downloadingTitle = Letöltés
 noStreamsWarning = Előfordulhat, hogy a böngésző nem fog tudni visszafejteni egy ekkora fájlt.
 noStreamsOptionCopy = Másolja a hivatkozást, és nyissa meg egy másik böngészőben
-noStreamsOptionFirefox = Próbálja ki a kedvenc böngészőnket
 noStreamsOptionDownload = Folytatás ezzel a böngészővel
 # the next line after the colon contains a file name
 shareLinkDescription = Ossza meg a fájlja hivatkozását:

@@ -71,8 +71,6 @@ expiredPageHeader = Pautan ini sudah luput atau pun tidak pernah wujud!
 notSupportedHeader = Pelayar anda tidak disokong.
 notSupportedDetail = Malangnya, pelayar ini tidak menyokong teknologi web yang melaksanakan Send. Anda perlu cuba pelayar lain. Kami syorkan Firefox!
 notSupportedLink = Kenapa pelayar saya tidak disokong?
-notSupportedOutdatedDetail = Malangnya versi Firefox ini tidak menyokong teknologi web yang menguasakan Send. Anda perlu mengemaskini pelayar anda.
-updateFirefox = Kemaskini Firefox
 downloadFirefoxButtonSub = Muat turun Percuma
 uploadedFile = Fail
 copyFileList = Salin URL
@@ -107,4 +105,3 @@ expiresMinutes = { $minutes }m
 passwordIsSet = Kata laluan ditetapkan
 # A short status message shown when the user enters a long password
 maxPasswordLength = Panjang kata laluan maksimum: { $length }
-# A short status message shown when there was an error setting the password

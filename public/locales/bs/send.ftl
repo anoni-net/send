@@ -75,8 +75,6 @@ expiredPageHeader = Veza je istekla ili nikad nije postojala!
 notSupportedHeader = Vaš pretraživač nije podržan.
 notSupportedDetail = Ovaj pretraživač nažalost ne podržava web tehnologiju koja omogućava Send. Trebate probati drugi pretraživač. Preporučujemo Firefox!
 notSupportedLink = Zašto moj pretraživač nije podržan?
-notSupportedOutdatedDetail = Nažalost ova verzija Firefoxa ne podržava web tehnologiju koja omogućava Send. Morate ažurirati vaš pretraživač.
-updateFirefox = Ažuriraj Firefox
 downloadFirefoxButtonSub = Besplatno preuzimanje
 uploadedFile = Datoteka
 copyFileList = Kopiraj URL
@@ -111,4 +109,3 @@ expiresMinutes = { $minutes }m
 passwordIsSet = Lozinka postavljena
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maksimalna veličina lozinke: { $length }
-# A short status message shown when there was an error setting the password

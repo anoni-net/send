@@ -24,8 +24,6 @@ fileTooBig = Den fil er for stor at uploade. Den skal være mindre end { $size }
 linkExpiredAlt = Link er udløbet
 notSupportedHeader = Din browser understøttes ikke.
 notSupportedLink = Hvorfor understøttes min browser ikke?
-notSupportedOutdatedDetail = Desværre understøtter denne version af Firefox ikke den webteknologi, som driver Send. Du skal opdatere din browser.
-updateFirefox = Opdater Firefox
 deletePopupCancel = Annuller
 deleteButtonHover = Slet
 passwordTryAgain = Forkert adgangskode. Prøv igen.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours } t { $minutes } m
 expiresMinutes = { $minutes } m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maksimum længde af adgangskode: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] Kun 1 arkiv er tilladt.
        *[other] Kun { $count } arkiver er tilladt.
     }
-expiredTitle = Dette link er udløbet.
-notSupportedDescription = { -send-brand } virker ikke med denne browser. { -send-short-brand } virker bedst med den nyeste version af { -firefox } og med de fleste andre nye browsere.
-downloadFirefox = Hent { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } d. { $hours } t. { $minutes } m.
 addFilesButton = Vælg filer, der skal uploades
@@ -110,12 +103,10 @@ dragAndDropFiles = Træk og slip filer
 orClickWithSize = eller klik for at sende filer på op til { $size }
 addPassword = Beskyt med adgangskode
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = OK
 downloadingTitle = Henter
 noStreamsWarning = Denne browser kan muligvis ikke dekryptere en fil, der er så stor.
 noStreamsOptionCopy = Kopier linket for at åbne det i en anden browser
-noStreamsOptionFirefox = Prøv vores favorit-browser
 noStreamsOptionDownload = Fortsæt med denne browser
 # the next line after the colon contains a file name
 shareLinkDescription = Del linket til din fil:

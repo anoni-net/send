@@ -24,8 +24,6 @@ fileTooBig = Այդ ֆայլը չափազանց մեծ է վերբեռնելու
 linkExpiredAlt = Հղումն ավարտված է
 notSupportedHeader = Ձեր զննարկիչը չի աջակցվում:
 notSupportedLink = Ինչու իմ զննարկիչը չի աջակցվում:
-notSupportedOutdatedDetail = Դժբախտաբար, Firefox- ի այս տարբերակը չի աջակցում այն վեբ տեխնոլոգիան, որը պետք է Send-ի համար: Դուք պետք է թարմացնեք ձեր զննարկիչը:
-updateFirefox = Թարմացնել Firefox-ը
 deletePopupCancel = Չեղարկել
 deleteButtonHover = Ջնջել
 passwordTryAgain = Սխալ գաղտնաբառ. Կրկին փորձեք:
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours }ժ { $minutes }ր
 expiresMinutes = { $minutes }ր
 # A short status message shown when the user enters a long password
 maxPasswordLength = Գանղտնաբառի առավելագույն չափ. { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Ուղարկել
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] Միայն 1 արխիվ է թույլատրված:
        *[other] Միայն { $count } արխիվներ են թույլատրված:
     }
-expiredTitle = Այս հղումն ավարտված է:
-notSupportedDescription = { -send-brand }-ը չի աշխատի այս զննարկչի հետ: { -send-short-brand }-ը լավագույն կերպով աշխատում է { -firefox }-ի վերջին տարբերակի հետ և կաշխատի զննարկիչների մեծամասնության վերջին տարբերակների հետ:
-downloadFirefox = Ներբեռնել { -firefox }-ը
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }օր { $hours }ժ { $minutes }ր
 addFilesButton = Ընտրեք ֆայլեր՝ վերբեռնելու համար
@@ -110,12 +103,10 @@ dragAndDropFiles = Քաշեք և գցեք ֆայլերը
 orClickWithSize = կամ կտտացրեք`ուղարկելու համար մինչև { $size }
 addPassword = Պաշտպանեք գաղտնաբառով
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = Լավ
 downloadingTitle = Ներբեռնվում է
 noStreamsWarning = Այս զննարկիչը չի կարողանա վերծանել այսպիսի մեծ ֆայլը
 noStreamsOptionCopy = Պատճենեք հղումը`այլ զննարկիչում բացելու համար
-noStreamsOptionFirefox = Փորձեք մեր սիրած զննարկիչը
 noStreamsOptionDownload = Շարունակեք այս զննարկիչով
 # the next line after the colon contains a file name
 shareLinkDescription = Կիսվեք ձեր ֆայլի հղումով.

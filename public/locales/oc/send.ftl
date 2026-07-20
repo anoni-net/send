@@ -24,8 +24,6 @@ fileTooBig = Aqueste fichièr es tròp gròs per l’enviar. Sa talha deu èsser
 linkExpiredAlt = Lo ligam a expirat
 notSupportedHeader = Vòstre navegador es pas compatible.
 notSupportedLink = Perqué mon navegador es pas compatible ?
-notSupportedOutdatedDetail = Aquesta version de Firefox es pas compatibla amb la tecnologia web amb la quala fonciona Send. Vos cal metre a jorn lo navegador.
-updateFirefox = Metre a jorn Firefox
 deletePopupCancel = Anullar
 deleteButtonHover = Suprimir
 passwordTryAgain = Senhal incorrècte. Tornatz ensajar.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours } h { $minutes } min
 expiresMinutes = { $minutes } min
 # A short status message shown when the user enters a long password
 maxPasswordLength = Talha maximala del senhal : { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] Pas qu’un archiu es autorizat.
        *[other] Pas que { $count } archius son autorizats.
     }
-expiredTitle = Aqueste ligam a expirat.
-notSupportedDescription = { -send-brand } foncionarà pas amb aqueste navegador. { -send-short-brand } fonciona melhor amb la darrièra version de { -firefox } e foncionarà amb la version mai recenta de la màger part dels navegadors.
-downloadFirefox = Telecargar { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } j { $hours } h { $minutes } min
 addFilesButton = Seleccionatz los fichièrs de mandar
@@ -110,12 +103,10 @@ dragAndDropFiles = Lisatz-depausatz de fichièrs
 orClickWithSize = o clicatz per enviar fins a { $size }
 addPassword = Protegir amb un senhal
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = D'acòrd
 downloadingTitle = Telecargament
 noStreamsWarning = Pòt arribar qu’aqueste navegador pòsca pas deschifrar un fichièr tan gròs.
 noStreamsOptionCopy = Copiatz lo ligam per lo dobrir dins un autre navegador
-noStreamsOptionFirefox = Ensajatz nòstre navegador preferit
 noStreamsOptionDownload = Contunhar amb aqueste navegador
 # the next line after the colon contains a file name
 shareLinkDescription = Partejatz lo ligam cap a vòstre fichièr :

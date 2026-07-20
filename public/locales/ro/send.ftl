@@ -26,8 +26,6 @@ fileTooBig = Acest fișier este prea mare. Ar trebuie să fie sub { $size }.
 linkExpiredAlt = Link expirat
 notSupportedHeader = Browserul tău nu este suportat.
 notSupportedLink = De ce browserul meu nu este suportat?
-notSupportedOutdatedDetail = Din păcate, această versiune de Firefox nu suportă tehnologiile web din spatele Send. Va trebui să actualizezi browserul.
-updateFirefox = Actualizează Firefox
 deletePopupCancel = Renunță
 deleteButtonHover = Șterge
 passwordTryAgain = Parolă incorectă. Încearcă din nou.
@@ -40,9 +38,7 @@ expiresHoursMinutes = { $hours }h { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Lungime minimă a parolei: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -103,9 +99,6 @@ tooManyArchives =
         [few] Numai { $count } arhive sunt permise.
        *[other] Numai { $count } de arhive sunt permise.
     }
-expiredTitle = Acest link a expirat.
-notSupportedDescription = { -send-brand } nu va funcționa pe acest browser. { -send-short-brand } funcționează cel mai bine cu ultima versiune de { -firefox } și va funcționa cu versiunea curentă a majorității browserelor.
-downloadFirefox = Descarcă { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }z { $hours }h { $minutes }m
 addFilesButton = Selectează fișierele pentru încărcare
@@ -117,12 +110,10 @@ dragAndDropFiles = Trage și plasează fișierele
 orClickWithSize = sau dă clic pentru a trimite până la { $size }
 addPassword = Protejează cu parolă
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = Ok
 downloadingTitle = Se descarcă
 noStreamsWarning = Este posibil ca acest browser să nu poată decripta un fișier atât de mare.
 noStreamsOptionCopy = Copiază linkul pentru a-l deschide într-un alt browser
-noStreamsOptionFirefox = Încearcă browserul nostru favorit
 noStreamsOptionDownload = Continuă cu acest browser
 # the next line after the colon contains a file name
 shareLinkDescription = Partajează linkul către fișier:

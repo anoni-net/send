@@ -24,8 +24,6 @@ fileTooBig = Dat bestand is te groot om te worden geüpload. Het moet kleiner zi
 linkExpiredAlt = Koppeling verlopen
 notSupportedHeader = Uw browser wordt niet ondersteund.
 notSupportedLink = Waarom wordt mijn browser niet ondersteund?
-notSupportedOutdatedDetail = Helaas ondersteunt deze versie van Firefox de webtechnologie die Send gebruikt niet. U dient uw browser bij te werken.
-updateFirefox = Firefox bijwerken
 deletePopupCancel = Annuleren
 deleteButtonHover = Verwijderen
 footerText = Niet gelieerd aan Mozilla of Firefox.
@@ -43,9 +41,7 @@ expiresHoursMinutes = { $hours }u { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maximale wachtwoordlengte: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -101,9 +97,6 @@ tooManyArchives =
         [one] Slechts één archief is toegestaan.
        *[other] Slechts { $count } archieven zijn toegestaan.
     }
-expiredTitle = Deze koppeling is verlopen.
-notSupportedDescription = { -send-brand } werkt niet met deze browser. { -send-short-brand } werkt het beste met de nieuwste versie van { -firefox }, en werkt met de huidige versie van de meeste browsers.
-downloadFirefox = { -firefox } downloaden
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }u { $minutes }m
 addFilesButton = Selecteer te uploaden bestanden
@@ -115,12 +108,10 @@ dragAndDropFiles = Versleep bestanden
 orClickWithSize = of klik om tot { $size } te versturen
 addPassword = Beveiligen met wachtwoord
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = OK
 downloadingTitle = Downloaden
 noStreamsWarning = Deze browser kan een bestand van deze omvang mogelijk niet ontcijferen.
 noStreamsOptionCopy = Koppeling kopiëren om in een andere browser te openen
-noStreamsOptionFirefox = Onze favoriete browser proberen
 noStreamsOptionDownload = Doorgaan met deze browser
 # the next line after the colon contains a file name
 shareLinkDescription = Deel de koppeling naar uw bestand:

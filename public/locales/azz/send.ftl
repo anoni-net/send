@@ -22,8 +22,6 @@ fileTooBig = Nejin tajkuilol semi ueyi. Moneki amo panos { $size }
 linkExpiredAlt = Nejin tein tikpatskilij amo tekititok ya
 notSupportedHeader = Monavegador amo kualtia.
 notSupportedLink = ¿Keyej nonavegador amo kualtia?
-notSupportedOutdatedDetail = Tetayokoltij, Firefox tein tikuitok amo kiselia tepostekitilis tecnología web tein ika tekiti Send. Moneki tikyankuilis monavegador.
-updateFirefox = Maj Firefox  moyankuili
 deletePopupCancel = Maj motsakuili uan amo tami tein kichiujtok
 deleteButtonHover = Maj majchiua
 passwordTryAgain = Amo yektik ichtakatajtol. Oksepa xikijkuilo.
@@ -36,9 +34,7 @@ expiresHoursMinutes = { $hours }h { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Keniuj ueyak ichtakatajtol, maj amo pano: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Xiktitani
@@ -89,9 +85,6 @@ tooManyArchives =
     { $count ->
        *[other] Sayoj { $count } tajkuilolmej archivos uelis moajsiskej saj.
     }
-expiredTitle = Nejin tein tikpatskilij amo tekititos ok.
-notSupportedDescription = { -send-brand } amo tekiti ika nejin navegador. { -send-short-brand } okachi kuali tekiti tein ika okachi yankuik { -firefox }, uan no tekitis tein ika okachi yankuikej tel miak navegadores.
-downloadFirefox = Xiktemoui { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }t { $hours }h { $minutes }m
 addFilesButton = Xikinixpejpena tajkuilolmej archivos tein  tikintejkoltis
@@ -103,12 +96,10 @@ dragAndDropFiles = Xikintilana uan xikinkajkaua tajkuilolmej archivos
 orClickWithSize = oso xikpatskili uan tiktitanis, sayoj tein amo panoua  { $size }
 addPassword = Xikyekpia ika se ichtakatajtol
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = Kuali yetok
 downloadingTitle = Kitemouijtok
 noStreamsWarning = Xa navegador amo uelis kitalij nejin tajkuilol archivo tein tel ueyi kemej se uelis kiyekixtajtoltis ya.
 noStreamsOptionCopy = Xikixkopina tein se kipatskilis uan ijkon se uelis kitatapos itech okse navegador
-noStreamsOptionFirefox = Xikejeko navegador tein semi techuelita
 noStreamsOptionDownload = Maj niksentoka niktatekiujti nejin navegador
 # the next line after the colon contains a file name
 shareLinkDescription = Xikinpanoltili oksekin tein se kipatskilis uan teuika motajkuilol archivo:

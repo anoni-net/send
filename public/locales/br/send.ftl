@@ -30,8 +30,6 @@ fileTooBig = Re vras eo ar restr-mañ evit e pellgas. Rankout a ra bezañ nebeut
 linkExpiredAlt = Ere diamzeret
 notSupportedHeader = N'eo ket skoret ho merdeer.
 notSupportedLink = Perak n'eo ket skoret ma merdeer?
-notSupportedOutdatedDetail = Siwazh n'eo ket skoret ar c'halvezerezhioù implijet evit Send gant an handelv-mañ eus Firefox. Ret e vo deoc'h hizivaat ho merdeer.
-updateFirefox = Hizivaat Firefox
 deletePopupCancel = Nullañ
 deleteButtonHover = Dilemel
 passwordTryAgain = Ger-tremen direizh. Klaskit en-dro.
@@ -44,9 +42,7 @@ expiresHoursMinutes = { $hours }e { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Hirder brasañ aotreet evit ar ger-tremen: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -117,9 +113,6 @@ tooManyArchives =
         [many] Aotreet eo{ $count } a zielloù nemetken.
        *[other] Aotreet eo{ $count } diell nemetken.
     }
-expiredTitle = Diamzeret eo an ere.
-notSupportedDescription = { -send-brand } n'aio ket en-dro war ar merdeer-mañ. { -send-short-brand } a za en-dro gwelloc'h gant handelv diwezhañ { -firefox }, ha mont a raio en-dro gant handelv bremanel lodenn vrasañ ar merdeerioù.
-downloadFirefox = Pellgargañ { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }e { $minutes }m
 addFilesButton = Diuzit ur restr da bellgas
@@ -131,12 +124,10 @@ dragAndDropFiles = Riklit ha laoskit restroù
 orClickWithSize = pe klikit evit kas betek { $size }
 addPassword = Gwareziñ gant ur ger-tremen
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = Mat eo
 downloadingTitle = O pellgargañ
 noStreamsWarning = Posupl eo ne vefe ket gouest ar merdeer-mañ da ezrinegañ ur restr ken bras.
 noStreamsOptionCopy = Eilit an ere evit digeriñ anezhañ en ur merdeer all
-noStreamsOptionFirefox = Esaeit hor merdeer karetañ
 noStreamsOptionDownload = Kenderc'hel gant ar merdeer-mañ
 # the next line after the colon contains a file name
 shareLinkDescription = Rannit an ere etrezek ho restr:

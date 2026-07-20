@@ -26,8 +26,6 @@ fileTooBig = Ten plik jest za duży, aby go wysłać. Musi być mniejszy niż { 
 linkExpiredAlt = Odnośnik wygasł
 notSupportedHeader = Używana przeglądarka nie jest obsługiwana.
 notSupportedLink = Dlaczego ta przeglądarka nie jest obsługiwana?
-notSupportedOutdatedDetail = Ta wersja Firefoksa nie obsługuje technologii internetowej, która napędza Send. Należy uaktualnić przeglądarkę.
-updateFirefox = Uaktualnij Firefoksa
 deletePopupCancel = Anuluj
 deleteButtonHover = Usuń
 passwordTryAgain = Niepoprawne hasło. Spróbuj ponownie.
@@ -40,9 +38,7 @@ expiresHoursMinutes = { $hours } godz. { $minutes } min
 expiresMinutes = { $minutes } min
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maksymalna długość hasła: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -103,9 +99,6 @@ tooManyArchives =
         [few] Dozwolone są tylko { $count } archiwa.
        *[many] Dozwolonych jest tylko { $count } archiwów.
     }
-expiredTitle = Ten odnośnik wygasł.
-notSupportedDescription = { -send-brand } nie będzie działać w tej przeglądarce. { -send-short-brand } najlepiej działa w najnowszej wersji przeglądarki { -firefox }, ale będzie działać także w aktualnych wersjach większości przeglądarek.
-downloadFirefox = Pobierz przeglądarkę { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } d. { $hours } godz. { $minutes } min
 addFilesButton = Wybierz pliki do wysłania
@@ -117,12 +110,10 @@ dragAndDropFiles = Przeciągnij pliki
 orClickWithSize = lub kliknij, aby wysłać do { $size }
 addPassword = Chroń hasłem
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = OK
 downloadingTitle = Pobieranie
 noStreamsWarning = Ta przeglądarka może nie być w stanie odszyfrować tak dużego pliku.
 noStreamsOptionCopy = Skopiuj odnośnik, aby otworzyć w innej przeglądarce
-noStreamsOptionFirefox = Wypróbuj naszą ulubioną przeglądarkę
 noStreamsOptionDownload = Kontynuuj za pomocą tej przeglądarki
 # the next line after the colon contains a file name
 shareLinkDescription = Udostępnij odnośnik do pliku:

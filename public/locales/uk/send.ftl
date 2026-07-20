@@ -26,8 +26,6 @@ fileTooBig = Цей файл завеликий для вивантаження.
 linkExpiredAlt = Час дії посилання минув
 notSupportedHeader = Ваш браузер не підтримується.
 notSupportedLink = Чому мій браузер не підтримується?
-notSupportedOutdatedDetail = На жаль, ця версія Firefox не підтримує веб-технологію, завдяки якій працює Send. Вам потрібно оновити свій браузер.
-updateFirefox = Оновити Firefox
 deletePopupCancel = Скасувати
 deleteButtonHover = Видалити
 passwordTryAgain = Невірний пароль. Спробуйте знову.
@@ -40,9 +38,7 @@ expiresHoursMinutes = { $hours } год. { $minutes } хв.
 expiresMinutes = { $minutes } хв.
 # A short status message shown when the user enters a long password
 maxPasswordLength = Найбільша довжина паролю: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -103,9 +99,6 @@ tooManyArchives =
         [few] Дозволяється лише { $count } архіви.
        *[other] Дозволяється лише { $count } архівів.
     }
-expiredTitle = Термін дії цього посилання завершився.
-notSupportedDescription = { -send-brand } не працюватиме з цим браузером. { -send-short-brand } найкраще працює з найновішою версією { -firefox }, а також з більшістю інших браузерів.
-downloadFirefox = Завантажити { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }д { $hours }г { $minutes }хв
 addFilesButton = Оберіть файли для вивантаження
@@ -117,12 +110,10 @@ dragAndDropFiles = Перетягуйте файли
 orClickWithSize = або натисніть, щоб надіслати до { $size }
 addPassword = Захист паролем
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = Гаразд
 downloadingTitle = Завантаження
 noStreamsWarning = Цьому браузеру може не вдатися розшифрувати такий великий файл.
 noStreamsOptionCopy = Скопіюйте посилання, щоб відкрити його в іншому браузері
-noStreamsOptionFirefox = Спробуйте наш улюблений браузер
 noStreamsOptionDownload = Продовжити в цьому браузері
 # the next line after the colon contains a file name
 shareLinkDescription = Надішліть посилання на свій файл:

@@ -26,8 +26,6 @@ fileTooBig = Tento soubor je příliš veliký. Velikost nahrávaných souborů 
 linkExpiredAlt = Platnost odkazu vypršela
 notSupportedHeader = Váš prohlížeč není podporován.
 notSupportedLink = Proč není můj prohlížeč podporovaný?
-notSupportedOutdatedDetail = Tato verze Firefoxu bohužel nepodporuje webovou technologii, která pohání Send. Musíte aktualizovat svůj prohlížeč.
-updateFirefox = Aktualizovat Firefox
 deletePopupCancel = Zrušit
 deleteButtonHover = Smazat
 passwordTryAgain = Špatné heslo. Zkuste to znovu.
@@ -40,9 +38,7 @@ expiresHoursMinutes = { $hours } h { $minutes } m
 expiresMinutes = { $minutes } m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maximální délka hesla: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand =
     { $case ->
@@ -139,9 +135,6 @@ tooManyArchives =
         [few] Povoleny jsou nejvýše { $count } archivy.
        *[other] Povoleno je nejvýše { $count } archivů.
     }
-expiredTitle = Platnost tohoto odkazu vypršela.
-notSupportedDescription = { -send-brand } nebude v tomto prohlížeči fungovat. Nejlépe { -send-short-brand } funguje v nejnovějším { -firefox(case: "gen") } nebo aktuálních verzích nejpoužívanějších prohlížečů.
-downloadFirefox = Stáhnout { -firefox(case: "acc") }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }h { $minutes }m
 addFilesButton = Vyberte soubory k nahrání
@@ -153,12 +146,10 @@ dragAndDropFiles = Přetažením myší nebo kliknutím sem
 orClickWithSize = můžete poslat až { $size }
 addPassword = Ochránit heslem
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = OK
 downloadingTitle = Stahování
 noStreamsWarning = Dešifrování tak velikého souboru se v tomto prohlížeči nemusí podařit.
 noStreamsOptionCopy = Zkopírujte odkaz pro otevření v jiném prohlížeči
-noStreamsOptionFirefox = Vyzkoušejte náš oblíbený prohlížeč
 noStreamsOptionDownload = Pokračovat v tomto prohlížeči
 # the next line after the colon contains a file name
 shareLinkDescription = Sdílet odkaz na soubor:

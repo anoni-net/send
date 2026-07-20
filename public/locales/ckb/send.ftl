@@ -24,8 +24,6 @@ fileTooBig = ئەم پەڕگەیە زۆر گەورەیە بۆ بارکردن. پ
 linkExpiredAlt = بەستەر بەسەرچووە
 notSupportedHeader = وێبگەڕەکەت پشتگیری ناکرێت
 notSupportedLink = بۆ وێبگەڕەکەم پشتگیری ناکرێت؟
-notSupportedOutdatedDetail = بەداخەوە ئەم وەشانەی Firefox پشتگیری ئەو جۆرە تەکنەلۆژییە ناکات کە پێویستە بۆ Send. پێویستە وێبگەڕەکەت نوێبکەیتەوە.
-updateFirefox = فاەرفۆکس نوێبکەرەوە
 deletePopupCancel = پاشگەزبوونەوە
 deleteButtonHover = سڕینەوە
 passwordTryAgain = وشەی تێپەڕبوون هەڵەیە. هەوڵ بدەرەوە.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours }ک { $minutes }خ
 expiresMinutes = { $minutes }خ
 # A short status message shown when the user enters a long password
 maxPasswordLength = زۆرترین درێژی وشەی تێپەڕی ڕێگەپێدراو: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] تەنها 1 ئەرشیف ڕێپێدراوە.
        *[other] تەنها { $count } ئەرشیف ڕێپێدراوە.
     }
-expiredTitle = بەستەر بەسەرچووە.
-notSupportedDescription = { -send-brand } کارنکات لەگەڵ ئەم وێبگەڕە. { -send-short-brand } باش کاردەکات لەگەڵ کۆتا وەشانی { -firefox }، وکاردەکات لەگەڵ زۆربەی وەشانی ئێستای وێبگەڕەکان.
-downloadFirefox = { -firefox } دابگرە
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } ڕ { $hours } ک{ $minutes } خ
 addFilesButton = پەڕگەکان هەڵبژێرە بۆ بارکردن
@@ -110,12 +103,10 @@ dragAndDropFiles = ڕاکێشان و دانانی پەڕگەکان
 orClickWithSize = یان کرتە بکە بۆ ناردنی قەبارەی تاوەکوو { $size }
 addPassword = بپارێزە لەگەڵ وشەی تێپەڕ
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = باشە
 downloadingTitle = دادەگیرێت...
 noStreamsWarning = لەوانەیە ئەم وێبگەڕە نەتوانێت پەڕگەی وا گەورە بە هێما بکات.
 noStreamsOptionCopy = بەستەر لەبەربگرەوە بۆ کردنەوەی لە وێبگەڕێکی تر
-noStreamsOptionFirefox = وێبگەڕی دڵخوازی ئێمە تاقیبکەرەوە
 noStreamsOptionDownload = بەردەوام بە لەگەڵ ئەم وێبگەڕە
 # the next line after the colon contains a file name
 shareLinkDescription = بەستەر بڵاوبکەرەوە بۆ پەڕگەکەت:

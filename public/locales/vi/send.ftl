@@ -22,8 +22,6 @@ fileTooBig = Tập tin này quá lớn để tải lên. Kích thước tập ti
 linkExpiredAlt = Liên kết đã hết hạn
 notSupportedHeader = Trình duyệt của bạn không được hỗ trợ.
 notSupportedLink = Tại sao trình duyệt của tôi không được hỗ trợ?
-notSupportedOutdatedDetail = Thật không may là phiên bản Firefox này không hỗ trợ công nghệ được sử dụng trong Send. Bạn cần cập nhật trình duyệt của bạn.
-updateFirefox = Cập nhật Firefox
 deletePopupCancel = Hủy bỏ
 deleteButtonHover = Xóa
 passwordTryAgain = Sai mật khẩu. Vui lòng thử lại.
@@ -36,9 +34,7 @@ expiresHoursMinutes = { $hours } giờ { $minutes } phút
 expiresMinutes = { $minutes } phút
 # A short status message shown when the user enters a long password
 maxPasswordLength = Độ dài mật khẩu tối đa: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -89,9 +85,6 @@ tooManyArchives =
     { $count ->
        *[other] Chỉ cho phép { $count } lưu trữ.
     }
-expiredTitle = Liên kết này đã hết hạn.
-notSupportedDescription = { -send-brand } sẽ không hoạt động với trình duyệt này. { -send-short-brand } hoạt động tốt nhất với phiên bản { -firefox } mới nhất và sẽ hoạt động với phiên bản hiện tại của hầu hết các trình duyệt.
-downloadFirefox = Tải xuống { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } ngày { $hours } giờ { $minutes } phút
 addFilesButton = Chọn tập tin để tải lên
@@ -103,12 +96,10 @@ dragAndDropFiles = Kéo và thả tập tin
 orClickWithSize = hoặc nhấp để gửi tối đa { $size }
 addPassword = Bảo vệ bằng mật khẩu
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = OK
 downloadingTitle = Đang tải xuống
 noStreamsWarning = Trình duyệt này có khả năng không thể giải mã một tập tin lớn này.
 noStreamsOptionCopy = Sao chép liên kết để mở trong một trình duyệt khác
-noStreamsOptionFirefox = Hãy dùng thử trình duyệt yêu thích của chúng tôi
 noStreamsOptionDownload = Tiếp tục với trình duyệt này
 # the next line after the colon contains a file name
 shareLinkDescription = Chia sẻ liên kết đến tập tin của bạn:

@@ -24,8 +24,6 @@ fileTooBig = Kjo kartelë është shumë e madhe për ngarkim. Do të duhej të 
 linkExpiredAlt = Lidhja skadoi
 notSupportedHeader = Shfletuesi juaj nuk mbulohet.
 notSupportedLink = Pse nuk mbulohet ky shfletues?
-notSupportedOutdatedDetail = Mjerisht, ky version i Firefox-it nuk e mbulon teknologjinë web mbi të cilën bazohet Send. Do t’ju duhet të përditësoni shfletuesin tuaj.
-updateFirefox = Përditësojeni Firefox-in
 deletePopupCancel = Anuloje
 deleteButtonHover = Fshije
 passwordTryAgain = Fjalëkalim i pasaktë. Riprovoni.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours }h { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Gjatësi maksimum fjalëkalimi: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] Lejohet vetëm 1 arkiv.
        *[other] Lejohen vetëm { $count } arkiva.
     }
-expiredTitle = Kjo lidhje ka skaduar.
-notSupportedDescription = { -send-brand } s’do të funksionojë me këtë shfletues. { -send-short-brand } funksionin më mirë me versionin më të ri të { -firefox }, dhe do të funksionojë me versionin e tanishëm të shumicës së shfletuesve.
-downloadFirefox = Shkarkoni { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }h { $minutes }m
 addFilesButton = Përzgjidhni kartela për ngarkim
@@ -110,12 +103,10 @@ dragAndDropFiles = Tërhiqni dhe lini kartela
 orClickWithSize = ose klikoni që të dërgohen deri në { $size }
 addPassword = Mbrojini me fjalëkalim
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = OK
 downloadingTitle = Shkarkim
 noStreamsWarning = Ky shfletues mund të mos jetë në gjendje të shfshehtëzojë një kartelë kaq të madhe.
 noStreamsOptionCopy = Kopjoje lidhjen për ta hapur në një tjetër shfletues
-noStreamsOptionFirefox = Provoni shfletuesin tonë të parapëlqyer
 noStreamsOptionDownload = Vazhdo me këtë shfletues
 # the next line after the colon contains a file name
 shareLinkDescription = Ndani me të tjerët lidhjen për te kartela juaj:

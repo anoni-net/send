@@ -23,8 +23,6 @@ fileTooBig = Archivo ya´a ka´nu. Nejia chunku´va { $size }
 linkExpiredAlt = Nnɨ´ɨ enlace
 notSupportedHeader = Ntu íyo tiñu nuu ka̱a̱ nánuku ya´a.
 notSupportedLink = ¿Navi ntu satiñu nuu ka̱a̱ nánuku ya´a?
-notSupportedOutdatedDetail = Tuni Firefox ya´a ntu satiñu vii jii Send. Nejika xinunu a jíía ka̱a̱ nánuku.
-updateFirefox = Naxi´ñá Firefox
 deletePopupCancel = Nkuvi-ka
 deleteButtonHover = Xita
 passwordTryAgain = Contraseña ntu vatu. Nachu´un tuku.
@@ -37,9 +35,7 @@ expiresHoursMinutes = { $hours }h { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Naja ka´nu koo contraseña: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -95,9 +91,6 @@ tooManyArchives =
         [one] Ntu xini 1 archivo íyo
        *[other] Ntu xini { $count } archivos íyo
     }
-expiredTitle = Nnɨ'ɨ link ya´a.
-notSupportedDescription = { -send-brand } nsatiñu jii ka̱a̱ nánuku ya´a. { -send-short-brand } satiñu va´a jii tuni íchi yata { -firefox }, jee satiñu va´a jii tuni íyo ntañu´u kuaiyo daa ka̱a̱ nánuku.
-downloadFirefox = Xinuun { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }h { $minutes }m
 addFilesButton = Kaji archivos ska
@@ -109,12 +102,10 @@ dragAndDropFiles = Staka jee sía  daa archivo
 orClickWithSize = a xiin kuaxin saa chu´un íchi nee { $size }
 addPassword = Iyo yu´u jii contraseña
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = Kuvi
 downloadingTitle = Xinuu
 noStreamsWarning = Kuvi ka̱a̱ nánaku ya´a nxituvi a vaji nuu iin archivo ka´nu.
 noStreamsOptionCopy = Tɨɨn enlace jee síne nuu inka ka̱a̱ nánuku
-noStreamsOptionFirefox = Ni´i ka̱a̱ nánuku va´a
 noStreamsOptionDownload = Kaka jii ka̱a̱ nánuku ya´a
 # the next line after the colon contains a file name
 shareLinkDescription = Kua´a enlace archivo noo´o

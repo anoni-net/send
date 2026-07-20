@@ -22,8 +22,6 @@ fileTooBig = 此文件太大。文件大小上限为 { $size }。
 linkExpiredAlt = 链接已过期
 notSupportedHeader = 不支持您的浏览器。
 notSupportedLink = 为什么不支持我的浏览器？
-notSupportedOutdatedDetail = 很可惜，此版本的 Firefox 不支持 Send 所使用的 Web 技术。您需要更新浏览器才能使用它。
-updateFirefox = 更新 Firefox
 deletePopupCancel = 取消
 deleteButtonHover = 删除
 footerText = 不附属于 Mozilla 或 Firefox。
@@ -41,9 +39,7 @@ expiresHoursMinutes = { $hours } 小时 { $minutes } 分钟
 expiresMinutes = { $minutes } 分钟
 # A short status message shown when the user enters a long password
 maxPasswordLength = 最大密码长度：{ $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -98,9 +94,6 @@ tooManyArchives =
     { $count ->
        *[other] 只可上传 { $count } 个压缩文件。
     }
-expiredTitle = 此链接已过期。
-notSupportedDescription = { -send-brand } 无法在此浏览器上正常工作。{ -send-short-brand } 与最新版本 { -firefox } 配合使用体验最佳，也适用于目前的大多数浏览器。
-downloadFirefox = 下载 { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } 天 { $hours } 小时 { $minutes } 分钟
 addFilesButton = 选择要上传的文件
@@ -112,12 +105,10 @@ dragAndDropFiles = 拖放文件
 orClickWithSize = 或点此传送最大 { $size } 的文件
 addPassword = 密码保护
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = 确定
 downloadingTitle = 正在下载
 noStreamsWarning = 此浏览器可能无法解密这么大的文件。
 noStreamsOptionCopy = 复制链接以在其他浏览器中打开
-noStreamsOptionFirefox = 试试大家最爱的浏览器
 noStreamsOptionDownload = 使用此浏览器继续
 # the next line after the colon contains a file name
 shareLinkDescription = 您的文件链接：

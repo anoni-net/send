@@ -20,8 +20,6 @@ fileTooBig = Dosyanız çok büyük. En fazla { $size } boyutunda olmalı.
 linkExpiredAlt = Bağlantı zaman aşımına uğramış
 notSupportedHeader = Tarayıcınız desteklenmiyor.
 notSupportedLink = Tarayıcım neden desteklenmiyor?
-notSupportedOutdatedDetail = Kullandığınız Firefox sürümü Send için gereken web teknolojilerini desteklemiyor. Tarayıcınızı güncellemeniz gerekiyor.
-updateFirefox = Firefox’u güncelle
 deletePopupCancel = Vazgeç
 deleteButtonHover = Sil
 passwordTryAgain = Yanlış parola. Yeniden deneyin.
@@ -34,9 +32,7 @@ expiresHoursMinutes = { $hours } sa { $minutes } dk
 expiresMinutes = { $minutes } dk
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maksimum parola uzunluğu: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -92,9 +88,6 @@ tooManyArchives =
         [one] En fazla 1 arşive izin veriliyor.
        *[other] En fazla { $count } arşive izin veriliyor.
     }
-expiredTitle = Bu bağlantının süresi doldu.
-notSupportedDescription = { -send-brand } bu tarayıcıyı desteklemiyor. { -send-short-brand } en iyi şekilde { -firefox }’un son sürümüyle ve çoğu tarayıcının güncel sürümüyle çalışır.
-downloadFirefox = { -firefox }’u indir
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } g { $hours } sa { $minutes } dk
 addFilesButton = Yüklenecek dosyaları seçin
@@ -106,12 +99,10 @@ dragAndDropFiles = Dosyaları sürükleyip bırakarak
 orClickWithSize = veya buraya tıklayarak { $size }’ye kadar dosyalarınızı gönderebilirsiniz
 addPassword = Parola koruması ekle
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = Tamam
 downloadingTitle = İndiriliyor
 noStreamsWarning = Bu tarayıcı bu kadar büyük bir dosyanın şifresini çözemeyebilir.
 noStreamsOptionCopy = Bağlantıyı başka bir tarayıcıda açmak için kopyala
-noStreamsOptionFirefox = En sevdiğimiz tarayıcıyı deneyin
 noStreamsOptionDownload = Bu tarayıcıyla devam edin
 # the next line after the colon contains a file name
 shareLinkDescription = Dosyanızın bağlantısını paylaşın:

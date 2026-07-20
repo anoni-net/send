@@ -22,8 +22,6 @@ fileTooBig = Tekedh pulik axi a le' ka kadh'ba', kwa'al kin alemna' { $size }
 linkExpiredAlt = Yabats u awil ki ela'
 notSupportedHeader = Yab u awil ka japiyat k'al axi NAVEGADOR
 notSupportedLink = ¿Jale' ti u NAVEGADOR yab in japiyal?
-notSupportedOutdatedDetail = Yab u awil ka eyendha' Send kom an NAVEGADOR Firefox biyalits. Ka Pa'ba' axi it.
-updateFirefox = Ka itmedha' Firefox
 deletePopupCancel = Ka kuba'
 deleteButtonHover = Ka pakuw
 passwordTryAgain = Yab ja' an tsinat japixtaláb. Ka exa' junil.
@@ -36,9 +34,7 @@ expiresHoursMinutes = { $hours }h { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = In puwél an tsinat japixtaláb pel: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -93,9 +89,6 @@ tooManyArchives =
             Expidh u awil 1 i t'ojláb.
             Expidh u awil { $count } i t'ojláb.
     }
-expiredTitle = An enlace talíts in tsap.
-notSupportedDescription = { -send-brand } yab u t'ojnal al axi navegador. { -send-short-brand } u t'ojnal alwa' k'al an { -firefox } axi it, ani ne'ets ka t'ojon alwa' k'al an it navegadorchik.
-downloadFirefox = Ka pa'ba' { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } k'icháj { $hours } hora { $minutes } minuto
 addFilesButton = Ka takuy an t'ojláb axi ne'ets ka k'adhba'
@@ -107,12 +100,10 @@ dragAndDropFiles = Ka kina' a t'ojlabil ani ka walka' te'
 orClickWithSize = o ka t'aja' an clic abal ka abna' ma { $size }
 addPassword = Ka k'aniy k'al jún i tsinat japixtaláb
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = Ka bats'uw
 downloadingTitle = K'wajat ti pa'íl
 noStreamsWarning = Walám axi navegador yab ne'ets kin ejtow kin japiy jún i t'ojláb tekedh pulik.
 noStreamsOptionCopy = Ka k'ot'biy an enlace abal ka japiy al pil i navegador
-noStreamsOptionFirefox = Ka eyendha' i navegador
 noStreamsOptionDownload = yab kit kalej al axi navegador
 # the next line after the colon contains a file name
 shareLinkDescription = Ka abna' an enlace al an eyendhanél:

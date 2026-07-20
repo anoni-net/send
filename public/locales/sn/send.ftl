@@ -8,7 +8,5 @@ expiresHoursMinutes = { $hours }maawa { $minutes }mineti
 expiresMinutes = { $minutes }mineti
 # A short status message shown when the user enters a long password
 maxPasswordLength = Pasiwedhi haipfuuri mavara:{ $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 

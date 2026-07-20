@@ -26,8 +26,6 @@ fileTooBig = Pasirinktas failas yra per didelis, kad jį būtų galima įkelti. 
 linkExpiredAlt = Saitas nebegalioja
 notSupportedHeader = Jūsų naršyklė nepalaikoma.
 notSupportedLink = Kodėl mano naršyklė nepalaikoma?
-notSupportedOutdatedDetail = Deja, šioje „Firefox“ naršyklės laidoje nepalaikoma „Send“ veikti reikalinga technologija. Jeigu norite naudotis šia paslauga, turėsite atnaujinti savo naršyklę.
-updateFirefox = Atnaujinti „Firefox“
 deletePopupCancel = Atsisakyti
 deleteButtonHover = Šalinti
 passwordTryAgain = Slaptažodis netinka. Bandykite dar kartą.
@@ -40,9 +38,7 @@ expiresHoursMinutes = { $hours } val. { $minutes } min.
 expiresMinutes = { $minutes } min.
 # A short status message shown when the user enters a long password
 maxPasswordLength = Didžiausias leistinas slaptažodžio ilgis: { $length } simb.
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -111,9 +107,6 @@ tooManyArchives =
         [few] Leidžiama turėti iki ne daugiau kaip { $count } archyvus.
        *[other] Leidžiama turėti iki ne daugiau kaip { $count } archyvų.
     }
-expiredTitle = Šis saitas nebegalioja.
-notSupportedDescription = „{ -send-brand }“ su šia naršykle neveikia. „{ -send-short-brand }“ geriausiai veikia su paskiausia „{ -firefox }“ laida, o taip pat veikia su daugumos kitų naršyklių paskiausiomis laidomis.
-downloadFirefox = Parsisiųsti „{ -firefox }“
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } d. { $hours } val. { $minutes } min.
 addFilesButton = Rinktis failus įkėlimui
@@ -125,12 +118,10 @@ dragAndDropFiles = Užtempkite ir numeskite failus čia
 orClickWithSize = arba spustelėkite mygtuką ir dalinkitės failais iki { $size }
 addPassword = Apsaugoti slaptažodžiu
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = Gerai
 downloadingTitle = Parsiunčiama
 noStreamsWarning = jūsų naršyklei gali nepavykti iššifruoti tokio didelio failo.
 noStreamsOptionCopy = Nukopijuokite saitą ir atverkite jį kita naršykle
-noStreamsOptionFirefox = Išbandykite mūsų mėgstamiausią naršyklę
 noStreamsOptionDownload = Tęsti naudojantis šia naršykle
 # the next line after the colon contains a file name
 shareLinkDescription = Pasidalinkite saitu į jūsų failą:

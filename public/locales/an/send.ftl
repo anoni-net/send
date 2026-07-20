@@ -24,8 +24,6 @@ fileTooBig = Ixe fichero ye masiau gran pa cargar-lo. Ha de tener menos de { $si
 linkExpiredAlt = Lo vinclo ye caducau
 notSupportedHeader = Lo suyo navegador no ye compatible
 notSupportedLink = Per qué no ye compatible lo mío navegador?
-notSupportedOutdatedDetail = Esta versión de Firefox no admite la tecnolochía web con que funciona lo Send. Habrás d'esviellar lo navegador.
-updateFirefox = Esviellar Firefox
 deletePopupCancel = Cancelar
 deleteButtonHover = Borrar
 passwordTryAgain = La contrasenya ye incorrecta. Torne-lo a intentar.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours } h { $minutes } min
 expiresMinutes = { $minutes } min
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maxima lonchitut d'a clau: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] Nomás se permite 1 ficher.
        *[other] Nomás se permiten { $count } fichers.
     }
-expiredTitle = Este vinclo ye caducau.
-notSupportedDescription = { -send-brand } no funcionará con este navegador. { -send-short-brand } funciona millor con a zaguera versión de { -firefox } y funcionará con a versión mas recient d'a mayor parte de navegadors.
-downloadFirefox = Descargar { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } d { $hours } h { $minutes } min
 addFilesButton = Triar los fichers a cargar
@@ -110,12 +103,10 @@ dragAndDropFiles = Arrociega y suelta los fichers
 orClickWithSize = u fes clic aquí pa ninviar dica { $size }
 addPassword = Protecher con una clau
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = Vale
 downloadingTitle = Se ye descargando
 noStreamsWarning = Este navegador talment no pueda descifrar un fichero tant gran.
 noStreamsOptionCopy = Copia lo vinclo pa ubrir-lo en belatro navegador
-noStreamsOptionFirefox = Preba lo nuestro navegador favorito
 noStreamsOptionDownload = Continar con este navegador
 # the next line after the colon contains a file name
 shareLinkDescription = Comparte lo vinclo enta lo tuyo fichero:

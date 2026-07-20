@@ -25,8 +25,6 @@ fileTooBig = הקובץ הזה גדול מידי להעלאה. עליו להיו
 linkExpiredAlt = הקישור פג
 notSupportedHeader = הדפדפן שלך לא נתמך.
 notSupportedLink = למה אין תמיכה בדפדפן שלי?
-notSupportedOutdatedDetail = לצערנו גרסת Firefox זו לא תומכת בטכנולוגית הרשת שמפעילה את Send. יש לעדכן את הגרסה של הדפדפן שלך.
-updateFirefox = עדכון Firefox
 deletePopupCancel = ביטול
 deleteButtonHover = מחיקה
 passwordTryAgain = סיסמה שגויה. נא לנסות שוב.
@@ -39,9 +37,7 @@ expiresHoursMinutes = { $hours } שע׳ { $minutes } דק׳
 expiresMinutes = { $minutes } דק׳
 # A short status message shown when the user enters a long password
 maxPasswordLength = אורך הססמה המרבי: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -98,9 +94,6 @@ tooManyArchives =
         [one] רק ארכיון אחד מורשה.
        *[other] רק { $count } ארכיונים מורשים.
     }
-expiredTitle = פג תוקפו של קישור זה.
-notSupportedDescription = ‏{ -send-brand } לא יפעל עם דפדפן זה. { -send-short-brand } פועל בצורה הטובה ביותר עם הגרסה העדכנית ביותר של { -firefox }, ויעבוד עם הגרסה הנוכחית של רוב הדפדפנים.
-downloadFirefox = הורדת { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } ימים { $hours } שעות { $minutes } דקות
 addFilesButton = בחירת קבצים להעלאה
@@ -112,12 +105,10 @@ dragAndDropFiles = גרירה והשלכת קבצים
 orClickWithSize = או ללחוץ כדי לשלוח קבצים עד לגודל של { $size }
 addPassword = הגנה באמצעות ססמה
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = אישור
 downloadingTitle = בהורדה
 noStreamsWarning = ייתכן שדפדפן זה לא יוכל לפענח קובץ בגודל כזה.
 noStreamsOptionCopy = העתקת הקישור לפתיחה בדפדפן אחר
-noStreamsOptionFirefox = נסו את הדפדפן המועדף עלינו
 noStreamsOptionDownload = המשך בדפדפן זה
 # the next line after the colon contains a file name
 shareLinkDescription = שיתוף הקישור לקובץ שלך:

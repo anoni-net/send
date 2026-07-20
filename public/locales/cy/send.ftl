@@ -32,8 +32,6 @@ fileTooBig = Mae'r ffeil yn rhy fawr i'w llwytho. Dylai fod yn llai na { $size }
 linkExpiredAlt = Mae'r ddolen wedi dod i ben
 notSupportedHeader = Nid yw eich porwr yn cael ei gynnal.
 notSupportedLink = Pam nad yw fy mhorwr yn cael ei gynnal?
-notSupportedOutdatedDetail = Yn anffodus, nid yw'r fersiwn yma o Firefox yn cynnal y technoleg gwe sy'n gyrru Send. Bydd angen i chi ddiweddaru eich porwr.
-updateFirefox = Diweddaru Firefox
 deletePopupCancel = Diddymu
 deleteButtonHover = Dileu
 passwordTryAgain = Cyfrinair anghywir. Ceisiwch eto.
@@ -46,9 +44,7 @@ expiresHoursMinutes = { $hours }a { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Hyd mwyaf cyfrinair: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Anfon
@@ -124,9 +120,6 @@ tooManyArchives =
         [many] Dim ond { $count } archif sy'n cael eu caniatáu.
        *[other] Dim ond { $count } archif sy'n cael eu caniatáu.
     }
-expiredTitle = Mae'r ddolen hon wedi dod i ben.
-notSupportedDescription = Ni fydd { -send-brand } yn gweithio gyda'r porwr hwn. Mae { -send-short-brand } yn gweithio orau gyda'r fersiwn ddiweddaraf o { -firefox }, a bydd yn gweithio gyda'r fersiwn gyfredol o'r rhan fwyaf o borwyr.
-downloadFirefox = Llwytho { -firefox } i Lawr
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } d { $hours } a { $minutes } m
 addFilesButton = Dewis ffeiliau i'w llwytho i fyny
@@ -138,12 +131,10 @@ dragAndDropFiles = Llusgo a gollwng ffeiliau
 orClickWithSize = neu glicio i anfon hyd at { $size }
 addPassword = Diogelu gyda chyfrinair
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = Iawn
 downloadingTitle = Llwytho i Lawr
 noStreamsWarning = Efallai na fydd y porwr hwn yn gallu dadgryptio ffeil mor fawr a hon.
 noStreamsOptionCopy = Copïwch y ddolen i'w agor mewn porwr arall
-noStreamsOptionFirefox = Rhowch gynnig ar ein hoff porwr
 noStreamsOptionDownload = Parhau gyda'r porwr hwn
 # the next line after the colon contains a file name
 shareLinkDescription = Rhannu'r ddolen i'ch ffeil:

@@ -22,7 +22,6 @@ sendYourFilesLink = B'anb'e ve't u Send
 errorPageHeader = At ma'l kam valexh kat eli!
 notSupportedHeader = U chukb'al aq'one' ye' ni toleb'e'.
 notSupportedLink = Kam q'ii uve' ye' kuxh ni toleb' u chukb'al vaq'one'?
-updateFirefox = Tz'ajsa tatine' Firefox
 deletePopupCancel = Ya'samal
 deleteButtonHover = Sojsa
 # A short representation of a countdown timer containing the number of hours and minutes remaining as digits, example "13h 47m"
@@ -30,7 +29,6 @@ expiresHoursMinutes = { $hours }h { $minutes }m
 # A short representation of a countdown timer containing the number of minutes remaining as digits, example "56m"
 expiresMinutes = { $minutes }m
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Aq'b'en

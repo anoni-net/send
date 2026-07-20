@@ -24,8 +24,6 @@ fileTooBig = Failu a ebuka ibulite. Ọ kwẹsịghi ịkalị { $size }
 linkExpiredAlt = Njiko jedebe
 notSupportedHeader = Adighi akwado ihe nchogharị gị
 notSupportedLink = Gịnị kpatara na akwadoghị ihe nchọgharị m?
-notSupportedOutdatedDetail = Ọ dị nwute na ụdị Firefox a anaghị akwado teknụzụ weebụ na-eji Zipụ. Ikwesiri imelite ihe nchọgharị gị.
-updateFirefox = Melite Firefox
 deletePopupCancel = Kagbuo
 deleteButtonHover = Hichapụ
 passwordTryAgain = okwuntughe ezighi ezi.Nwaa ọzọ
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours }h { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Oke okwuntughe kachasị: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Zipu
 -send-short-brand = Zipu, Ziga
@@ -74,7 +70,4 @@ copyLinkButton = Detuo njikọ
 downloadTitle = Budata faịlụ gasi
 downloadDescription = Nkekọrịta faịlụ a site na site na iji zoo njedebe na-njedebe yana otu njikọ na-akwụsị na-akpaghị aka.
 trySendDescription = Gbalịa maka nyefe faịlụ dị mfe.
-expiredTitle = Njikọ a emebiela.
-notSupportedDescription = agaghị eji ihe nchọgharị a rụọ ọrụ. na arụ ọrụ kacha mma na ụdị nke , ọ ga-arụkwa ụdị nke ihe nchọgharị ka ugbu a.
-downloadFirefox = Budata
 okButton = O

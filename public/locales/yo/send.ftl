@@ -43,8 +43,6 @@ notSupportedLink =
     Kí ló ṣe tí ẹ̀rọ-aṣàwárí mi ò ní ìbátan?
     Kí nìdí tí ẹ̀rọ-ìfarakọ́ra mi ò ní ìbátan?
     Kí nìdí tí ẹ̀rọ-aṣàwárí mi ò ní ìbátan?
-notSupportedOutdatedDetail = Ó ṣe, wípé ẹ̀dà Firefox yí ò ní àtìlẹyìn ẹ̀rọ-alátagbà tí ó ń mú Send ṣiṣẹ́. O ní láti ṣe àgbéga èdà ẹ̀rọ-aṣàwárí rẹ kó bágbàmu.
-updateFirefox = Mú Firefox bágbàmu
 deletePopupCancel =
     Nù kúrò
     Parẹ́
@@ -75,9 +73,7 @@ expiresHoursMinutes =
 expiresMinutes = { $minutes }i
 # A short status message shown when the user enters a long password
 maxPasswordLength = Ìdíwọ̀n ọ̀rọ̀-aṣínà: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand =
@@ -102,6 +98,5 @@ addFilesButton = E yan awon faili lati gbasoke
 dragAndDropFiles = E mu awon faili ki ede ju si bi
 okButton = O DA
 downloadingTitle = N se igabsile
-noStreamsOptionFirefox = E gbiyanju asawakiri to je ayanfe wa
 noStreamsOptionDownload = Tesiwaju pelu aṣàwákiri yi
 trailheadPromo = Ona wa lati dabobo ipamo re. Darapo mo Firefox

@@ -23,9 +23,16 @@ module.exports = function getTranslator(locale) {
     if (bundle.hasMessage(id)) {
       return bundle.formatPattern(bundle.getMessage(id).value, data);
     }
-    return defaultBundle.formatPattern(
-      defaultBundle.getMessage(id).value,
-      data
-    );
+    if (defaultBundle.hasMessage(id)) {
+      return defaultBundle.formatPattern(
+        defaultBundle.getMessage(id).value,
+        data
+      );
+    }
+    // Unguarded, this was `defaultBundle.getMessage(id).value` on an undefined
+    // message: a TypeError thrown while rendering, so one missing key 500s the
+    // page. Returning the id keeps the page up and makes the gap visible, which
+    // is how a missing key should fail. The client does the same.
+    return id;
   };
 };

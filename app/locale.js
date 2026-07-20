@@ -22,5 +22,10 @@ export async function getTranslator(locale) {
         return bundle.formatPattern(bundle.getMessage(id).value, data);
       }
     }
+    // Falling off the end returned undefined, and nanohtml skips a non-string
+    // child, so a missing key rendered as an empty element rather than anything
+    // anyone would notice. That is how a reference to a string absent from all
+    // 85 locales survived. Returning the id makes the gap visible.
+    return id;
   };
 }
