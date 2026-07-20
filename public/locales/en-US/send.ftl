@@ -140,3 +140,16 @@ rateLimitedRetry = Too many requests from your connection. Try again in { $secon
 # file expires OR reaches its download limit, so by the time anyone asks, the
 # two are the same absence.
 linkUnavailableTitle = This link is no longer available. It may have expired, or reached its download limit.
+
+# Replaces notSupportedDescription and notSupportedOutdatedDetail, which both
+# named Firefox. This project is not affiliated with Mozilla, and pointing a
+# Tor Browser user at another browser is bad advice.
+notSupportedDetail = This browser does not support the web technology { -send-brand } needs to encrypt files in your browser. A current version of a major browser will work.
+notSupportedUpdateDetail = This version of your browser does not support the web technology { -send-brand } needs. Updating it usually fixes this.
+# Shown when the site itself is not served over a secure origin, so the browser
+# withholds the encryption APIs. The cause is the site, not the browser.
+insecureContextHeader = This site is not served securely.
+insecureContextDetail = Browsers only allow the encryption { -send-brand } needs on a secure connection. This site is being served over plain HTTP, so it cannot encrypt anything. That is the site's configuration, not a problem with your browser.
+# Shown above the choices offered when a file is too large for this browser to
+# decrypt in memory.
+noStreamsChooseDescription = Choose how you would like to continue.

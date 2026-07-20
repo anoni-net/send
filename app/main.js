@@ -14,11 +14,16 @@ import { setTranslate, locale } from './utils';
 
 (async function start() {
   const capabilities = await getCapabilities();
-  if (
-    !capabilities.crypto &&
-    window.location.pathname !== '/unsupported/crypto'
-  ) {
-    return window.location.assign('/unsupported/crypto');
+  if (!capabilities.crypto) {
+    // WebCrypto is unavailable on any origin the browser does not consider
+    // secure, so an instance served over plain http fails this check on every
+    // browser ever made. Saying "your browser is not supported" there sends the
+    // visitor to troubleshoot something that is not broken, and the operator
+    // never hears about the real cause.
+    const reason = window.isSecureContext === false ? 'insecure' : 'crypto';
+    if (window.location.pathname !== `/unsupported/${reason}`) {
+      return window.location.assign(`/unsupported/${reason}`);
+    }
   }
   if (capabilities.serviceWorker) {
     try {

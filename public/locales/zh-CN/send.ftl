@@ -135,3 +135,12 @@ rateLimitedRetry = 这个连接在短时间内发送了太多请求。请在 { $
 # Shown when a share link no longer resolves. Replaces expiredTitle, which
 # asserted a cause the server cannot know.
 linkUnavailableTitle = 这个链接已经无法使用。可能是已经过期，也可能是已达下载次数上限。
+# Replaces notSupportedDescription and notSupportedOutdatedDetail, which both
+# named Firefox.
+notSupportedDetail = 这个浏览器不支持 { -send-brand } 在浏览器内加密文件所需的网页技术。使用主流浏览器的当前版本即可。
+notSupportedUpdateDetail = 你的浏览器版本不支持 { -send-brand } 所需的网页技术。更新浏览器通常就能解决。
+# Shown when the site itself is not served over a secure origin.
+insecureContextHeader = 这个网站没有以安全连接提供。
+insecureContextDetail = 浏览器只在安全连接下开放 { -send-brand } 所需的加密功能。这个网站目前以纯 HTTP 提供，因此无法进行任何加密。这是网站的配置问题，不是你的浏览器有问题。
+# Shown above the choices offered when a file is too large for this browser.
+noStreamsChooseDescription = 请选择你要如何继续。

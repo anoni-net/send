@@ -5,9 +5,16 @@ module.exports = function(state, emit) {
   let strings;
   // `why` keeps its initialiser: the outdated branch below does not set it.
   let why = '';
-  let url;
 
-  if (state.params.reason !== 'outdated') {
+  // No outbound link to any particular browser vendor. Send is not affiliated
+  // with one, README and the footer both say so, and telling a Tor Browser user
+  // to install something else is bad advice for exactly the people most likely
+  // to be reading this page.
+  if (state.params.reason === 'insecure') {
+    strings = insecureStrings(state);
+  } else if (state.params.reason === 'outdated') {
+    strings = outdatedStrings(state);
+  } else {
     strings = unsupportedStrings(state);
     why = html`
       <a
@@ -17,11 +24,6 @@ module.exports = function(state, emit) {
         ${state.translate('notSupportedLink')}
       </a>
     `;
-    url =
-      'https://www.mozilla.org/firefox/new/';
-  } else {
-    strings = outdatedStrings(state);
-    url = 'https://support.mozilla.org/kb/update-firefox-latest-version';
   }
 
   return html`
@@ -33,9 +35,6 @@ module.exports = function(state, emit) {
         <h1 class="text-3xl font-bold">${strings.header}</h1>
         <p class="mt-4 mb-8 max-w-md leading-normal">${strings.description}</p>
         ${why}
-        <a href="${url}" class="btn rounded-lg mt-8 px-8">
-          ${strings.button}
-        </a>
       </section>
     </main>
   `;
@@ -44,15 +43,24 @@ module.exports = function(state, emit) {
 function outdatedStrings(state) {
   return {
     header: state.translate('notSupportedHeader'),
-    description: state.translate('notSupportedOutdatedDetail'),
-    button: state.translate('updateFirefox')
+    description: state.translate('notSupportedUpdateDetail')
   };
 }
 
 function unsupportedStrings(state) {
   return {
     header: state.translate('notSupportedHeader'),
-    description: state.translate('notSupportedDescription'),
-    button: state.translate('downloadFirefox')
+    description: state.translate('notSupportedDetail')
+  };
+}
+
+// Not the browser's fault. WebCrypto is unavailable on any origin the browser
+// does not consider secure, so an operator serving Send over plain http sends
+// every visitor to this page. Blaming their browser sends them off to
+// troubleshoot something that is not broken.
+function insecureStrings(state) {
+  return {
+    header: state.translate('insecureContextHeader'),
+    description: state.translate('insecureContextDetail')
   };
 }
