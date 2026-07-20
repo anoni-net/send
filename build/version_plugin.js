@@ -21,9 +21,23 @@ const version = JSON.stringify({
   commit,
   source: pkg.homepage,
   version: API_VERSION,
-  // Our own release, from package.json. Use this for anything that identifies
-  // the build rather than the protocol, such as support questions.
-  release: process.env.CIRCLE_TAG || `v${pkg.version}`
+  // Our own release. Use this for anything that identifies the build rather
+  // than the protocol, such as support questions or fetching the matching
+  // SHA256SUMS.txt.
+  //
+  // Read from package.json and from nothing else. This used to fall back from
+  // process.env.CIRCLE_TAG, left over from Mozilla's CircleCI: GitHub Actions
+  // never sets that variable, so the fallback had been dead for as long as this
+  // repository has existed. Reaching for the CI equivalent (GITHUB_REF_NAME)
+  // would have been the wrong repair. version.json ships inside dist/, and
+  // VERIFYING.md promises that a clean clone plus `npm ci && npm run build`
+  // reproduces dist/ byte for byte. Anything sourced from the build environment
+  // rather than the tree breaks that promise the moment the two disagree, and
+  // it fails in the least helpful way: an auditor's honest rebuild stops
+  // matching, and the tooling cannot tell them whether they found tampering or
+  // a version string. The tree is the single source, and the publish workflow
+  // checks the git tag against it.
+  release: `v${pkg.version}`
 });
 
 class VersionPlugin {
