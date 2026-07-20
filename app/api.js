@@ -10,6 +10,17 @@ export class ConnectionError extends Error {
   }
 }
 
+// A connection that never opened, as distinct from one that opened and then
+// dropped. The distinction is the point: a refused or filtered connect is
+// almost always something in front of the user rather than the server, and
+// saying so is actionable where "something went wrong" is not.
+export class ConnectFailedError extends Error {
+  constructor() {
+    super('connect-failed');
+    this.cancelled = false;
+  }
+}
+
 let apiUrlPrefix = '';
 export function getApiUrl(path) {
   return apiUrlPrefix + path;
@@ -141,14 +152,82 @@ export async function setPassword(id, owner_token, keychain) {
   return response.ok;
 }
 
-function asyncInitWebSocket(server) {
+// Long enough that a slow mobile connection is not called a failure, short
+// enough that a swallowed connect does not look like a hung app. A connect is
+// a handshake, not a transfer, so it does not scale with the file.
+const WS_CONNECT_TIMEOUT = 30000;
+const CANCEL_POLL_INTERVAL = 250;
+
+// This used to listen for 'open' and nothing else. `new WebSocket()` does not
+// throw when a connection is refused or filtered: it fires 'error', then
+// 'close'. So the promise never settled, upload() stayed awaiting it, and the
+// upload tile sat at 0% with a Cancel button that could not help, because the
+// cancel flag is only read further down the upload loop. Nothing short of a
+// reload recovered.
+//
+// There are now four ways out: it opens, it fails, the user cancels, or it
+// takes so long that something is almost certainly swallowing it.
+export function asyncInitWebSocket(server, canceller = { cancelled: false }) {
   return new Promise((resolve, reject) => {
-    try {
-      const ws = new WebSocket(server);
-      ws.addEventListener('open', () => resolve(ws), { once: true });
-    } catch (e) {
-      reject(new ConnectionError(false));
+    let ws;
+    let settled = false;
+    let timer;
+    let poll;
+
+    // Returns true to the first caller only, so a socket that errors and then
+    // closes settles once.
+    function claim() {
+      if (settled) {
+        return false;
+      }
+      settled = true;
+      clearTimeout(timer);
+      clearInterval(poll);
+      return true;
     }
+
+    function closeSocket() {
+      if (ws && ![WebSocket.CLOSED, WebSocket.CLOSING].includes(ws.readyState)) {
+        ws.close();
+      }
+    }
+
+    function fail() {
+      if (!claim()) {
+        return;
+      }
+      closeSocket();
+      reject(new ConnectFailedError());
+    }
+
+    timer = setTimeout(fail, WS_CONNECT_TIMEOUT);
+    // cancel() only sets a flag, and while we are waiting on the socket nothing
+    // else is reading it, so without this the button does nothing until the
+    // connection resolves on its own.
+    poll = setInterval(() => {
+      if (!canceller.cancelled || !claim()) {
+        return;
+      }
+      closeSocket();
+      reject(new ConnectionError(true));
+    }, CANCEL_POLL_INTERVAL);
+
+    try {
+      ws = new WebSocket(server);
+    } catch (e) {
+      return fail();
+    }
+    ws.addEventListener(
+      'open',
+      () => {
+        if (claim()) {
+          resolve(ws);
+        }
+      },
+      { once: true }
+    );
+    ws.addEventListener('error', fail, { once: true });
+    ws.addEventListener('close', fail, { once: true });
   });
 }
 
@@ -206,7 +285,7 @@ async function upload(
   const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
   const endpoint = `${protocol}//${host}${port ? ':' : ''}${port}/api/ws`;
 
-  const ws = await asyncInitWebSocket(endpoint);
+  const ws = await asyncInitWebSocket(endpoint, canceller);
 
   try {
     const metadataHeader = arrayToB64(new Uint8Array(metadata));

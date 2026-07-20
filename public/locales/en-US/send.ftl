@@ -124,3 +124,7 @@ shareLinkButton = Share link
 shareMessage = Download “{ $name }” with { -send-brand }: simple, safe file sharing
 
 sponsoredByThunderbird = Sponsored by Thunderbird
+
+# Shown when the upload connection could not be opened at all, which usually
+# means something between the user and the server is blocking it.
+connectFailed = Could not open a connection to upload. Your network may be blocking it. Check your connection and try again.

@@ -130,6 +130,12 @@ export default function(state, emitter) {
       if (err.message === '0') {
         //cancelled. do nothing
         render();
+      } else if (err.message === 'connect-failed') {
+        // The upload never started, so the archive is still selected and the
+        // page is still usable. A dialog keeps the user where they are instead
+        // of throwing away their selection for a full error page, and names the
+        // likely cause: this is the failure someone on a filtered network hits.
+        state.modal = okDialog(state.translate('connectFailed'));
       } else {
         console.error('upload failed', {
           error: err,
