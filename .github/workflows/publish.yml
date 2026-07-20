@@ -61,6 +61,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # /__version__ reports `release` from package.json, deliberately, so that
+      # a clean rebuild produces the same dist/ as the published image. That
+      # only holds if the tag agrees with the tree. A tag that does not means
+      # the released image reports one version while the release page carries
+      # another, and VERIFYING.md sends people to `git checkout <release>` and
+      # to the SHA256SUMS.txt of that tag. Fail before anything is published.
+      - name: Tag matches package.json version
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          set -euo pipefail
+          pkg="v$(node -p "require('./package.json').version")"
+          echo "tag=${GITHUB_REF_NAME} package.json=${pkg}"
+          [ "${GITHUB_REF_NAME}" = "${pkg}" ] || {
+            echo "Tag ${GITHUB_REF_NAME} does not match package.json (${pkg})."
+            echo "Bump the version in package.json and retag, so /__version__"
+            echo "and the release assets agree."
+            exit 1; }
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
