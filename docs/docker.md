@@ -5,24 +5,39 @@ published image is signed by our CI with cosign, and carries an SBOM and SLSA
 provenance. [VERIFYING.md](../VERIFYING.md) shows how to check all of that, and
 how to confirm the JavaScript a running instance serves matches this source.
 
+Three ways to name the image, in increasing order of how much they pin down:
+
+| Reference | Resolves to |
+|---|---|
+| `:latest` | whatever was last pushed to `main`. Moves under you. Fine for a look around |
+| `:5.0.0` | that [release](https://github.com/anoni-net/send/releases). Stable, since we do not retag |
+| `@sha256:...` | exactly one image, permanently. Use this in production |
+
 ```bash
-docker pull ghcr.io/anoni-net/send:latest
+docker pull ghcr.io/anoni-net/send:5.0.0
 
 # example quickstart (point REDIS_HOST to an already-running redis server)
 docker run -v $PWD/uploads:/uploads -p 1443:1443 \
     -e 'DETECT_BASE_URL=true' \
     -e 'REDIS_HOST=localhost' \
     -e 'FILE_DIR=/uploads' \
-    ghcr.io/anoni-net/send:latest
+    ghcr.io/anoni-net/send:5.0.0
 ```
 
-Verify the signature before running it, and pin by digest (`@sha256:...`) in
-production so the tag cannot move under you:
+Verify the signature before you run it. Verify a version tag rather than
+`:latest`: a moving tag tells you only about whatever it pointed at the moment
+you checked, and the `docker run` after it can resolve to something else.
 
 ```bash
-cosign verify ghcr.io/anoni-net/send:latest \
+VERSION=5.0.0
+
+cosign verify ghcr.io/anoni-net/send:${VERSION} \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
   --certificate-identity-regexp '^https://github.com/anoni-net/send/.github/workflows/publish.yml@.*$'
+
+# Then pin production to the digest you just verified, so nothing can move it.
+docker buildx imagetools inspect ghcr.io/anoni-net/send:${VERSION} \
+  --format '{{println .Manifest.Digest}}'
 ```
 
 Or clone this repo and run `docker build -t send:latest .` to build an image
@@ -170,7 +185,7 @@ therefore not installed by default.
 To use either backend, build an image with the SDK added:
 
 ```dockerfile
-FROM ghcr.io/anoni-net/send:latest
+FROM ghcr.io/anoni-net/send:5.0.0
 USER root
 RUN npm install --no-save @aws-sdk/client-s3 @aws-sdk/lib-storage
 # ...or, for Google Cloud Storage:
@@ -246,7 +261,7 @@ $ docker run --net=sendnet -v $PWD/uploads:/uploads -p 1443:1443 \
     -e 'MAX_FILE_SIZE=5368709120' \
     -e 'MAX_EXPIRE_SECONDS=2592000' \
     -e 'SEND_FOOTER_DMCA_URL=https://example.com/dmca-contact-info' \
-    ghcr.io/anoni-net/send:latest
+    ghcr.io/anoni-net/send:5.0.0
 ```
 Then open http://localhost:1443 to view the UI. (change the `localhost` to your IP or hostname above to serve the UI to others)
 
@@ -267,7 +282,7 @@ $ docker run -p 1443:1443 \
     -e 'UI_COLOR_PRIMARY=#f00' \
     -e 'UI_COLOR_ACCENT=#a00' \
     -e 'UI_CUSTOM_ASSETS_ICON=custom_assets/logo.svg' \
-    ghcr.io/anoni-net/send:latest
+    ghcr.io/anoni-net/send:5.0.0
 ```
 
 ## Docker Compose
@@ -275,5 +290,6 @@ $ docker run -p 1443:1443 \
 For a Docker compose configuration example, see
 [timvisee/send-docker-compose](https://github.com/timvisee/send-docker-compose).
 It is written for upstream's image, so change the `image:` line to
-`ghcr.io/anoni-net/send:latest` if you want the build this repository
-publishes.
+`ghcr.io/anoni-net/send:5.0.0` if you want the build this repository publishes.
+A compose file is a deployment, so prefer a version tag or a digest over
+`:latest` there, per the table at the top of this page.
