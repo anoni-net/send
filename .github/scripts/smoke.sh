@@ -162,5 +162,19 @@ done
   echo "  250 API requests from one address were never rate-limited"
   docker logs send; exit 1; }
 
+# The limiter skips genuine WebSocket upgrades. That skip used to test the
+# Upgrade header on its own, so sending one turned the limit off for every /api
+# route. The unit test that covered the skip sent a single header too, so it
+# passed either way; only a real request through the real stack shows the
+# difference. The window is already exhausted above, so a request that is still
+# counted must come back 429.
+echo "Rate limiting is not bypassable by a header ..."
+code=$(curl -s -o /dev/null -w '%{http_code}' -H 'Upgrade: websocket' \
+  "http://localhost:${PORT}/api/exists/deadbeefdead")
+echo "  with a bare Upgrade header -> ${code}"
+[ "$code" = "429" ] || {
+  echo "  a request carrying only an Upgrade header skipped the rate limit"
+  docker logs send; exit 1; }
+
 docker rm -f send redis >/dev/null 2>&1 || true
 docker network rm sendci >/dev/null 2>&1 || true

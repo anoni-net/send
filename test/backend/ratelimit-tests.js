@@ -70,10 +70,73 @@ describe('RateLimiter', function() {
       const next = sinon.stub();
       const r = res();
       // Two upgrades from the same ip must both pass through untouched.
-      mw({ ip: '1.2.3.4', headers: { upgrade: 'websocket' } }, r, next);
-      mw({ ip: '1.2.3.4', headers: { upgrade: 'websocket' } }, r, next);
+      const headers = { upgrade: 'websocket', connection: 'Upgrade' };
+      mw({ ip: '1.2.3.4', headers }, r, next);
+      mw({ ip: '1.2.3.4', headers }, r, next);
       sinon.assert.calledTwice(next);
       sinon.assert.notCalled(r.sendStatus);
+    });
+
+    // The skip used to test the Upgrade header on its own, so sending one on an
+    // ordinary request disabled the limiter for every /api route.
+    it('still limits a request carrying only an Upgrade header', function() {
+      const rl = new RateLimiter({ windowMs: 1000, max: 1 });
+      const mw = rl.middleware();
+      const next = sinon.stub();
+
+      mw({ ip: '1.2.3.4', headers: { upgrade: 'websocket' } }, res(), next);
+      const r2 = res();
+      mw({ ip: '1.2.3.4', headers: { upgrade: 'websocket' } }, r2, next);
+
+      sinon.assert.calledOnce(next);
+      sinon.assert.calledWith(r2.sendStatus, 429);
+    });
+
+    it('still limits when Connection says something other than upgrade', function() {
+      const rl = new RateLimiter({ windowMs: 1000, max: 1 });
+      const mw = rl.middleware();
+      const next = sinon.stub();
+      const headers = { upgrade: 'websocket', connection: 'keep-alive' };
+
+      mw({ ip: '1.2.3.4', headers }, res(), next);
+      const r2 = res();
+      mw({ ip: '1.2.3.4', headers }, r2, next);
+
+      sinon.assert.calledOnce(next);
+      sinon.assert.calledWith(r2.sendStatus, 429);
+    });
+  });
+
+  describe('isUpgrade', function() {
+    const isUpgrade = RateLimiter.isUpgrade;
+
+    it('accepts a real upgrade, including a token list', function() {
+      assert.equal(
+        isUpgrade({ headers: { upgrade: 'websocket', connection: 'Upgrade' } }),
+        true
+      );
+      // Browsers and proxies send this form.
+      assert.equal(
+        isUpgrade({
+          headers: { upgrade: 'websocket', connection: 'keep-alive, Upgrade' }
+        }),
+        true
+      );
+    });
+
+    it('rejects anything that is not a real upgrade', function() {
+      const cases = [
+        {},
+        { upgrade: 'websocket' },
+        { connection: 'Upgrade' },
+        { upgrade: 'websocket', connection: 'keep-alive' },
+        // A substring must not count: "upgrade-insecure-requests" is a real
+        // header value that appears in Connection-adjacent contexts.
+        { upgrade: 'websocket', connection: 'upgrade-insecure-requests' }
+      ];
+      for (const headers of cases) {
+        assert.equal(isUpgrade({ headers }), false, JSON.stringify(headers));
+      }
     });
   });
 });

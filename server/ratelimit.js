@@ -56,9 +56,17 @@ class RateLimiter {
 
   // Express middleware. Skips WebSocket upgrades: those are rate-limited at the
   // upload handler instead, and counting the upgrade here would double-count.
+  //
+  // The skip used to test `req.headers.upgrade` alone, which let any client opt
+  // out of the limit by sending a header nothing validates: `curl -H 'Upgrade: x'`
+  // was served without ever being counted. Node only routes a request to the
+  // 'upgrade' event when Connection lists "upgrade" as well, so anything
+  // reaching this middleware with only the one header is an ordinary request
+  // wearing a costume. Both headers are now required, matching what actually
+  // makes a request an upgrade.
   middleware() {
     return (req, res, next) => {
-      if (req.headers.upgrade) {
+      if (isUpgrade(req)) {
         return next();
       }
       if (this.check(req.ip)) {
@@ -70,4 +78,18 @@ class RateLimiter {
   }
 }
 
+// Connection is a comma-separated list of tokens and is case-insensitive, so
+// "keep-alive, Upgrade" has to count.
+function isUpgrade(req) {
+  const connection = req.headers.connection;
+  if (!req.headers.upgrade || typeof connection !== 'string') {
+    return false;
+  }
+  return connection
+    .toLowerCase()
+    .split(',')
+    .some(token => token.trim() === 'upgrade');
+}
+
 module.exports = RateLimiter;
+module.exports.isUpgrade = isUpgrade;
