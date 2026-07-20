@@ -291,6 +291,14 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # This job never checks the repository out, it only downloads
+          # artifacts, so `gh` has no git remote to infer the repository from
+          # and exits with "fatal: not a git repository". That went unnoticed
+          # because this step only runs for tags, and every run before v5.0.0
+          # was a push to main. It cost the v5.0.0 release: the image was built,
+          # pushed and signed, and then the release it belongs to was never
+          # created. GH_REPO removes the inference entirely.
+          GH_REPO: ${{ github.repository }}
           DIGEST: ${{ steps.manifest.outputs.digest }}
         run: |
           set -euo pipefail
