@@ -3,7 +3,16 @@ const Metadata = require('../metadata');
 const createLogger = require('../log');
 const createRedisClient = require('./redis');
 
+// The prefix becomes part of the on-disk filename, and reap() only sweeps names
+// matching /^\d+-.../. A non-finite expiry produced the literal name "NaN-<id>",
+// which no sweep would ever match and no TTL would ever cover, so the file
+// outlived every mechanism meant to remove it. Callers validate their input, but
+// this is the boundary where a bad value stops being recoverable, so it refuses
+// rather than encoding the damage into a filename.
 function getPrefix(seconds) {
+  if (!Number.isFinite(seconds)) {
+    throw new Error(`invalid expiry: ${seconds}`);
+  }
   return Math.max(Math.floor(seconds / 86400), 1);
 }
 
