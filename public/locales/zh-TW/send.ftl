@@ -51,7 +51,7 @@ maxPasswordLength = 最大密碼長度: { $length }
 -mozilla = Mozilla
 
 introTitle = 簡單而私密的檔案共享服務
-introDescription = { -send-brand } 讓您可透過點對點加密的方式來分享檔案，並提供會自動失效的鏈結。這樣一來就可以保留分享時的隱私，也確保檔案不會永久保存於網路上。
+introDescription = { -send-brand } 讓您可透過端對端加密的方式來分享檔案，並提供會自動失效的鏈結。這樣一來就可以保留分享時的隱私，也確保檔案不會永久保存於網路上。
 notifyUploadEncryptDone = 已加密您的檔案，可以傳送
 # downloadCount is from the downloadCount string and timespan is a timespanMinutes string. ex. 'Expires after 2 downloads or 25 minutes'
 archiveExpiryInfo = { $downloadCount } 或 { $timespan } 後失效
@@ -83,7 +83,7 @@ totalSize = 總大小: { $size }
 copyLinkDescription = 複製鏈結即可分享您的檔案:
 copyLinkButton = 複製鏈結
 downloadTitle = 下載檔案
-downloadDescription = 此檔案是透過 { -send-brand } 進行分享，以點對點加密的方式來分享檔案，並提供會自動失效的鏈結。
+downloadDescription = 此檔案是透過 { -send-brand } 進行分享，以端對端加密的方式來分享檔案，並提供會自動失效的鏈結。
 trySendDescription = 快試試 { -send-brand }，簡單安全的檔案分享機制。
 # count will always be > 10
 tooManyFiles = { $count ->
