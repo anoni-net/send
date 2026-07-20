@@ -25,6 +25,44 @@ function clientIp(req) {
   return (req && (req.ip || (req.socket && req.socket.remoteAddress))) || '';
 }
 
+// Coerce before comparing. The guard used to test the values straight off the
+// wire, and every comparison against a non-numeric value is false, so a
+// timeLimit of "abc" passed validation intact: it then became the literal
+// filename prefix "NaN", which no expiry and no reaper sweep would ever match,
+// and the EXPIRE that would have failed is issued only after the file and the
+// metadata are already stored. Number() keeps numeric strings working for
+// third-party clients and turns everything else into NaN, which `||` replaces
+// with the default.
+function readUploadRequest(fileInfo) {
+  return {
+    timeLimit: Number(fileInfo.timeLimit) || config.default_expire_seconds,
+    dlimit: Number(fileInfo.dlimit) || config.default_downloads,
+    metadata: fileInfo.fileMetadata,
+    auth: fileInfo.authorization
+  };
+}
+
+// The only thing between an unauthenticated client and the storage layer, so it
+// is a named function rather than an inline condition, and it is tested
+// directly.
+function validUploadRequest({ timeLimit, dlimit, metadata, auth }) {
+  return (
+    // `.length` on an array is its element count and on an object is undefined,
+    // so a non-string slipped past the size cap and reached hSet, which throws
+    // on it only after the file is on disk.
+    typeof metadata === 'string' &&
+    metadata.length > 0 &&
+    metadata.length <= config.max_metadata_size &&
+    !!auth &&
+    Number.isInteger(timeLimit) &&
+    timeLimit > 0 &&
+    timeLimit <= config.max_expire_seconds &&
+    Number.isInteger(dlimit) &&
+    dlimit > 0 &&
+    dlimit <= config.max_downloads
+  );
+}
+
 module.exports = function(ws, req) {
   let fileStream;
 
@@ -59,22 +97,10 @@ module.exports = function(ws, req) {
       const owner = crypto.randomBytes(10).toString('hex');
 
       const fileInfo = JSON.parse(message);
-      const timeLimit = fileInfo.timeLimit || config.default_expire_seconds;
-      const dlimit = fileInfo.dlimit || config.default_downloads;
-      const metadata = fileInfo.fileMetadata;
-      const auth = fileInfo.authorization;
+      const { timeLimit, dlimit, metadata, auth } = readUploadRequest(fileInfo);
       const maxFileSize = config.max_file_size;
-      const maxExpireSeconds = config.max_expire_seconds;
-      const maxDownloads = config.max_downloads;
 
-      if (
-        !metadata ||
-        !auth ||
-        metadata.length > config.max_metadata_size ||
-        timeLimit <= 0 ||
-        timeLimit > maxExpireSeconds ||
-        dlimit > maxDownloads
-      ) {
+      if (!validUploadRequest({ timeLimit, dlimit, metadata, auth })) {
         ws.send(
           JSON.stringify({
             error: 400
@@ -140,3 +166,6 @@ module.exports = function(ws, req) {
     ws.close();
   });
 };
+
+module.exports.readUploadRequest = readUploadRequest;
+module.exports.validUploadRequest = validUploadRequest;

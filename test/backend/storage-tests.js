@@ -257,6 +257,25 @@ describe('Storage', function() {
     });
   });
 
+  // A non-numeric expiry used to produce the filename "NaN-<id>", which the
+  // reaper's whitelist never matches, so the file survived both the TTL and the
+  // sweep. set() has to refuse before anything is written.
+  describe('invalid expiry', function() {
+    for (const bad of ['abc', '7d', {}, NaN, Infinity, -Infinity]) {
+      it(`refuses to store with an expiry of ${String(bad)}`, async function() {
+        storage.storage.files = [];
+        storage.storage.deleted = [];
+        let threw = false;
+        try {
+          await storage.set('ffffffffffffffff', null, { dl: 0 }, bad);
+        } catch (e) {
+          threw = true;
+        }
+        assert.ok(threw, 'set() should reject an invalid expiry');
+      });
+    }
+  });
+
   describe('ping', function() {
     it('works', async function() {
       await storage.ping();
