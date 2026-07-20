@@ -134,3 +134,9 @@ connectFailed = Could not open a connection to upload. Your network may be block
 rateLimited = Too many requests from your connection. Wait a moment, then try again.
 # $seconds is how long the server asked us to wait
 rateLimitedRetry = Too many requests from your connection. Try again in { $seconds } seconds.
+
+# Shown when a share link no longer resolves. Replaces expiredTitle, which
+# asserted a cause the server cannot know: the record is deleted the moment a
+# file expires OR reaches its download limit, so by the time anyone asks, the
+# two are the same absence.
+linkUnavailableTitle = This link is no longer available. It may have expired, or reached its download limit.
