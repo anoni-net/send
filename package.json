@@ -30,7 +30,8 @@
     "test:frontend": "cross-env NODE_ENV=development FRONTEND_TESTS=1 node test/frontend/runner.js",
     "test:report": "nyc report --reporter=html",
     "start": "npm run clean && cross-env NODE_ENV=development L10N_DEV=true BASE_URL=http://localhost:8080 DETECT_BASE_URL=true webpack serve --mode=development",
-    "prod": "node server/bin/prod.js"
+    "prod": "node server/bin/prod.js",
+    "lint:docs-version": "node scripts/lint-docs-version"
   },
   "nyc": {
     "reporter": [
