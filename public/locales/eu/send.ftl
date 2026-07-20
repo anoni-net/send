@@ -24,8 +24,6 @@ fileTooBig = Fitxategia handiegia da kargatzeko. { $size } baino txikiagoa izan 
 linkExpiredAlt = Lotura iraungi da
 notSupportedHeader = Zure nabigatzailea ez da onartzen.
 notSupportedLink = Zergatik ez da nire nabigatzailea onartzen?
-notSupportedOutdatedDetail = Zoritxarrez Firefox bertsio honek ez du Send-ek behar duen web teknologia onartzen. Zure nabigatzailea eguneratu behar duzu.
-updateFirefox = Eguneratu Firefox
 deletePopupCancel = Utzi
 deleteButtonHover = Ezabatu
 passwordTryAgain = Pasahitz okerra. Saiatu berriro.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours }h { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Pasahitzaren gehienezko luzera: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] Soilik artxibo bakarra onartzen da.
        *[other] Soilik { $count } artxibo onartzen dira.
     }
-expiredTitle = Lotura hau iraungi da.
-notSupportedDescription = { -send-brand } ez da nabigatzaile honetan ibiliko. { -send-short-brand } hobeto dabil { -firefox }(r)en azken bertsioarekin; halaber, nabigatzaile gehienen azken bertsioarekin ibiliko da.
-downloadFirefox = Deskargatu { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }e { $hours }h { $minutes }m
 addFilesButton = Hautatu igotzeko fitxategiak
@@ -110,12 +103,10 @@ dragAndDropFiles = Arrastatu eta jaregin fitxategiak
 orClickWithSize = edo egin klik { $size } arte igotzeko
 addPassword = Babestu pasahitzarekin
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = Ados
 downloadingTitle = Deskargatzen
 noStreamsWarning = Baliteke nabigatzailea gai ez izatea horrelako tamaina handiko fitxategiak deszifratzeko.
 noStreamsOptionCopy = Kopiatu lotura beste nabigatzaile batean irekitzeko
-noStreamsOptionFirefox = Probatu gure nabigatzaile gogokoena
 noStreamsOptionDownload = Jarraitu nabigatzaile honekin
 # the next line after the colon contains a file name
 shareLinkDescription = Partekatu zure fitxategirako lotura:

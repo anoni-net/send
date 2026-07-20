@@ -24,8 +24,6 @@ fileTooBig = Le dimensioni di questo file sono eccessive. Dovrebbe essere inferi
 linkExpiredAlt = Link scaduto
 notSupportedHeader = Il browser in uso non è supportato.
 notSupportedLink = Perché questo browser non risulta supportato?
-notSupportedOutdatedDetail = Purtroppo questa versione di Firefox non supporta le tecnologie web alla base di Send. È necessario aggiornare il browser.
-updateFirefox = Aggiorna Firefox
 deletePopupCancel = Annulla
 deleteButtonHover = Elimina
 passwordTryAgain = Password errata, riprovare.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours }h { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Lunghezza massima della password: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -88,9 +84,6 @@ tooManyArchives =
         [one] È consentito solo un archivio.
        *[other] Sono consentiti solo { $count } archivi.
     }
-expiredTitle = Questo link è scaduto.
-notSupportedDescription = Non è possibile utilizzare { -send-brand } con questo browser. { -send-short-brand } funziona al meglio con l’ultima versione di { -firefox } ma è compatibile con l’ultima versione della maggior parte dei browser.
-downloadFirefox = Scarica { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }g { $hours }h { $minutes }m
 addFilesButton = Seleziona i file da caricare
@@ -102,12 +95,10 @@ dragAndDropFiles = Trascina e rilascia i file
 orClickWithSize = o fai clic per inviare fino a { $size }
 addPassword = Proteggi con una password
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = OK
 downloadingTitle = Download in corso…
 noStreamsWarning = Questo browser potrebbe non essere in grado di decrittare un file così grande.
 noStreamsOptionCopy = Copia il link e aprilo in un altro browser
-noStreamsOptionFirefox = Prova il nostro browser preferito
 noStreamsOptionDownload = Continua con questo browser
 # the next line after the colon contains a file name
 shareLinkDescription = Condividi il link al tuo file:

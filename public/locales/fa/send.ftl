@@ -24,8 +24,6 @@ fileTooBig = این پرونده بسیار حجیم است. حجم آن می‌
 linkExpiredAlt = پیوند منقضی شده است
 notSupportedHeader = مرورگر شما پشتیبانی نمی‌شود.
 notSupportedLink = چرا از مرورگر من پشتیبانی نمی‌شود؟
-notSupportedOutdatedDetail = متاسفانه این نسخه از فایرفاکس این تکنولوژی وب که به Send قدرت می‌بخشد را پشتیبانی نمی‌کند. شما نیاز دارید تا مرورگر خود را بروز کنید.
-updateFirefox = بروزرسانی فایرفاکس
 deletePopupCancel = انصراف
 deleteButtonHover = حذف
 passwordTryAgain = کلمه عبور اشتباه است. مجدد تلاش کنید.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours }ساعت { $minutes }دقیقه
 expiresMinutes = { $minutes } دقیقه
 # A short status message shown when the user enters a long password
 maxPasswordLength = حداکثر اندازهٔ گذرواژه: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = ارسال
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] تنها 1 بایگانی مجاز است.
        *[other] تنها { $count } بایگانی مجاز است.
     }
-expiredTitle = این پیوند منقضی شده است.
-notSupportedDescription = { -send-brand } با این مرورگر کار نخواهد کرد. { -send-short-brand } بهترین عملکرد را با آخرین نسخه { -firefox } خواهد داشت، و با آخرین نسخه اکثر مرورگر‌های کنونی کار می‌کند.
-downloadFirefox = دریافت { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } روز { $hours } ساعت { $minutes } دقیقه
 addFilesButton = پرونده‌ها را برای بارگذاری انتخاب کنید
@@ -110,12 +103,10 @@ dragAndDropFiles = فایل‌ها را بکشید و اینجا رها کنید
 orClickWithSize = یا برای ارسال تا { $size } کلیک کنید
 addPassword = با گذرواژه محافظت کنید
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = تأیید
 downloadingTitle = در حال بارگیری
 noStreamsWarning = ممکن است این مرورگر نتواند یک پرونده به این بزرگی را رمزگشایی کند.
 noStreamsOptionCopy = لینک را کپی کنید تا در مرورگر دیگری باز شود
-noStreamsOptionFirefox = مرورگر مورد علاقه ما را امتحان کنید
 noStreamsOptionDownload = با این مرورگر ادامه دهید
 # the next line after the colon contains a file name
 shareLinkDescription = پیوند مربوط به پرونده خود را به اشتراک بگذارید:

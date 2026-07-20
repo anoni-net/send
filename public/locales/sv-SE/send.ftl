@@ -24,8 +24,6 @@ fileTooBig = Den filen är för stor för att ladda upp. Det ska vara mindre än
 linkExpiredAlt = Länk upphörd
 notSupportedHeader = Din webbläsare stöds inte.
 notSupportedLink = Varför stöds inte min webbläsare?
-notSupportedOutdatedDetail = Tyvärr stödjer den här versionen av Firefox inte webbtekniken som driver Send. Du måste uppdatera din webbläsare.
-updateFirefox = Uppdatera Firefox
 deletePopupCancel = Avbryt
 deleteButtonHover = Ta bort
 passwordTryAgain = Felaktigt lösenord. Försök igen.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours }t { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maximal lösenordslängd: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] Endast 1 arkiv är tillåten.
        *[other] Endast { $count } arkiv är tillåtna.
     }
-expiredTitle = Den här länken har upphört.
-notSupportedDescription = { -send-brand } fungerar inte med den här webbläsaren. { -send-short-brand } fungerar bäst med den senaste versionen av { -firefox } och kommer att fungera med den nuvarande versionen av de flesta webbläsare.
-downloadFirefox = Hämta { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }t { $minutes }m
 addFilesButton = Välj filer som ska laddas upp
@@ -110,12 +103,10 @@ dragAndDropFiles = Dra och släpp filer
 orClickWithSize = eller klicka för att skicka upp till { $size }
 addPassword = Skydda med lösenord
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = OK
 downloadingTitle = Laddar ner
 noStreamsWarning = Den här webbläsaren kanske inte kan dekryptera en så stor fil.
 noStreamsOptionCopy = Kopiera länken för att öppna i en annan webbläsare
-noStreamsOptionFirefox = Prova vår favoritwebbläsare
 noStreamsOptionDownload = Fortsätt med den här webbläsaren
 # the next line after the colon contains a file name
 shareLinkDescription = Dela länken till din fil:

@@ -24,8 +24,6 @@ fileTooBig = That file is too big to upload. It should be less than { $size }.
 linkExpiredAlt = Link expired
 notSupportedHeader = Your browser is not supported.
 notSupportedLink = Why is my browser not supported?
-notSupportedOutdatedDetail = Unfortunately this version of Firefox does not support the web technology that powers Send. You’ll need to update your browser.
-updateFirefox = Update Firefox
 deletePopupCancel = Cancel
 deleteButtonHover = Delete
 footerText = Not affiliated with Mozilla or Firefox.
@@ -43,9 +41,7 @@ expiresHoursMinutes = { $hours }h { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maximum password length: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -101,9 +97,6 @@ tooManyArchives =
         [one] Only 1 archive is allowed.
        *[other] Only { $count } archives are allowed.
     }
-expiredTitle = This link has expired.
-notSupportedDescription = { -send-brand } will not work with this browser. { -send-short-brand } works best with the latest version of { -firefox }, and will work with the current version of most browsers.
-downloadFirefox = Download { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }h { $minutes }m
 addFilesButton = Select files to upload
@@ -115,12 +108,10 @@ dragAndDropFiles = Drag and drop files
 orClickWithSize = or click to send up to { $size }
 addPassword = Protect with password
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = OK
 downloadingTitle = Downloading
 noStreamsWarning = This browser might not be able to decrypt a file this big.
 noStreamsOptionCopy = Copy the link to open in another browser
-noStreamsOptionFirefox = Try our favourite browser
 noStreamsOptionDownload = Continue with this browser
 # the next line after the colon contains a file name
 shareLinkDescription = Share the link to your file:

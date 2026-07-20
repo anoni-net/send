@@ -28,8 +28,6 @@ fileTooBig = Tuta dataja je přewulka za nahraće. Měła mjeńša hač { $size 
 linkExpiredAlt = Wotkaz je spadnjeny
 notSupportedHeader = Waš wobhladowak so njepodpěruje.
 notSupportedLink = Čehodla so mój wobhladowak njepodpěruje?
-notSupportedOutdatedDetail = Bohužel tuta wersija Firefox webtechnologiju njepodpěruje, na kotrejž Send bazuje. Dyrbiće swój wobhladowak aktualizować.
-updateFirefox = Firefox aktualizować
 deletePopupCancel = Přetorhnyć
 deleteButtonHover = Zhašeć
 passwordTryAgain = Wopačne hesło. Prošu spytajće hišće raz.
@@ -42,9 +40,7 @@ expiresHoursMinutes = { $hours } hodź. { $minutes } mjeń.
 expiresMinutes = { $minutes } mjeń.
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maksimalna dołhosć hesła: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -110,9 +106,6 @@ tooManyArchives =
         [few] Jenož { $count } archiwy su dowolene.
        *[other] Jenož { $count } archiwow je dowolene.
     }
-expiredTitle = Tutón wotkaz je spadnjeny.
-notSupportedDescription = { -send-brand } z tutym wobhladowakom njefunguje. { -send-short-brand } najlěpje z najnowšej wersiju { -firefox } funguje, a funguje z aktualnej wersiju najwjace wobhladowakow.
-downloadFirefox = { -firefox } scáhnyć
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }h { $minutes }m
 addFilesButton = Dataje za nahrawanje wubrać
@@ -124,12 +117,10 @@ dragAndDropFiles = Ćehńće a wotkładźće dataje
 orClickWithSize = abo klikńće, zo byšće do { $size } pósłał
 addPassword = Z hesłom škitać
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = W porjadku
 downloadingTitle = Sćahuje so
 noStreamsWarning = Tutón wobhladowak njemóhł tajku wulku dataju dešifrować.
 noStreamsOptionCopy = Kopěrujće wotkaz, zo byšće jón w druhim wobhladowaku wočinił
-noStreamsOptionFirefox = Wupruwujće naš najlubši wobhladowak
 noStreamsOptionDownload = Z tutym wobhladowakom pokročować
 # the next line after the colon contains a file name
 shareLinkDescription = Dźělće wotkaz k swojej dataji:

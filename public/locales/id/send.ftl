@@ -22,8 +22,6 @@ fileTooBig = Berkas terlalu besar untuk diunggah. Harus kurang dari { $size }.
 linkExpiredAlt = Tautan kedaluwarsa
 notSupportedHeader = Peramban Anda tidak mendukung.
 notSupportedLink = Mengapa peramban saya tidak didukung?
-notSupportedOutdatedDetail = Sayangnya Firefox versi ini tidak mendukung teknologi web yang menggerakkan Send. Anda perlu memperbarui peramban Anda.
-updateFirefox = Perbarui Firefox
 deletePopupCancel = Batal
 deleteButtonHover = Hapus
 passwordTryAgain = Sandi salah. Silakan coba lagi.
@@ -36,9 +34,7 @@ expiresHoursMinutes = { $hours }j { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Panjang sandi maksimal: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -89,9 +85,6 @@ tooManyArchives =
     { $count ->
        *[other] Hanya { $count } arsip diperbolehkan.
     }
-expiredTitle = Tautan ini telah kadaluarsa.
-notSupportedDescription = { -send-brand } tidak dapat digunakan dengan peramban ini. { -send-short-brand } bekerja maksimal dengan versi terbaru { -firefox }, dan akan bekerja dengan versi terkini mayoritas peramban.
-downloadFirefox = Unduh { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }h { $hours }j { $minutes }m
 addFilesButton = Pilih berkas untuk diunggah
@@ -103,12 +96,10 @@ dragAndDropFiles = Seret dan jatuhkan berkas
 orClickWithSize = atau klik untuk mengirim hingga { $size }
 addPassword = Lindungi dengan kata sandi
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = Oke
 downloadingTitle = Mengunduh
 noStreamsWarning = Peramban ini mungkin tidak dapat mendekripsi berkas sebesar ini.
 noStreamsOptionCopy = Salin tautan untuk dibuka di peramban lainnya
-noStreamsOptionFirefox = Coba peramban favorit kami
 noStreamsOptionDownload = Lanjutkan dengan peramban ini
 # the next line after the colon contains a file name
 shareLinkDescription = Bagikan tautan ke berkas Anda:

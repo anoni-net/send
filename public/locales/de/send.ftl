@@ -24,8 +24,6 @@ fileTooBig = Die Datei ist zu groß zum Hochladen. Sie sollte maximal { $size } 
 linkExpiredAlt = Link abgelaufen
 notSupportedHeader = Dein Browser wird nicht unterstützt.
 notSupportedLink = Warum wird mein Browser nicht unterstützt?
-notSupportedOutdatedDetail = Leider unterstützt diese Firefox-Version die Web-Technologie nicht, auf der Send basiert. Du musst deinen Browser aktualisieren.
-updateFirefox = Firefox aktualisieren
 deletePopupCancel = Abbrechen
 deleteButtonHover = Löschen
 passwordTryAgain = Falsches Passwort. Versuche es nochmal.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours }h { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maximale Passwortlänge: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] Es ist nur ein  Archiv erlaubt.
        *[other] Es sind nur { $count } Archive erlaubt.
     }
-expiredTitle = Dieser Link ist abgelaufen.
-notSupportedDescription = { -send-brand } funktioniert nicht mit diesem Browser. { -send-short-brand } funktioniert am besten mit der neuesten Version von { -firefox } und funktioniert mit der aktuellen Version der meisten Browser.
-downloadFirefox = { -firefox } herunterladen
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }h { $minutes }m
 addFilesButton = Dateien zum Hochladen auswählen
@@ -110,12 +103,10 @@ dragAndDropFiles = Dateien per Drag & Drop einfügen
 orClickWithSize = oder klicken, um bis zu { $size } zu senden
 addPassword = Mit Passwort schützen
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = OK
 downloadingTitle = Wird heruntergeladen…
 noStreamsWarning = Dieser Browser kann eine so große Datei möglicherweise nicht entschlüsseln.
 noStreamsOptionCopy = Kopiere den Link, um ihn in einem anderen Browser zu öffnen
-noStreamsOptionFirefox = Probiere unseren Lieblingsbrowser aus
 noStreamsOptionDownload = Mit diesem Browser weitermachen
 # the next line after the colon contains a file name
 shareLinkDescription = Teilen Sie den Link zu Ihrer Datei:

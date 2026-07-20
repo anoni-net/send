@@ -22,8 +22,6 @@ fileTooBig = Koropak unjalkeuneun badag teuing. Kudu kurang ti { $size }.
 linkExpiredAlt = Tutumbu kadaluwarsa
 notSupportedHeader = Panyungsi anjeun teu dirojong
 notSupportedLink = Naha panyungsi kuring teu dirojong?
-notSupportedOutdatedDetail = Hanjakal Firefox vérsi ieu teu ngarojong téhnologi wéb nu ngagerakkeun Send. Anjeun perlu ngapdét panyungsi anjeun.
-updateFirefox = Apdét Firefox
 deletePopupCancel = Bolay
 deleteButtonHover = Pupus
 passwordTryAgain = Kecap sandi salah. Pecakan deui.
@@ -36,9 +34,7 @@ expiresHoursMinutes = { $hours }j { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Panjang sandi maksimal: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -94,9 +90,6 @@ tooManyArchives =
         [one] Ngan saarsip nu diidinan.
        *[other] Ngan { $count } arsip nu diidinan.
     }
-expiredTitle = Ieu tutumbu geus kadaluwarsa.
-notSupportedDescription = { -send-brand } moal jalan di ieu panyungsi. { -send-short-brand } jalan naker dina { -firefox } vérsi pamganyarna, sarta bakal jalan di loba panyungsi vérsi kiwari.
-downloadFirefox = Undeur { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }p { $hours }j { $minutes }m
 addFilesButton = Pilih koropak unjalkeuneun
@@ -108,12 +101,10 @@ dragAndDropFiles = Ésérkeun sarta ésotkeun koropak
 orClickWithSize = atawa klik pikeun ngirim nika { $size }
 addPassword = Piningan ku kecap sandi
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = OKÉH
 downloadingTitle = Ngundeur
 noStreamsWarning = Ieu panyungsi kawasna mah teu bisa ngadékrip koropak badag kieu.
 noStreamsOptionCopy = Tiron tutumbu jang bukaeun di panyungsi séjén
-noStreamsOptionFirefox = Pecakan panyungsi karesep kami
 noStreamsOptionDownload = Tuluykeun ku ieu panyungsi
 # the next line after the colon contains a file name
 shareLinkDescription = Bagikeun tutumbu ka koropak anjeun:

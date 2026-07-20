@@ -26,8 +26,6 @@ fileTooBig = Та датотека је превелика за отпремањ
 linkExpiredAlt = Веза је истекла
 notSupportedHeader = Ваш прегледач није подржан.
 notSupportedLink = Зашто мој прегледач није подржан?
-notSupportedOutdatedDetail = Нажалост, ово издање Firefox-a не подржава веб технологију која омогућава Send. Мораћете да ажурирате ваш прегледач.
-updateFirefox = Ажурирај Firefox
 deletePopupCancel = Откажи
 deleteButtonHover = Обриши
 passwordTryAgain = Нетачна лозинка. Пробајте поново.
@@ -40,9 +38,7 @@ expiresHoursMinutes = { $hours }ч { $minutes }м
 expiresMinutes = { $minutes }м
 # A short status message shown when the user enters a long password
 maxPasswordLength = Највећа дужина лозинке: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -103,9 +99,6 @@ tooManyArchives =
         [few] Дозвољене су само { $count } архиве.
        *[other] Дозвољено је само { $count } архива.
     }
-expiredTitle = Ова веза је истекла.
-notSupportedDescription = { -send-brand } неће радити у овом прегледачу. { -send-short-brand } најбоље ради са последњим издањем прегледача { -firefox } и радиће са тренутним издањима већине других прегледача.
-downloadFirefox = Преузми { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }д { $hours }ч { $minutes }м
 addFilesButton = Изаберите датотеке за отпремање
@@ -117,12 +110,10 @@ dragAndDropFiles = Превуците и пустите датотеке
 orClickWithSize = или кликните за слање садржаја великог до { $size }
 addPassword = Заштитите лозинком
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = У реду
 downloadingTitle = Преузимам
 noStreamsWarning = Овај прегледач можда неће моћи да дешифрује оволико велику датотеку.
 noStreamsOptionCopy = Копирај везу за отварање у другом прегледачу
-noStreamsOptionFirefox = Пробајте наш омиљени прегледач
 noStreamsOptionDownload = Наставите у овом прегледачу
 # the next line after the colon contains a file name
 shareLinkDescription = Поделите везу до датотеке:

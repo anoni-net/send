@@ -26,8 +26,6 @@ fileTooBig = Súbor je príliš veľký. Mal by byť menší než { $size }.
 linkExpiredAlt = Platnosť odkazu vypršala
 notSupportedHeader = Váš prehliadač nie je podporovaný.
 notSupportedLink = Prečo nie je môj prehliadač podporovaný?
-notSupportedOutdatedDetail = Žiaľ, táto verzia Firefoxu nepodporuje webovú technológiu, ktorá poháňa Send. Budete musieť aktualizovať svoj prehliadač.
-updateFirefox = Aktualizovať Firefox
 deletePopupCancel = Zrušiť
 deleteButtonHover = Odstrániť
 passwordTryAgain = Nesprávne heslo. Skúste to znova.
@@ -40,9 +38,7 @@ expiresHoursMinutes = { $hours } hod. { $minutes } min.
 expiresMinutes = { $minutes } min.
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maximálna dĺžka hesla: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -103,9 +99,6 @@ tooManyArchives =
         [few] Povolené sú najviac { $count } archívy.
        *[other] Povolených je najviac { $count } archívov.
     }
-expiredTitle = Platnosť odkazu vypršala.
-notSupportedDescription = { -send-brand } nebude v tomto prehliadači fungovať. { -send-short-brand } najlepšie funguje v najnovšej verzii { -firefox(case: "gen") } alebo aktuálnych verziách najpoužívanejších prehliadačov.
-downloadFirefox = Prevziať { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } d { $hours } h { $minutes } min
 addFilesButton = Vyberte súbory pre nahratie
@@ -117,12 +110,10 @@ dragAndDropFiles = Pretiahnutím súboru alebo kliknutím sem
 orClickWithSize = môžete poslať až { $size }
 addPassword = Chrániť heslom
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = OK
 downloadingTitle = Preberá sa
 noStreamsWarning = Tento prehliadač nemusí byť schopný dešifrovať takto veľký súbor.
 noStreamsOptionCopy = Skopírovať odkaz pre otvorenie v inom prehliadači
-noStreamsOptionFirefox = Vyskúšajte náš obľúbený prehliadač
 noStreamsOptionDownload = Pokračovať v tomto prehliadači
 # the next line after the colon contains a file name
 shareLinkDescription = Zdieľajte odkaz na súbor:

@@ -26,8 +26,6 @@ fileTooBig = Файл слишком большой. Он должен быть 
 linkExpiredAlt = Истёк срок действия ссылки
 notSupportedHeader = Ваш браузер не поддерживается.
 notSupportedLink = Почему мой браузер не поддерживается?
-notSupportedOutdatedDetail = К сожалению, эта версия Firefox не поддерживает веб-технологию, благодаря которой работает Send. Ваш нужно обновить свой браузер.
-updateFirefox = Обновить Firefox
 deletePopupCancel = Отмена
 deleteButtonHover = Удалить
 passwordTryAgain = Неверный пароль. Попробуйте снова.
@@ -40,9 +38,7 @@ expiresHoursMinutes = { $hours } ч. { $minutes } мин.
 expiresMinutes = { $minutes } мин.
 # A short status message shown when the user enters a long password
 maxPasswordLength = Максимальная длина пароля: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -103,9 +99,6 @@ tooManyArchives =
         [few] Только { $count } архива разрешено.
        *[other] Только { $count } архивов разрешено.
     }
-expiredTitle = Срок действия этой ссылки истёк.
-notSupportedDescription = { -send-brand } не будет работать в этом браузере. { -send-short-brand } лучше всего работает с последней версией { -firefox }, и будет работать с последними версиями популярных браузеров.
-downloadFirefox = Загрузить { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } дн. { $hours } ч. { $minutes } мин.
 addFilesButton = Добавить
@@ -117,12 +110,10 @@ dragAndDropFiles = Перетащите файлы сюда
 orClickWithSize = или кликните сюда для отправки файлов до { $size }
 addPassword = Защитить паролем
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = OK
 downloadingTitle = Загрузка
 noStreamsWarning = Этот браузер может не иметь возможности расшифровать такой большой файл.
 noStreamsOptionCopy = Скопируйте ссылку, чтобы открыть в другом браузере
-noStreamsOptionFirefox = Попробуйте наш любимый браузер
 noStreamsOptionDownload = Продолжить в этом браузере
 # the next line after the colon contains a file name
 shareLinkDescription = Поделитесь ссылкой на ваш файл:

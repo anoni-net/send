@@ -24,8 +24,6 @@ fileTooBig = Kanu tutu yo. Tsini ñu'u koi tana { $size }.
 linkExpiredAlt = Ntoo enlace
 notSupportedHeader = Kue ku kuni página.
 notSupportedLink = ¿Chanu kue ku kuncheuña?
-notSupportedOutdatedDetail = Firefox kue ku kuni página web takua kuachu'un Send. tsiniñu'u ndu tsa'a navegador.
-updateFirefox = Ndu tsa'a Firefox
 deletePopupCancel = Kunchatu
 deleteButtonHover = Stoò
 passwordTryAgain = Kue vaa ni chau sivi siki. Chai tuku.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours }h { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Kua tu'un see: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] 1 tutu ni ku.
        *[other] Mitu'un { $count } tutu ni ku.
     }
-expiredTitle = Koo enlace inka
-notSupportedDescription = { -send-brand } ma ku Kuachu'un navegador yo. { -send-short-brand } Sachu'in va'a la  versión da ntii { -firefox }, sachu'un tsi  versión tsa'a su inka kue navegador.
-downloadFirefox = Snuú { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }h { $minutes }m
 addFilesButton = Katsi tutu ku skau
@@ -110,12 +103,10 @@ dragAndDropFiles = Xita cha sia kue tutu
 orClickWithSize = katavi takua stuchaku ña mancha { $size }
 addPassword = Inka vai tsi tu'un seé
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = Vaá
 downloadingTitle = Snuì
 noStreamsWarning = Ku ña navegador yo ma ku mini iin tutú kanu.
 noStreamsOptionCopy = Ndatava enlace takua kunu tsí inka navegador
-noStreamsOptionFirefox = Kuachu'un navegador ña va'a nu ntia
 noStreamsOptionDownload = Kunka tsi navegador yo
 # the next line after the colon contains a file name
 shareLinkDescription = Stucha enlace tutu ku:

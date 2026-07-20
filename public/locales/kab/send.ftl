@@ -24,8 +24,6 @@ fileTooBig = Afaylu-agi meqqer aṭas. Yessefk ad yili daw n  { $size }.
 linkExpiredAlt = Aseɣwen yemmut
 notSupportedHeader = Iminig-ik ur ittusefrak ara
 notSupportedLink = Ayγer iminig inu ur yettwasefrek ara?
-notSupportedOutdatedDetail = Ad nesḥissef imilqem-agi n Firefox Firefox ur isefrak ara titiknulujiyin web yettwaseqdacen di Send. Yessefk ad tleqmeḍ iminig-ik.
-updateFirefox = Leqqem Firefox
 deletePopupCancel = Sefsex
 deleteButtonHover = Kkes
 passwordTryAgain = Yir awal uffir. Ɛreḍ tikelt nniḍen.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours }Isragen { $minutes }Tisdatin
 expiresMinutes = { $minutes }Tisdatin
 # A short status message shown when the user enters a long password
 maxPasswordLength = Tuγzi tafellayt n wawal uffir: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] Ala 1 n teṛcibt i yettwasirgen.
        *[other] Ala { $count } n teṛcibin i yettwasiregn.
     }
-expiredTitle = Immut useɣwen.
-notSupportedDescription = { -send-brand } ur iteddu ara s yiminig-a. { -send-short-brand } iteddu akken iwata s lqem aneggaru n { -firefox }, daɣen iteddu s lqem amiran n tuget n yiminigen.
-downloadFirefox = Sider { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } ass { $hours } srg { $minutes } tsd
 addFilesButton = Fren ifuyla ad tessaliḍ
@@ -110,12 +103,10 @@ dragAndDropFiles = Ẓuɣer sakin sers ifuyla
 orClickWithSize = neɣ sit akken ad tazneḍ arma d { $size }
 addPassword = Ḥrez s wawal uffir
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = IH
 downloadingTitle = Azdam
 noStreamsWarning = Iminig-a ur yezmir ara ad yezmek afaylu meqqren.
 noStreamsOptionCopy = Nɣel aseɣwen i tulya deg yiminig-nniden
-noStreamsOptionFirefox = Ɛreḍ iminig-ik ufrin
 noStreamsOptionDownload = Kemmel akked iminig-a
 # the next line after the colon contains a file name
 shareLinkDescription = Bḍu aseɣwen ɣer ufaylu-ik:

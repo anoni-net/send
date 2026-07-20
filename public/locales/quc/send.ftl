@@ -24,8 +24,6 @@ fileTooBig = Le kemk'olib'al sib'alaj nim chech upaqab'isaxik. Rajawaxik nitz' c
 linkExpiredAlt = Xq'ax uq'ijol kemwiqb'al
 notSupportedHeader = Man toq'am ta le anik'onel
 notSupportedLink = ¿Jasche man toq'am ta le nunik'onel?
-notSupportedOutdatedDetail = Chakuyu' we okib'al rech Firefox man kutoq'aj ta le k'ak'eta'm rech web' le kuya' uchuq'ab' Send. Rajawaxik kak'ak'arisaj le anik'onel.
-updateFirefox = Chak'ak'arisaj Firefox
 deletePopupCancel = Uq'atexik
 deleteButtonHover = Uchupik
 passwordTryAgain = Man utz ta le retokib'al. Chab'ana' chi jumul.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours }h { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Nimalaj unimal retokib'al: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Utaqik
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] Xew 1 kemk'olib'al ya'om b'e chech.
        *[other] Xew { $count } taq kemk'olib'al ya'om b'e chech
     }
-expiredTitle = Xq'ax uq'ijol we kemwiqb'al
-notSupportedDescription = { -send-brand } man kchakun ta ruk' we nik'onel. { -send-short-brand } are qas utz uchakunem ruk' le maja naj okib'al rech { -firefox }, xuquje' kchakun ruk' le okib'al rech chanim rech nima ronojel taq nik'onelab'.
-downloadFirefox = Uqasaxik { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }h { $minutes }m
 addFilesButton = Ucha'ik taq kemk'olib'al chech upaqab'isaxik
@@ -110,12 +103,10 @@ dragAndDropFiles = Uchararexik chi'l utzoqopixik taq kemk'olib'al
 orClickWithSize = on chapitz'a' chech utaqik chech { $size }
 addPassword = Chajital rumal retokib'al
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = Ja'e
 downloadingTitle = Ktajin uqasaxik
 noStreamsWarning = We nik'onel wene man kkowin taj kusol jun jewa' unimal kemk'olib'al
 noStreamsOptionCopy = Chawelesaj uwach le kemwiqb'al chech ujaqik jun chi nik'onel
-noStreamsOptionFirefox = Chak'amb'ejaj le ajawatal nik'onel
 noStreamsOptionDownload = Chab'ana' na ruk' we nik'onel
 # the next line after the colon contains a file name
 shareLinkDescription = Chakomone'j le kemwiqb'al chech le akemk'olib'al:

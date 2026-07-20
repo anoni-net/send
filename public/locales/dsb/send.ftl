@@ -28,8 +28,6 @@ fileTooBig = Toś ta dataja jo pśewjelika za nagraśe. Měła mjeńša ako { $s
 linkExpiredAlt = Wótkaz spadnjony
 notSupportedHeader = Waš wobglědowak se njepódpěra.
 notSupportedLink = Cogodla se mój wobglědowak njepódpěra?
-notSupportedOutdatedDetail = Bóžko toś ta wersija Firefox webtechnologiju njepódpěra, na kótarejž Send bazěrujo. Musyśo swój wobglědowak aktualizěrowaś.
-updateFirefox = Firefox aktualizěrowaś
 deletePopupCancel = Pśetergnuś
 deleteButtonHover = Wulašowaś
 passwordTryAgain = Wopacne gronidło. Wopytajśo hyšći raz.
@@ -42,9 +40,7 @@ expiresHoursMinutes = { $hours } góź. { $minutes } min.
 expiresMinutes = { $minutes } min.
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maksimalna dłujkosć gronidła: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -110,9 +106,6 @@ tooManyArchives =
         [few] Jano { $count } archiwy su dowólone.
        *[other] Jano { $count } archiwow jo dowólone.
     }
-expiredTitle = Toś ten wótkaz jo spadnjony.
-notSupportedDescription = { -send-brand } z toś tym wobglědowakom njefunkcioněrujo. { -send-short-brand } nejlěpjej z nejnowšeju wersiju { -firefox } funkcioněrujo, a funkcioněrujo z aktualneju wersiju nejwěcej wobglědowakow.
-downloadFirefox = { -firefox } ześěgnuś
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }ź { $hours }g { $minutes }m
 addFilesButton = Dataje za nagrawanje wubraś
@@ -124,12 +117,10 @@ dragAndDropFiles = Śěgniśo a wótpołožćo dataje
 orClickWithSize = abo klikniśo, aby do { $size } pósłał
 addPassword = Z gronidłom šćitaś
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = W pórěźe
 downloadingTitle = Ześěgujo se
 noStreamsWarning = Toś ten wobglědowak njamógał taku wjeliku dataju dešifrěrowaś.
 noStreamsOptionCopy = Kopěrujśo wótkaz, aby jen w drugim wobglědowaku wócynił
-noStreamsOptionFirefox = Wopytajśo naš nejlubšy wobglědowak
 noStreamsOptionDownload = Z toś tym wobglědowakom pókšacowaś
 # the next line after the colon contains a file name
 shareLinkDescription = Źělśo wótkaz k swójej dataji:

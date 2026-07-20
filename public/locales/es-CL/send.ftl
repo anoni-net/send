@@ -24,8 +24,6 @@ fileTooBig = Ese archivo es muy grande para ser subido. Debiera tener un tamaño
 linkExpiredAlt = Enlace expirado
 notSupportedHeader = Tu navegador no está soportado.
 notSupportedLink = ¿Por qué mi navegador no es soportado?
-notSupportedOutdatedDetail = Lamentablemente esta versión de Firefox no soporta la tecnología web que potencia a Send. Deberás actualizar tu navegador.
-updateFirefox = Actualizar Firefox
 deletePopupCancel = Cancelar
 deleteButtonHover = Eliminar
 passwordTryAgain = Contraseña incorrecta. Vuelve a intentarlo.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours }h { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Longitud máxima de la contraseña: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] Solo 1 archivo está permitido.
        *[other] Solo { $count } archivos están permitidos.
     }
-expiredTitle = Este enlace ha expirado.
-notSupportedDescription = { -send-brand } no funcionará con este navegador. { -send-short-brand } funciona mejor con la última versión de { -firefox } y con la versión actual de la mayoría de los navegadores.
-downloadFirefox = Bajar { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }h { $minutes }m
 addFilesButton = Selecciona los archivos a subir
@@ -110,12 +103,10 @@ dragAndDropFiles = Arrastra y suelta archivos
 orClickWithSize = o haz clic para enviar hasta { $size }
 addPassword = Protegido con contraseña
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = Aceptar
 downloadingTitle = Bajando
 noStreamsWarning = Es posible que este navegador no pueda descifrar un archivo tan grande.
 noStreamsOptionCopy = Copiar el enlace para abrirlo en otro navegador
-noStreamsOptionFirefox = Prueba nuestro navegador favorito
 noStreamsOptionDownload = Continuar con este navegador
 # the next line after the colon contains a file name
 shareLinkDescription = Comparte el enlace a tu dispositivo:

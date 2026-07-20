@@ -24,8 +24,6 @@ fileTooBig = Tämä tiedosto on liian suuri ladattavaksi. Sen pitäisi olla pien
 linkExpiredAlt = Linkki on vanhentunut
 notSupportedHeader = Selaintasi ei tueta.
 notSupportedLink = Miksi selaintani ei tueta?
-notSupportedOutdatedDetail = Valitettavasti tämä Firefoxin versio ei tue Sendiä käyttävää web-tekniikkaa. Sinun on päivitettävä selaimesi.
-updateFirefox = Päivitä Firefox
 deletePopupCancel = Peruuta
 deleteButtonHover = Poista
 passwordTryAgain = Väärä salasana. Yritä uudelleen.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours } t { $minutes } min
 expiresMinutes = { $minutes } min
 # A short status message shown when the user enters a long password
 maxPasswordLength = Salasanan enimmäispituus: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] Vain 1 arkisto on sallittu.
        *[other] Vain { $count } arkistoa on sallittu.
     }
-expiredTitle = Tämä linkki on vanhentunut.
-notSupportedDescription = { -send-brand } ei toimi tällä selaimella. { -send-short-brand } toimii parhaiten { -firefox }in uusimmalla versiolla, ja toimii useimpien selainten uusimmilla versioilla.
-downloadFirefox = Lataa { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } pv { $hours } t { $minutes } min
 addFilesButton = Valitse lähetettävät tiedostot
@@ -110,12 +103,10 @@ dragAndDropFiles = Vedä ja pudota tiedostot
 orClickWithSize = tai napsauta lähettääksesi tiedostoja, joiden koko voi olla enintään { $size }
 addPassword = Suojaa salasanalla
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = OK
 downloadingTitle = Ladataan
 noStreamsWarning = Tämä selain ei välttämättä osaa purkaa salausta näin suurikokoisista tiedostoista.
 noStreamsOptionCopy = Kopioi linkki avataksesi sen toisessa selaimessa
-noStreamsOptionFirefox = Kokeile suosikkiselaintamme
 noStreamsOptionDownload = Jatka tällä selaimella
 # the next line after the colon contains a file name
 shareLinkDescription = Jaa linkki tiedostoosi:

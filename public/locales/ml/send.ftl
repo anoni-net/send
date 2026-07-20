@@ -24,8 +24,6 @@ fileTooBig = ഈ ഫയൽ വളരെ വലുതായതിനാൽ അപ
 linkExpiredAlt = കണ്ണി കാലഹരണപ്പെട്ടു
 notSupportedHeader = താങ്കളുടെ ബ്രൗസറിന് പിന്തുണയില്ല.
 notSupportedLink = എന്തുകൊണ്ടാണ് എന്റെ ബ്രൗസറിന് പിന്തുണയില്ലാത്തത്?
-notSupportedOutdatedDetail = ദൗർഭാഗ്യവശാൽ ഫയർഫോക്സിന്റെ ഈ പതിപ്പ് ഫയർഫോക്സ് സെൻഡ് ഉപയോഗിക്കുന്ന വെബ് സാങ്കേതികവിദ്യ പിന്തുണയ്ക്കുന്നില്ല. താങ്കൾ താങ്കളുടെ ബ്രൗസർ പുതുക്കേണ്ടി വരും.
-updateFirefox = ഫയർഫോക്സ് പുതുക്കൂ
 deletePopupCancel = റദ്ദാക്കുക
 deleteButtonHover = നീക്കം ചെയ്യുക
 passwordTryAgain = രഹസ്യവാക്ക് തെറ്റാണ്. വീണ്ടും ശ്രമിക്കുക.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours } മണിക്കൂർ { $minutes } മിന
 expiresMinutes = { $minutes } മിനുട്ട്
 # A short status message shown when the user enters a long password
 maxPasswordLength = രഹസ്യവാക്കിന്റെ പരമാവധി നീളം: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = ഫയർഫോക്സ് സെൻഡ്
 -send-short-brand = സെൻഡ്
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] ഒരു ആർക്കൈവ് മാത്രമേ അനുവദിച്ചിട്ടുള്ളൂ.
        *[other] { $count } ആർക്കൈവുകൾ മാത്രമേ അനുവദിച്ചിട്ടുള്ളൂ.
     }
-expiredTitle = ഈ ലിങ്ക് കാലഹരണപ്പെട്ടു.
-notSupportedDescription = ഈ ബ്രൌസറിൽ { -send-brand } പ്രവർത്തിക്കില്ല. { -send-short-brand } { -firefox }- ന്റെ ഏറ്റവും പുതിയ പതിപ്പിൽ വളരെ നന്നായി പ്രവർത്തിക്കുന്നു, കൂടാതെ മിക്ക ബ്രൌസറുകളുടെയും നിലവിലെ പതിപ്പിൽ പ്രവർത്തിക്കുകയും ചെയ്യും.
-downloadFirefox = { -firefox } ഡൗണ്‍ലോഡ് ചെയ്യുക
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } ദിവസം { $hours } മണിക്കൂർ { $minutes } മിനിറ്റ്
 addFilesButton = അപ്‌ലോഡ് ചെയ്യാനുള്ള ഫയലുകൾ തിരഞ്ഞെടുക്കുക
@@ -110,12 +103,10 @@ dragAndDropFiles = ഫയലുകൾ വലിച്ചിടുക
 orClickWithSize = അല്ലെങ്കിൽ { $size } വരെ അയയ്ക്കുന്നതിന് അമർത്തുക
 addPassword = രഹസ്യവാക്ക് ഉപയോഗിച്ച് സംരക്ഷിക്കുക
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = ശരി
 downloadingTitle = ഡൌണ്‍ലോഡ് ചെയ്യുന്നു
 noStreamsWarning = ഇത്ര വലിയ ഫയൽ ബ്രൌസറില്‍ ഡീക്രിപ്റ്റ് ചെയ്യാൻ കഴിഞ്ഞേക്കില്ല.
 noStreamsOptionCopy = മറ്റൊരു ബ്രൗസറിൽ തുറക്കുന്നതിന് ലിങ്ക് പകർത്തുക
-noStreamsOptionFirefox = ഞങ്ങളുടെ പ്രിയപ്പെട്ട ബ്രൗസർ പരീക്ഷിക്കുക
 noStreamsOptionDownload = ഈ ബ്രൗസറിൽ തുടരുക
 # the next line after the colon contains a file name
 shareLinkDescription = നിങ്ങളുടെ ഫയലിനുള്ള കണ്ണി പങ്കിടുക:

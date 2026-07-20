@@ -24,8 +24,6 @@ fileTooBig = Esti ficheru ye mui grande como pa xubilu. Debería tener menos de 
 linkExpiredAlt = Caducó l'enllaz
 notSupportedHeader = El to restolador nun ta sofitáu.
 notSupportedLink = ¿Por qué'l mio restolador nun ta sofitáu?
-notSupportedOutdatedDetail = Desafortunadamente esta versión de Firefox nun sofita la teunoloxía web qu'usa Send. Vas precisar anovar el restolador.
-updateFirefox = Anovar Firefox
 deletePopupCancel = Encaboxar
 deleteButtonHover = Desaniciar
 passwordTryAgain = La contraseña ye incorreuta. Volvi tentalo.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours }h { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Llargor máximu de la contraseña: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] Namái se permite 1 archivu
        *[other] Namái se permiten { $count } archivos
     }
-expiredTitle = Esti enllaz caducó.
-notSupportedDescription = { -send-brand } nun va funcionar con esti restolador. { -send-short-brand } funciona meyor cola última versión de { -firefox } y l'actual de la mayoría de restoladores.
-downloadFirefox = Baxar { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }h { $minutes }m
 addFilesButton = Esbillar los ficheros a unviar
@@ -109,7 +102,6 @@ dragAndDropFiles = Arrastra y suelta ficheros
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 orClickWithSize = o calca pa unviar hasta { $size }
 addPassword = Protexer con una contraseña
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = Aceutar
 downloadingTitle = Baxando

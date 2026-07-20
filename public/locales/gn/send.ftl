@@ -24,8 +24,6 @@ fileTooBig = Marandurenda tuichaiterei ehupi hag̃ua. Michĩveva’erã { $size 
 linkExpiredAlt = Juajuha ndoikóiva
 notSupportedHeader = Ne kundaha ndorekói pytyvõ.
 notSupportedLink = ¿Mba’ére che kundahára ndorekói ñepytyvõ?
-notSupportedOutdatedDetail = Ko Firefox rembiapo ndaipu’akái ñanduti rembipurupyahu oikotevẽva Send. Embohekopyahúke ne kundahára.
-updateFirefox = Firefox mbohekopyahu
 deletePopupCancel = Heja
 deleteButtonHover = Mboguete
 passwordTryAgain = Ñe’ẽñemi ndoikóiva. Eha’ãjey.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours } h { $minutes } m
 expiresMinutes = { $minutes } m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Ñe’ẽñemi pukukue: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] Oñemoneĩ 1 marandurenda añoite
        *[other] Oñemoneĩ { $count } marandurenda añoite
     }
-expiredTitle = Ko juajuha ndoikovéima.
-notSupportedDescription = { -send-brand } ndoikomo’ãi ko kundahára ndive. { -send-short-brand } oikoporãvéta { -firefox } rembiapokue ipyahuvéva ndive, ha oikóta opavavete kundahára ndive.
-downloadFirefox = Emboguejy { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }h { $minutes }m
 addFilesButton = Eiporavo marandurenda ehupi hag̃ua
@@ -110,12 +103,10 @@ dragAndDropFiles = Embosyryry ha epoi marandurenda
 orClickWithSize = térã eikutu emondo hag̃ua { $size } peve
 addPassword = Ñe’ẽñemíme mo’ãmbyre
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = OK
 downloadingTitle = Oñemboguejyhína
 noStreamsWarning = Ikatu ko kundahára ndoikuaái marandurenda tuichaitereíva.
 noStreamsOptionCopy = Embokuatia juajuha embojuruja hag̃ua ambue kundahárape.
-noStreamsOptionFirefox = Eipuru ore kundahára rohayhuvéva
 noStreamsOptionDownload = Eku’ejey ko kundahára ndive
 # the next line after the colon contains a file name
 shareLinkDescription = Emoherakuã juajuha ne mba’e’oka ndive:

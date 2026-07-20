@@ -24,8 +24,6 @@ fileTooBig = Ûta yachìj hua archibô dan. Da'ui gā li doj ga da' { $size }
 linkExpiredAlt = Nitāj si ni'ñānj lînk gà'
 notSupportedHeader = Nitāj si huā hue'ê riña sa nana'uî't.
 notSupportedLink = Nù huin saj nitāj si huā hue'ê riña sa nana'uí?
-notSupportedOutdatedDetail = Nu unùkuaj Firefox nan gi'iaj sunj ngà sa 'iaj sun ngà Send. Da'uît nāgi'iaj nakàt riña sa nana'uî't han.
-updateFirefox = Nagi'iaj nakà Firefox
 deletePopupCancel = Duyichin'
 deleteButtonHover = Dure'
 passwordTryAgain = Sê da'nga' huì dan huin. Ginù huin ñû.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours }h { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Dānaj gā yachìj da'nga huìi: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -82,6 +78,5 @@ totalSize = Dàj nìko yàchi: { $size }
 copyLinkDescription = Guxūn lînk da' ga'ue duyingâ't archibô:
 copyLinkButton = Guxûn lînk
 downloadTitle = Nadunïnj nej archîbo
-downloadFirefox = Nadunïnj { -firefox }
 okButton = Ga'ue
 shareLinkButton = Duguachîn enlâse

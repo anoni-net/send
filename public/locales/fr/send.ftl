@@ -24,8 +24,6 @@ fileTooBig = Ce fichier est trop volumineux pour être envoyé. Sa taille doit �
 linkExpiredAlt = Le lien a expiré
 notSupportedHeader = Votre navigateur n’est pas pris en charge.
 notSupportedLink = Pourquoi mon navigateur n’est-il pas pris en charge ?
-notSupportedOutdatedDetail = Malheureusement, cette version de Firefox ne prend pas en charge les technologies web utilisées par Send. Vous devez mettre à jour votre navigateur.
-updateFirefox = Mettre à jour Firefox
 deletePopupCancel = Annuler
 deleteButtonHover = Supprimer
 passwordTryAgain = Mot de passe incorrect. Veuillez réessayer.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours } h { $minutes } min
 expiresMinutes = { $minutes } min
 # A short status message shown when the user enters a long password
 maxPasswordLength = Longueur maximale du mot de passe : { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] Une seule archive est autorisée.
        *[other] Seules { $count } archives sont autorisées.
     }
-expiredTitle = Ce lien a expiré.
-notSupportedDescription = { -send-brand } ne fonctionnera pas avec ce navigateur. { -send-short-brand } fonctionne mieux avec la dernière version de { -firefox } et fonctionnera avec la dernière version de la plupart des navigateurs.
-downloadFirefox = Télécharger { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days } j { $hours } h { $minutes } min
 addFilesButton = Sélectionnez des fichiers à envoyer
@@ -110,12 +103,10 @@ dragAndDropFiles = Glissez-déposez des fichiers
 orClickWithSize = ou cliquez pour envoyer jusqu’à { $size }
 addPassword = Protéger par mot de passe
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = OK
 downloadingTitle = Téléchargement en cours
 noStreamsWarning = Ce navigateur pourrait ne pas être en mesure de déchiffrer un fichier aussi volumineux.
 noStreamsOptionCopy = Copiez le lien pour l’ouvrir dans un autre navigateur
-noStreamsOptionFirefox = Essayez notre navigateur préféré
 noStreamsOptionDownload = Continuer avec ce navigateur
 # the next line after the colon contains a file name
 shareLinkDescription = Partagez le lien vers votre fichier :

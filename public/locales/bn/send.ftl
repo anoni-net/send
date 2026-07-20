@@ -24,8 +24,6 @@ fileTooBig = ফাইলটি আপলোড করার জন্যে খ
 linkExpiredAlt = লিঙ্ক মেয়াদউত্তীর্ণ হয়েছে
 notSupportedHeader = আপনার ব্রাউজার সমর্থিত নয়।
 notSupportedLink = আমার ব্রাউজার কেন সমর্থিত নয়?
-notSupportedOutdatedDetail = দুর্ভাগ্যবশত Firefox এই সংস্করণটি ওয়েব প্রযুক্তিকে সমর্থন করে না যা Send কে সমর্থন করে। আপনাকে আপনার ব্রাউজারটি আপডেট করতে হবে।
-updateFirefox = Firefox হালনাগাদ করুন
 deletePopupCancel = বাতিল
 deleteButtonHover = মুছে ফেলুন
 passwordTryAgain = ভুল পাসওয়ার্ড। আবার চেষ্টা করুন।
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours }ঘ { $minutes }মি
 expiresMinutes = { $minutes }মি
 # A short status message shown when the user enters a long password
 maxPasswordLength = সর্বোচ্চ পাসওয়ার্ড দৈর্ঘ্য:{ $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = প্রেরণ
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] কেবল ১টি আর্কাইভ অনুমোদিত।
        *[other] কেবল { $count } আর্কাইভ অনুমোদিত।
     }
-expiredTitle = এই লিঙ্কের মেয়াদ শেষ হয়ে গেছে।
-notSupportedDescription = { -send-brand } এই ব্রাউজারের সাথে কাজ করবে না। { -firefox } এর সাম্প্রতিকতম সংস্করণে { -send-short-brand } সর্বোত্তমভাবে কাজ করবে, এবং এটি বেশিরভাগ ব্রাউজারের বর্তমান সংস্করণে কাজ করবে।
-downloadFirefox = { -firefox } ডাউনলোড করুন
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }দি { $hours }ঘ { $minutes }মি
 addFilesButton = আপলোডের জন্য ফাইল নির্বাচন করুন
@@ -110,12 +103,10 @@ dragAndDropFiles = ফাইল টেনে এনে ছাড়ুন
 orClickWithSize = বা সর্বোচ্চ { $size } আকারের ফাইল পাঠাতে ক্লিক করুন
 addPassword = পাসওয়ার্ড দ্বারা সুরক্ষিত রাখুন
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = ঠিক আছে
 downloadingTitle = ডাউনলোড হচ্ছে
 noStreamsWarning = এই ব্রাউজার এতো বড় একটি ফাইল ডিক্রিপ্ট করতে সক্ষম নয়।
 noStreamsOptionCopy = অন্য ব্রাউজারে খুলতে লিঙ্ক অনুলিপি করুন
-noStreamsOptionFirefox = আমাদের জনপ্রিয় ব্রাউজার ব্যবহার করুন
 noStreamsOptionDownload = এই ব্রাউজার ব্যবহার অব্যহত রাখুন
 # the next line after the colon contains a file name
 shareLinkDescription = আপনার ফাইলে লিঙ্ক শেয়ার করুন:

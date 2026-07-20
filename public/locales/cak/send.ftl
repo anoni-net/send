@@ -24,8 +24,6 @@ fileTooBig = Yalan nïm re yakb'äl re' richin nijotob'äx. K'o ta chi man nik'o
 linkExpiredAlt = Xk'is ruq'ijul ri ximonel
 notSupportedHeader = Man koch'el ta ri awokik'amaya'l.
 notSupportedLink = ¿Achike ruma man nikoch' taq ri wokik'amaya'l?
-notSupportedOutdatedDetail = K'ayew ruma re ruwäch Firefox re' man nuköch' ta ri ajk'amaya'l na'ob'äl nrajo' ri Send. Rajowaxik nak'ëx ri awokik'amaya'l.
-updateFirefox = Tik'ex ri Firefox
 deletePopupCancel = Tiq'at
 deleteButtonHover = Tiyuj
 passwordTryAgain = Itzel ri ewan tzij. Tatojtob'ej chik.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours }r { $minutes }ch
 expiresMinutes = { $minutes }ch
 # A short status message shown when the user enters a long password
 maxPasswordLength = Nïm raqän ewan tzij: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Titaq
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] Xa xe 1 yakb'äl niya' q'ij chi re.
        *[other] Xa xe { $count } taq yakb'äl niya' q'ij chi ke.
     }
-expiredTitle = Xk'is yan ruq'ij re ximonel re'.
-notSupportedDescription = Man xtisamäj ta ri { -send-brand } rik'in re okik'amaya'l re'. Nisamäj ütz ri { -send-short-brand } rik'in ri ruk'isib'äl ruwäch { -firefox }, chuqa' xtisamäj rik'in ri ruwäch k'o wakami pa ronojel okik'amaya'l.
-downloadFirefox = Tiqasäx { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }q { $hours }r { $minutes }ch'
 addFilesButton = Kecha' taq yakb'äl richin yejotob'äx
@@ -110,12 +103,10 @@ dragAndDropFiles = Keqirirëx chuqa' ke'osq'opïx taq yakb'äl
 orClickWithSize = o tapitz'a' richin natäq k'a { $size }
 addPassword = Tichajïx rik'in ewan tzij
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = ÜTZ
 downloadingTitle = Niqasäx
 noStreamsWarning = Rik'in jub'a' re okik'amaya'l re' man nitikïr ta nretamaj rusik'ixik nima'q taq yakb'äl.
 noStreamsOptionCopy = Tiwachib'ëx ri ximonel richin nijaq pa jun chik okik'amaya'l
-noStreamsOptionFirefox = Tatojtob'ej ri jeb'ël qokik'amaya'l
 noStreamsOptionDownload = Kisamäj na rik'in re okik'amaya'l re'
 # the next line after the colon contains a file name
 shareLinkDescription = Nakomonij ri ximonel rik'in ri awokisab'al:

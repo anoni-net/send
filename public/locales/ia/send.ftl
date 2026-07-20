@@ -24,8 +24,6 @@ fileTooBig = Iste file es troppo grande pro incargar. Illo debe esser inferior a
 linkExpiredAlt = Ligamine expirate
 notSupportedHeader = Tu navigator non es supportate
 notSupportedLink = Proque non es mi navigator supportate?
-notSupportedOutdatedDetail = Infelicemente iste version de Firefox non supporta le nove technologia web que actiona Send. Tu debe actualisar tu navigator.
-updateFirefox = Actualisar Firefox
 deletePopupCancel = Cancellar
 deleteButtonHover = Deler
 passwordTryAgain = Contrasigno incorrecte. Retenta.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours }h { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maxime longor del contrasigno: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] Solo 1 archivo es permittite.
        *[other] Solo { $count } archivos es permitter.
     }
-expiredTitle = Iste ligamine ha expirate.
-notSupportedDescription = { -send-brand } non functionara con iste navigator. { -send-short-brand } functiona melio con le ultime version de { -firefox }, e functionara con le version actual de plure navigatores.
-downloadFirefox = Discargar { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }h { $minutes }m
 addFilesButton = Selige le files a incargar
@@ -110,12 +103,10 @@ dragAndDropFiles = Traher e deponer files
 orClickWithSize = o cliccar pro inviar usque { $size }
 addPassword = Proteger per contrasigno
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = OK
 downloadingTitle = Discargamento
 noStreamsWarning = Es possibile que iste navigator non pote decryptar un file de iste proportiones.
 noStreamsOptionCopy = Copiar le ligamine e aperir lo in un altere navigator
-noStreamsOptionFirefox = Prova nostre navigator favorite
 noStreamsOptionDownload = Continuar con iste navigator
 # the next line after the colon contains a file name
 shareLinkDescription = Condivide le ligamine a tu file:

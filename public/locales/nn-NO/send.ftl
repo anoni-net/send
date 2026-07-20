@@ -24,8 +24,6 @@ fileTooBig = Fila er for stor, og kan ikkje lastast opp. Ho må vere mindre enn 
 linkExpiredAlt = Lenka har gått ut
 notSupportedHeader = Nettlesaren din er ikkje støtta.
 notSupportedLink = Kvifor er ikkje nettlesaren min støtta?
-notSupportedOutdatedDetail = Dessverre støttar ikkje denne versjonen av Firefox nett-teknologien som driv Send. Du må å oppdatere nettlesaren din.
-updateFirefox = Oppdater Firefox
 deletePopupCancel = Avbryt
 deleteButtonHover = Slett
 passwordTryAgain = Feil passord. Prøv på nytt.
@@ -38,9 +36,7 @@ expiresHoursMinutes = { $hours }t { $minutes }m
 expiresMinutes = { $minutes }m
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maksimum passordlengde: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -96,9 +92,6 @@ tooManyArchives =
         [one] Berre 1 arkiv er lov.
        *[other] Berre { $count } arkiv er lov.
     }
-expiredTitle = Denne lenka har gått ut.
-notSupportedDescription = { -send-brand } fungerer ikkje med denne nettlesaren. { -send-short-brand } fungerer best med siste versjon av { -firefox } og med dei fleste andre nye nettlesarar.
-downloadFirefox = Last ned { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }t { $minutes }m
 addFilesButton = Vel filer som skal lastast opp
@@ -110,12 +103,10 @@ dragAndDropFiles = Dra og slepp filer
 orClickWithSize = eller klikk for å sende filer på opptil { $size }
 addPassword = Vern med passord
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = OK
 downloadingTitle = Lastar ned
 noStreamsWarning = Denne nettlesaren kan kanskje ikkje dekryptere ei så stor fil.
 noStreamsOptionCopy = Kopier lenka for å opne henne i ein annan nettlesar
-noStreamsOptionFirefox = Prøv favorittnettlesaren vår
 noStreamsOptionDownload = Fortset med denne nettlesaren
 # the next line after the colon contains a file name
 shareLinkDescription = Del lenka til fila di:

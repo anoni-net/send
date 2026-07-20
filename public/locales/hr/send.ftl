@@ -26,8 +26,6 @@ fileTooBig = Datoteka je prevelika za prijenos. Mora biti manja od { $size }.
 linkExpiredAlt = Poveznica je istekla
 notSupportedHeader = Tvoj preglednik nije podržan.
 notSupportedLink = Zašto moj preglednik nije podržan?
-notSupportedOutdatedDetail = Nažalost, ovo izdanje Firefoxa ne podržava web tehnologiju koja omogućava Send. Morat ćeš ažurirati preglednik.
-updateFirefox = Ažuriraj Firefox
 deletePopupCancel = Odustani
 deleteButtonHover = Obriši
 passwordTryAgain = Netočna lozinka. Pokušaj ponovo.
@@ -40,9 +38,7 @@ expiresHoursMinutes = { $hours }s { $minutes }m
 expiresMinutes = { $minutes }min
 # A short status message shown when the user enters a long password
 maxPasswordLength = Maksimalna duljina lozinke: { $length }
-# A short status message shown when there was an error setting the password
 
-## Send version 2 strings
 
 -send-brand = Send
 -send-short-brand = Send
@@ -103,9 +99,6 @@ tooManyArchives =
         [few] Dozvoljene su samo { $count } arhive.
        *[other] Dozvoljeno je samo { $count } arhiva.
     }
-expiredTitle = Poveznica je istekla.
-notSupportedDescription = { -send-brand } neće raditi s ovim preglednikom. { -send-short-brand } najbolje radi sa zadnjom { -firefox } verzijom i radit će s aktualnim verzijama većine preglednika.
-downloadFirefox = Preuzmi { -firefox }
 # A short representation of a countdown timer containing the number of days, hours, and minutes remaining as digits, example "2d 11h 56m"
 expiresDaysHoursMinutes = { $days }d { $hours }s { $minutes }m
 addFilesButton = Odaberi datoteke za prijenos
@@ -117,12 +110,10 @@ dragAndDropFiles = Povuci i ispusti datoteke
 orClickWithSize = ili pritisni gumb, za slanje do { $size }
 addPassword = Zaštiti s lozinkom
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
-# $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = U redu
 downloadingTitle = Preuzimanje
 noStreamsWarning = Ovaj preglednik možda neće moći dešifrirati datoteku ove veličine.
 noStreamsOptionCopy = Za otvaranje u drugom pregledniku, kopiraj poveznicu
-noStreamsOptionFirefox = Isprobaj naš omiljeni preglednik
 noStreamsOptionDownload = Nastavi s ovim preglednikom
 # the next line after the colon contains a file name
 shareLinkDescription = Dijeli poveznicu na tvoju datoteku:
