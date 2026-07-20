@@ -10,7 +10,7 @@ module.exports = function(state, emit) {
         class="flex flex-col items-center justify-center h-full w-full p-6 md:p-8 overflow-hidden md:rounded-xl md:shadow-big"
       >
         <h1 class="text-center text-3xl font-bold my-2">
-          ${state.translate('expiredTitle')}
+          ${state.translate('linkUnavailableTitle')}
         </h1>
         <svg class="text-primary my-12">
           <use xlink:href="${assets.get('notFound.svg')}#svg124" />
