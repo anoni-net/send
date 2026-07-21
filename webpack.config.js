@@ -9,18 +9,22 @@ const webJsOptions = {
   babelrc: false,
   presets: [
     [
-      '@babel/preset-env',
-      {
-        bugfixes: true,
-        useBuiltIns: 'entry',
-        corejs: 3
-      }
+      '@babel/preset-env'
+      // No options. `bugfixes` was removed in Babel 8 (always on now), and
+      // `useBuiltIns`/`corejs` moved out of preset-env into a separate plugin.
+      // Rather than wire that plugin up, `import 'core-js'` was dropped from
+      // app/main.js: the app refuses any browser without WebCrypto (it redirects
+      // to /unsupported/crypto before mounting), and every such browser has the
+      // rest of what the app uses natively, so the polyfills were dead weight.
+      // Removing them took the app bundle from 71 KB to 53 KB gzipped.
     ]
   ],
   plugins: [
-    '@babel/plugin-syntax-dynamic-import',
-    'module:nanohtml',
-    ['@babel/plugin-proposal-class-properties', { loose: false }]
+    // @babel/plugin-syntax-dynamic-import and
+    // @babel/plugin-proposal-class-properties were removed in Babel 8: dynamic
+    // import is standard syntax now, and class properties are a stage-4 feature
+    // that preset-env transforms (spec mode, matching the previous loose:false).
+    'module:nanohtml'
   ]
 };
 

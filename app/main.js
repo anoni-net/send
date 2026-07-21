@@ -1,5 +1,4 @@
 /* global DEFAULTS LIMITS WEB_UI */
-import 'core-js';
 import createApp from './framework';
 import routes from './routes';
 import getCapabilities from './capabilities';
