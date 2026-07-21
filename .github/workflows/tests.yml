@@ -95,3 +95,69 @@ jobs:
 
       - name: Frontend tests (mocha in chromium)
         run: npm run test:frontend
+
+  # VERIFYING.md promises the build is reproducible: the same commit produces
+  # byte-identical dist/ across Node versions. That was a point-in-time manual
+  # result, checked by hand and then trusted. This makes it a gate. Two Node
+  # versions build the same checkout; the compare job fails if any served file
+  # differs. version.json is identical across the two because both build the
+  # same commit.
+  reproducible-build:
+    name: Reproducible build (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [22, 24]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install dependencies
+        run: npm ci
+        env:
+          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: 'true'
+
+      - name: Build
+        run: npm run build
+
+      - name: Hash dist
+        run: |
+          find dist -type f | sort | xargs sha256sum > "dist-hashes-${{ matrix.node }}.txt"
+          echo "$(wc -l < dist-hashes-${{ matrix.node }}.txt) files"
+
+      - name: Upload hashes
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-hashes-${{ matrix.node }}
+          path: dist-hashes-${{ matrix.node }}.txt
+          if-no-files-found: error
+
+  reproducible-compare:
+    name: Reproducible build (compare)
+    runs-on: ubuntu-latest
+    needs: reproducible-build
+    steps:
+      - name: Download hashes
+        uses: actions/download-artifact@v4
+        with:
+          pattern: dist-hashes-*
+          merge-multiple: true
+
+      - name: Compare
+        run: |
+          set -euo pipefail
+          ls -1 dist-hashes-*.txt
+          # Same file list, same hashes, regardless of the Node that built it.
+          if diff dist-hashes-22.txt dist-hashes-24.txt; then
+            echo "dist/ is byte-identical across Node 22 and 24 ($(wc -l < dist-hashes-22.txt) files)."
+          else
+            echo "::error::Reproducibility broken: dist/ differs between Node versions."
+            echo "VERIFYING.md promises byte-identical output. A dependency that"
+            echo "emits Node-version-dependent bytes is the usual cause."
+            exit 1
+          fi
