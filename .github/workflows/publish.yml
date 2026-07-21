@@ -313,11 +313,24 @@ jobs:
             cat SHA256SUMS.txt
           } > SHA256SUMS-annotated.txt
           mv SHA256SUMS-annotated.txt SHA256SUMS.txt
+
+          # Sign the checksum file itself, keyless, the same way the image is
+          # signed. VERIFYING.md rests the whole argument on this list coming
+          # from somewhere other than the server being checked, but until now it
+          # was protected only by the release's write permission: anyone who
+          # could replace a release asset could replace the list that exists to
+          # catch replacement. cosign and id-token are already here for the
+          # image, so this costs two files and no new trust.
+          cosign sign-blob --yes \
+            --bundle SHA256SUMS.txt.cosign.bundle \
+            SHA256SUMS.txt
+
           # The release may not exist yet if the tag was pushed first; create it
           # empty in that case rather than failing the publish.
           gh release view "${GITHUB_REF_NAME}" >/dev/null 2>&1 \
             || gh release create "${GITHUB_REF_NAME}" --title "${GITHUB_REF_NAME}" --notes "Release notes to follow."
-          gh release upload "${GITHUB_REF_NAME}" SHA256SUMS.txt --clobber
+          gh release upload "${GITHUB_REF_NAME}" \
+            SHA256SUMS.txt SHA256SUMS.txt.cosign.bundle --clobber
 
       - name: Summary
         if: always()
