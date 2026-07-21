@@ -290,11 +290,6 @@ const conf = convict({
     default: '',
     env: 'SEND_DOWNLOAD_NOTICE_HTML'
   },
-  show_thunderbird_sponsor: {
-    format: Boolean,
-    default: false,
-    env: 'SHOW_THUNDERBIRD_SPONSOR'
-  },
   ui_color_primary: {
     format: String,
     default: '#0a84ff',

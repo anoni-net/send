@@ -1,6 +1,5 @@
 const html = require('nanohtml');
 const raw = require('nanohtml/raw');
-const assets = require('../../common/assets');
 
 module.exports = function intro(state) {
   const notice = state.WEB_UI.MAIN_NOTICE_HTML
@@ -10,29 +9,6 @@ module.exports = function intro(state) {
         >
           ${raw(state.WEB_UI.MAIN_NOTICE_HTML)}
         </p>
-      `
-    : '';
-
-  const sponsor = state.WEB_UI.SHOW_THUNDERBIRD_SPONSOR
-    ? html`
-        <a
-          class="w-full mt-5 mb-2 p-2 border-default dark:border-grey-70 rounded-default text-orange-60 bg-yellow-40 text-center leading-normal"
-          href="https://www.thunderbird.net/"
-        >
-          <svg
-            width="30"
-            height="30"
-            class="m-2 mr-3 d-inline-block align-middle"
-          >
-            <image
-              xlink:href="${assets.get('thunderbird-icon.svg')}"
-              src="${assets.get('thunderbird-icon.svg')}"
-              width="30"
-              height="30"
-            />
-          </svg>
-          Sponsored by Thunderbird
-        </a>
       `
     : '';
 
@@ -49,7 +25,6 @@ module.exports = function intro(state) {
           ${state.translate('introDescription')}
         </p>
       </div>
-      ${sponsor}
     </send-intro>
   `;
 };
