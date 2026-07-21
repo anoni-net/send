@@ -30,7 +30,14 @@ app.use(
   express.static(path.resolve(__dirname, '../../dist/'), {
     setHeaders: function(res, path) {
       if (!/serviceWorker\.js$/.test(path)) {
-        res.set('Cache-Control', 'public, max-age=31536000, immutable');
+        // no-transform so a CDN (e.g. Cloudflare Polish) cannot re-compress
+        // images or otherwise rewrite these files. VERIFYING.md promises the
+        // served bytes match dist/ exactly; a transform would break byte-for-
+        // byte verification behind a CDN.
+        res.set(
+          'Cache-Control',
+          'public, max-age=31536000, immutable, no-transform'
+        );
       }
       res.removeHeader('Pragma');
     }
