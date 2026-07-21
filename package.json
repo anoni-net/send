@@ -182,6 +182,7 @@
     "zh-TW"
   ],
   "overrides": {
-    "serialize-javascript": "^7.0.5"
+    "serialize-javascript": "^7.0.5",
+    "ws": "^8.18.0"
   }
 }
