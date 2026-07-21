@@ -17,9 +17,6 @@
     "lint": "npm-run-all lint:*",
     "lint:css": "stylelint app/*.css app/**/*.css",
     "lint:js": "eslint . --max-warnings 0",
-    "lint-locales": "node scripts/lint-locales",
-    "lint-locales:dev": "npm run lint-locales",
-    "lint-locales:prod": "npm run lint-locales -- --production",
     "format": "prettier '**/*.js' 'assets/*.css' --single-quote --write",
     "get-prod-locales": "node scripts/get-prod-locales",
     "get-prod-locales:write": "npm run get-prod-locales -- --write",
@@ -31,7 +28,8 @@
     "test:report": "nyc report --reporter=html",
     "start": "npm run clean && cross-env NODE_ENV=development L10N_DEV=true BASE_URL=http://localhost:8080 DETECT_BASE_URL=true webpack serve --mode=development",
     "prod": "node server/bin/prod.js",
-    "lint:docs-version": "node scripts/lint-docs-version"
+    "lint:docs-version": "node scripts/lint-docs-version",
+    "lint:locales": "node scripts/lint-locales-check"
   },
   "nyc": {
     "reporter": [
@@ -50,6 +48,7 @@
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.16.11",
     "@eslint/js": "^10.0.1",
+    "@fluent/syntax": "^0.19.0",
     "@fullhuman/postcss-purgecss": "^4.1.3",
     "@google-cloud/storage": "^7.21.0",
     "assert": "^2.1.0",
