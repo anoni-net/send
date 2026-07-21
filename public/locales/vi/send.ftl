@@ -107,3 +107,8 @@ shareLinkButton = Chia sẻ liên kết
 # $name is the name of the file
 shareMessage = Tải xuống “{ $name }“ với { -send-brand }: chia sẻ tập tin đơn giản, an toàn
 trailheadPromo = Đây là một cách để bảo vệ sự riêng tư của bạn. Tham gia Firefox.
+footerText = Không liên kết với Mozilla hoặc Firefox.
+footerLinkDonate = Quyên góp
+footerLinkCli = CLI
+footerLinkDmca = DMCA
+footerLinkSource = Mã nguồn

@@ -121,3 +121,8 @@ shareLinkButton = Udostępnij odnośnik
 # $name is the name of the file
 shareMessage = Pobierz „{ $name }” za pomocą { -send-brand }: prostego i bezpiecznego udostępniania plików
 trailheadPromo = Jest sposób na ochronę swojej prywatności. Dołącz do Firefoksa.
+footerText = Niepowiązane z Mozilla ani Firefox.
+footerLinkDonate = Wesprzyj
+footerLinkCli = CLI
+footerLinkDmca = DMCA
+footerLinkSource = Kod źródłowy

@@ -107,3 +107,8 @@ shareLinkButton = แบ่งปันลิงก์
 # $name is the name of the file
 shareMessage = ดาวน์โหลด “{ $name }” ด้วย { -send-brand }: การแบ่งปันไฟล์ที่ง่ายและเป็นส่วนตัว
 trailheadPromo = มีวิธีปกป้องความเป็นส่วนตัวของคุณ เข้าร่วม Firefox
+footerText = ไม่มีส่วนเกี่ยวข้องกับ Mozilla หรือ Firefox
+footerLinkDonate = บริจาค
+footerLinkCli = CLI
+footerLinkDmca = DMCA
+footerLinkSource = ซอร์สโค้ด

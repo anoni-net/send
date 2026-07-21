@@ -102,3 +102,8 @@ shareLinkButton = 링크 공유
 # $name is the name of the file
 shareMessage = { -send-brand }으로 “{ $name }” 파일을 내려받으세요: 쉽고 안전한 파일 공유입니다.
 trailheadPromo = 개인 정보를 보호하는 방법이 있습니다. Firefox에 가입하세요.
+footerText = Mozilla 또는 Firefox와 무관합니다.
+footerLinkDonate = 기부
+footerLinkCli = CLI
+footerLinkDmca = DMCA
+footerLinkSource = 소스 코드

@@ -114,3 +114,8 @@ shareLinkButton = Dela länk
 # $name is the name of the file
 shareMessage = Ladda ner "{ $name }" med { -send-brand }: enkel, säker fildelning
 trailheadPromo = Det finns ett sätt att skydda din integritet. Gå med i Firefox.
+footerText = Inte anslutet till Mozilla eller Firefox.
+footerLinkDonate = Donera
+footerLinkCli = CLI
+footerLinkDmca = DMCA
+footerLinkSource = Källkod

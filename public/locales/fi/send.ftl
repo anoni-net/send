@@ -114,3 +114,8 @@ shareLinkButton = Jaa linkki
 # $name is the name of the file
 shareMessage = Lataa tiedosto ”{ $name }” { -send-brand } -palvelusta: yksinkertaista ja turvallista tiedostonjakoa
 trailheadPromo = On tapa suojata yksityisyyttään. Liity Firefoxiin.
+footerText = Ei sidoksissa Mozillaan tai Firefoxiin.
+footerLinkDonate = Lahjoita
+footerLinkCli = CLI
+footerLinkDmca = DMCA
+footerLinkSource = Lähdekoodi

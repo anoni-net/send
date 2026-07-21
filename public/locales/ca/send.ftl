@@ -114,3 +114,8 @@ shareLinkButton = Comparteix l'enllaç
 # $name is the name of the file
 shareMessage = Baixeu «{ $name }» amb el { -send-brand }: compartició de fitxers senzilla i segura
 trailheadPromo = Hi ha una manera de protegir la vostra privadesa. Uniu-vos al Firefox.
+footerText = Sense afiliació amb Mozilla o Firefox.
+footerLinkDonate = Donatiu
+footerLinkCli = CLI
+footerLinkDmca = DMCA
+footerLinkSource = Codi font

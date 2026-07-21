@@ -157,3 +157,8 @@ shareLinkButton = Sdílet odkaz
 # $name is the name of the file
 shareMessage = Stáhněte si soubor „{ $name }“ se { -send-brand(case: "ins") } - jednoduché a bezpečné sdílení souborů
 trailheadPromo = Existuje způsob, jak ochránit své soukromí. Používejte Firefox.
+footerText = Není spojeno s Mozilla ani Firefox.
+footerLinkDonate = Přispět
+footerLinkCli = CLI
+footerLinkDmca = DMCA
+footerLinkSource = Zdrojový kód

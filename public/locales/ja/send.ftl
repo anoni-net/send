@@ -107,3 +107,8 @@ shareLinkButton = リンクを共有
 # $name is the name of the file
 shareMessage = { -send-brand } で "{ $name }" をダウンロード: シンプルで安全なファイル共有
 trailheadPromo = プライバシーを保護する方法があります。Firefox を試してください。
+footerText = Mozilla および Firefox とは関係ありません。
+footerLinkDonate = 寄付
+footerLinkCli = CLI
+footerLinkDmca = DMCA
+footerLinkSource = ソースコード
