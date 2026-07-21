@@ -150,6 +150,24 @@ footer li a:hover {
   white-space: nowrap;
 }
 
+/* The noscript block in server/layout.js used these two classes, but nothing
+ * defined them, and the global `a` rule above strips link colour and underline.
+ * So the only screen a Tor Browser "Safest" user ever sees rendered as plain
+ * text with an unfindable link. This is the sole place styling has to work with
+ * JavaScript off, so it is written plainly rather than with @apply. */
+.noscript {
+  max-width: 32rem;
+  margin: 2rem auto;
+  padding: 1rem;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.noscript .link {
+  color: #0a84ff;
+  text-decoration: underline;
+}
+
 .link-primary {
   @apply text-primary;
 }

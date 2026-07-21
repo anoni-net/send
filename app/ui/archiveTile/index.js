@@ -14,12 +14,12 @@ module.exports = function(state, emit, archive) {
           <button
             class="link-primary self-end flex items-start"
             onclick=${share}
-            title="Share link"
+            title="${state.translate('shareLinkButton')}"
           >
             <svg class="h-4 w-4 mr-2">
               <use xlink:href="${assets.get('share-24.svg')}#icon" />
             </svg>
-            Share link
+            ${state.translate('shareLinkButton')}
           </button>
         `
       : html`
@@ -83,8 +83,13 @@ module.exports = function(state, emit, archive) {
 
   function copy(event) {
     event.stopPropagation();
-    copyToClipboard(archive.url);
-    const text = event.target.lastChild;
+    if (!copyToClipboard(archive.url)) {
+      return;
+    }
+    // currentTarget, not target: clicking the inner <svg>/<use> made target the
+    // icon, so the "Copied!" text was written onto the wrong node and the
+    // confirmation never showed. The button is where the label lives.
+    const text = event.currentTarget.lastChild;
     text.textContent = state.translate('copiedUrl');
     setTimeout(
       () => (text.textContent = state.translate('copyLinkButton')),
@@ -105,8 +110,7 @@ module.exports = function(state, emit, archive) {
       try {
         await navigator.share({
           title: state.translate('-send-brand'),
-          text: `Download "${archive.name}" with Send: simple, safe file sharing`,
-          //state.translate('shareMessage', { name }),
+          text: state.translate('shareMessage', { name: archive.name }),
           url: archive.url
         });
       } catch (e) {

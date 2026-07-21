@@ -104,7 +104,7 @@ addPassword = 使用密碼保護
 # $size is the size of the file, displayed using the fileSize message as format (e.g. "2.5MB")
 okButton = 確定
 downloadingTitle = 下載中
-noStreamsWarning = 此瀏覽器無法解密這麼大的檔案。
+noStreamsWarning = 此瀏覽器可能無法解密這麼大的檔案。
 noStreamsOptionCopy = 複製鏈結，用其他瀏覽器開啟
 noStreamsOptionDownload = 繼續使用目前的瀏覽器
 # the next line after the colon contains a file name
