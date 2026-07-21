@@ -60,6 +60,23 @@ curl -s "${BASE}${ASSET}" -o "$(basename "$ASSET")"
 sha256sum -c SHA256SUMS.txt --ignore-missing    # macOS: shasum -a 256 -c
 ```
 
+The list itself is signed, keyless, by the same workflow that signs the image.
+Verifying it first means you are not trusting the release page to have served
+you the real list. Fetch the signature bundle alongside it and check it with
+[cosign]:
+
+```sh
+curl -sLO "https://github.com/anoni-net/send/releases/download/${VERSION}/SHA256SUMS.txt.cosign.bundle"
+
+cosign verify-blob SHA256SUMS.txt \
+  --bundle SHA256SUMS.txt.cosign.bundle \
+  --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+  --certificate-identity-regexp '^https://github.com/anoni-net/send/.github/workflows/publish.yml@.*$'
+```
+
+`Verified OK` means the list was produced by this repository's publish workflow,
+not substituted afterward.
+
 `OK` means the bundle you were served is the one in that release. To check
 everything rather than one file, fetch each name listed in `SHA256SUMS.txt` the
 same way.
