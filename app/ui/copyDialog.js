@@ -66,9 +66,14 @@ module.exports = function(name, url) {
 
     function copy(event) {
       event.stopPropagation();
-      copyToClipboard(url);
-      event.target.textContent = state.translate('copiedUrl');
-      setTimeout(close, 1000);
+      // Only claim success and close if the copy actually happened. A hardened
+      // or Tor Browser configuration can block execCommand, and closing the
+      // dialog then would hide the one place showing the link and its QR code
+      // while telling the user it is on their clipboard.
+      if (copyToClipboard(url)) {
+        event.target.textContent = state.translate('copiedUrl');
+        setTimeout(close, 1000);
+      }
     }
   };
   dialog.type = 'copy';

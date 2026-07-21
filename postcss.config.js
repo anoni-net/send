@@ -21,7 +21,13 @@ if (process.env.NODE_ENV === 'development') {
       // These globs used to be one level deep, so moving a component into
       // app/ui/archiveTile/ was enough to lose its styles. `**` now covers any
       // depth. The android/ entries went with the directory in #38.
-      content: ['./app/**/*.js'],
+      //
+      // server/layout.js is included because it renders the <noscript> block,
+      // the one piece of markup that comes from the server, not app/. Its
+      // .noscript/.link classes would otherwise be purged and the JS-disabled
+      // page, the only screen a Tor Browser "Safest" user sees, would render
+      // unstyled.
+      content: ['./app/**/*.js', './server/layout.js'],
       extractors: [
         {
           extractor: TailwindExtractor,
