@@ -1,0 +1,21 @@
+version: 2
+
+# Actions and the base image are pinned by commit SHA / digest, which is what
+# stops a moved tag from executing in a job that holds packages:write and can
+# mint a Sigstore signature. A pin also freezes security fixes, so Dependabot
+# advances the pins and keeps the human-readable tag comment in step, turning a
+# manual chore into a reviewable PR.
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: ci
+
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: chore
