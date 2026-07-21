@@ -23,7 +23,11 @@ const colors = {
 };
 
 module.exports = {
-  purge: false,
+  // tailwind 3 JIT scans `content` and generates only the classes it finds,
+  // which replaces the separate postcss-purgecss step. server/layout.js is
+  // included for the <noscript> block's classes (see the note that used to live
+  // in postcss.config.js).
+  content: ['./app/**/*.js', './server/layout.js'],
   theme: {
     colors: colors,
     screens: {
@@ -291,70 +295,6 @@ module.exports = {
     }
   },
 
-  variants: {
-    appearance: ['responsive'],
-    backgroundAttachment: ['responsive'],
-    backgroundColor: ['responsive', 'hover', 'focus'],
-    backgroundPosition: ['responsive'],
-    backgroundRepeat: ['responsive'],
-    backgroundSize: ['responsive'],
-    borderCollapse: [],
-    borderColor: ['responsive', 'hover', 'focus'],
-    borderRadius: ['responsive'],
-    borderStyle: ['responsive'],
-    borderWidth: ['responsive'],
-    cursor: ['responsive'],
-    display: ['responsive'],
-    flexDirection: ['responsive'],
-    flexWrap: ['responsive'],
-    alignItems: ['responsive'],
-    alignSelf: ['responsive'],
-    alignContent: ['responsive'],
-    justifyContent: ['responsive'],
-    flex: ['responsive'],
-    flexGrow: ['responsive'],
-    flexShrink: ['responsive'],
-    float: ['responsive'],
-    fontFamily: ['responsive'],
-    fontWeight: ['responsive', 'hover', 'focus'],
-    height: ['responsive'],
-    lineHeight: ['responsive'],
-    listStylePosition: ['responsive'],
-    listStyleType: ['responsive'],
-    margin: ['responsive'],
-    maxHeight: ['responsive'],
-    maxWidth: ['responsive'],
-    minHeight: ['responsive'],
-    minWidth: ['responsive'],
-    negativeMargin: ['responsive'],
-    opacity: ['responsive', 'hover'],
-    outline: ['focus'],
-    overflow: ['responsive'],
-    padding: ['responsive'],
-    pointerEvents: ['responsive'],
-    position: ['responsive'],
-    inset: ['responsive'],
-    resize: ['responsive'],
-    boxShadow: ['responsive', 'hover', 'focus'],
-    fill: [],
-    stroke: [],
-    tableLayout: ['responsive'],
-    textAlign: ['responsive'],
-    textColor: ['responsive', 'hover', 'focus'],
-    fontSize: ['responsive'],
-    fontStyle: ['responsive', 'hover', 'focus'],
-    fontSmoothing: ['responsive', 'hover', 'focus'],
-    textDecoration: ['responsive', 'hover', 'focus'],
-    textTransform: ['responsive', 'hover', 'focus'],
-    letterSpacing: ['responsive'],
-    userSelect: ['responsive'],
-    verticalAlign: ['responsive'],
-    visibility: ['responsive'],
-    whitespace: ['responsive'],
-    wordBreak: ['responsive'],
-    width: ['responsive'],
-    zIndex: ['responsive']
-  },
   corePlugins: {
     container: false
   },
