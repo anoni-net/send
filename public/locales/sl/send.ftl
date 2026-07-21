@@ -144,3 +144,8 @@ shareLinkButton = Deli povezavo
 # $name is the name of the file
 shareMessage = Prenesite "{ $name }" s { -send-brand }om: enostavno in varno deljenje datotek
 trailheadPromo = Vašo zasebnost lahko zaščitite. Pridružite se Firefoxu.
+footerText = Ni povezano z Mozilla ali Firefox.
+footerLinkDonate = Podprite
+footerLinkCli = CLI
+footerLinkDmca = DMCA
+footerLinkSource = Izvorna koda

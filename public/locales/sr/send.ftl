@@ -121,3 +121,8 @@ shareLinkButton = Поделите везу
 # $name is the name of the file
 shareMessage = Преузмите „{ $name }“ помоћу програма { -send-brand }:  једноставно и безбедно дељење датотека
 trailheadPromo = Постоји начин да заштитите вашу приватност. Придружите се Firefox-у.
+footerText = Није повезано са Mozilla или Firefox.
+footerLinkDonate = Донирај
+footerLinkCli = CLI
+footerLinkDmca = DMCA
+footerLinkSource = Изворни код

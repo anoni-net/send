@@ -114,3 +114,8 @@ shareLinkButton = Hivatkozás megosztása
 # $name is the name of the file
 shareMessage = „{ $name }” letöltése a { -send-brand } segítségével: egyszerű, biztonságos fájlmegosztás
 trailheadPromo = Védje meg a magánszféráját. Csatlakozzon a Firefoxhoz.
+footerText = Nem áll kapcsolatban a Mozillával vagy a Firefoxszal.
+footerLinkDonate = Támogatás
+footerLinkCli = CLI
+footerLinkDmca = DMCA
+footerLinkSource = Forráskód

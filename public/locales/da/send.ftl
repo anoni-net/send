@@ -114,3 +114,8 @@ shareLinkButton = Del link
 # $name is the name of the file
 shareMessage = Hent { $name } med { -send-brand } - simpel og sikker fildeling
 trailheadPromo = Beskyt dine digitale rettigheder. Slut dig til Firefox.
+footerText = Ikke tilknyttet Mozilla eller Firefox.
+footerLinkDonate = Donér
+footerLinkCli = CLI
+footerLinkDmca = DMCA
+footerLinkSource = Kildekode

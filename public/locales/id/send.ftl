@@ -107,3 +107,8 @@ shareLinkButton = Bagikan tautan
 # $name is the name of the file
 shareMessage = Unduh "{ $name }" dengan { -send-brand }: berbagi berkas dengan sederhana dan aman
 trailheadPromo = Ada cara untuk melindungi privasi Anda. Bergabunglah dengan Firefox.
+footerText = Tidak berafiliasi dengan Mozilla atau Firefox.
+footerLinkDonate = Donasi
+footerLinkCli = CLI
+footerLinkDmca = DMCA
+footerLinkSource = Sumber

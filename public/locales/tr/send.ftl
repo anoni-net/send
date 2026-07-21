@@ -110,3 +110,8 @@ shareLinkButton = Bağlantıyı paylaş
 # $name is the name of the file
 shareMessage = “{ $name }” dosyasını { -send-brand } ile indirin: basit ve güvenli dosya paylaşımı
 trailheadPromo = Gizliliğinizi korumanın bir yolu var. Firefox’a katılın.
+footerText = Mozilla veya Firefox ile bağlantılı değildir.
+footerLinkDonate = Bağış yap
+footerLinkCli = CLI
+footerLinkDmca = DMCA
+footerLinkSource = Kaynak kodu

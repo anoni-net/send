@@ -114,3 +114,8 @@ shareLinkButton = Κοινή χρήση συνδέσμου
 # $name is the name of the file
 shareMessage = Λήψη του “{ $name }” με το { -send-brand }: απλός και ασφαλής διαμοιρασμός αρχείων
 trailheadPromo = Υπάρχει τρόπος να προστατέψετε το απόρρητό σας. Γίνετε μέλος του Firefox.
+footerText = Χωρίς σύνδεση με τη Mozilla ή τον Firefox.
+footerLinkDonate = Δωρεά
+footerLinkCli = CLI
+footerLinkDmca = DMCA
+footerLinkSource = Πηγαίος κώδικας

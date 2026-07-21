@@ -121,3 +121,8 @@ shareLinkButton = Partajează linkul
 # $name is the name of the file
 shareMessage = Descarcă „{ $name }” cu { -send-brand }: partajare simplă și sigură a fișierelor
 trailheadPromo = Există o modalitate de a-ți proteja viața privată. Folosește Firefox.
+footerText = Neafiliat cu Mozilla sau Firefox.
+footerLinkDonate = Donează
+footerLinkCli = CLI
+footerLinkDmca = DMCA
+footerLinkSource = Cod sursă

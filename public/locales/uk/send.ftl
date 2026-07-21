@@ -121,3 +121,8 @@ shareLinkButton = Поділитись посиланням
 # $name is the name of the file
 shareMessage = Завантажте “{ $name }” з { -send-brand }: простий та безпечний обмін файлами
 trailheadPromo = Існує спосіб захистити вашу приватність. Приєднуйтесь до Firefox.
+footerText = Не пов'язано з Mozilla чи Firefox.
+footerLinkDonate = Підтримати
+footerLinkCli = CLI
+footerLinkDmca = DMCA
+footerLinkSource = Джерельний код

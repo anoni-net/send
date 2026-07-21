@@ -114,3 +114,8 @@ shareLinkButton = Compartilhar link
 # $name is the name of the file
 shareMessage = Baixe "{ $name }" com o { -send-brand }: compartilhamento de arquivos simples e seguro
 trailheadPromo = Existe um meio de proteger sua privacidade. Use o Firefox.
+footerText = Sem afiliação com a Mozilla ou o Firefox.
+footerLinkDonate = Doar
+footerLinkCli = CLI
+footerLinkDmca = DMCA
+footerLinkSource = Código-fonte
