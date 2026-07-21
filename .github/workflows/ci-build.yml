@@ -67,12 +67,20 @@ jobs:
       - name: Trivy vulnerability scan (gate)
         run: |
           set -euo pipefail
+          # Scan a saved tarball, not the live daemon. The old form mounted
+          # /var/run/docker.sock into aquasec/trivy:latest, which is an
+          # unpinned third-party image given root-equivalent control of the
+          # runner one step after it logged in to GHCR. --input needs neither
+          # the socket nor a registry pull. Trivy is pinned by digest (0.58.0)
+          # for the same reason the socket is gone: nothing unaudited runs here.
+          docker save send:ci -o /tmp/send-ci-image.tar
           docker run --rm \
-            -v /var/run/docker.sock:/var/run/docker.sock \
-            aquasec/trivy:latest image \
+            -v /tmp/send-ci-image.tar:/scan/image.tar:ro \
+            aquasec/trivy@sha256:b88012e2a0a309d6a8a00463d4e63e5e513377fb74eccbc8f9b0f8f81940ebeb \
+              image \
               --scanners vuln --ignore-unfixed --no-progress \
               --severity HIGH,CRITICAL --exit-code 1 \
-              send:ci | tee trivy-report.txt
+              --input /scan/image.tar | tee trivy-report.txt
 
       - name: Upload Trivy report
         if: always()
