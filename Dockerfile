@@ -79,7 +79,12 @@ COPY --chown=app:app --from=builder /app/dist dist
 #     source of every npm-side HIGH this image reported (picomatch, sigstore).
 #     The container starts with `node server/bin/prod.js` and never calls npm.
 USER root
-RUN npm ci --production \
+# --ignore-scripts: this runs as root, so any dependency lifecycle script would
+# run as root too. No package in the production tree declares one today (checked
+# across the whole `npm ls --omit=dev` tree), so this makes a latent risk
+# structural rather than relying on that staying true. The app is prebuilt into
+# dist/ and needs no install-time scripts of its own.
+RUN npm ci --omit=dev --ignore-scripts \
   && npm cache clean --force \
   && rm -f package-lock.json \
   && rm -rf /usr/local/lib/node_modules/npm \
