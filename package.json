@@ -98,8 +98,8 @@
     "webpack-unassert-loader": "^1.2.0"
   },
   "dependencies": {
-    "@fluent/bundle": "^0.17.1",
-    "@fluent/langneg": "^0.6.2",
+    "@fluent/bundle": "^0.19.1",
+    "@fluent/langneg": "^0.7.0",
     "base64-js": "^1.5.1",
     "convict": "^6.2.5",
     "convict-format-with-validator": "^6.2.0",
