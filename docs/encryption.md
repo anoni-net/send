@@ -52,3 +52,19 @@ now.
 2. The user is prompted for the password and the signing key is derived
 3. The browser requests the metadata using the key to sign the nonce
 4. If the password was correct the metadata is returned, otherwise a 401
+
+#### The share url is part of the password
+
+Because the PBKDF2 salt is the full share url, the sender and the downloader
+derive the same signing key only when they use the same url, character for
+character. Open a password-protected link on a different hostname and the key
+differs, so the server returns a 401 and the downloader is told the password is
+wrong even when it is correct.
+
+This matters when one instance answers on more than one address, for example a
+clearnet host and a `.onion` mirror. A link created on one and opened on the
+other cannot be unlocked. A trailing slash, a port, or an `http` vs `https`
+difference in front of the fragment has the same effect. Share the exact url the
+uploader was given, and give a password-protected link out on the address it was
+made on. This is inherited from upstream; fixing it properly means changing the
+salt, which would break every existing link.
