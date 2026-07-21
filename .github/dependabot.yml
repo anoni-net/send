@@ -19,3 +19,10 @@ updates:
       interval: weekly
     commit-message:
       prefix: chore
+    ignore:
+      # The project targets Node 22 on purpose (engines, Dockerfile, CI). Keep
+      # the base image on 22.x for patch/digest updates; a move to a new major
+      # is a deliberate decision, not a Dependabot bump.
+      - dependency-name: node
+        update-types:
+          - version-update:semver-major
