@@ -84,9 +84,26 @@ USER root
 # across the whole `npm ls --omit=dev` tree), so this makes a latent risk
 # structural rather than relying on that staying true. The app is prebuilt into
 # dist/ and needs no install-time scripts of its own.
+# nanohtml ships its Babel/browserify transform in the same package it renders
+# with, so `npm ci` installs the transform's dependencies (acorn, a full JS
+# parser, plus transform-ast, through2, nanobench, ...) as production packages.
+# The server only ever calls nanohtml's string-render path (lib/server.js): the
+# transform code is required lazily inside functions that server-side rendering
+# never reaches, verified by tracing the module graph. So these sit in the image
+# and the SBOM as "running code" while never executing. Removed after install,
+# the same way npm itself is above. The smoke test renders a page through real
+# SSR, so a wrong removal here fails the build rather than shipping broken.
 RUN npm ci --omit=dev --ignore-scripts \
   && npm cache clean --force \
   && rm -f package-lock.json \
+  && rm -rf node_modules/acorn node_modules/acorn-node \
+            node_modules/convert-source-map \
+            node_modules/estree-is-member-expression \
+            node_modules/transform-ast node_modules/through2 \
+            node_modules/nanobench node_modules/dash-ast \
+            node_modules/get-assigned-identifiers \
+            node_modules/nanohtml/lib/babel.js \
+            node_modules/nanohtml/lib/browserify-transform.js \
   && rm -rf /usr/local/lib/node_modules/npm \
             /usr/local/bin/npm /usr/local/bin/npx \
   && chown -R app:app /app
