@@ -103,15 +103,39 @@ jobs:
         with:
           images: ${{ env.IMAGE }}
 
-      # 1) Build natively into the local daemon so we can test BEFORE publishing.
-      - name: Build image (${{ matrix.platform }}, load for smoke test)
+      # Build once and push by digest, WITH the SBOM + SLSA provenance. Every
+      # check below then runs against this exact image, pulled back from the
+      # registry, so the artifact that gets tested, scanned, checksummed and
+      # signed is one and the same. The old flow built twice — a `--load` image
+      # for the tests and a separate `--push` image for release — which shared a
+      # cache but was never asserted equal, so in principle it tested one image
+      # and shipped another. push-by-digest publishes an untagged, unsigned
+      # digest; if a check below fails the workflow stops before the merge job
+      # tags or signs it, and GHCR garbage-collects the unreferenced digest.
+      - name: Build and push by digest (${{ matrix.platform }})
+        id: push
         uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7.3.0
         with:
           context: .
-          load: true
-          tags: send:ci
+          platforms: ${{ matrix.platform }}
+          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ env.IMAGE }}
+          outputs: type=image,push-by-digest=true,name-canonical=true,push=true
           cache-from: type=gha,scope=${{ matrix.arch }}
           cache-to: type=gha,mode=max,scope=${{ matrix.arch }}
+          sbom: true
+          provenance: mode=max
+
+      # Pull that exact digest back and tag it send:ci locally, so the smoke
+      # test, the scan and the checksums below all examine the published bytes,
+      # not a separately built copy of them.
+      - name: Pull the pushed image
+        env:
+          DIGEST: ${{ steps.push.outputs.digest }}
+        run: |
+          set -euo pipefail
+          docker pull "${IMAGE}@${DIGEST}"
+          docker tag "${IMAGE}@${DIGEST}" send:ci
 
       # Playwright's browser check is optional in smoke.sh: if the install does
       # not work on this architecture the script skips that step and says so,
@@ -128,21 +152,17 @@ jobs:
       - name: Smoke test (health + E2EE round-trip + browser render)
         run: bash .github/scripts/smoke.sh
 
-      # 2) Vulnerability scan of the exact image we are about to publish.
-      #    This GATES: a HIGH or CRITICAL with a fix available stops the
-      #    publish. Viable now that the count is zero; it was report-only while
-      #    the base image was EOL node:16 and the count was in the twenties.
-      #    amd64 only, the package set being identical on both.
+      # Vulnerability scan of the exact image just published. This GATES: a HIGH
+      # or CRITICAL with a fix available stops the publish before it is tagged or
+      # signed. amd64 only, the package set being identical on both.
       - name: Trivy vulnerability scan (gate)
         if: matrix.arch == 'amd64'
         run: |
           set -euo pipefail
-          # Scan a saved tarball, not the live daemon. The old form mounted
-          # /var/run/docker.sock into aquasec/trivy:latest — an unpinned
-          # third-party image with root-equivalent control of the runner, one
-          # step after it logged in to GHCR and while it holds packages:write
-          # and id-token:write. --input needs neither the socket nor a registry
-          # pull, and Trivy is pinned by digest (0.58.0).
+          # Scan a saved tarball, not the live daemon. Mounting the docker socket
+          # into an unpinned third-party image would hand it root-equivalent
+          # control of the runner one step after the GHCR login. --input needs
+          # neither the socket nor a registry pull, and Trivy is pinned by digest.
           docker save send:ci -o /tmp/send-ci-image.tar
           docker run --rm \
             -v /tmp/send-ci-image.tar:/scan/image.tar:ro \
@@ -159,21 +179,6 @@ jobs:
           name: trivy-report
           path: trivy-report.txt
           if-no-files-found: warn
-
-      # 3) Push this architecture by digest, with SBOM + SLSA provenance. No
-      #    tags here: the merge job below applies them to the manifest list.
-      - name: Push by digest
-        id: push
-        uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7.3.0
-        with:
-          context: .
-          platforms: ${{ matrix.platform }}
-          labels: ${{ steps.meta.outputs.labels }}
-          tags: ${{ env.IMAGE }}
-          outputs: type=image,push-by-digest=true,name-canonical=true,push=true
-          cache-from: type=gha,scope=${{ matrix.arch }}
-          sbom: true
-          provenance: mode=max
 
       # Checksums of everything the server will serve to a browser. Published so
       # anyone can rebuild from source and confirm the bytes they were served
