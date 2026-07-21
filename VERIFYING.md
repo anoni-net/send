@@ -149,7 +149,13 @@ sha256sum dist/app.*.js    # macOS: shasum -a 256 dist/app.*.js
 ```
 
 Compare that against `SHA256SUMS.txt` from step 1 and against what the server
-served you in step 1. All three should match.
+served you in step 1. The `.js` and `.css` should match.
+
+One file in `SHA256SUMS.txt` will not, unless you cloned with full history:
+`dist/version.json` embeds the commit, which the build reads from `.git`. A
+shallow clone, a downloaded tarball, or any tree without `.git` reports the
+commit as `unknown`, so that one file differs while every `.js` and `.css` still
+matches. The `.js` is what executes; that is what has to be identical.
 
 Our builds are reproducible: the same commit produces byte-identical output
 across operating systems and Node versions. This was verified across macOS

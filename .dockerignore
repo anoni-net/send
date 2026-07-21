@@ -16,3 +16,8 @@ docs
 node_modules
 .vscode
 .DS_Store
+# A local .env holds secrets and never belongs in the build context. It only
+# reaches the builder stage today (the final stage copies named paths), so
+# nothing leaks into the published image, but keeping it out removes the
+# foot-gun entirely. .gitignore already excludes it from the repo.
+.env
