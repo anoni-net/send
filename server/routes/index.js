@@ -115,11 +115,18 @@ module.exports = function(app) {
     app.use(helmet.contentSecurityPolicy(csp));
   }
 
+  // no-store keeps pages and API responses out of any cache. no-transform is
+  // aimed one layer out: a CDN (Cloudflare's JavaScript Detections / Bot Fight
+  // Mode) otherwise injects a third-party <script> into the HTML, reusing this
+  // request's CSP nonce so it runs. For a service whose security rests on the
+  // served JavaScript being the audited build, that injection breaks the
+  // guarantee. no-transform on the origin response makes the CDN pass the HTML
+  // through untouched. Static assets get their own no-transform in prod.js.
   app.use(function(req, res, next) {
     res.set('Pragma', 'no-cache');
     res.set(
       'Cache-Control',
-      'private, no-cache, no-store, must-revalidate, max-age=0'
+      'private, no-cache, no-store, must-revalidate, max-age=0, no-transform'
     );
     next();
   });
