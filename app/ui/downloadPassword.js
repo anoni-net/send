@@ -35,6 +35,8 @@ module.exports = function(state, emit) {
           maxlength="4096"
           autocomplete="off"
           placeholder="${state.translate('unlockInputPlaceholder')}"
+          aria-invalid="${invalid ? 'true' : 'false'}"
+          aria-describedby="password-error"
           oninput="${inputChanged}"
           type="password"
         />
@@ -50,10 +52,12 @@ module.exports = function(state, emit) {
       </form>
       <label
         id="password-error"
+        role="alert"
+        aria-live="assertive"
         class="${invalid ? '' : 'invisible'} text-red dark:text-red-40 my-4"
         for="password-input"
       >
-        ${state.translate('passwordTryAgain')}
+        ${invalid ? state.translate('passwordTryAgain') : ''}
       </label>
     </div>
   `;

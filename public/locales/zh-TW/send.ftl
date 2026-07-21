@@ -132,3 +132,6 @@ insecureContextHeader = 這個網站沒有以安全連線提供。
 insecureContextDetail = 瀏覽器只在安全連線下開放 { -send-brand } 所需的加密功能。這個網站目前以純 HTTP 提供，因此無法進行任何加密。這是網站的設定問題，不是你的瀏覽器有問題。
 # Shown above the choices offered when a file is too large for this browser.
 noStreamsChooseDescription = 請選擇你要如何繼續。
+# Accessible names for the two expiry dropdowns.
+downloadCountSelectLabel = 檔案失效前的下載次數
+expiryTimeSelectLabel = 檔案失效前的保留時間

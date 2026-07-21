@@ -143,3 +143,8 @@ insecureContextDetail = Browsers only allow the encryption { -send-brand } needs
 # Shown above the choices offered when a file is too large for this browser to
 # decrypt in memory.
 noStreamsChooseDescription = Choose how you would like to continue.
+
+# Accessible names for the two dropdowns in the "Expires after N downloads or T"
+# sentence, which have no visible label of their own.
+downloadCountSelectLabel = Number of downloads before the file expires
+expiryTimeSelectLabel = Time before the file expires
