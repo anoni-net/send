@@ -34,11 +34,9 @@ module.exports = function(state, emit) {
         const selected = parseInt(value);
         state.archive.dlimit = selected;
         emit('render');
-        if (selected > parseInt(state.LIMITS.MAX_DOWNLOADS || '0')) {
-          console.log('Chosen max download count is larger than the allowed limit', selected)
-        }
       },
-      'expire-after-dl-count-select'
+      'expire-after-dl-count-select',
+      state.translate('downloadCountSelectLabel')
     ),
     dlCountSelect
   );
@@ -60,11 +58,9 @@ module.exports = function(state, emit) {
         const selected = parseInt(value);
         state.archive.timeLimit = selected;
         emit('render');
-        if (selected > parseInt(state.LIMITS.MAX_EXPIRE_SECONDS || '0')) {
-          console.log('Chosen download expiration is larger than the allowed limit', selected)
-        }
       },
-      'expire-after-time-select'
+      'expire-after-time-select',
+      state.translate('expiryTimeSelectLabel')
     ),
     timeSelect
   );
