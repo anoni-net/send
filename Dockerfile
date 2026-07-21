@@ -5,7 +5,7 @@
 ##
 
 # Build project
-FROM node:22-alpine3.22@sha256:cd7807368cf24826297cbad5dca1a44972ccfd770647db52a8c7589eb4599ac8 AS builder
+FROM node:26-alpine3.22@sha256:c7932b9e5e337b0e733d6e16abc1b0e104759e8b05e59ed56586cce967d26dfe AS builder
 
 RUN set -x \
   # Change node uid/gid
@@ -34,7 +34,7 @@ RUN set -x \
     && npm run build
 
 # Main image
-FROM node:22-alpine3.22@sha256:cd7807368cf24826297cbad5dca1a44972ccfd770647db52a8c7589eb4599ac8
+FROM node:26-alpine3.22@sha256:c7932b9e5e337b0e733d6e16abc1b0e104759e8b05e59ed56586cce967d26dfe
 
 RUN set -x \
   # Pick up OS security patches published since the base image was built. The
