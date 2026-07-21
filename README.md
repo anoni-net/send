@@ -71,13 +71,13 @@ separately and is not part of this repository.
 The image is public, so pulling needs no login:
 
 ```sh
-docker pull ghcr.io/anoni-net/send:5.1.0
+docker pull ghcr.io/anoni-net/send:5.1.1
 ```
 
 Every published image is signed by our CI. Verify it before you run it:
 
 ```sh
-cosign verify ghcr.io/anoni-net/send:5.1.0 \
+cosign verify ghcr.io/anoni-net/send:5.1.1 \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
   --certificate-identity-regexp '^https://github.com/anoni-net/send/.github/workflows/publish.yml@.*$'
 ```
@@ -183,13 +183,13 @@ repository 裡。
 映像是公開的，拉取不需要登入：
 
 ```sh
-docker pull ghcr.io/anoni-net/send:5.1.0
+docker pull ghcr.io/anoni-net/send:5.1.1
 ```
 
 每一個發布的映像都經過我們的 CI 簽章。執行之前先驗證：
 
 ```sh
-cosign verify ghcr.io/anoni-net/send:5.1.0 \
+cosign verify ghcr.io/anoni-net/send:5.1.1 \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
   --certificate-identity-regexp '^https://github.com/anoni-net/send/.github/workflows/publish.yml@.*$'
 ```
