@@ -34,6 +34,38 @@ runs in your browser is [public](https://github.com/anoni-net/send/), and
 [VERIFYING.md](../VERIFYING.md) sets out how to check that the JavaScript this
 site serves you was built from it.
 
+## What can the person running the server see?
+
+The point of encrypting in your browser is that the server cannot read what you
+send. It stores ciphertext, and the key never reaches it, so the operator cannot
+see your file's contents, its name, or its type.
+
+Being unable to read the files is not the same as seeing nothing. Anyone running
+a public web service still observes some things about how it is used, and it is
+worth being clear about which:
+
+- **The size of the encrypted file**, and when each upload and download happens.
+  The ciphertext is a few percent larger than the original, so its size is not
+  the exact file size, but it is close.
+- **Your IP address**, the same as for any website you connect to. This instance
+  keeps no application access log, and the rate limiter holds addresses only in
+  memory and only briefly. But a reverse proxy or CDN in front of Send, which the
+  deployment guides recommend for HTTPS, does see connecting addresses and can be
+  configured to log them. That is outside what this code controls.
+- **The download limit and expiry** you chose, since the server enforces them.
+
+None of that reveals what is in a file. If who is talking to whom, and when, is
+itself sensitive, reach the instance over Tor so the network layer does not tie
+the transfer to you.
+
+## Is there a limit on how often I can use it?
+
+Yes. To keep one source from overwhelming the service, each address is limited to
+a number of uploads and API requests per minute. If you hit the limit you are
+asked to wait a short time and try again; nothing is lost, and an ordinary upload
+or download never comes close. An operator running their own instance sets the
+numbers, and can turn the limits off.
+
 ## How long are files available for?
 
 You choose when you upload: from five minutes up to seven days, with 24 hours as
