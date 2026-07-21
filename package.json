@@ -24,7 +24,7 @@
     "get-prod-locales": "node scripts/get-prod-locales",
     "get-prod-locales:write": "npm run get-prod-locales -- --write",
     "contributors": "git shortlog -s | awk -F\\t '{print $2}' > CONTRIBUTORS",
-    "release": "npm-run-all contributors changelog",
+    "release": "npm-run-all contributors",
     "test": "npm-run-all test:*",
     "test:backend": "nyc --reporter=lcovonly mocha --reporter=min test/backend",
     "test:frontend": "cross-env NODE_ENV=development FRONTEND_TESTS=1 node test/frontend/runner.js",
