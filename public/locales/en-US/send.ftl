@@ -113,7 +113,6 @@ shareLinkButton = Share link
 # $name is the name of the file
 shareMessage = Download “{ $name }” with { -send-brand }: simple, safe file sharing
 
-sponsoredByThunderbird = Sponsored by Thunderbird
 
 # Shown when the upload connection could not be opened at all, which usually
 # means something between the user and the server is blocking it.

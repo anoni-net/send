@@ -120,4 +120,3 @@ shareLinkButton = Koppeling delen
 shareMessage = Download ‘{ $name }’ met { -send-brand }: eenvoudig, veilig bestanden delen
 trailheadPromo = Er is een manier om uw privacy te beschermen. Doe mee met Firefox.
 
-sponsoredByThunderbird = Gesponsord door Thunderbird
