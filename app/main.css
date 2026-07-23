@@ -345,7 +345,10 @@ select {
 
 @tailwind utilities;
 
-@responsive {
+/* In @layer utilities, JIT generates responsive/state variants on demand for
+ * classes actually used (e.g. `md:shadow-big`, `focus:outline`), which replaces
+ * the deprecated @responsive / @variants directives. */
+@layer utilities {
   .shadow-light {
     box-shadow: 0 0 8px 0 rgb(12 12 13 / 10%);
   }
@@ -354,9 +357,7 @@ select {
     box-shadow: 0 12px 18px 2px rgb(34 0 51 / 4%),
       0 6px 22px 4px rgb(7 48 114 / 12%), 0 6px 10px -4px rgb(14 13 26 / 12%);
   }
-}
 
-@variants focus {
   .outline {
     outline: 1px dotted grey;
   }
