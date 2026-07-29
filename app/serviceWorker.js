@@ -10,8 +10,13 @@ import { transformStream } from './streams';
 import Zip from './zip';
 import contentDisposition from 'content-disposition';
 
-let noSave = false;
 const map = new Map();
+// The map is shared by every tab on this origin and lives as long as the worker
+// does, so an entry that is never removed is retained for the whole session.
+// Nothing bounded it before. 32 is well above any real concurrency (the archive
+// limit is 16 files in one transfer) and Map iterates in insertion order, so
+// evicting the front drops the oldest.
+const MAX_ENTRIES = 32;
 // The leading `.*` used to be here and did nothing: with `$` and no `^`, match
 // already searches anywhere in the string. It was not free, though. Greedy
 // `.*` backtracking against a non-matching string made this quadratic, 15
@@ -69,6 +74,22 @@ async function decryptStream(id) {
         transform(chunk, controller) {
           file.progress += chunk.length;
           controller.enqueue(chunk);
+        },
+        flush() {
+          // The entry has to outlive the stream, because the page keeps polling
+          // for progress and a missing entry reads as a cancelled download. The
+          // secrets do not, and this is the one point that is reached exactly
+          // when the last byte has been delivered.
+          //
+          // Removal used to depend on the progress poll seeing
+          // `progress === size`, which for a multi-file archive is never true:
+          // size is the sum of the plaintext members while progress counts the
+          // zip stream, and the zip framing makes the latter strictly larger for
+          // any non-empty filename. So after downloading an archive the worker
+          // held the raw secret, the plaintext password and the full share URL
+          // (fragment included) for the rest of its life, across tab closes and
+          // shared by every tab on the origin.
+          scrub(file);
         }
       },
       function oncancel() {
@@ -92,8 +113,9 @@ async function decryptStream(id) {
     // off the page and destroys the very state that was tracking the download.
     file.error = errorStatus(e);
     file.retryAfter = e && e.retryAfter;
+    scrub(file);
 
-    if (noSave) {
+    if (file.noSave) {
       return new Response(null, { status: file.error });
     }
 
@@ -106,6 +128,18 @@ async function decryptStream(id) {
     // did nothing, and it masked 404s on the streaming path too.
     return new Response(null, { status: 204 });
   }
+}
+
+// Drop everything the entry holds that is worth stealing, keeping the fields
+// the progress poll reads. Called when the stream has delivered its last byte
+// and when it fails, so the window in which the worker holds key material is
+// the download itself rather than the lifetime of the worker.
+function scrub(file) {
+  file.key = null;
+  file.nonce = null;
+  file.password = null;
+  file.url = null;
+  file.manifest = null;
 }
 
 // e.message is a status only when the failure came from the download request
@@ -172,7 +206,6 @@ self.onfetch = event => {
 
 self.onmessage = event => {
   if (event.data.request === 'init') {
-    noSave = event.data.noSave;
     const info = {
       key: event.data.key,
       nonce: event.data.nonce,
@@ -183,8 +216,16 @@ self.onmessage = event => {
       type: event.data.type,
       manifest: event.data.manifest,
       size: event.data.size,
+      // Per download. This was a module-level variable, so two downloads in
+      // flight from different tabs shared one value and the second init
+      // rewrote the first one's behaviour.
+      noSave: event.data.noSave,
       progress: 0
     };
+    if (map.size >= MAX_ENTRIES) {
+      const oldest = map.keys().next().value;
+      map.delete(oldest);
+    }
     map.set(event.data.id, info);
 
     event.ports[0].postMessage('file info received');
@@ -202,7 +243,12 @@ self.onmessage = event => {
         retryAfter: file.retryAfter
       });
     } else {
-      if (file.progress === file.size) {
+      // >= rather than ===. For a multi-file archive the counter runs past
+      // file.size (it counts the zip stream, file.size is the plaintext sum),
+      // so equality never held and the entry was never dropped here. The
+      // secrets are already gone by this point either way: flush() scrubs them
+      // when the last byte lands.
+      if (file.progress >= file.size) {
         map.delete(event.data.id);
       }
       event.ports[0].postMessage({ progress: file.progress });
