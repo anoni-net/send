@@ -67,6 +67,7 @@ describe('Owner Middleware', function() {
 
   it('authenticates when the hashes match', async function() {
     storage.metadata.returns(Promise.resolve(storedMeta));
+    storage.setField.resolves(1);
     const req = request(
       'x',
       'send-v1 R7nZk14qJqZXtxpnAtw2uDIRQTRnO1qSO1Q0PiwcNA8'
@@ -84,6 +85,23 @@ describe('Owner Middleware', function() {
     assert.equal(req.authorized, true);
     assert.equal(req.meta, storedMeta);
     assert.notEqual(req.nonce, storedMeta.nonce);
+  });
+
+  it('sends a 404 when the record goes away before the nonce is stored', async function() {
+    // The nonce published in WWW-Authenticate is the one the next request
+    // signs, so it must not be handed out for a record the write did not reach.
+    // setField answers -1 rather than recreating the hash without a TTL.
+    storage.metadata.returns(Promise.resolve(storedMeta));
+    storage.setField.resolves(-1);
+    const req = request(
+      'x',
+      'send-v1 R7nZk14qJqZXtxpnAtw2uDIRQTRnO1qSO1Q0PiwcNA8'
+    );
+    const res = response();
+    await authMiddleware(req, res, next);
+    sinon.assert.calledWith(res.sendStatus, 404);
+    sinon.assert.notCalled(next);
+    sinon.assert.notCalled(res.set);
   });
 
   it('sends a 401 when the hashes do not match', async function() {

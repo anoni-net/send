@@ -73,17 +73,25 @@ function createFakeRedis() {
       m.set(field, String(next));
       return next;
     },
-    // Mirrors the ADJUST_DOWNLOAD Lua script: guard the increment on the key
-    // still existing, and never create it. arguments are [field, delta] as
-    // strings, exactly as server/storage/index.js passes them.
-    async eval(_script, opts) {
+    // Mirrors the two Lua scripts in server/storage/index.js. Both share the
+    // same EXISTS guard: never create the key, answer -1 when it is gone. The
+    // script text decides which one, matching how redis dispatches on the body
+    // it is sent. ADJUST_DOWNLOAD takes [field, delta] and returns the new
+    // count; SET_FIELDS takes field/value pairs and returns 1.
+    async eval(script, opts) {
       const key = opts.keys[0];
-      const [field, delta] = opts.arguments;
       const m = hashes.get(key);
       if (!m || m.size === 0) return -1;
-      const next = Number(m.get(field) || 0) + Number(delta);
-      m.set(field, String(next));
-      return next;
+      if (script.includes('HINCRBY')) {
+        const [field, delta] = opts.arguments;
+        const next = Number(m.get(field) || 0) + Number(delta);
+        m.set(field, String(next));
+        return next;
+      }
+      for (let i = 0; i < opts.arguments.length; i += 2) {
+        m.set(opts.arguments[i], String(opts.arguments[i + 1]));
+      }
+      return 1;
     },
     async expire(key, seconds) {
       ttls.set(key, seconds);
@@ -176,12 +184,51 @@ describe('Storage', function() {
   });
 
   describe('setField', function() {
-    it('works', async function() {
+    it('writes the field and reports success', async function() {
       await storage.set('x', null);
-      storage.setField('x', 'y', 'z');
+      const written = await storage.setField('x', 'y', 'z');
+      assert.equal(written, 1);
       const z = await storage.redis.hGet('x', 'y');
       assert.equal(z, 'z');
       await storage.del('x');
+    });
+
+    it('refuses to recreate a record that is gone', async function() {
+      // A bare HSET creates the key, so an owner writing against a record that
+      // expired or was deleted a moment earlier rebuilt it as a one-field hash
+      // with no TTL: never expiring, reported as present by /api/exists, and
+      // invisible to reap() because EXISTS answered 1.
+      await storage.set('gone', null, { foo: 'bar' });
+      await storage.del('gone');
+
+      const written = await storage.setField('gone', 'dlimit', '5');
+
+      assert.equal(written, -1);
+      assert.equal(await storage.metadata('gone'), null);
+      assert.equal(await storage.redis.exists('gone'), 0);
+    });
+  });
+
+  describe('setFields', function() {
+    it('writes every field in one call', async function() {
+      // The password route sets `auth` and `pwd` together. A record carrying
+      // only one of them misreports whether a password is required.
+      await storage.set('x', null);
+      const written = await storage.setFields('x', { auth: 'a', pwd: true });
+      assert.equal(written, 1);
+      assert.equal(await storage.redis.hGet('x', 'auth'), 'a');
+      assert.equal(await storage.redis.hGet('x', 'pwd'), 'true');
+      await storage.del('x');
+    });
+
+    it('refuses to recreate a record that is gone', async function() {
+      await storage.set('gone2', null, { foo: 'bar' });
+      await storage.del('gone2');
+
+      const written = await storage.setFields('gone2', { auth: 'a', pwd: true });
+
+      assert.equal(written, -1);
+      assert.equal(await storage.redis.exists('gone2'), 0);
     });
   });
 
