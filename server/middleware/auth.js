@@ -26,7 +26,14 @@ module.exports = {
         const verifyHash = hmac.digest();
         if (crypto.timingSafeEqual(verifyHash, Buffer.from(auth, 'base64'))) {
           req.nonce = crypto.randomBytes(16).toString('base64');
-          storage.setField(id, 'nonce', req.nonce);
+          // Awaited: the nonce handed to the client in WWW-Authenticate below
+          // is the one the next request signs, so publishing it before the
+          // write lands means a failed write leaves the client signing against
+          // a nonce the server never stored. -1 means the record went away
+          // between the metadata() read above and here.
+          if ((await storage.setField(id, 'nonce', req.nonce)) < 0) {
+            return res.sendStatus(404);
+          }
           res.set('WWW-Authenticate', `send-v1 ${req.nonce}`);
           req.authorized = true;
           req.meta = meta;

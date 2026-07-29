@@ -26,6 +26,23 @@ const ADJUST_DOWNLOAD = `
 if redis.call('EXISTS', KEYS[1]) == 0 then return -1 end
 return redis.call('HINCRBY', KEYS[1], ARGV[1], ARGV[2])`;
 
+// Same EXISTS guard, for the same reason: HSET creates the key when it is
+// missing, so an owner writing a field against a record that expired or was
+// deleted a moment earlier rebuilt it as a one-field hash with no TTL. That
+// hash never expires, metadata() reports it as present so /api/exists answers
+// 200 forever for a file that is gone, and reap() sees EXISTS == 1 and never
+// sweeps the file it pointed at. ARGV is field/value pairs, and the loop keeps
+// them in one script so a multi-field write cannot land half-applied: the
+// password path sets `auth` and `pwd` together, and a record carrying only one
+// of them misreports whether a password is required. Returns 1 when written and
+// -1 when the record is already gone.
+const SET_FIELDS = `
+if redis.call('EXISTS', KEYS[1]) == 0 then return -1 end
+for i = 1, #ARGV, 2 do
+  redis.call('HSET', KEYS[1], ARGV[i], ARGV[i + 1])
+end
+return 1`;
+
 // The S3 and GCS SDKs are not installed in the published image. Together they
 // pull in over half of the production dependency tree for backends that a
 // filesystem deployment never loads, so they moved to devDependencies: the
@@ -106,12 +123,22 @@ class DB {
   }
 
   setField(id, key, value) {
-    // Coerce to string: redis stores strings and node-redis v4 rejects
-    // non-string/number values (e.g. the boolean `pwd`). Callers may not await,
-    // so guard the promise to avoid an unhandled rejection.
-    const p = this.redis.hSet(id, key, String(value));
-    p.catch(err => this.log.error('setField:', err));
-    return p;
+    return this.setFields(id, { [key]: value });
+  }
+
+  // Every caller awaits the result and acts on it. The promise used to carry a
+  // `.catch` that logged and swallowed, which meant a redis failure never
+  // reached the route: /api/password answered 200 while the password was not
+  // stored, so the sender was told the file was protected and anyone with the
+  // link could still download it.
+  setFields(id, fields) {
+    const args = [];
+    for (const [key, value] of Object.entries(fields)) {
+      // Coerce to string: redis stores strings and node-redis v4 rejects
+      // non-string/number values (e.g. the boolean `pwd`).
+      args.push(key, String(value));
+    }
+    return this.redis.eval(SET_FIELDS, { keys: [id], arguments: args });
   }
 
   // Atomically claim one download slot before a byte is streamed. Returns the
