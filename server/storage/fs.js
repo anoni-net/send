@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const promisify = require('util').promisify;
+const { pipeline } = require('stream');
 
 const stat = promisify(fs.stat);
 const readdir = promisify(fs.readdir);
@@ -23,19 +24,41 @@ class FSStorage {
     return fs.createReadStream(path.join(this.dir, id));
   }
 
+  // pipeline rather than pipe, for the same reason download.js uses it: one
+  // completion callback covering success, abort and error alike.
+  //
+  // The abort case is what pipe() got wrong here. routes/ws.js destroys the
+  // source stream whenever the socket closes with anything but 1000, and
+  // destroy() with no argument emits 'close', not 'error'. pipe() neither ends
+  // nor destroys its destination on that, so this promise resolved on 'finish'
+  // and rejected on the write stream's 'error' and hit neither: it never
+  // settled, the write stream was orphaned with its fd still open, and because
+  // the fd was held the reaper's unlink freed the name but none of the disk
+  // blocks. Closing a tab mid-upload produces close code 1006, so it needed no
+  // authentication and no crafted input to reach, and disk use grew
+  // monotonically until a restart. pipeline watches both ends for premature
+  // close, destroys the whole chain and calls back with
+  // ERR_STREAM_PREMATURE_CLOSE.
+  //
+  // unlink is the async form and deliberately ignores its own error. This
+  // callback runs outside any promise executor, so a throw from it is uncaught
+  // and ends the process, which is exactly what unlinkSync did whenever the
+  // write stream failed at open and left no file to remove: ENOENT. The default
+  // file_dir lives under the OS temp directory and is created once in the
+  // constructor, so a /tmp sweeper removing it under a running server turned
+  // every subsequent upload into a crash.
   set(id, file) {
+    const filepath = path.join(this.dir, id);
     return new Promise((resolve, reject) => {
-      const filepath = path.join(this.dir, id);
-      const fstream = fs.createWriteStream(filepath);
-      file.pipe(fstream);
-      file.on('error', err => {
-        fstream.destroy(err);
+      pipeline(file, fs.createWriteStream(filepath), err => {
+        if (!err) {
+          return resolve();
+        }
+        // storage/index.js writes the redis record only after this resolves, so
+        // a failure here leaves a file no metadata points at. Remove it now
+        // rather than waiting for the reaper's grace period.
+        fs.unlink(filepath, () => reject(err));
       });
-      fstream.on('error', err => {
-        fs.unlinkSync(filepath);
-        reject(err);
-      });
-      fstream.on('finish', resolve);
     });
   }
 
