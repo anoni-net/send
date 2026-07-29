@@ -154,11 +154,20 @@ module.exports = function(ws, req) {
         ws.send(JSON.stringify({ ok: true }));
       }
     } catch (e) {
-      // An over-size upload is a client error, so it stays at info and carries
-      // the numbers the limiter used to print with console.error. Everything
-      // else is a server fault and keeps the error level and the stack.
+      // Two of these are things the client did, not faults of ours, so they log
+      // at info without a stack. Only the rest keep the error level.
       if (e instanceof Limiter.LimitError) {
+        // Over max_file_size. The numbers ride on the error, replacing the
+        // console.error the limiter used to write outside the logger.
         log.info('uploadTooLarge', { length: e.length, limit: e.limit });
+      } else if (e && e.code === 'ERR_STREAM_PREMATURE_CLOSE') {
+        // The upload was abandoned: a closed tab, a dropped connection, a
+        // cancel. ws.on('close') destroys the source for any code other than
+        // 1000 and storage.set now settles on that, which is the whole point of
+        // the pipeline change. It arrives here as an exception, so without this
+        // branch every closed tab wrote a stack trace at error level into the
+        // operator's log.
+        log.info('uploadAborted');
       } else {
         log.error('upload', e);
       }
