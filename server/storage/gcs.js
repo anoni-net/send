@@ -34,8 +34,15 @@ class GCSStorage {
     return this.bucket.file(id).delete();
   }
 
-  ping() {
-    return this.bucket.exists();
+  // exists() resolves to [false] for a bucket that is not there rather than
+  // rejecting, so returning it directly made /__heartbeat__ answer 200 while
+  // storage was unreachable. The S3 and filesystem backends both throw, and a
+  // heartbeat that cannot fail is not a heartbeat.
+  async ping() {
+    const [exists] = await this.bucket.exists();
+    if (!exists) {
+      throw new Error('GCS bucket is not reachable');
+    }
   }
 }
 
