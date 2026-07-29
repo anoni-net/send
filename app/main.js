@@ -11,6 +11,27 @@ import { getTranslator } from './locale';
 import Archive from './archive';
 import { setTranslate, locale } from './utils';
 
+// Resolve once a worker controls this page, or after the wait, whichever comes
+// first. Bounded rather than open-ended: if claim() never lands the caller falls
+// back to the non-streaming download, which is slower but works, instead of the
+// page hanging before it renders.
+const CONTROL_WAIT_MS = 4000;
+
+function controllingWorker() {
+  if (navigator.serviceWorker.controller) {
+    return Promise.resolve();
+  }
+  return new Promise(resolve => {
+    const done = () => {
+      clearTimeout(timer);
+      navigator.serviceWorker.removeEventListener('controllerchange', done);
+      resolve();
+    };
+    const timer = setTimeout(done, CONTROL_WAIT_MS);
+    navigator.serviceWorker.addEventListener('controllerchange', done);
+  });
+}
+
 (async function start() {
   const capabilities = await getCapabilities();
   if (!capabilities.crypto) {
@@ -28,6 +49,18 @@ import { setTranslate, locale } from './utils';
     try {
       await navigator.serviceWorker.register('/serviceWorker.js');
       await navigator.serviceWorker.ready;
+      // `ready` resolves on an active worker, which is not the same as one
+      // controlling this page. On a first visit the page was loaded before any
+      // worker existed, so navigator.serviceWorker.controller stays null until
+      // the worker's clients.claim() takes effect, and that is a separate
+      // asynchronous step. The streaming download path posts to `controller`
+      // directly, so arriving straight at a download link raced it: the user
+      // saw an error page for a good link, and retrying spent another download
+      // from the file's limit.
+      await controllingWorker();
+      if (!navigator.serviceWorker.controller) {
+        capabilities.streamDownload = false;
+      }
     } catch (e) {
       // continue but disable streaming downloads
       capabilities.streamDownload = false;

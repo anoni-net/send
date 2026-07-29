@@ -60,6 +60,17 @@ export default class FileReceiver extends Emitter {
 
   sendMessageToSw(msg) {
     return new Promise((resolve, reject) => {
+      // `navigator.serviceWorker.ready` guarantees an active worker, not one
+      // controlling this page, so on a first visit that lands straight on a
+      // download link this can still be null. Reading .postMessage off it threw
+      // a TypeError, which surfaced as an error page for a perfectly good link,
+      // and the retry spent another download from the limit. main.js now waits
+      // for control before enabling this path; this keeps the failure legible
+      // if it happens anyway.
+      const sw = navigator.serviceWorker.controller;
+      if (!sw) {
+        return reject(new Error('no serviceWorker controlling this page'));
+      }
       const channel = new MessageChannel();
 
       channel.port1.onmessage = function(event) {
@@ -79,7 +90,7 @@ export default class FileReceiver extends Emitter {
         }
       };
 
-      navigator.serviceWorker.controller.postMessage(msg, [channel.port2]);
+      sw.postMessage(msg, [channel.port2]);
     });
   }
 
