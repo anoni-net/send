@@ -135,12 +135,20 @@ describe('GCSStorage', function() {
   });
 
   describe('ping', function() {
-    it('checks that the bucket exists', async function() {
-      bucketStub.exists.resolves(true);
+    it('resolves when the bucket exists', async function() {
+      bucketStub.exists.resolves([true]);
       const s = new GCSStorage({ gcs_bucket: 'foo' });
-      const result = await s.ping();
-      assert.equal(result, true);
+      await s.ping();
       sinon.assert.calledOnce(bucketStub.exists);
+    });
+
+    it('rejects when the bucket is not there', async function() {
+      // exists() answers [false] rather than rejecting, so returning it
+      // directly let /__heartbeat__ report 200 with storage unreachable. The
+      // S3 and filesystem backends both throw here.
+      bucketStub.exists.resolves([false]);
+      const s = new GCSStorage({ gcs_bucket: 'foo' });
+      await assert.rejects(s.ping());
     });
   });
 });

@@ -133,19 +133,32 @@ module.exports = function(app) {
   app.use(express.json());
   app.use(express.text());
   // Per-IP limit on the HTTP API. Scoped to /api so it never touches the health
-  // endpoints a load balancer polls, the static assets, or the pages. Off in
-  // development, like the CSP above: local runs and the frontend test suite
-  // legitimately burst requests. The WebSocket upload is limited in routes/ws.js.
+  // endpoints a load balancer polls or the static assets. Off in development,
+  // like the CSP above: local runs and the frontend test suite legitimately
+  // burst requests. The WebSocket upload is limited in routes/ws.js.
   if (!IS_DEV) {
     app.use('/api', apiLimiter.middleware());
   }
+  // GET /download/:id answers from a storage.metadata() lookup and distinguishes
+  // an id that exists (200, with the nonce in WWW-Authenticate) from one that
+  // does not (the 404 page), which is the same thing /api/exists/:id reveals. As
+  // a page it sat outside the /api mount, so the rate-limited endpoint had an
+  // unlimited twin doing a redis round-trip per request. Same limiter instance,
+  // so the two share one budget per client rather than granting a second one.
+  const downloadPageLimit = IS_DEV ? [] : [apiLimiter.middleware()];
   app.get('/', language, pages.index);
   app.get('/config', function(req, res) {
     res.json(clientConstants);
   });
   app.get('/error', language, pages.blank);
   app.get('/app.webmanifest', language, require('./webmanifest'));
-  app.get('/download/:id', validId, language, pages.download);
+  app.get(
+    '/download/:id',
+    ...downloadPageLimit,
+    validId,
+    language,
+    pages.download
+  );
   app.get('/unsupported/:reason', language, pages.unsupported);
   app.get('/api/download/:id', validId, auth.hmac, require('./download'));
   app.get(

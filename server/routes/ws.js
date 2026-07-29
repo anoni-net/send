@@ -154,11 +154,18 @@ module.exports = function(ws, req) {
         ws.send(JSON.stringify({ ok: true }));
       }
     } catch (e) {
-      log.error('upload', e);
+      // An over-size upload is a client error, so it stays at info and carries
+      // the numbers the limiter used to print with console.error. Everything
+      // else is a server fault and keeps the error level and the stack.
+      if (e instanceof Limiter.LimitError) {
+        log.info('uploadTooLarge', { length: e.length, limit: e.limit });
+      } else {
+        log.error('upload', e);
+      }
       if (ws.readyState === 1) {
         ws.send(
           JSON.stringify({
-            error: e === 'limit' ? 413 : 500
+            error: e instanceof Limiter.LimitError ? 413 : 500
           })
         );
       }
