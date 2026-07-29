@@ -28,7 +28,7 @@ function createFooter(state) {
     if (WEB_UI.FOOTER_DONATE_URL != '') {
       links.push(html`
         <li class="m-2">
-          <a href="${WEB_UI.FOOTER_DONATE_URL}" target="_blank">
+          <a href="${WEB_UI.FOOTER_DONATE_URL}" target="_blank" rel="noopener noreferrer">
             ${translate('footerLinkDonate')}
           </a>
         </li>
@@ -37,7 +37,7 @@ function createFooter(state) {
     if (WEB_UI.FOOTER_CLI_URL != '') {
       links.push(html`
         <li class="m-2">
-          <a href="${WEB_UI.FOOTER_CLI_URL}" target="_blank">
+          <a href="${WEB_UI.FOOTER_CLI_URL}" target="_blank" rel="noopener noreferrer">
             ${translate('footerLinkCli')}
           </a>
         </li>
@@ -46,7 +46,7 @@ function createFooter(state) {
     if (WEB_UI.FOOTER_DMCA_URL != '') {
       links.push(html`
         <li class="m-2">
-          <a href="${WEB_UI.FOOTER_DMCA_URL}" target="_blank">
+          <a href="${WEB_UI.FOOTER_DMCA_URL}" target="_blank" rel="noopener noreferrer">
             ${translate('footerLinkDmca')}
           </a>
         </li>
@@ -55,7 +55,7 @@ function createFooter(state) {
     if (WEB_UI.FOOTER_SOURCE_URL != '') {
       links.push(html`
         <li class="m-2">
-          <a href="${WEB_UI.FOOTER_SOURCE_URL}" target="_blank">
+          <a href="${WEB_UI.FOOTER_SOURCE_URL}" target="_blank" rel="noopener noreferrer">
             ${translate('footerLinkSource')}
           </a>
         </li>
@@ -64,7 +64,7 @@ function createFooter(state) {
   } else {
     links.push(html`
       <li class="m-2">
-        <a href="https://github.com/anoni-net/send" target="_blank">
+        <a href="https://github.com/anoni-net/send" target="_blank" rel="noopener noreferrer">
           ${translate('footerLinkSource')}
         </a>
       </li>
@@ -79,7 +79,7 @@ function createFooter(state) {
     if (WEB_UI.CUSTOM_FOOTER_URL != '' && WEB_UI.CUSTOM_FOOTER_TEXT != '') {
       footerLinks.push(html`
         <li class="m-2">
-          <a href="${WEB_UI.CUSTOM_FOOTER_URL}" target="_blank">
+          <a href="${WEB_UI.CUSTOM_FOOTER_URL}" target="_blank" rel="noopener noreferrer">
             ${WEB_UI.CUSTOM_FOOTER_TEXT}
           </a>
         </li>
@@ -87,7 +87,7 @@ function createFooter(state) {
     } else if (WEB_UI.CUSTOM_FOOTER_URL != '') {
       footerLinks.push(html`
         <li class="m-2">
-          <a href="${WEB_UI.CUSTOM_FOOTER_URL}" target="_blank">
+          <a href="${WEB_UI.CUSTOM_FOOTER_URL}" target="_blank" rel="noopener noreferrer">
             ${WEB_UI.CUSTOM_FOOTER_URL}
           </a>
         </li>
