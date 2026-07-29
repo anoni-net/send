@@ -82,7 +82,7 @@ describe('API', function() {
     });
 
     it('returns file info on success', async function() {
-      const keychain = new Keychain();
+      const keychain = Keychain.generate();
       const enc = await keychain.encryptStream(plaintext.stream);
       const meta = await keychain.encryptMetadata(metadata);
       const verifierB64 = await keychain.authKeyB64();
@@ -104,7 +104,7 @@ describe('API', function() {
     });
 
     it('can be cancelled', async function() {
-      const keychain = new Keychain();
+      const keychain = Keychain.generate();
       const enc = await keychain.encryptStream(plaintext.stream);
       const meta = await keychain.encryptMetadata(metadata);
       const verifierB64 = await keychain.authKeyB64();

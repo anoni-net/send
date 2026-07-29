@@ -8,7 +8,8 @@ import { encryptedSize } from './utils';
 export default class FileSender extends Emitter {
   constructor() {
     super();
-    this.keychain = new Keychain();
+    // The one place a key is meant to be created. Everything else receives one.
+    this.keychain = Keychain.generate();
     this.reset();
   }
 

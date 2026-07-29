@@ -47,6 +47,20 @@ function routeToMatcher(pattern) {
   };
 }
 
+// decodeURIComponent throws URIError on a lone `%` or a malformed escape such
+// as `%zz`. That happened here, inside matchRoute, before the wildcard route was
+// ever considered, and matchRoute runs from mount()'s onDocumentReady callback
+// where nothing catches it. The server-rendered HTML displayed and then the
+// client script died: no error page, no console pointer, a page that simply
+// never moves. A segment that will not decode is a segment we pass through.
+function decodeSegment(segment) {
+  try {
+    return decodeURIComponent(segment);
+  } catch (e) {
+    return segment;
+  }
+}
+
 function matchRoute(routes, pathname) {
   const segments = pathname.split('/').filter(Boolean);
   let wildcard = null;
@@ -64,7 +78,7 @@ function matchRoute(routes, pathname) {
       if (p.startsWith(':')) {
         // wayfarer decodes each captured segment; base64url keys are unaffected
         // but stay faithful to it so nothing changes for other params.
-        params[p.slice(1)] = decodeURIComponent(segments[i]);
+        params[p.slice(1)] = decodeSegment(segments[i]);
       } else if (p !== segments[i]) {
         ok = false;
         break;
@@ -151,7 +165,9 @@ class App {
       throw new Error(`no route matched ${pathname}`);
     }
     this._handler = matched.route.handler;
-    state.href = pathname;
+    // state.href is gone. On the download page `pathname` carries the
+    // #fragment, so it was a second copy of the decryption key sitting on the
+    // shared app state, and nothing in app/ ever read it.
     state.route = matched.route.matcher.name;
     state.params = matched.params;
     return matched;

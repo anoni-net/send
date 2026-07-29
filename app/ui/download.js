@@ -58,6 +58,15 @@ module.exports = function(state, emit) {
     if (downloadMetadata.status === 404) {
       return notFound(state);
     }
+    if (!state.fileInfo.secretKey) {
+      // No key in the #fragment, so nothing here can decrypt anything. Chat
+      // clients, mail gateways and link-preview crawlers all strip fragments,
+      // and this is what a recipient is left holding when one does. Stop here
+      // rather than proceed: the download used to run anyway on a key the
+      // Keychain had invented for itself, which meant a request, a rejected
+      // HMAC and a message saying the file had expired.
+      return notFound(state);
+    }
     if (!state.fileInfo.nonce) {
       // coming from something like the browser back button
       return location.reload();

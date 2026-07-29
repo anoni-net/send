@@ -54,9 +54,13 @@ import { setTranslate, locale } from './utils';
 
   const app = routes(createApp());
 
-  /* eslint-disable-next-line require-atomic-updates --
-     same bootstrap, single pass, no concurrent writer. */
-  window.app = app;
+  // No `window.app = app`. Nothing in app/ read it, and through app.state it
+  // handed anything running in the page (an extension content script, a
+  // devtools paste, a future injection) state.params.key, state.fileInfo
+  // .secretKey and the live Keychain with its rawSecret, already decoded and
+  // ready to use. None of that is capability the #fragment does not already
+  // give, so this removes convenience rather than a leak, but the convenience
+  // was only ever on the attacker's side.
   app.use(controller);
   app.use(dragManager);
   app.use(pasteManager);

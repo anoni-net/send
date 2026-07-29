@@ -1,5 +1,4 @@
 const html = require('nanohtml');
-const raw = require('nanohtml/raw');
 const { percent } = require('../../utils');
 const { archiveInfo, archiveDetails } = require('./shared');
 
@@ -16,12 +15,22 @@ module.exports.preview = function(state, emit) {
           ${archiveDetails(state.translate, archive)}
         </div>
       `;
+  // Interpolated as text, not through nanohtml/raw. This is the only raw HTML
+  // sink that renders on the page whose #fragment holds the decryption key, so
+  // operator-configured markup here is markup running next to the key. The
+  // production CSP blocks injected <script>, onerror= attributes, beacon images
+  // and form posts, which leaves bounded page spoofing, but routes/index.js
+  // wraps the whole policy in `!IS_DEV`, so an instance run with
+  // NODE_ENV=development turns that into direct location.hash exfiltration with
+  // no code change at all. The other NOTICE_HTML settings keep raw(): none of
+  // them render on this page. SEND_DOWNLOAD_NOTICE_HTML defaults to empty, so
+  // this only changes anything for an operator who set it and used markup.
   const notice = state.WEB_UI.DOWNLOAD_NOTICE_HTML
     ? html`
         <p
           class="w-full mt-4 p-2 border-default dark:border-grey-70 rounded-default text-orange-60 bg-yellow-40 text-center leading-normal"
         >
-          ${raw(state.WEB_UI.DOWNLOAD_NOTICE_HTML)}
+          ${state.WEB_UI.DOWNLOAD_NOTICE_HTML}
         </p>
       `
     : '';

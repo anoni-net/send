@@ -4,13 +4,28 @@ const encoder = new TextEncoder();
 const decoder = new TextDecoder();
 
 export default class Keychain {
+  // Generating a key is the sender's job, so it is asked for by name. The
+  // constructor used to do it silently whenever it was handed nothing, and the
+  // receiving paths share this constructor: a link whose #fragment had been
+  // stripped (a chat client, a mail gateway, a link-preview crawler) built a
+  // keychain out of 16 fresh random bytes, signed a meaningless HMAC, took the
+  // 401 the server rightly returned, and told the recipient the file had
+  // expired. The sender then re-sent a file that was sitting there untouched.
+  // It failed closed, so it was never a break, but a class that holds a secret
+  // should not invent one when it is not given one.
+  static generate(nonce) {
+    return new Keychain(
+      arrayToB64(crypto.getRandomValues(new Uint8Array(16))),
+      nonce
+    );
+  }
+
   constructor(secretKeyB64, nonce) {
     this._nonce = nonce || 'yRCdyQ1EMSA3mo4rqSkuNQ==';
-    if (secretKeyB64) {
-      this.rawSecret = b64ToArray(secretKeyB64);
-    } else {
-      this.rawSecret = crypto.getRandomValues(new Uint8Array(16));
+    if (!secretKeyB64) {
+      throw new Error('missing key');
     }
+    this.rawSecret = b64ToArray(secretKeyB64);
     this.secretKeyPromise = crypto.subtle.importKey(
       'raw',
       this.rawSecret,
