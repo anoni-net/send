@@ -25,7 +25,7 @@ give you: tampering that is broad enough to matter is tampering that anyone can
 catch, and catching it leaves evidence.
 
 Assume nothing here is trustworthy if the answers do not match. Report
-mismatches to <toomore@anoni.net>.
+mismatches to <whisper@anoni.net>.
 
 ## 1. Check the bytes you were served (2 minutes)
 
