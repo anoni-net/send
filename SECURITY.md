@@ -7,12 +7,17 @@ about it seriously.
 
 ## Reporting a vulnerability
 
-Email **toomore@anoni.net**. Please do not open a public issue for an
+Email **whisper@anoni.net**. Please do not open a public issue for an
 unfixed vulnerability.
 
+To encrypt your report, use our
+[PGP public key](https://anoni.net/B7DF84305C7911D90D59A66061F66CF36EE386D4.asc)
+with fingerprint `B7DF84305C7911D90D59A66061F66CF36EE386D4`, also available on
+the [contact page](https://anoni.net/docs/en/contact/).
+
 Useful things to include: affected version or image digest, a description of the
-impact, and the steps to reproduce it. If you would like an encrypted reply, say
-so and include your key.
+impact, and the steps to reproduce it. If you would like an encrypted reply,
+include your public key.
 
 We are a small volunteer community, so we cannot promise a fixed response time.
 We aim to acknowledge a report within a few days and will tell you what we plan
