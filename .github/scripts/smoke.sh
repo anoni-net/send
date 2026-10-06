@@ -14,9 +14,14 @@ set -euo pipefail
 IMAGE="${SEND_IMAGE:-send:ci}"
 PORT=1443
 FFSEND_VERSION="v0.2.77"
+# Upstream publishes no checksums. This is the sha256 of the release asset as
+# downloaded on 2026-10-06; a mismatch stops the script before it runs the file.
+FFSEND_SHA256="ebd14a67c46e7d744ce84677f057d9dc07abc884eaa8f70d68a9e59d27357313"
+# Same pin as tests.yml.
+REDIS_IMAGE="redis:8.10.2-alpine@sha256:3811787313eba226a2ef38658c6ccb91cd5e110edc89c37767de373120a0e5a0"
 
 docker network create sendci
-docker run -d --name redis --network sendci redis:alpine
+docker run -d --name redis --network sendci "$REDIS_IMAGE"
 docker run -d --name send --network sendci \
   -e REDIS_HOST=redis \
   -e BASE_URL="http://localhost:${PORT}" \
@@ -118,6 +123,7 @@ FF=/tmp/ffsend
 # by peer". A hiccup fetching a test tool should not read as a broken image.
 curl -fsSL --retry 3 --retry-delay 2 --retry-all-errors -o "$FF" \
   "https://github.com/timvisee/ffsend/releases/download/${FFSEND_VERSION}/ffsend-${FFSEND_VERSION}-linux-x64-static"
+echo "${FFSEND_SHA256}  ${FF}" | sha256sum -c -
 chmod +x "$FF"
 
 head -c 1048576 /dev/urandom > /tmp/send-in.bin

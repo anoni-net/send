@@ -17,10 +17,11 @@
 # The vulnerability scan GATES: a HIGH or CRITICAL with a fix available stops
 # the publish.
 #
-# Verify a published image (keyless):
+# Verify a published release image (keyless). The identity is anchored to a
+# version tag, so an image signed by a run on some other ref does not pass:
 #   cosign verify ghcr.io/anoni-net/send@<digest> \
 #     --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-#     --certificate-identity-regexp '^https://github.com/anoni-net/send/.github/workflows/publish.yml@.*$'
+#     --certificate-identity-regexp '^https://github.com/anoni-net/send/.github/workflows/publish.yml@refs/tags/v.*$'
 ##
 name: publish
 
@@ -30,11 +31,10 @@ on:
     tags: ['v*']
   workflow_dispatch:
 
-# Least privilege: repo default stays read-only; grant only what this needs.
+# Least privilege: repo default stays read-only. Each job below grants only
+# what it needs; only the merge job, which signs, can mint an OIDC token.
 permissions:
   contents: read
-  packages: write   # push to GHCR
-  id-token: write   # cosign keyless (Sigstore OIDC)
 
 concurrency:
   group: publish-${{ github.ref }}
@@ -54,7 +54,14 @@ jobs:
   build:
     name: Build ${{ matrix.arch }}
     needs: tests
+    # workflow_dispatch accepts any branch. A run from a branch would push and
+    # sign an image tagged after that branch (an old `ci-native-arm64-build`
+    # tag came from exactly that), so only main and version tags publish.
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
     runs-on: ${{ matrix.runner }}
+    permissions:
+      contents: read
+      packages: write   # push to GHCR by digest
     strategy:
       fail-fast: true
       matrix:
@@ -143,8 +150,10 @@ jobs:
       - name: Set up Playwright (chromium)
         id: playwright
         continue-on-error: true
+        # The Playwright version comes from package-lock.json, and no install
+        # scripts run: this job holds packages:write.
         run: |
-          npm i --no-save playwright@1.48.2
+          npm ci --ignore-scripts
           npx playwright install --with-deps chromium
 
       # On arm64 the E2EE round-trip is skipped, because ffsend publishes no
@@ -373,6 +382,6 @@ jobs:
             echo '```sh'
             echo "cosign verify ${IMAGE}@${DIGEST} \\"
             echo "  --certificate-oidc-issuer https://token.actions.githubusercontent.com \\"
-            echo "  --certificate-identity-regexp '^https://github.com/anoni-net/send/.github/workflows/publish.yml@.*\$'"
+            echo "  --certificate-identity 'https://github.com/anoni-net/send/.github/workflows/publish.yml@${GITHUB_REF}'"
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"

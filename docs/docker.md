@@ -33,7 +33,7 @@ VERSION=5.2.1
 
 cosign verify ghcr.io/anoni-net/send:${VERSION} \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-  --certificate-identity-regexp '^https://github.com/anoni-net/send/.github/workflows/publish.yml@.*$'
+  --certificate-identity-regexp '^https://github.com/anoni-net/send/.github/workflows/publish.yml@refs/tags/v.*$'
 
 # Then pin production to the digest you just verified, so nothing can move it.
 docker buildx imagetools inspect ghcr.io/anoni-net/send:${VERSION} \

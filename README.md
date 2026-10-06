@@ -83,7 +83,7 @@ Every published image is signed by our CI. Verify it before you run it:
 ```sh
 cosign verify ghcr.io/anoni-net/send:5.2.1 \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-  --certificate-identity-regexp '^https://github.com/anoni-net/send/.github/workflows/publish.yml@.*$'
+  --certificate-identity-regexp '^https://github.com/anoni-net/send/.github/workflows/publish.yml@refs/tags/v.*$'
 ```
 
 Pin by digest (`@sha256:...`) in production so the tag cannot move under you.
@@ -198,7 +198,7 @@ docker pull ghcr.io/anoni-net/send:5.2.1
 ```sh
 cosign verify ghcr.io/anoni-net/send:5.2.1 \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-  --certificate-identity-regexp '^https://github.com/anoni-net/send/.github/workflows/publish.yml@.*$'
+  --certificate-identity-regexp '^https://github.com/anoni-net/send/.github/workflows/publish.yml@refs/tags/v.*$'
 ```
 
 正式環境請用 digest（`@sha256:...`）固定版本，這樣 tag 就不會在你不知情的情況下
