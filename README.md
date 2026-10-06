@@ -53,7 +53,7 @@ The full history was imported from upstream and preserved, including all tags.
 Everything below was done on top of upstream v3.4.27. See
 [CHANGELOG.md](CHANGELOG.md) for the detailed list.
 
-- **Runtime and build stack modernized** — Node 16 to 22, webpack 4 to 5,
+- **Runtime and build stack modernized** — Node 16 to 24, webpack 4 to 5,
   node-redis 3 to 6, aws-sdk v2 to v3, `@google-cloud/storage` 6 to 7.
 - **No third-party error reporting.** Sentry is gone from both the browser and
   the server, so nothing this service runs reports to anyone else.
@@ -75,13 +75,13 @@ separately and is not part of this repository.
 The image is public, so pulling needs no login:
 
 ```sh
-docker pull ghcr.io/anoni-net/send:5.2.1
+docker pull ghcr.io/anoni-net/send:5.3.0
 ```
 
 Every published image is signed by our CI. Verify it before you run it:
 
 ```sh
-cosign verify ghcr.io/anoni-net/send:5.2.1 \
+cosign verify ghcr.io/anoni-net/send:5.3.0 \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
   --certificate-identity-regexp '^https://github.com/anoni-net/send/.github/workflows/publish.yml@refs/tags/v.*$'
 ```
@@ -170,7 +170,7 @@ git log --oneline v3.4.27..upstream/master   # 分岔之後上游的新 commit
 完整歷史從上游匯入並保留，包含所有 tag。以下的變更都是疊在上游 v3.4.27 之上。
 詳細清單見 [CHANGELOG.md](CHANGELOG.md)。
 
-- **執行環境與建置工具現代化**：Node 16 升到 22、webpack 4 升到 5、node-redis 3
+- **執行環境與建置工具現代化**：Node 16 升到 24、webpack 4 升到 5、node-redis 3
   升到 6、aws-sdk v2 升到 v3、`@google-cloud/storage` 6 升到 7。
 - **沒有第三方錯誤回報**。Sentry 已經從瀏覽器端與伺服器端一併移除，這個服務的
   程式不會向任何第三方回報。
@@ -190,13 +190,13 @@ repository 裡。
 映像是公開的，拉取不需要登入：
 
 ```sh
-docker pull ghcr.io/anoni-net/send:5.2.1
+docker pull ghcr.io/anoni-net/send:5.3.0
 ```
 
 每一個發布的映像都經過我們的 CI 簽章。執行之前先驗證：
 
 ```sh
-cosign verify ghcr.io/anoni-net/send:5.2.1 \
+cosign verify ghcr.io/anoni-net/send:5.3.0 \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
   --certificate-identity-regexp '^https://github.com/anoni-net/send/.github/workflows/publish.yml@refs/tags/v.*$'
 ```
