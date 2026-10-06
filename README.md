@@ -40,8 +40,12 @@ git remote -v
 # upstream  https://gitlab.com/timvisee/send.git     (canonical)
 
 git fetch upstream
-git merge upstream/master   # review, then push to origin/main
+git log --oneline v3.4.27..upstream/master   # anything new since we diverged
 ```
+
+The two trees have diverged too far for a plain merge. Review each upstream
+commit and cherry-pick the ones that apply onto a branch, then open a pull
+request as usual.
 
 ## What we changed
 
@@ -117,13 +121,13 @@ released under the same MPL-2.0.
 
 <a id="zh-tw"></a>
 
-# Send：anoni.net 自架原始碼
+# anoni.net 自架的 Send 原始碼
 
 [English](#en) | **正體中文**
 
 這個 repository 存放 [anoni.net][anoni] 社群自架在 **https://send.anoni.net**
-的 [Send][upstream] 原始碼。Send 是一個簡單、私密、端到端加密的檔案分享網頁
-程式。檔案在瀏覽器裡就加密完成，伺服器只會拿到密文，永遠拿不到解密金鑰。
+的 [Send][upstream] 原始碼。Send 是一個簡單、私密、端對端加密的檔案分享網頁
+程式。檔案在瀏覽器裡就加密完成，伺服器只會取得密文，無法取得解密金鑰。
 
 ## 與上游的關係
 
@@ -137,7 +141,7 @@ GitHub 上那份只是鏡像，所以 GitHub 的 fork 網路在這裡不適用�
   [Firefox Send](https://github.com/mozilla/send) 的社群 fork。
 
 這個 repository 存在的理由，是讓 anoni.net 社群能夠固定版本、審閱、建置並持續
-現代化我們實際在跑的那份程式碼，用我們自己的 CI 與簽章映像。
+現代化我們實際執行的那份程式碼，用我們自己的 CI 與簽章映像。
 
 從 **v4.0.0** 起，我們的版號不再跟隨上游。上游最後一個發行版是 v3.4.27，也是
 這個 repository 分岔出來的那個 commit。
@@ -155,8 +159,11 @@ git remote -v
 # upstream  https://gitlab.com/timvisee/send.git     （正式來源）
 
 git fetch upstream
-git merge upstream/master   # 先審閱，再推到 origin/main
+git log --oneline v3.4.27..upstream/master   # 分岔之後上游的新 commit
 ```
+
+兩邊已經分岔太多，無法直接 merge。逐一審閱上游的 commit，把適用的 cherry-pick
+到新分支，再照一般流程開 pull request。
 
 ## 我們改了什麼
 
@@ -165,13 +172,13 @@ git merge upstream/master   # 先審閱，再推到 origin/main
 
 - **執行環境與建置工具現代化**：Node 16 升到 22、webpack 4 升到 5、node-redis 3
   升到 6、aws-sdk v2 升到 v3、`@google-cloud/storage` 6 升到 7。
-- **沒有第三方錯誤回報**。Sentry 已經從瀏覽器端與伺服器端一併移除，這個服務跑
-  的東西不會向任何其他人回報。
+- **沒有第三方錯誤回報**。Sentry 已經從瀏覽器端與伺服器端一併移除，這個服務的
+  程式不會向任何第三方回報。
 - **供應鏈**：我們自己建置並發布多架構映像到 `ghcr.io/anoni-net/send`，用
   cosign 簽章（keyless、Sigstore），附上 SBOM 與 SLSA provenance，並經過 Trivy
   掃描。
 - **測試**：後端測試、前端測試（Playwright）與 headless 瀏覽器檢查都在 CI 執行，
-  另外對每次新建的映像跑一次真實的端到端加密上傳與下載往返。
+  另外對每次新建的映像執行一次真實的端對端加密上傳與下載往返。
 - **沒有更動協定或加密**。傳輸格式、URL 格式與加密都沒有動過，所以既有的分享
   連結與 `ffsend` 這類第三方客戶端都能繼續使用。
 
@@ -199,8 +206,8 @@ cosign verify ghcr.io/anoni-net/send:5.2.1 \
 
 ## 驗證你正在使用的東西
 
-Send 在瀏覽器裡加密，所以它的保護建立在一件事上：你的瀏覽器收到的 JavaScript
-就是我們發布的那一份。這件事可以查證，[VERIFYING.md](VERIFYING.md) 是逐步做法：
+Send 在瀏覽器裡加密，你的瀏覽器收到的 JavaScript 必須是我們發布的那一份，
+保護才成立。這件事可以查證，[VERIFYING.md](VERIFYING.md) 列出逐步做法：
 
 - 把某個實例送給你的位元組，跟對應
   [release](https://github.com/anoni-net/send/releases) 附的 `SHA256SUMS.txt`
