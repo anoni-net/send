@@ -38,7 +38,7 @@ Find which release an instance is running:
 
 ```sh
 curl -s https://send.anoni.net/__version__
-# {"commit":"...","source":"https://github.com/anoni-net/send","version":"v3.4.27","release":"v5.3.0"}
+# {"commit":"...","source":"https://github.com/anoni-net/send","version":"v3.4.27","release":"v5.3.1"}
 ```
 
 `release` is the version to fetch checksums for. (`version` is the Send API
@@ -48,7 +48,7 @@ release numbers.)
 Download the list and the script your browser was served, then compare:
 
 ```sh
-VERSION=v5.3.0                     # the "release" field above
+VERSION=v5.3.1                     # the "release" field above
 BASE=https://send.anoni.net
 
 curl -sLO "https://github.com/anoni-net/send/releases/download/${VERSION}/SHA256SUMS.txt"
@@ -119,7 +119,7 @@ there is no key of ours to steal. Verification checks that the signature came
 from this repository's publish workflow:
 
 ```sh
-cosign verify ghcr.io/anoni-net/send:5.3.0 \
+cosign verify ghcr.io/anoni-net/send:5.3.1 \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
   --certificate-identity-regexp '^https://github.com/anoni-net/send/.github/workflows/publish.yml@refs/tags/v.*$'
 ```
@@ -128,8 +128,8 @@ The output names the commit and the workflow run that produced the image. Each
 image also carries an SBOM and SLSA provenance:
 
 ```sh
-docker buildx imagetools inspect ghcr.io/anoni-net/send:5.3.0 --format '{{json .SBOM}}'
-docker buildx imagetools inspect ghcr.io/anoni-net/send:5.3.0 --format '{{json .Provenance}}'
+docker buildx imagetools inspect ghcr.io/anoni-net/send:5.3.1 --format '{{json .SBOM}}'
+docker buildx imagetools inspect ghcr.io/anoni-net/send:5.3.1 --format '{{json .Provenance}}'
 ```
 
 ## 3. Rebuild from source and compare (about 10 minutes)
@@ -140,8 +140,8 @@ source yourself and confirm you get the same bytes.
 ```sh
 git clone https://github.com/anoni-net/send.git
 cd send
-git checkout v5.3.0        # the "release" field from /__version__
-git tag -v v5.3.0          # optional: PGP signature on the tag
+git checkout v5.3.1        # the "release" field from /__version__
+git tag -v v5.3.1          # optional: PGP signature on the tag
 
 npm ci
 npm run build
