@@ -98,13 +98,16 @@ function createFooter(state) {
           ${WEB_UI.CUSTOM_FOOTER_TEXT}
         </li>
       `);
-    } else {
-      footerLinks.push(html`
-        <li class="m-2">
-          ${translate('footerText')}
-        </li>
-      `);
     }
+
+    // The not-affiliated notice stays next to a custom footer. Upstream showed
+    // one or the other, so an operator naming themselves lost the line saying
+    // this is not Mozilla's service.
+    footerLinks.push(html`
+      <li class="m-2">
+        ${translate('footerText')}
+      </li>
+    `);
   }
 
   return html`
