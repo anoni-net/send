@@ -7,8 +7,10 @@ about it seriously.
 
 ## Reporting a vulnerability
 
-Email **whisper@anoni.net**. Please do not open a public issue for an
-unfixed vulnerability.
+Email **whisper@anoni.net**, or use GitHub's
+[private vulnerability reporting](https://github.com/anoni-net/send/security/advisories/new)
+(the **Report a vulnerability** button under this repository's Security tab).
+Please do not open a public issue for an unfixed vulnerability.
 
 To encrypt your report, use our
 [PGP public key](https://anoni.net/B7DF84305C7911D90D59A66061F66CF36EE386D4.asc)
