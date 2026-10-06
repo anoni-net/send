@@ -23,7 +23,7 @@ Send uses JavaScript to:
 - Encrypt and decrypt files on your device rather than on the server.
 - Render the user interface.
 - Show the interface in [various different
-  languages](https://github.com/anoni-net/send#localization).
+  languages](localization.md).
 
 The first point is the whole design. The server stores ciphertext it cannot
 read, and the key never reaches it: the key lives in the part of the share link

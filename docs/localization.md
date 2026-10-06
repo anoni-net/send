@@ -32,7 +32,7 @@ first.
 
 ## Code
 
-In `app/` we use the `state.translate()` function to translate strings to the best matching language base on the user's `Accept-Language` header. It's a wrapper around fluent's [FluentBundle.format](http://projectfluent.org/fluent.js/fluent/FluentBundle.html). It works the same for both server and client side rendering.
+In `app/` we use the `state.translate()` function to translate strings to the best matching language base on the user's `Accept-Language` header. It's a wrapper around `FluentBundle.formatPattern` from [@fluent/bundle](https://github.com/projectfluent/fluent.js/tree/main/fluent-bundle). It works the same for both server and client side rendering.
 
 ### Examples
 

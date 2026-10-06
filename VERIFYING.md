@@ -81,16 +81,17 @@ not substituted afterward.
 everything rather than one file, fetch each name listed in `SHA256SUMS.txt` the
 same way.
 
-### Images may not match, and that is expected
+### Images may not match on some instances
 
-Check `.js` and `.css`. Those are the files that can execute, and they arrive
-untouched.
+Check `.js` and `.css` first. Those are the files that can execute.
 
-Images often will not match, because a CDN in front of an instance may
-re-compress them in transit. send.anoni.net sits behind Cloudflare, whose Polish
-feature re-encodes PNGs: the 32×32 favicon leaves the server at 1025 bytes and
-arrives at 746, with a `cf-polished: ok, orig_size=1025` header saying so. The
-image is re-encoded, not replaced.
+A CDN in front of an instance may re-compress images in transit. Cloudflare's
+Polish, for example, re-encodes PNGs and adds a `cf-polished` header saying so.
+Since v5.1.1 the server sends every static asset with
+`Cache-Control: no-transform`, which stops that, so on send.anoni.net the 32×32
+favicon arrives at its original 1025 bytes and matches. An instance running an
+older release, or behind a CDN that ignores `no-transform`, may still serve
+re-encoded images. The image is re-encoded, not replaced.
 
 So a `FAILED` on a `.png` next to `OK` on the JavaScript means a CDN is
 optimising images. **A `FAILED` on a `.js` file is the one that matters.** Check
