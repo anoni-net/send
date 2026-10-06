@@ -1,11 +1,4 @@
 ##
-# Baseline CI — known-good reference point.
-#
-# Builds the Docker image straight from the upstream source (unchanged) and
-# proves the resulting container boots and serves. This is intentionally
-# minimal: it does NOT push to any registry. Publishing a signed image, SBOM
-# and vulnerability scanning are a later increment (see README roadmap).
-#
 # The fast gate on PRs and non-main branches: build the image, run the smoke
 # test (health endpoints + a real ffsend upload/download round-trip), and
 # report a vulnerability scan. Publishing signed images lives in publish.yml.
@@ -52,8 +45,10 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Set up Playwright (chromium)
+        # The Playwright version comes from package-lock.json, and no install
+        # scripts run.
         run: |
-          npm i --no-save playwright@1.48.2
+          npm ci --ignore-scripts
           npx playwright install --with-deps chromium
 
       - name: Smoke test (health + E2EE round-trip + browser render)

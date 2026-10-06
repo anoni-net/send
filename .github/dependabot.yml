@@ -26,3 +26,21 @@ updates:
       - dependency-name: node
         update-types:
           - version-update:semver-major
+
+  # npm security updates arrive regardless of this entry; what the entry adds
+  # is grouping. Without it every advisory opened its own PR, and a dozen sat
+  # open at once, each superseded by the next. Version updates stay off
+  # (limit 0): dependency bumps go into a release deliberately, because a
+  # build-tool bump can change the bytes in dist/ that SHA256SUMS.txt covers.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 0
+    commit-message:
+      prefix: chore
+    groups:
+      npm-security:
+        applies-to: security-updates
+        patterns:
+          - "*"

@@ -71,7 +71,7 @@ curl -sLO "https://github.com/anoni-net/send/releases/download/${VERSION}/SHA256
 cosign verify-blob SHA256SUMS.txt \
   --bundle SHA256SUMS.txt.cosign.bundle \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-  --certificate-identity-regexp '^https://github.com/anoni-net/send/.github/workflows/publish.yml@.*$'
+  --certificate-identity-regexp '^https://github.com/anoni-net/send/.github/workflows/publish.yml@refs/tags/v.*$'
 ```
 
 `Verified OK` means the list was produced by this repository's publish workflow,
@@ -121,7 +121,7 @@ from this repository's publish workflow:
 ```sh
 cosign verify ghcr.io/anoni-net/send:5.2.1 \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-  --certificate-identity-regexp '^https://github.com/anoni-net/send/.github/workflows/publish.yml@.*$'
+  --certificate-identity-regexp '^https://github.com/anoni-net/send/.github/workflows/publish.yml@refs/tags/v.*$'
 ```
 
 The output names the commit and the workflow run that produced the image. Each
