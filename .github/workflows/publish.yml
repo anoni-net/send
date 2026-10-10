@@ -183,7 +183,7 @@ jobs:
 
       - name: Upload Trivy report
         if: always() && matrix.arch == 'amd64'
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: trivy-report
           path: trivy-report.txt
@@ -207,7 +207,7 @@ jobs:
 
       - name: Upload asset checksums
         if: matrix.arch == 'amd64'
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: SHA256SUMS
           path: SHA256SUMS.txt
@@ -220,7 +220,7 @@ jobs:
           touch "${{ runner.temp }}/digests/${digest#sha256:}"
 
       - name: Upload digest
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: digests-${{ matrix.arch }}
           path: ${{ runner.temp }}/digests/*
