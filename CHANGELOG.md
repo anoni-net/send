@@ -16,6 +16,8 @@ the encryption. `/__version__` reports `release: v5.3.2`, `version` stays `v3.4.
   several high severity TLS and DNS issues. The fixes arrived in 24.22.1. Both
   build stages move to the new `node:24-alpine3.24` digest, which also brings
   the base image's Alpine packages up to date.
+- **body-parser 2.3.0 -> 2.4.0** (through express), for CVE-2026-111181, a denial
+  of service from an unhandled decompression stream error.
 
 #### Changed
 
