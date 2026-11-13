@@ -292,7 +292,7 @@ jobs:
       # 4) Sign the manifest list by digest, keyless (Sigstore + GitHub OIDC).
       #    Signing the list covers every architecture under it.
       - name: Install cosign
-        uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
+        uses: sigstore/cosign-installer@756fe2d284c7292c4e9b62c8a28f1e5629c59532 # v4.1.3
         with:
           # v4 installs cosign v3 by default, a major tool jump in the one step
           # the whole verification story rests on, and it only runs at publish
